@@ -28,8 +28,8 @@
 	<bean id="bds" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
-		<property name="username" value="C##SPRING"/>
-		<property name="password" value="SPRING"/>
+		<property name="username" value="C##BISSHARE"/>
+		<property name="password" value="BISSHARE"/>
 	</bean>
 
 	<!-- 트랜잭션 관리 bean 등록 (id는 고정) -->
