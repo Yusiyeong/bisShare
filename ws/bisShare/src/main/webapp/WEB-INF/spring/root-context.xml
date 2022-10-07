@@ -14,14 +14,14 @@
 	
 	<!-- SqlSessionFactory -->
 	<bean id="sst" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="ssfb" />	
+		<constructor-arg index="0" ref="ssf" />	
 	</bean>
 	
-	<!-- 팩토리 -->
-	<bean id="ssfb" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="bds" />
-		<!-- <property name="configLocation" value="경로"/>
-		<property name="mapperLocations" value="경로"/> -->
+		<!-- Factory -->
+	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="bds"/>
+		<property name="configLocation" value="classpath:/mapper/conf.xml"></property>
+		<property name="mapperLocations" value="classpath:/mapper/**/*-mapper.xml"/>
 	</bean>
 	
 	<!-- 데이터소스 -->
@@ -41,7 +41,7 @@
 	<aop:aspectj-autoproxy/>
 
 	<!-- @Aspect 어노테이션도 scan 하기 위함 -->
-	<context:component-scan base-package="com.bs.test">
+	<context:component-scan base-package="com.bs">
 		<context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
 	</context:component-scan>
 
