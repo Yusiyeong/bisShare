@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="root" value="${pageContext.request.contextPath}" />  
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -24,10 +26,10 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/bisShare/notice/list">공지사항</a>
-                        <a class="collapse-item" href="/bisShare/board/list">자유게시판</a>
-                        <a class="collapse-item" href="/bisShare/blind/list">블라인드게시판</a>
-                        <a class="collapse-item" href="/bisShare/cloud/list">자료실</a>
+                        <a class="collapse-item" href="${root}/notice/list">공지사항</a>
+                        <a class="collapse-item" href="${root}/board/list">자유게시판</a>
+                        <a class="collapse-item" href="${root}/blind/list">블라인드게시판</a>
+                        <a class="collapse-item" href="${root}/cloud/list">자료실</a>
                     </div>
                 </div>
             </li>
@@ -42,10 +44,10 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/bisShare/mail/write">메일작성</a>
-                        <a class="collapse-item" href="/bisShare/mail/recieve">받은메일</a>
-                        <a class="collapse-item" href="/bisShare/mail/send">보낸메일</a>
-                        <a class="collapse-item" href="/bisShare/mail/important">중요메일</a>
+                        <a class="collapse-item" href="${root}/mail/write">메일작성</a>
+                        <a class="collapse-item" href="${root}/mail/recieve">받은메일</a>
+                        <a class="collapse-item" href="${root}/mail/send">보낸메일</a>
+                        <a class="collapse-item" href="${root}/mail/important">중요메일</a>
                     </div>
                 </div>
             </li>
@@ -76,14 +78,14 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="/bisShare/calendar">
+                <a class="nav-link" href="${root}/calendar">
                     <i class="fas fa-fw fa-table"></i>
                     <span>일정</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="/bisShare/address">
+                <a class="nav-link" href="${root}/address">
                     <i class="fas fa-fw fa-table"></i>
                     <span>주소록</span></a>
             </li>

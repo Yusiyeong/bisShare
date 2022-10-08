@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="root" value="${pageContext.request.contextPath}" />  
 <!DOCTYPE html>
 <html>
 
@@ -64,7 +66,7 @@
                                             Login
                                         </a>
                                         <hr>
-                                        <a href="/bisShare/main" class="btn btn-google btn-user btn-block">
+                                        <a href="${root}/main" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> 메인페이지로 이동하기
                                         </a>
                                         <a href="index.html" class="btn btn-facebook btn-user btn-block">
