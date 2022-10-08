@@ -22,7 +22,7 @@ public class MainController {
 	@RequestMapping("/main")
 	public String mainPage(Model model) {
 		model.addAttribute("title", "BISSHARE");
-		model.addAttribute("page", "main");
+		model.addAttribute("page", "layout/main");
 		return "layout/template";
 	}
 	

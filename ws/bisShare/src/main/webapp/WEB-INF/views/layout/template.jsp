@@ -39,7 +39,7 @@
 
 	<jsp:include page="topbar.jsp"></jsp:include>
 	
-	<jsp:include page="${page}.jsp"></jsp:include>
+	<jsp:include page="../${page}.jsp"></jsp:include>
 	
 	<jsp:include page="footer.jsp"></jsp:include>                             
 
