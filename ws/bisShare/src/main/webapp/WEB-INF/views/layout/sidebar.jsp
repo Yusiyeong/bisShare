@@ -45,7 +45,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="${root}/mail/write">메일작성</a>
-                        <a class="collapse-item" href="${root}/mail/recieve">받은메일</a>
+                        <a class="collapse-item" href="${root}/mail/receive">받은메일</a>
                         <a class="collapse-item" href="${root}/mail/send">보낸메일</a>
                         <a class="collapse-item" href="${root}/mail/important">중요메일</a>
                     </div>
