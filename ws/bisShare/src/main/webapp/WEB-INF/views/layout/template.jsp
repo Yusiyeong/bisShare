@@ -13,6 +13,8 @@
     <meta name="author" content="">
 
     <title>${title}</title>
+    
+
 
     <!-- Custom fonts for this template-->
     <link href="${root}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -29,26 +31,28 @@
 	<!-- Bootstrap core JavaScript-->
     <script src="${root}/resources/vendor/jquery/jquery.min.js"></script>
     <script src="${root}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+	
     <!-- Core plugin JavaScript-->
     <script src="${root}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-
+	
     <!-- Custom scripts for all pages-->
     <script src="${root}/resources/js/sb-admin-2.min.js"></script>
-
+	
 	<!-- 데이터 테이블 js -->
     <script src="${root}/resources/vendor/datatables/jquery.dataTables.min.js"></script>
 	<script src="${root}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 	
-	<!-- include libraries(jQuery, bootstrap) -->
-	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+   	<!-- include libraries(jQuery, bootstrap) -->
+<!-- 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>  -->
 	<!-- include summernote css/js-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 	<!-- include summernote-ko-KR -->
 	<script src="/resources/js/board/summernote-ko-KR.js"></script>
+		
+
 	
 </head>
 
