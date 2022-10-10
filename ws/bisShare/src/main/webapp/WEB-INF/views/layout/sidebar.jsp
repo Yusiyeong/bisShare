@@ -7,11 +7,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${root}/main">
+                <div class="sidebar-brand-icon">
+                    <img style="width:40px; height: 40px;" alt="비즈쉐어" src="${root}/resources/img/logo.png">
                 </div>
-                <div class="sidebar-brand-text mx-3">BISSHARE</div>
+                <div class="sidebar-brand-text mx-3" style="margin-left:4px !important;">BISSHARE</div>
             </a>
 
             <!-- Divider -->
@@ -21,7 +21,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa"></i>
+                    <i class="fas fa-fw fa-chalkboard"></i>
                     <span>게시판</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -38,7 +38,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa"></i>
+                    <i class="fas fa-fw fa-mail-bulk"></i>
                     <span>메일</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -59,35 +59,51 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
+                    <i class="fas fa-fw fa-clipboard"></i>
                     <span>전자결재</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="${root}/approval/my">나의 기안서</a>
                         <a class="collapse-item" href="${root}/approval/write">기안서 작성</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                        <a class="collapse-item" href="${root}/approval/temp">임시저장한 기안서</a>
+                        <a class="collapse-item" href="${root}/approval/document">나의 결재함</a>
                     </div>
                 </div>
             </li>
-
-            <!-- Nav Item - Charts -->
+            
+            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="${root}/calendar">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>일정</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                    aria-expanded="true" aria-controls="collapseThree">
+                    <i class="fas fa-fw fa-calendar"></i>
+                    <span>일정</span>
+                </a>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="${root}/calendar/main">나의 일정</a>
+                        <a class="collapse-item" href="${root}/calendar/write">일정 작성</a>
+                        <a class="collapse-item" href="${root}/calendar/edit">일정 수정</a>
+                        <a class="collapse-item" href="${root}/calendar/view">일정 조회</a>
+                    </div>
+                </div>
             </li>
-
-            <!-- Nav Item - Tables -->
+            
+            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="${root}/address">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>주소록</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsefour"
+                    aria-expanded="true" aria-controls="collapsefour">
+                    <i class="fas fa-fw fa-address-book"></i>
+                    <span>주소록</span>
+                </a>
+                <div id="collapsefour" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="${root}/address/list">조직도</a>
+                        <a class="collapse-item" href="${root}/address/search">주소록 검색</a>
+                    </div>
+                </div>
             </li>
-
+            
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -95,7 +111,6 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
 
 
         </ul>
