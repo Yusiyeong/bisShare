@@ -7,9 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AddressController {
 
-	@GetMapping("address")
+	@GetMapping("address/list")
 	public String addressList(Model model) {
-		model.addAttribute("page", "address/addressList");
+		model.addAttribute("page", "address/address-list");
+		return "layout/template";
+	}
+	
+	@GetMapping("address/search")
+	public String addressSearch(Model model) {
+		model.addAttribute("page", "address/address-search");
 		return "layout/template";
 	}
 }
