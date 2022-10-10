@@ -35,48 +35,56 @@
     <!-- Core plugin JavaScript-->
     <script src="${root}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 	
-    <!-- Custom scripts for all pages-->
-    <script src="${root}/resources/js/sb-admin-2.min.js"></script>
-	
 	<!-- 데이터 테이블 js -->
     <script src="${root}/resources/vendor/datatables/jquery.dataTables.min.js"></script>
 	<script src="${root}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 	
-   	<!-- include libraries(jQuery, bootstrap) -->
-<!-- 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>  -->
 	<!-- include summernote css/js-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+	
 	<!-- include summernote-ko-KR -->
 	<script src="/resources/js/board/summernote-ko-KR.js"></script>
+	
+	
+   	<!-- include libraries(jQuery, bootstrap) -->
+   	<!-- 겹치는 부분 (일단 주석 / 10.10) -->
+<!-- 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>  -->
 		
 
 	
 </head>
 
 <body id="page-top">
-
+	
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-	<jsp:include page="sidebar.jsp"></jsp:include>
-
+		<jsp:include page="sidebar.jsp"></jsp:include>
+	
 	    <!-- Content Wrapper -->
 	    <div id="content-wrapper" class="d-flex flex-column">
-
-	<jsp:include page="topbar.jsp"></jsp:include>
 	
-	<jsp:include page="../${page}.jsp"></jsp:include>
+			<jsp:include page="topbar.jsp"></jsp:include>
+			
+            <!-- Main Content -->
+            <div id="content">
+				<jsp:include page="../${page}.jsp"></jsp:include>
+            </div>
+            <!-- End of Main Content -->
 	
-	<jsp:include page="footer.jsp"></jsp:include>                             
-
-        </div>
-        <!-- End of Content Wrapper -->
+			<jsp:include page="footer.jsp"></jsp:include>
+			                             
+	    </div>
+	    <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
-
+    
+    <!-- 사이드바 토글 모든페이지에서 작동 js -->
+    <script src="${root}/resources/js/sb-admin-2.min.js"></script>
+    
 </body>
 </html>
