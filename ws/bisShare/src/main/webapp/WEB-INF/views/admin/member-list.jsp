@@ -3,6 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
     
+    <style>
+	     #profile-img-area{
+            width: 30px;
+            height: 30px;
+            margin: auto;
+         }
+        #profile-img-area > img{
+            border-radius: 20%; 
+            width: 100%; 
+            height: 100%;
+            border: 1px solid black;
+         }
+    </style>
+    
+    
 		<!-- Begin Page Content -->
             <div class="container-fluid">
 
@@ -30,118 +45,74 @@
                        
                        <div class="table-responsive" style="overflow: auto">
 
+					 	<span id="id_entire">전체</span>
+					    <span id="id_inn">재직</span>
+					    <span id="id_out">퇴직</span>
+    
 						<!-- 사원관리 테이블start -->
 						<div style="height: 500px; overflow: auto"> 
 						 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                <thead>
                                    <tr>
-                                       <th width="5%"></th>
-                                       <th width="60%">제목</th>
-                                       <th width="10%" class="text-center">작성자</th>
-                                       <th width="10%" class="text-center">작성일</th>
-                                       <th width="10%" class="text-center">조회수</th>
+                                       <th width="7%" class="text-center">사진</th>
+                                       <th width="10%" class="text-center">사원번호</th>
+                                       <th width="10%" class="text-center">이름</th>
+                                       <th width="10%" class="text-center">부서</th>
+                                       <th width="10%" class="text-center">직급</th>
+                                       <th width="20%" class="text-center">메일</th>
+	                                   <th width="20%" class="text-center">연락처</th>
                                    </tr>
                                </thead>
                               
                                <tbody>
-                                   <tr>
-                                       <td class="text-center">1</td>
-                                       <td>인사이동 공지입니다.</td>
+                              <!-- 전체start -->
+                                   <tr id="entire">
+                                       <td class="text-center">
+	                                       <div id="profile-img-area">
+								              <img src="${root}/resources/img/undraw_profile_3.svg">
+								           </div>
+                                       </td>
+                                       
+                                       <td class="text-center">01</td>
                                        <td class="text-center">유시영</td>
-                                       <td class="text-center">2022.01.05</td>
-                                       <td class="text-center">7</td>
+                                       <td class="text-center">개발1팀</td>
+                                       <td class="text-center">대리</td>
+                                       <td class="text-center">kh1234@google.com</td>
+                                       <td class="text-center">010-4039-8988</td>
+                                   </tr>  
+                                   <!-- 전체end --> 
+                                   <!-- 재직start -->
+                                   <tr id="inn">
+                                       <td class="text-center">
+	                                       <div id="profile-img-area">
+								              <img src="${root}/resources/img/undraw_profile_3.svg">
+								           </div>
+                                       </td>
+                                       
+                                       <td class="text-center">02</td>
+                                       <td class="text-center">유재석</td>
+                                       <td class="text-center">개발2팀</td>
+                                       <td class="text-center">과장</td>
+                                       <td class="text-center">kh1234@google.com</td>
+                                       <td class="text-center">010-1111-2222</td>
                                    </tr>   
-                                   <tr>
-                                       <td class="text-center">2</td>
-                                       <td>식권발급 관련 안내드립니다.</td>
-                                       <td class="text-center">유시영</td>
-                                       <td class="text-center">2022.01.05</td>
-                                       <td class="text-center">17</td>
-                                   </tr>     
-                                   <tr>
-                                       <td class="text-center">3</td>
-                                       <td>7월 일정을 공유합니다.</td>
-                                       <td class="text-center">유시영</td>
-                                       <td class="text-center">2022.01.05</td>
-                                       <td class="text-center">30</td>
-                                   </tr>         
-                                   <tr>
-                                       <td class="text-center">4</td>
-                                       <td>3층 엘레베이터 고장 관련</td>
-                                       <td class="text-center">유시영</td>
-                                       <td class="text-center">2022.01.05</td>
-                                       <td class="text-center">24</td>
-                                   </tr>   
-                                   <tr>
-                                       <td class="text-center">5</td>
-                                       <td>전체 사원들에게 알려드립니다.</td>
-                                       <td class="text-center">유시영</td>
-                                       <td class="text-center">2022.01.05</td>
-                                       <td class="text-center">7</td>
-                                   </tr>     
-                                   <tr>
-                                       <td class="text-center">6</td>
-                                       <td>인사이동 공지입니다.</td>
-                                       <td class="text-center">유시영</td>
-                                       <td class="text-center">2022.01.05</td>
-                                       <td class="text-center">5</td>
+                                   <!-- 재직end -->
+                                   <!-- 퇴직start -->
+                                   <tr id="out">
+                                       <td class="text-center">
+	                                       <div id="profile-img-area">
+								              <img src="${root}/resources/img/undraw_profile_3.svg">
+								           </div>
+                                       </td>
+                                       
+                                       <td class="text-center">03</td>
+                                       <td class="text-center">홍길동</td>
+                                       <td class="text-center">개발3팀</td>
+                                       <td class="text-center">대리</td>
+                                       <td class="text-center">kh1234@google.com</td>
+                                       <td class="text-center">010-1234-5678</td>
                                    </tr> 
-                                   <tr>
-                                       <td class="text-center">7</td>
-                                       <td>식권발급 관련 안내드립니다.</td>
-                                       <td class="text-center">유시영</td>
-                                       <td class="text-center">2022.01.05</td>
-                                       <td class="text-center">11</td>
-                                   </tr>
-                                   <tr>
-                                       <td class="text-center">1</td>
-                                       <td>인사이동 공지입니다.</td>
-                                       <td class="text-center">유시영</td>
-                                       <td class="text-center">2022.01.05</td>
-                                       <td class="text-center">7</td>
-                                   </tr>   
-                                   <tr>
-                                       <td class="text-center">2</td>
-                                       <td>식권발급 관련 안내드립니다.</td>
-                                       <td class="text-center">유시영</td>
-                                       <td class="text-center">2022.01.05</td>
-                                       <td class="text-center">17</td>
-                                   </tr>     
-                                   <tr>
-                                       <td class="text-center">3</td>
-                                       <td>7월 일정을 공유합니다.</td>
-                                       <td class="text-center">유시영</td>
-                                       <td class="text-center">2022.01.05</td>
-                                       <td class="text-center">30</td>
-                                   </tr>         
-                                   <tr>
-                                       <td class="text-center">4</td>
-                                       <td>3층 엘레베이터 고장 관련</td>
-                                       <td class="text-center">유시영</td>
-                                       <td class="text-center">2022.01.05</td>
-                                       <td class="text-center">24</td>
-                                   </tr>   
-                                   <tr>
-                                       <td class="text-center">5</td>
-                                       <td>전체 사원들에게 알려드립니다.</td>
-                                       <td class="text-center">유시영</td>
-                                       <td class="text-center">2022.01.05</td>
-                                       <td class="text-center">7</td>
-                                   </tr>     
-                                   <tr>
-                                       <td class="text-center">6</td>
-                                       <td>인사이동 공지입니다.</td>
-                                       <td class="text-center">유시영</td>
-                                       <td class="text-center">2022.01.05</td>
-                                       <td class="text-center">5</td>
-                                   </tr> 
-                                   <tr>
-                                       <td class="text-center">7</td>
-                                       <td>식권발급 관련 안내드립니다.</td>
-                                       <td class="text-center">유시영</td>
-                                       <td class="text-center">2022.01.05</td>
-                                       <td class="text-center">11</td>
-                                   </tr>
+                                   <!-- 퇴직end -->  
                                </tbody> 
                            </table>
 						 
@@ -155,4 +126,42 @@
 
   </div>
            <!-- /.container-fluid -->
+           
+           
+           <script>
 
+        $(function(){
+
+            const entire = $('#entire');
+            const inn = $('#inn');
+            const out = $('#out');
+
+
+            $('#inn').hide();   // 초깃값 설정
+            $('#out').hide();	// 초깃값 설정
+            
+
+            $('#id_entire').click(function(){
+            	entire.show(); 
+            	inn.hide();       
+            	out.hide();       
+            });
+
+
+            $('#id_inn').click(function(){
+            	entire.hide(); 
+            	inn.show();       
+            	out.hide(); 
+            });
+
+
+            $('#id_out').click(function(){
+            	entire.hide(); 
+                inn.hide();       
+                out.show(); 
+            });
+
+        });
+
+     </script>
+           

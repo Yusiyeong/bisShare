@@ -14,7 +14,7 @@ public class NoticeController {
 	public String list(Model model) {
 
 		model.addAttribute("title", "NOTICE");
-		model.addAttribute("page", "notice/notice-list");
+		model.addAttribute("page", "notice/list");
 
 		return "layout/template";
 
@@ -26,10 +26,22 @@ public class NoticeController {
 	public String write(Model model) {
 		
 		model.addAttribute("title", "WRITE");
-		model.addAttribute("page", "notice/notice-write");
+		model.addAttribute("page", "notice/write");
 
 		return "layout/template";
 
 	}//write
+	
+	// 게시글 상세조회(화면)
+	@GetMapping("detail")
+	public String detail(Model model) {
+
+		model.addAttribute("title", "DETAIL");
+		model.addAttribute("page", "notice/detail");
+
+		return "layout/template";
+		
+	}//detail
+		
 		
 }//class
