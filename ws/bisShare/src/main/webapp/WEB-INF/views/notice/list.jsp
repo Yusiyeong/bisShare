@@ -16,7 +16,7 @@
                        <!--검색버튼start-->
                      
                        <div style="height: 50px;">
-                           <div style="position: absolute; right: 20px;">
+                           <div style="float: right;">
                                Search : <input type="text">
                                <input type="submit" value="검색" class="btn-primary" style="border-radius: 3px;" >
                            </div>
@@ -39,7 +39,7 @@
                                <tbody>
                                    <tr>
                                        <td class="text-center">1</td>
-                                       <td>인사이동 공지입니다.</td>
+                                       <td><a href="${root}/notice/detail">인사이동 공지입니다.</a></td>
                                        <td class="text-center">유시영</td>
                                        <td class="text-center">2022.01.05</td>
                                        <td class="text-center">7</td>
@@ -87,16 +87,17 @@
                                        <td class="text-center">11</td>
                                    </tr>
                                    
+                                   
                                </tbody> 
                            </table>
                            
 							<!-- 글쓰기 버튼 start  -->
-							<button class="btn btn-primary btn-sm" style="position: absolute; right: 20px;" onclick = "location.href ='${root}/notice/write'">글쓰기</button>				
+							<button class="btn btn-primary btn-sm"  onclick = "location.href ='${root}/notice/write'">글쓰기</button>				
 							<!-- 글쓰기 버튼 end  -->
 
                                <!--페이징start-->                                 
-                                   <nav aria-label="...">
-                                       <ul class="pagination">
+                                   <nav aria-label="..." style="float: right;">
+                                   		<ul class="pagination">
                                            <li class="page-item disabled">
                                                <a class="page-link">Previous</a>
                                            </li>
