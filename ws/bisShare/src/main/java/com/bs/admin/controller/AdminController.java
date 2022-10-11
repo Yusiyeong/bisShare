@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("admin")
 public class AdminController {
 
-	// 게시글 조회(화면)
+	// 사원 관리 조회(화면)
 	@GetMapping("list")
 	public String list(Model model) {
 		
@@ -20,6 +20,17 @@ public class AdminController {
 		
 	}//list
 	
+	
+	// 사원 등록(화면)
+	@GetMapping("enroll")
+	public String enroll(Model model) {
+		
+		model.addAttribute("title", "MEMBER ENROLL");
+		model.addAttribute("page", "admin/member-enroll");
+
+		return "layout/template";
+		
+	}//enroll
 	
 	
 }//class
