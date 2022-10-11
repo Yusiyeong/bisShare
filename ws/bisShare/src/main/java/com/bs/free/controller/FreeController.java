@@ -1,4 +1,4 @@
-package com.bs.board.controller;
+package com.bs.free.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("board")
-public class BoardController {
+@RequestMapping("free")
+public class FreeController {
 
 	// 게시글 조회(화면)
 	@GetMapping("list")
 	public String list(Model model) {
 
-		model.addAttribute("title", "BOARD");
-		model.addAttribute("page", "board/board-list");
+		model.addAttribute("title", "FREE");
+		model.addAttribute("page", "free/list");
 
 		return "layout/template";
 

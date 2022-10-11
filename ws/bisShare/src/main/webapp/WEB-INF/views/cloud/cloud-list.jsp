@@ -91,11 +91,11 @@
                            </table>
                            
 							<!-- 업로드 버튼 start  -->
-							<button class="btn btn-primary btn-sm" style="position: absolute; right: 20px;" onclick = "location.href ='${root}/cloud/write'">파일 업로드</button>				
+							<button class="btn btn-primary btn-sm" onclick = "location.href ='${root}/cloud/write'">파일 업로드</button>				
 							<!-- 업로드 버튼 end  -->
 
                                <!--페이징start-->                                 
-                                   <nav aria-label="...">
+                                   <nav aria-label="..." style="float: right;">
                                        <ul class="pagination">
                                            <li class="page-item disabled">
                                                <a class="page-link">Previous</a>

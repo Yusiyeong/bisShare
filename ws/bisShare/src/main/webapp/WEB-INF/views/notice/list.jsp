@@ -92,7 +92,7 @@
                            </table>
                            
 							<!-- 글쓰기 버튼 start  -->
-							<button class="btn btn-primary btn-sm"  onclick = "location.href ='${root}/notice/write'">글쓰기</button>				
+							<button class="btn btn-primary btn-sm" onclick = "location.href ='${root}/notice/write'">글쓰기</button>				
 							<!-- 글쓰기 버튼 end  -->
 
                                <!--페이징start-->                                 
