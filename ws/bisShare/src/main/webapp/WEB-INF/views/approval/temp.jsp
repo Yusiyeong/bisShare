@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}" />   
-<h1>결재 작성 페이지</h1>
 
+    <h1>임시저장한 기안서</h1>
