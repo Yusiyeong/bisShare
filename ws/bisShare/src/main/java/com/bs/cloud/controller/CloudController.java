@@ -14,12 +14,22 @@ public class CloudController {
 	public String list(Model model) {
 		
 		model.addAttribute("title", "CLOUD");
-		model.addAttribute("page", "cloud/cloud-list");
+		model.addAttribute("page", "cloud/list");
 
 		return "layout/template";
 		
 	}//list
 	
-	
+	// 게시글 조회(화면)
+	@GetMapping("write")
+	public String write(Model model) {
+		
+		model.addAttribute("title", "CLOUD");
+		model.addAttribute("page", "cloud/write");
+
+		return "layout/template";
+		
+	}//list
+		
 	
 }//class
