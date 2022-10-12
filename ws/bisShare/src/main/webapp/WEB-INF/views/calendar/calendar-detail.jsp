@@ -123,7 +123,9 @@
             <div>
                 <textarea id="con" placeholder="내용을 입력하세요"></textarea>
             </div>
-            <a href="" id="submit" class="btn btn-primary btn-user btn-block">
+            <a href="" id="" class="btn btn-primary btn-user btn-block">
                 수정하기 </a>
+            <a href="" id="" class="btn btn-primary btn-user btn-block">
+                삭제하기 </a>
         </div>
     </form>
