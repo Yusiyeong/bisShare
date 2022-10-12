@@ -27,6 +27,11 @@ $(document).ready(function() {
     alert(data[1]);
   });
 
+  $('#dataTable tbody').on('click','tr td:nth-child(3)', function() {
+    const data = table.row(this).data();
+    alert(`${data[1]} 번째 중요 표시`);
+  });
+
 });
 
 function selectAll(check) {

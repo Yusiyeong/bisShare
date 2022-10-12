@@ -57,5 +57,16 @@ public class MailController {
 		return "layout/template";
 	}
 	
+	/**
+	 * 상세 보기 이동
+	 */
+	@GetMapping("detail")
+	public String detail(Model model) {
+		model.addAttribute("title", "DETAIL");
+		model.addAttribute("page", "mail/detail");
+		
+		return "layout/template";
+	}
+	
 	
 }
