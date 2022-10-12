@@ -14,6 +14,13 @@
 	    </div>
        
 	    <div class="card-body">
+	    	<div style="height: 50px;">
+	            <div style="float: right;">
+	                <input type="text">
+	                <input type="submit" value="검색" class="btn-primary" style="border-radius: 3px;" >
+	            </div>
+            </div>
+	    
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">  
  					<thead>
