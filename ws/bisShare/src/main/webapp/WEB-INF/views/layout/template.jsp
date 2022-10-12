@@ -35,10 +35,6 @@
     <!-- Core plugin JavaScript-->
     <script src="${root}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 	
-	<!-- 데이터 테이블 js -->
-    <script src="${root}/resources/vendor/datatables/jquery.dataTables.min.js"></script>
-	<script src="${root}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	
 	<!-- include summernote css/js-->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
@@ -66,12 +62,17 @@
 	
 	    <!-- Content Wrapper -->
 	    <div id="content-wrapper" class="d-flex flex-column">
-	
-			<jsp:include page="topbar.jsp"></jsp:include>
-			
+
             <!-- Main Content -->
             <div id="content">
-				<jsp:include page="../${page}.jsp"></jsp:include>
+	
+    			<jsp:include page="topbar.jsp"></jsp:include>
+                
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+			        <jsp:include page="../${page}.jsp"></jsp:include>
+                </div>
+                
             </div>
             <!-- End of Main Content -->
 	
@@ -85,6 +86,17 @@
     
     <!-- 사이드바 토글 모든페이지에서 작동 js -->
     <script src="${root}/resources/js/sb-admin-2.min.js"></script>
+
+    <%-- <!-- 데이터 테이블 js -->
+    <script src="${root}/resources/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="${root}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="${root}/resources/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="${root}/resources/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="${root}/resources/js/demo/datatables-demo.js"></script> --%>
     
 </body>
 </html>
