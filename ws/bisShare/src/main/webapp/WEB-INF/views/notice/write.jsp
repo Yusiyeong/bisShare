@@ -26,8 +26,9 @@ $(document).ready(function() {
                    </div>
                    <div class="card-body">
 	                   	  <form method="post" action="">
-					         <input type="text" name="title" style="width: 90%;" placeholder=" title"/>
-					         <input class="btn btn-primary btn-sm" type="submit" value="작성" style="float: right; width: 7%;"  onclick="goWrite(this.form)"/> 
+					         <input type="text" name="title" style="width: 84%;" placeholder=" title"/>
+					         <input class="btn btn-secondary btn-sm" value="취소" style="float: right; width: 7%;" onclick=""/> 
+					         <input class="btn btn-primary btn-sm" type="submit" value="작성" style="float: right; width: 7%; margin-right: 8px;" onclick="goWrite(this.form)"/> 
 					         <br><br> 
 					         <textarea id="summernote" name="content"></textarea>
 					      </form>
