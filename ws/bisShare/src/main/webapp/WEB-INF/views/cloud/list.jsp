@@ -3,7 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
     
-		<!-- Begin Page Content -->
+    <!-- 검색 이모티콘 -->
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    
+      <!-- Begin Page Content -->
             <div class="container-fluid">
 
                <!-- DataTales Example -->
@@ -13,23 +16,24 @@
                    </div>
                    <div class="card-body">
 
-                       <!--검색버튼start-->
-                     
+                   
+                        <!--검색버튼start-->
                        <div style="height: 50px;">
-                           <div style="position: absolute; right: 20px;">
+                           <div style="float: right;">
                                Search : <input type="text">
                                <input type="submit" value="검색" class="btn-primary" style="border-radius: 3px;" >
                            </div>
                        </div>
                        <!--검색버튼end-->
                        
+                       <!-- 테이블start -->
                        <div class="table-responsive">
 
                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                <thead>
                                    <tr>
                                        <th width="5%"></th>
-                                       <th width="60%">파일 이름</th>
+                                       <th width="60%">제목</th>
                                        <th width="10%" class="text-center">작성자</th>
                                        <th width="10%" class="text-center">작성일</th>
                                        <th width="10%" class="text-center">조회수</th>
@@ -39,7 +43,7 @@
                                <tbody>
                                    <tr>
                                        <td class="text-center">1</td>
-                                       <td>인사이동 공지입니다.</td>
+                                       <td data-toggle="modal" data-target="#listSelect">인사이동 공지입니다.</td>
                                        <td class="text-center">유시영</td>
                                        <td class="text-center">2022.01.05</td>
                                        <td class="text-center">7</td>
@@ -89,10 +93,94 @@
                                    
                                </tbody> 
                            </table>
-                           
-							<!-- 업로드 버튼 start  -->
-							<button class="btn btn-primary btn-sm" onclick = "location.href ='${root}/cloud/write'">파일 업로드</button>				
-							<!-- 업로드 버튼 end  -->
+                           </div>
+                           <!-- 테이블end -->
+                     
+                     	<!-- 행 조회 모달창 start-->
+                        <!--  Modal-->
+                        <div class="modal fade" id="listSelect" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">제목</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="modal-body">
+                                    <!-- start -->
+                                   <div class="input-group mb-3">
+										아래 파일을 클릭하면 다운이 진행 됩니다.
+								   </div>
+
+								    <div class="input-group mb-2">
+										<a href="">다운로드 할 파일이름1</a>
+									</div>   
+									  <div class="input-group mb-2">
+										<a href="">다운로드 할 파일이름2</a>
+									</div>  
+									
+									
+									 <div class="input-group mb-3" style="height: 100px;">
+										 <textarea type="text" class="form-control"  style="height: 100px;" placeholder="내용"></textarea>
+								     </div>                    
+                                    <!-- end -->
+                                    </div>
+                                    
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                
+                          <!-- 행 조회 모달창 end-->
+                     
+                  <!------------------------------ ----------------------------------------------------------- ----------------------------- ----------------------------- -->
+                     
+	                     <!-- 업로드 버튼 start  -->
+	                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#uploadModal">파일 업로드</button>            
+	                     <!-- 업로드 버튼 end  -->
+                        
+                        <!-- 파일 업로드 모달창 start-->
+                        <!--  Modal-->
+                        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">파일 업로드</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="modal-body">
+                                    <!-- start -->
+                                   <div class="input-group mb-3">
+									  <input type="text" class="form-control" placeholder="제목을 입력하세요.">
+								   </div>
+
+								    <div class="input-group mb-3">
+										<input type="file">
+									</div>              
+									
+									 <div class="input-group mb-3" style="height: 100px;">
+										 <textarea type="text" class="form-control"  style="height: 100px;" placeholder="내용을 입력하세요."></textarea>
+								     </div>                    
+                                    <!-- end -->
+                                    </div>
+                                    
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+                                        <a class="btn btn-primary" type="submit">업로드</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                
+                          <!-- 파일 업로드 모달창 end-->
+            
 
                                <!--페이징start-->                                 
                                    <nav aria-label="..." style="float: right;">
@@ -112,11 +200,11 @@
                                    </nav>
                                <!--페이징end-->
                                
-                               
-                       </div>
                    </div>
                </div>
 
            </div>
            <!-- /.container-fluid -->
-
+           
+           
+        

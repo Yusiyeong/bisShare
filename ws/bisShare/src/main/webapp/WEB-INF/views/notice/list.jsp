@@ -3,6 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
     
+<style>
+a { text-decoration:none !important ;
+color: gray;}
+
+a:hover { text-decoration:none !important }
+</style>
+
 		<!-- Begin Page Content -->
             <div class="container-fluid">
 
@@ -23,6 +30,7 @@
                        </div>
                        <!--검색버튼end-->
                        
+                       <!-- 테이블start -->
                        <div class="table-responsive">
 
                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -90,6 +98,8 @@
                                    
                                </tbody> 
                            </table>
+                          </div>
+                          <!-- 테이블end -->
                            
 							<!-- 글쓰기 버튼 start  -->
 							<button class="btn btn-primary btn-sm" onclick = "location.href ='${root}/notice/write'">글쓰기</button>				
@@ -113,8 +123,6 @@
                                    </nav>
                                <!--페이징end-->
                                
-                               
-                       </div>
                    </div>
                </div>
 

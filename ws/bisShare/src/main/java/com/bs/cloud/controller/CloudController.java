@@ -20,16 +20,5 @@ public class CloudController {
 		
 	}//list
 	
-	// 게시글 조회(화면)
-	@GetMapping("write")
-	public String write(Model model) {
-		
-		model.addAttribute("title", "CLOUD");
-		model.addAttribute("page", "cloud/write");
-
-		return "layout/template";
-		
-	}//list
-		
 	
 }//class

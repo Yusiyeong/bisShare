@@ -43,9 +43,9 @@
                        </div>
                        <!--검색버튼end-->
                        
+						<!-- 테이블start -->
                        <div class="table-responsive" style="overflow: auto">
 
-						<!-- 사원관리 테이블start -->
 						<div style="height: 500px; overflow: auto"> 
 						 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                <thead>
@@ -232,13 +232,13 @@
                                </tbody> 
                            </table>
 						</div>
+                       </div>
                     	<!-- 사원관리 테이블end -->
                            
-                       </div>
                    </div>
                </div>
 
-  </div>
+  			</div>
            <!-- /.container-fluid -->
            
   
