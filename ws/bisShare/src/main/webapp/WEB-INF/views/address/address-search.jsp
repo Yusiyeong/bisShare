@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 
+<style>
+	#address-page{
+		margin-left: 630px;
+	}
+</style>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 	
@@ -25,7 +31,6 @@
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">  
  					<thead>
 						<tr>
-							<th><input type="checkbox" id="checkAll" onclick="selectAll(this)"></th>
 							<th>이름</th>
 							<th>직위</th>
 							<th>부서</th>
@@ -35,7 +40,6 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><input type="checkbox"></td>
 							<td>유재석</td>
 							<td>부장</td>
 							<td>영업3팀</td>
@@ -43,7 +47,6 @@
 							<td>jsyou@kh.com</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
 							<td>박명수</td>
 							<td>차장</td>
 							<td>영업3팀</td>
@@ -51,7 +54,6 @@
 							<td>mspark@kh.com</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
 							<td>정준하</td>
 							<td>과장</td>
 							<td>영업3팀</td>
@@ -59,7 +61,6 @@
 							<td>jhjung@kh.com</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
 							<td>정형돈</td>
 							<td>대리</td>
 							<td>영업3팀</td>
@@ -67,7 +68,6 @@
 							<td>hdjung@kh.com</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
 							<td>노홍철</td>
 							<td>사원</td>
 							<td>영업3팀</td>
@@ -75,7 +75,6 @@
 							<td>hcno@kh.com</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
 							<td>하동훈</td>
 							<td>사원</td>
 							<td>영업3팀</td>
@@ -83,7 +82,6 @@
 							<td>haha@kh.com</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
 							<td>길성준</td>
 							<td>사원</td>
 							<td>영업3팀</td>
@@ -91,7 +89,6 @@
 							<td>gill@kh.com</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
 							<td>권지용</td>
 							<td>전무</td>
 							<td>영업3팀</td>
@@ -99,7 +96,6 @@
 							<td>gd@kh.com</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
 							<td>김태호</td>
 							<td>이사</td>
 							<td>영업3팀</td>
@@ -108,6 +104,31 @@
 						</tr>
 					</tbody>
     			</table>
+    			
+    			<!-- page -->
+    			<nav id="address-page">
+	          		<ul class="pagination">
+	                  <li class="page-item">
+	                      <a class="page-link" href="">이전</a>
+	                  </li>
+	                   <li class="page-item"><a class="page-link" href="">1</a></li>
+	                  
+	                  <li class="page-item"><a class="page-link" href="">2</a></li>
+	                  
+	                  <li class="page-item"><a class="page-link" href="">3</a></li>
+	                  
+	                  <li class="page-item active" aria-current="page">
+	                      <a class="page-link" href="">4</a>
+	                  </li>
+	                  
+	                  <li class="page-item"><a class="page-link" href="">5</a></li>
+	                                                                
+	                  <li class="page-item">
+	                      <a class="page-link" href="">다음</a>
+	                  </li>
+	               </ul>
+                </nav>
+    			
     		</div>
     	</div>
     	
