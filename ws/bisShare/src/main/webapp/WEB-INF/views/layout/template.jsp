@@ -87,7 +87,7 @@
     <!-- 사이드바 토글 모든페이지에서 작동 js -->
     <script src="${root}/resources/js/sb-admin-2.min.js"></script>
 
-    <%-- <!-- 데이터 테이블 js -->
+    <!-- 데이터 테이블 js -->
     <script src="${root}/resources/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="${root}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
@@ -96,7 +96,7 @@
     <script src="${root}/resources/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="${root}/resources/js/demo/datatables-demo.js"></script> --%>
+    <script src="${root}/resources/js/demo/datatables-demo.js"></script>
     
 </body>
 </html>
