@@ -6,23 +6,9 @@
 
 	<!-- Page Heading -->
  	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.js"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
 		
-	<script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
-      });
-
-    </script>
     
 	<style>
 	  /* 캘린더 위의 해더 스타일(날짜가 있는 부분) */
@@ -35,5 +21,31 @@
 
 	<!-- calendar 태그 -->
     <div id='calendar'></div>
+    
+    <script>
+        window.onload = function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth' ,
+            selectable: true,
+            select: function(arg) { 
+                var title = prompt('Event Title:');
+                if (title) { 
+                    calendar.addEvent({
+                        title: title,
+                        start: arg.start,
+                        end: arg.end,
+                        allDay: arg.allDay
+                    })
+                }
+                
+                
+                calendar.unselect()
+            }
+            });
+            calendar.render();
+        }
+
+    </script>
 
 
