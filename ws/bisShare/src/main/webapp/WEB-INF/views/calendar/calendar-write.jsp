@@ -80,50 +80,68 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-	<!-- Page Heading -->
-    <form action="" method="post">
-        <div id="page">
-            <div>
-                <textarea id="title" placeholder="제목 없음"></textarea>
-            </div>
-            <div id="create">
-                작성일 <input id="write" type="textarea">
-            </div>
-            <div class="cate">
-                카테고리  <select id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
-						  <option selected>기타</option>
-						  <option value="1">회의</option>
-						  <option value="2">휴가</option>
-						  <option value="3">반차</option>
-						  <option value="4">외근</option>
-						</select>
-            </div>
-            <div id="start">
-                시작일 <input class="datepicker-start">
-                <script>
-                  $(function(){
-                    $( ".datepicker-start" ).datepicker({ minDate: 0});
-                    $('.datepicker-start').datepicker('setDate', 'today');
-                  })
-                </script>
-            </div>
-            <div id="end">
-                종료일 <input class="datepicker-end">
-                <script>
-                  $(function(){
-                    $('.datepicker-end').datepicker({ minDate: 0});
-                    $('.datepicker-end').datepicker('setDate', 'today');
-                  })
-                </script>
-            </div>
-            <div id="file">
-                첨부파일 <input type="file" id="file-name">
-            </div>
-            <hr id="line">
-            <div>
-                <textarea id="con" placeholder="내용을 입력하세요"></textarea>
-            </div>
-            <a href="" id="submit" class="btn btn-primary btn-user btn-block">
-                확인 </a>
-        </div>
-    </form>
+	<!-- Begin Page Content -->
+	       <div class="container-fluid">
+	          <!-- DataTales Example Start-->
+	          <div class="card shadow mb-4">
+	              <div class="card-header py-3">
+	                  <h6 class="m-0 font-weight-bold text-primary" >일정 작성</h6>
+	              </div>
+	              
+	              <div class="card-body">
+									<!--start-->
+									<!-- Page Heading -->
+								    <form action="" method="post">
+								        <div id="page">
+								            <div>
+								                <textarea id="title" placeholder="제목 없음"></textarea>
+								            </div>
+								            <div id="create">
+								                작성일 <input id="write" type="textarea">
+								            </div>
+								            <div class="cate">
+								                카테고리  <select id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
+														  <option selected>기타</option>
+														  <option value="1">회의</option>
+														  <option value="2">휴가</option>
+														  <option value="3">반차</option>
+														  <option value="4">외근</option>
+														</select>
+								            </div>
+								            <div id="start">
+								                시작일 <input class="datepicker-start">
+								                <script>
+								                  $(function(){
+								                    $( ".datepicker-start" ).datepicker({ minDate: 0});
+								                    $('.datepicker-start').datepicker('setDate', 'today');
+								                  })
+								                </script>
+								            </div>
+								            <div id="end">
+								                종료일 <input class="datepicker-end">
+								                <script>
+								                  $(function(){
+								                    $('.datepicker-end').datepicker({ minDate: 0});
+								                    $('.datepicker-end').datepicker('setDate', 'today');
+								                  })
+								                </script>
+								            </div>
+								            <div id="file">
+								                첨부파일 <input type="file" id="file-name">
+								            </div>
+								            <hr id="line">
+								            <div>
+								                <textarea id="con" placeholder="내용을 입력하세요"></textarea>
+								            </div>
+								            <a href="" id="submit" class="btn btn-primary btn-user btn-block">
+								                확인 </a>
+								        </div>
+								    </form>
+									<!--end-->
+							  </div>
+	
+					  </div>
+			<!-- DataTales Example End-->
+		  </div>
+	<!-- End Page Content -->
+	
