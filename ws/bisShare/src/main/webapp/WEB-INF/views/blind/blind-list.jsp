@@ -14,7 +14,6 @@
                    <div class="card-body">
 
                        <!--검색버튼start-->
-                     
                        <div style="height: 50px;">
                            <div style="position: absolute; right: 20px;">
                                Search : <input type="text">
@@ -23,6 +22,7 @@
                        </div>
                        <!--검색버튼end-->
                        
+                       <!-- 테이블 start -->
                        <div class="table-responsive">
 
                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -81,6 +81,8 @@
                                    
                                </tbody> 
                            </table>
+                           </div>
+                           <!-- 테이블 end -->
                            
 							<!-- 글쓰기 버튼 start  -->
 							<button class="btn btn-primary btn-sm" onclick = "location.href ='${root}/blind/write'">글쓰기</button>				
@@ -104,8 +106,6 @@
                                    </nav>
                                <!--페이징end-->
                                
-                               
-                       </div>
                    </div>
                </div>
 
