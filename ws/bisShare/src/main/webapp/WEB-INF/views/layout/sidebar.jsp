@@ -59,15 +59,23 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-clipboard"></i>
+                    <span class="badge badge-danger badge-counter">7</span>
+                    <i class="fas fa-clipboard fa-fw"></i>
+                    <!-- Counter - Messages -->
                     <span>전자결재</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="${root}/approval/my">나의 기안서</a>
                         <a class="collapse-item" href="${root}/approval/write">기안서 작성</a>
-                        <a class="collapse-item" href="${root}/approval/temp">임시저장한 기안서</a>
-                        <a class="collapse-item" href="${root}/approval/document">나의 결재함</a>
+                        <a class="collapse-item" href="${root}/approval/temp">
+                            임시저장한 기안서
+                            <span class="badge badge-danger">4</span>
+                        </a>
+                        <a class="collapse-item" href="${root}/approval/document">
+                            나의결재함
+                            <span class="badge badge-danger">3</span>
+                        </a>
                     </div>
                 </div>
             </li>
@@ -102,6 +110,15 @@
                         <a class="collapse-item" href="${root}/address/search">주소록 검색</a>
                     </div>
                 </div>
+            </li>
+
+            <!-- 나중에 관리자일때만 뜨게 해야함 -->
+            <!-- 관리자 (인사과 일 때) -->
+            <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link" href="${root}/admin/list">
+                    <i class="fas fa-fw fa-address-book"></i>
+                    <span>사원관리</span></a>
             </li>
             
             <!-- Divider -->
