@@ -5,9 +5,16 @@
 
 
 	<!-- Page Heading -->
- 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+ 	<!-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		
     
 	<style>
@@ -17,19 +24,124 @@
 	    padding-left: 1em;
 	    padding-right: 1em;
 	  }
+
+      #cate{
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      #select{
+        width: 100%;
+        height: 35px;
+        border:1px solid rgb(209, 209, 209);
+      }
+      .modal-title{
+        font-size: 30px;
+      }
 	</style>
+
+    <!-- Modal -->
+    <div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">일정추가</h1>
+            </div>
+            <div class="modal-body">
+            일정 제목
+            <input type="text" class="form-control" id="title">
+                <div id="cate">
+                    카테고리  
+                    <br>
+                    <select id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>기타</option>
+                        <option value="1">회의</option>
+                        <option value="2">휴가</option>
+                        <option value="3">반차</option>
+                        <option value="4">외근</option>
+                      </select>
+                </div>
+                내용
+                <input type="text" class="form-control" id="detail">
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+            <button type="button" id="saveBtn" class="btn btn-primary">확인</button>
+            </div>
+        </div>
+        </div>
+    </div>
 
 	<!-- calendar 태그 -->
     <div id='calendar'></div>
-    
+
     <script>
+
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                header : {
+                    left : 'prev, next today',
+                    center: 'title', 
+                    right : 'month, agendaWeek, agendaDay',   
+                }, 
+                selectable: true,
+                selectHelper: true,
+                select: function(start, end, allDays){
+                    $('#calendarModal').modal('toggle');
+
+                    $('#saveBtn').click(function(){
+                        var title = $('#title').val();
+                        var select = $('#select').val();
+                        var detail = $('#detail').val();
+                        var start_date = moment(start).format('YYYY-MM-DD');
+                        var end_date = moment(end).format('YYYY-MM-DD');
+
+                        console.log(title);
+                        console.log(select);
+                        console.log(detail);
+                        console.log(start_date);
+                        console.log(end_date); //end_date strat_date+1 되는 현상 고쳐야함
+
+                        $.ajax({
+                            url:"{{route('calendar.store')}}", //여기는 spring oracle에 맞게 url 변경 필요
+                            type:"POST", 
+                            dataType:'json', 
+                            data:{title, select, detail, start_date, end_date}, 
+                            success:function(response)
+                            {
+                                $('#calendarModal').modal('hide')
+                                $('#calendar').fullCalendar('renderEvent', {
+                                    'title': response.title,
+                                    'select': response.select,
+                                    'detail': response.detail,
+                                    'start': response.start,
+                                    'end': response.end,
+                                    'color': response.color
+                                    
+                                });
+                                alert("일정 등록 완료");
+                            },
+                            error:function(error)
+                            {
+                                if(error.responseJSON.errors){
+                                    $('titleError').html(error.responseJSON.errors.title);
+                                }
+                            }
+                        })
+                    })
+                }
+            })
+        });
+
+    </script>
+    
+    <!-- <script>
         window.onload = function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth' ,
             selectable: true,
             select: function(arg) { 
-                var title = prompt('Event Title:');
+                var title = prompt('일정의 제목을 입력하세요:');
                 if (title) { 
                     calendar.addEvent({
                         title: title,
@@ -38,14 +150,12 @@
                         allDay: arg.allDay
                     })
                 }
-                
-                
                 calendar.unselect()
             }
             });
             calendar.render();
         }
 
-    </script>
+    </script> -->
 
 
