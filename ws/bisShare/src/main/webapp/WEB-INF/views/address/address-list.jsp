@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 
+<style>
+	#address-page{
+		margin-left: 240px;
+	}
+</style>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 	
@@ -105,6 +111,29 @@
                     </div>
                 </div> <!-- card body -->
                 
+                <nav id="address-page">
+	          		<ul class="pagination">
+	                  <li class="page-item">
+	                      <a class="page-link" href="">이전</a>
+	                  </li>
+	                   <li class="page-item"><a class="page-link" href="">1</a></li>
+	                  
+	                  <li class="page-item"><a class="page-link" href="">2</a></li>
+	                  
+	                  <li class="page-item"><a class="page-link" href="">3</a></li>
+	                  
+	                  <li class="page-item active" aria-current="page">
+	                      <a class="page-link" href="">4</a>
+	                  </li>
+	                  
+	                  <li class="page-item"><a class="page-link" href="">5</a></li>
+	                                                                
+	                  <li class="page-item">
+	                      <a class="page-link" href="">다음</a>
+	                  </li>
+	               </ul>
+                </nav>
+                
 			</div>
 		</div>
 		
@@ -115,6 +144,7 @@
 	    		</div>
 			</div>
 		</div>
+		
 	</div> <!-- row -->
 	  
 </div>
