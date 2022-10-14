@@ -55,7 +55,7 @@
                                     <!-- form start -->
                                     <form class="user" method="post" action="${root}/employee/login">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" id="loginId" name="id" placeholder="아이디" value="${cookie.sid.value}">
+                                            <input type="text" class="form-control form-control-user" id="loginId" name="id" placeholder="아이디" value="${cookie.sid.value}">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" id="loginPwd" name="pwd" placeholder="비밀번호">
