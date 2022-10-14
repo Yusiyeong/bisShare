@@ -41,7 +41,7 @@
 	
 	<!-- include summernote-ko-KR -->
 	<script src="/resources/js/board/summernote-ko-KR.js"></script>
-	
+	<link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
 	
    	<!-- include libraries(jQuery, bootstrap) -->
    	<!-- 겹치는 부분 (일단 주석 / 10.10) -->
