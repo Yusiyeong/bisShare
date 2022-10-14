@@ -39,6 +39,14 @@ public class CalendarController {
 		return "layout/template";
 	}
 	
+	//일정 상세 조회
+	@GetMapping("calendar/detail")
+	public String detail(Model model) {
+		model.addAttribute("page", "calendar/calendar-detail");
+		return "layout/template";
+	}
+	
+	
 	
 	
 }

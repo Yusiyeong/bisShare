@@ -72,6 +72,16 @@
         margin: auto;
         width: 60px;
     }
+    
+    #edit, #delete{
+        text-align: center;
+        width: 100px;
+    }
+
+    #buttons{
+        
+        justify-content: center;
+    }
 
 
 </style>
@@ -134,10 +144,12 @@
 							            <div>
 							                <textarea id="con" placeholder="내용을 입력하세요"></textarea>
 							            </div>
-							            <a href="" id="" class="btn btn-primary btn-user btn-block">
-							                수정하기 </a>
-							            <a href="" id="" class="btn btn-primary btn-user btn-block">
-							                삭제하기 </a>
+                                        <div id="buttons">
+                                            <a href="" id="edit" class="btn btn-primary btn-user btn-block">
+                                                수정하기 </a>
+                                            <a href="" id="delete" class="btn btn-primary btn-user btn-block">
+                                                삭제하기 </a>
+                                        </div>
 							        </div>
 							    </form>
 								<!--end-->
