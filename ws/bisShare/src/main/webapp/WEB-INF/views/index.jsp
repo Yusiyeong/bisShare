@@ -28,6 +28,14 @@
 
 <body class="bg-gradient-primary">
 
+    <c:if test="${not empty errorMsg}">
+        <script>
+            alert('${errorMsg}');
+        </script>
+    </c:if>
+	<c:remove var="errorMsg" scope="session"/>
+    
+
     <div class="container">
 
         <!-- Outer Row -->
@@ -39,46 +47,36 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Login</h1>
                                     </div>
-                                    <form class="user">
+                                    <!-- form start -->
+                                    <form class="user" method="post" action="${root}/employee/login">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="아이디">
+                                            <input type="email" class="form-control form-control-user" id="loginId" name="id" placeholder="아이디" value="${cookie.sid.value}">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="비밀번호">
+                                            <input type="password" class="form-control form-control-user" id="loginPwd" name="pwd" placeholder="비밀번호">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
+                                                <input type="checkbox" class="custom-control-input" id="rememberCheck" name="rememberCheck">
+                                                <label class="custom-control-label" for="customCheck">Remember Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
-                                        </a>
+                                        </button>
                                         <hr>
                                         <a href="${root}/main" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> 메인페이지로 이동하기
-                                        </a>
-                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                         </a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>
@@ -102,6 +100,13 @@
     <!-- Custom scripts for all pages-->
     <script src="${root}/resources/js/sb-admin-2.min.js"></script>
 
+    <!-- js -->
+    <script src="${root}/resources/js/login/loginPage.js"></script>
+
+    <c:if test="${not empty cookie.sid}">
+        <!-- rememberCheck -->
+        <script src="${root}/resources/js/login/remember.js"></script>
+    </c:if>
 </body>
 
 </html>

@@ -16,25 +16,26 @@
 			<form class="user">
 				<div class="form-group">
 					<div class="text-truncate align-">받는 사람</div>
-					<input type="email" class="form-control" id="exampleInputEmail"
+					<input type="email" class="form-control" id="exampleInputEmail" name="received"
 						aria-describedby="emailHelp" placeholder="받는 사람">
 				</div>
 				<div class="form-group">
 					<div class="text-truncate align-">참조</div>
-					<input type="email" class="form-control" id="exampleInputEmail"
+					<input type="email" class="form-control" id="exampleInputEmail" name="ref"
 						aria-describedby="emailHelp" placeholder="참조">
 				</div>
 				<div class="form-group">
 					<div class="text-truncate align-">제목</div>
-					<input type="text" class="form-control" id="exampleInputEmail"
+					<input class="form-control"
 						aria-describedby="emailHelp" placeholder="제목">
 				</div>
-				<div class="form-group">
-					<div class="text-truncate align-">파일 첨부</div>
-					<input type="file" class="form-control">
+				<div class="form-group custom-file mb-3">
+					<input type="file" class="form-control custom-file-input" id="customFile">
+					<label class="custom-file-label" for="customFile">파일선택</label>
 				</div>
+				
 				<div class="form-group">
-					<textarea class="form-control" placeholder="내용" rows="20"></textarea>
+					<textarea id="mail-content" name="content"></textarea>
 				</div>
 
 
@@ -44,4 +45,9 @@
 		</div>
 	</div>
 </div>
+
+<script src="https://unpkg.com/@yaireo/tagify"></script>
+<script src="${root}/resources/js/mail/write.js"></script>
+
+
 

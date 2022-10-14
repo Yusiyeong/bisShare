@@ -9,7 +9,7 @@ $(document).ready(function() {
             type : "numeric-comma",
             targets: 0
           } ,
-          { targets : 0, width : 70},
+          { targets : 0, width : 70, className:"alCenter"},
           { targets : 1, width : 50},
           { targets : 2, width : 50},
           { targets : 4, width : 50},
@@ -17,7 +17,6 @@ $(document).ready(function() {
         ],
         select: {
         style:    'os',
-        selector: 'td:first-child'
         },
         order: [[ 5, 'desc' ]]
   });
@@ -40,3 +39,4 @@ function selectAll(check) {
     e.checked = check.checked;
   });
 }
+

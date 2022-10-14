@@ -6,8 +6,7 @@
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 	
-	<!-- <typeAliases>
-		<typeAlias type="com.kh.app99.member.vo.MemberVo" alias="mvo"/>
-		<typeAlias type="com.kh.app99.board.vo.BoardVo" alias="bvo"/>
-	</typeAliases> -->
+	<typeAliases>
+		<typeAlias type="com.bs.employee.vo.EmployeeVo" alias="ev"/>
+	</typeAliases>
 </configuration>
