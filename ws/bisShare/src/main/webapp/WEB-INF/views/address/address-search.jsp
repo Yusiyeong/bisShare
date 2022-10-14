@@ -7,6 +7,14 @@
 	#address-page{
 		margin-left: 630px;
 	}
+	
+	#field1{
+		margin-right: 5px;
+	}
+
+	#field2{
+		margin-right: 15px;
+	}
 </style>
 
 <!-- Begin Page Content -->
@@ -22,6 +30,26 @@
 	    <div class="card-body">
 	    	<div style="height: 50px;">
 	            <div style="float: right;">
+					<tr>
+                   		<td>
+                   			<select id="field1" name="field1" class="btn-primary" style="background: btn-primary; color: white;">
+	                            <option selected value="company">회사검색</option>
+	                            <option value="company1">회사1</option>
+	                            <option value="company2">회사2</option>
+	                            <option value="company3">회사3</option>
+							</select>
+                   		</td>
+		             </tr>	            
+                   	<tr>
+                   		<td>
+                   			<select id="field2" name="field2" class="btn-primary" style="background: btn-primary; color: white;">
+	                            <option selected value="dept">부서검색</option>
+	                            <option value="dept1">영업1팀</option>
+	                            <option value="dept2">영업2팀</option>
+	                            <option value="dept3">영업3팀</option>
+							</select>
+                   		</td>
+		             </tr>
 	                <input type="text">
 	                <input type="submit" value="검색" class="btn-primary" style="border-radius: 3px;" >
 	            </div>
