@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
     
+<style>
+    tr{
+        cursor: pointer;
+    }
+</style>
+
     <!-- 검색 이모티콘 -->
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     
@@ -43,7 +49,7 @@
                                <tbody>
                                    <tr>
                                        <td class="text-center">1</td>
-                                       <td data-toggle="modal" data-target="#listSelect">인사이동 공지입니다.</td>
+                                       <td data-toggle="modal" data-target="#listSelect">비즈쉐어 파일 입니다.</td>
                                        <td class="text-center">유시영</td>
                                        <td class="text-center">2022.01.05</td>
                                        <td class="text-center">7</td>
@@ -103,7 +109,7 @@
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">제목</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">비즈쉐어 파일 입니다.</h5>
                                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
