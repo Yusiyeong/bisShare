@@ -36,7 +36,7 @@ public class NoticeController {
 	@GetMapping("detail")
 	public String detail(Model model) {
 
-		model.addAttribute("title", "DETAIL");
+		model.addAttribute("title", "POST");
 		model.addAttribute("page", "notice/detail");
 
 		return "layout/template";

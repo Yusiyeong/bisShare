@@ -14,10 +14,33 @@ public class BlindController {
 	public String list(Model model) {
 		
 		model.addAttribute("title", "BLIND");
-		model.addAttribute("page", "blind/blind-list");
+		model.addAttribute("page", "blind/list");
 
 		return "layout/template";
 		
 	}//list
+	
+	// 게시글 작성(화면)
+		@GetMapping("write")
+		public String write(Model model) {
+			
+			model.addAttribute("title", "WRITE");
+			model.addAttribute("page", "blind/write");
+
+			return "layout/template";
+
+		}//write
+		
+		// 게시글 상세조회(화면)
+		@GetMapping("detail")
+		public String detail(Model model) {
+
+			model.addAttribute("title", "POST");
+			model.addAttribute("page", "blind/detail");
+
+			return "layout/template";
+			
+		}//detail
+			
 	
 }//class

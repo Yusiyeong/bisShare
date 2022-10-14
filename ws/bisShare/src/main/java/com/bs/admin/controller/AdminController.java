@@ -14,7 +14,7 @@ public class AdminController {
 	public String list(Model model) {
 		
 		model.addAttribute("title", "MEMBER LIST");
-		model.addAttribute("page", "admin/member-list");
+		model.addAttribute("page", "admin/list");
 
 		return "layout/template";
 		
@@ -26,7 +26,7 @@ public class AdminController {
 	public String enroll(Model model) {
 		
 		model.addAttribute("title", "MEMBER ENROLL");
-		model.addAttribute("page", "admin/member-enroll");
+		model.addAttribute("page", "admin/enroll");
 
 		return "layout/template";
 		

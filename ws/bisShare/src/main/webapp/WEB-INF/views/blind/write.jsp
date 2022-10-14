@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 
-    
+
 <script>
 $(document).ready(function() {
      $('#summernote').summernote({
@@ -27,7 +27,7 @@ $(document).ready(function() {
                    <div class="card-body">
                      <form method="post" action="">
                         <input type="text" name="title" style="width: 84%;" placeholder=" title"/>
-                        <a href="" class="btn btn-secondary btn-sm" style="float: right; width: 7%;">취소</a> 
+                        <a href="" class="btn btn-outline-primary btn-sm" style="float: right; width: 7%;">취소</a> 
                         <input class="btn btn-primary btn-sm" type="submit" value="작성" style="float: right; width: 7%; margin-right: 8px;" onclick="goWrite(this.form)"/> 
                         <br><br> 
                         <textarea id="summernote" name="content"></textarea>

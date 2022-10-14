@@ -29,7 +29,7 @@
                    <div class="card-body">
          
         			<!-- 사원등록 버튼 start  -->
-					<button class="btn btn-primary btn-sm" style="position: absolute;" onclick = "location.href ='${root}/admin/enroll'">사원 등록</button>				
+					<button class="btn btn-outline-primary btn-sm" style="position: absolute;" onclick = "location.href ='${root}/admin/enroll'">사원 등록</button>				
 					<!-- 사원등록 버튼 end  -->
 						
 						

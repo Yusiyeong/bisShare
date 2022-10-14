@@ -23,7 +23,7 @@
           <!-- DataTales Example Start-->
           <div class="card shadow mb-4">
               <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary" >사내 공지</h6>
+                  <h6 class="m-0 font-weight-bold text-primary" >블라인드 게시판</h6>
               </div>
               
               <div class="card-body">
@@ -43,7 +43,7 @@
                <!--수정, 삭제 버튼end-->
 
                     
-                     <h5>인사이동 공지입니다</h5>
+                     <h5>엘레베이터 왜 고장났나요</h5>
 
                      <hr>
 
