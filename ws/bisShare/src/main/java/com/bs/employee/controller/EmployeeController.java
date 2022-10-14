@@ -30,15 +30,12 @@ public class EmployeeController {
 			resp.addCookie(c);
 		}
 		
-//		EmployeeVo loginVo = ms.login(ev);
-		//TODO db 환경 설정 되면 변경
-		EmployeeVo loginVo = null;
+		EmployeeVo loginVo = ms.login(ev);
 		
 		if (loginVo != null) {
 			session.setAttribute("loginVo", loginVo);
 			return "redirect:/main";
 		} else {
-			//TODO 로그인 실패시
 			session.setAttribute("errorMsg", "아이디 혹은 비밀번호를 확인해주세요");
 			return "redirect:/";
 		}
