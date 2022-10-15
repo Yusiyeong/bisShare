@@ -13,8 +13,9 @@
 	}
 
 	#field2{
-		margin-right: 15px;
+		margin-right: 10px;
 	}
+	
 </style>
 
 <!-- Begin Page Content -->
@@ -32,21 +33,21 @@
 	            <div style="float: right;">
 					<tr>
                    		<td>
-                   			<select id="field1" name="field1" class="btn-primary" style="background: btn-primary; color: white;">
+                   			<select id="field1" name="field1" class="btn-link" style="color: black;">
 	                            <option selected value="company">회사검색</option>
-	                            <option value="company1">회사1</option>
-	                            <option value="company2">회사2</option>
-	                            <option value="company3">회사3</option>
+	                            <option value="company1">체크마인</option>
+	                            <option value="company2">마카데미아</option>
+	                            <option value="company3">에브리웨어</option>
 							</select>
                    		</td>
 		             </tr>	            
                    	<tr>
                    		<td>
-                   			<select id="field2" name="field2" class="btn-primary" style="background: btn-primary; color: white;">
+                   			<select id="field2" name="field2" class="btn-link" style="color: black;">
 	                            <option selected value="dept">부서검색</option>
-	                            <option value="dept1">영업1팀</option>
-	                            <option value="dept2">영업2팀</option>
-	                            <option value="dept3">영업3팀</option>
+	                            <option value="dept1">인사</option>
+	                            <option value="dept2">개발</option>
+	                            <option value="dept3">영업</option>
 							</select>
                    		</td>
 		             </tr>
@@ -132,6 +133,14 @@
 						</tr>
 					</tbody>
     			</table>
+    			
+    			<c:forEach var="addr" items="${list}">
+    				<c:if test="${empty list}">
+    					<tr>
+    						<td>조회된 직원이 없습니다.</td>
+    					</tr>
+    				</c:if>
+    			</c:forEach>
     			
     			<!-- page -->
     			<nav id="address-page">
