@@ -32,5 +32,17 @@ public class AdminController {
 		
 	}//enroll
 	
+
+	// 사원 등록(화면)
+	@GetMapping("detail")
+	public String detail(Model model) {
+		
+		model.addAttribute("title", "MEMBER");
+		model.addAttribute("page", "admin/detail");
+
+		return "layout/template";
+		
+	}//enroll
+	
 	
 }//class

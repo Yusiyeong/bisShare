@@ -1,14 +1,16 @@
 package com.bs.employee.controller;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bs.common.FileUploader;
 import com.bs.employee.service.EmployeeService;
 import com.bs.employee.vo.EmployeeVo;
 
@@ -18,10 +20,12 @@ public class EmployeeController {
 	
 	private final EmployeeService ms;
 	
+	// 생성자
 	public EmployeeController(EmployeeService ms) {
 		this.ms = ms;
 	}
 
+	// 로그인
 	@PostMapping("login")
 	public String login(EmployeeVo ev, String rememberCheck, HttpServletResponse resp, HttpSession session) {
 		
@@ -40,14 +44,32 @@ public class EmployeeController {
 			return "redirect:/";
 		}
 		
-	}
+	}//login
 	
-	@PostMapping("join")
-	public String join(EmployeeVo ev) {
+	// 사원등록(진행)
+	@PostMapping("enroll")
+	public String enroll(EmployeeVo ev, HttpServletRequest req, HttpSession session, Model model) {
 		
+		if(ev.getProfile() != null && !ev.getProfile().isEmpty()) {
+			String savePath = req.getServletContext().getRealPath("/resources/profile/");	
+			String changeName = FileUploader.fileUpload(ev.getProfile(), savePath);
+			ev.setProfilePath(changeName);
+		}
 		
+		// 서비스 호출
+		int result = ms.insertMember(ev);
 		
-		return "";
-	}
+		// 화면 선택
+		if(result == 1) {
+			session.setAttribute("alertMsg", "사원 등록 되었습니다.");
+			return "redirect:/admin/list";
+		}else {
+			model.addAttribute("alertMsg", "사원 등록 실패! 이전 화면으로 돌아갑니다.");
+			return "redirect:/admin/list";
+		}//if
+		
+	}//enroll
 	
-}
+	
+	
+}//class

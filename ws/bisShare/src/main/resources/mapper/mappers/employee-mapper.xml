@@ -1,11 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="employeeMapper">
 
+	<!-- 로그인 -->
 	<select id="selectOneById" resultType="ev">
 		SELECT *
 		FROM EMPLOYEE
 		WHERE STATUS='Y'
 	</select>
+	
+	<!-- 사원 등록 -->
+	<insert id="enroll">
+		INSERT INTO EMPLOYEE
+		(
+			EMP_NO,
+			ID,
+			PWD,
+			NICK,
+			PHONE,
+			EMAIL,
+			ADDRESS,
+			SS_NO,
+			HIRE_DATE,
+			SALARY,
+			PROFILE_PATH,
+			COMPANY_NO,
+			DEPT_NO,
+			RANK_NO
+		)
+		VALUES
+		(
+			SEQ_EMPLOYEE_NO.NEXTVAL
+			,#{id}
+			,#{pwd} 
+		    ,#{nick}
+		    ,#{phone} 
+		    ,#{email}
+		    ,#{address} 
+		    ,#{ssNo}
+		    ,#{hireDate} 
+		    ,#{salary}
+		    ,#{profilePath}
+		    , SEQ_COMPANY_NO.NEXTVAL
+		    , SEQ_DEPT_NO.NEXTVAL
+		    , SEQ_RANK_NO.NEXTVAL
+		)
+	</insert>
+	
 	
 </mapper>
