@@ -19,7 +19,11 @@ public class CalendarController {
 	
 	private final CalendarService cs;
 	
-
+	@Autowired
+	public CalendarController(CalendarService cs) {
+		super();
+		this.cs = cs;
+	}
 	
 	//일정 메인
 	@GetMapping("calendar/main")
@@ -27,8 +31,6 @@ public class CalendarController {
 		model.addAttribute("page", "calendar/calendar-main");
 		return "layout/template";
 	}
-	
-	
 	
 	//일정 작성 (화면)
 	@GetMapping("calendar/write")
