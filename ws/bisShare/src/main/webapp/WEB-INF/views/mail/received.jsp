@@ -97,6 +97,13 @@
 
 </div>
 
+<script src="${root}/resources/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="${root}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="${root}/resources/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="${root}/resources/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
 <script src="../resources/js/mail/datatables.js"></script>
 <script src="../resources/js/mail/mail-nav.js"></script>
 <script src="https://unpkg.com/@yaireo/tagify"></script>
