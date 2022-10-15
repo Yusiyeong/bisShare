@@ -3,10 +3,12 @@ package com.bs.address.service;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Service;
 
 import com.bs.address.dao.AddressDao;
 import com.bs.address.vo.AddressVo;
 
+@Service
 public class AddressServiceImpl implements AddressService{
 
 	private final SqlSessionTemplate sst;

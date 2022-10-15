@@ -3,9 +3,12 @@ package com.bs.address.dao;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.bs.address.vo.AddressVo;
 
+@Repository
 public class AddressDaoImpl implements AddressDao{
 
 	//주소록 조회

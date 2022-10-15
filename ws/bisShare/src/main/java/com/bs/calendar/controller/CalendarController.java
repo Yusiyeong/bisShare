@@ -21,7 +21,6 @@ public class CalendarController {
 	
 	@Autowired
 	public CalendarController(CalendarService cs) {
-		super();
 		this.cs = cs;
 	}
 	
