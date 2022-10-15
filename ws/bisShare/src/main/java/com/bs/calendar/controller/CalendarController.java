@@ -1,11 +1,24 @@
 package com.bs.calendar.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.bs.calendar.service.CalendarService;
+import com.bs.calendar.vo.CalendarVo;
+import com.bs.employee.vo.EmployeeVo;
 
 @Controller
+@RequestMapping("calendar")
 public class CalendarController {
+	
+	private final CalendarService cs;
+	
 
 	
 	//일정 메인
@@ -16,12 +29,35 @@ public class CalendarController {
 	}
 	
 	
-	//일정 작성
+	
+	//일정 작성 (화면)
 	@GetMapping("calendar/write")
 	public String write(Model model) {
 		model.addAttribute("page", "calendar/calendar-write");
 		return "layout/template";
 	}
+	
+	//일정 작성
+
+	@PostMapping("calendar/write")
+	public String write(CalendarVo vo, Model model, HttpSession session) {
+		
+		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginvo");
+		String no = loginvo.getEmpNo();
+		
+		int result = cs.write(vo);
+		
+		//화면 선택
+		if(result == 1) {
+			session.setAttribute("alertMsg", "일정 등록 완료");
+			return "layout/template";
+		}else {
+			model.addAttribute("msg" , "일정 등록 실패");
+			return "error/errorPage";
+		}
+		
+	}
+	
 	
 	
 	//일정 수정

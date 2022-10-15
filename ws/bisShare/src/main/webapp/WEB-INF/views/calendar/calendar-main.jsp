@@ -128,8 +128,9 @@
                             }
                         })
                     })
-                }
+                }      
             })
+            calendar.render();
         });
 
     </script>
