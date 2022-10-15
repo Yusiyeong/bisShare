@@ -1,9 +1,9 @@
 package com.bs.employee.service;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.mybatis.spring.SqlSessionTemplate;
 
 import com.bs.employee.dao.EmployeeDao;
 import com.bs.employee.vo.EmployeeVo;
@@ -13,7 +13,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	private final EmployeeDao md;
 	private final SqlSessionTemplate sst;
-	private final PasswordEncoder enc;
+	private final PasswordEncoder enc;		//암호화
 	
 	@Autowired
 	public EmployeeServiceImpl(EmployeeDao md, SqlSessionTemplate sst, PasswordEncoder enc) {
@@ -23,6 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		this.enc = enc;
 	}
 	
+	// 로그인
 	@Override
 	public EmployeeVo login(EmployeeVo ev) {
 		
@@ -33,7 +34,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 		} else {
 			return null;
 		}
-	}
+	}//login
+
+	// 사원등록
+	@Override
+	public int insertMember(EmployeeVo ev) {
+
+		// 암호화
+		ev.encodePwd(enc);
+		
+		return md.insertOne(sst, ev);
+		
+		
+	}//insertMember
 
 	
-}
+}//class

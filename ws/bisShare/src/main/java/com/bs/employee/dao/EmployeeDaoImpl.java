@@ -8,9 +8,16 @@ import com.bs.employee.vo.EmployeeVo;
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
+	// 로그인
 	@Override
 	public EmployeeVo selectOneById(SqlSessionTemplate sst, String id) {
 		return sst.selectOne("employeeMapper.selectOneById", id);
-	}
+	}//selectOneById
 
-}
+	// 사원 등록
+	@Override
+	public int insertOne(SqlSessionTemplate sst, EmployeeVo ev) {
+		return sst.insert("employeeMapper.enroll", ev);
+	}//insertOne
+
+}//class

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 
@@ -94,12 +95,11 @@
    <!-- DataTales Example Start-->
    <div class="card shadow mb-4">
       <div class="card-header py-3">
-         <h6 class="m-0 font-weight-bold text-primary" >사원 등록</h6>
+         <h6 class="m-0 font-weight-bold text-primary">보기/편집</h6>
       </div>
       
       <div class="card-body">
-         <!--form start-->
-         <form action="${root}/employee/enroll" method="post" enctype="multipart/form-data">
+         <!--start-->
          <div class="">
             <div class="row row-cols-2">
               <div class="col">
@@ -138,38 +138,38 @@
                         <div class="row">
                            <div class="col">
                               <label class="visually-hidden" for="autoSizingSelect">회사명</label>
-                              <input type="text" name="compName" class="form-control" placeholder="회사명을 입력하세요.">
+                              <input type="text" class="form-control" placeholder="회사명을 입력하세요.">
                            </div>
                         </div>
 
 						<div class="row" style="margin-top: 15px;">
 							<div class="col">
 							   <label class="visually-hidden" for="autoSizingSelect">회사 주소</label>
-							   <input type="text" name="compAddress" class="form-control" placeholder="회사 주소를 입력하세요.">
+							   <input type="text" class="form-control" placeholder="회사 주소를 입력하세요.">
 							</div>
 						</div>
 
                         <div class="row" style="margin-top: 15px;">
                            <div class="col">
                               <label class="visually-hidden" for="autoSizingSelect">직급</label>
-                              <select name="rankName" class="form-select form-control" id="autoSizingSelect">
-                                 <option value="a" selected>사원</option>
-                                 <option value="b">주임</option>
-                                 <option value="c">대리</option>
-                                 <option value="d">과장</option>
-                                 <option value="e">차장</option>
-                                 <option value="f">부장</option>
-                                 <option value="g">이사</option>
-                                 <option value="h">대표</option>
+                              <select class="form-select form-control" id="autoSizingSelect">
+                                 <option value="" selected>사원</option>
+                                 <option value="">주임</option>
+                                 <option value="">대리</option>
+                                 <option value="">과장</option>
+                                 <option value="">차장</option>
+                                 <option value="">부장</option>
+                                 <option value="">이사</option>
+                                 <option value="">대표</option>
                               </select>
                            </div>
       
                            <div class="col">
                               <label class="visually-hidden" for="autoSizingSelect">부서</label>
-                              <select name="deptName" class="form-select form-control" id="autoSizingSelect">
-                                 <option value="i" selected>인사</option>
-                                 <option value="j">개발</option>
-                                 <option value="k">영업</option>
+                              <select class="form-select form-control" id="autoSizingSelect">
+                                 <option value="" selected>인사</option>
+                                 <option value="">개발</option>
+                                 <option value="">영업</option>
                               </select>
                            </div>
                         </div>
@@ -197,17 +197,17 @@
                                  
                               <div class="col">
                                  <label class="visually-hidden" for="autoSizingSelect">아이디</label>
-                                 <input type="text" name="id" class="form-control" placeholder="아이디를 입력하세요.">
+                                 <input type="text" class="form-control" placeholder="아이디를 입력하세요.">
                               </div>
 
                               <div class="col">
                                  <label class="visually-hidden" for="autoSizingSelect">닉네임</label>
-                                 <input type="text" name="nick" class="form-control" placeholder="닉네임 입력하세요.">
+                                 <input type="text" class="form-control" placeholder="닉네임 입력하세요.">
                               </div>
 
 							  <div class="col">
-                                 <label class="visually-hidden" for="autoSizingSelect">임시 비밀번호</label>
-                                 <input type="text" name="pwd" class="form-control" placeholder="비밀번호를 입력하세요.">
+                                 <label class="visually-hidden" for="autoSizingSelect">비밀번호</label>
+                                 <input type="text" class="form-control" placeholder="본인만 확인 가능합니다." readonly>
                               </div>
                               
                            </div>
@@ -219,17 +219,17 @@
                                  
                               <div class="col">
                                  <label class="visually-hidden" for="autoSizingSelect">주민번호</label>
-                                 <input type="text" name="ssNo" class="form-control" placeholder="숫자만 입력하세요.">
+                                 <input type="text" class="form-control" placeholder="숫자만 입력하세요.">
                               </div>
 
                               <div class="col">
                                  <label class="visually-hidden" for="autoSizingSelect">이메일</label>
-                                 <input type="email" name="email" class="form-control" placeholder="이메일을 입력하세요.">
+                                 <input type="email" class="form-control" placeholder="이메일을 입력하세요.">
                               </div>
 
                               <div class="col">
                                  <label class="visually-hidden" for="autoSizingSelect">연락처</label>
-                                 <input type="tel" name="phone" class="form-control" placeholder="숫자만 입력하세요.">
+                                 <input type="tel" class="form-control" placeholder="숫자만 입력하세요.">
                               </div>
 
                            </div>
@@ -241,12 +241,12 @@
                                  
                               <div class="col">
                                  <label class="visually-hidden" for="autoSizingSelect">연봉</label>
-                                 <input type="text" name="salary" class="form-control" placeholder="숫자만 입력하세요.">
+                                 <input type="text" class="form-control" placeholder="숫자만 입력하세요.">
                               </div>
 
                               <div class="col">
                                  <label class="visually-hidden" for="autoSizingSelect">입사일</label>
-                                 <input type="text" name="hireDate" class="form-control" id="datepicker">
+                                 <input type="text" class="form-control" id="datepicker">
                               </div>
 
                            </div>
@@ -281,7 +281,7 @@
                               </div>
 
                               <div class="col">
-                                 <input type="text" name="address" class="form-control" id="sample6_detailAddress" placeholder="상세주소">
+                                 <input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소">
                               </div>
 
                            </div>
@@ -295,17 +295,16 @@
                       <!--취소, 등록 버튼start-->
                      <div style="margin-bottom: 7px; float: right;">
                         <!-- 취소 -->
-                        <a href="${root}/admin/list" class="btn btn-outline-secondary btn-sm">취소</a> 
+                        <a href="#" class="btn btn-outline-secondary btn-sm">취소</a> 
                         <!-- 등록 -->
-                        <input type="submit" class="btn btn-outline-primary btn-sm" value="등록">
+                        <a href="#" class="btn btn-outline-primary btn-sm">등록</a>
                      </div>
                      <!--취소, 등록 버튼end-->
 
             </div>
 
          </div>
-         </form>
-         <!--form end-->
+         <!--end-->
       </div>
 
    </div>
