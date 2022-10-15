@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bs.address.service.AddressService;
 import com.bs.address.vo.AddressVo;
 
 @Controller
+@RequestMapping("address")
 public class AddressController {
 	
 //	private final AddressService adds;
@@ -22,7 +24,7 @@ public class AddressController {
 //	}
 
 	//조직도
-	@GetMapping("address/list")
+	@GetMapping("list")
 	public String addressList(Model model) {
 //		List<AddressVo> voList = adds.selectList();
 //		model.addAttribute("voList", voList);
@@ -31,7 +33,7 @@ public class AddressController {
 	}
 	
 	//주소록 검색
-	@GetMapping("address/search")
+	@GetMapping("search")
 	public String addressSearch(Model model) {
 		model.addAttribute("page", "address/address-search");
 		return "layout/template";
