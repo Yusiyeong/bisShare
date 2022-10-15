@@ -35,9 +35,13 @@
     <!-- Core plugin JavaScript-->
     <script src="${root}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 	
-	<!-- include summernote css/js-->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+	<!-- include summernote css/js (기존)-->
+	<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet"> -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script> --> 
+	<!-- 변경 후 -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+	
 	
 	<!-- include summernote-ko-KR -->
 	<script src="/resources/js/board/summernote-ko-KR.js"></script>
