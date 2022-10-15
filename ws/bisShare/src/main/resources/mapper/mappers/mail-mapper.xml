@@ -1,4 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mailMapper">
+
+	<insert id="insertOne">
+		INSERT INTO MAIL(
+				MAIL_NO
+				, SEND
+				, RECEIVE
+				, TITLE
+				, CONTENT
+		)
+		VALUES (
+			SEQ_MAIL_NO.NEXTVAL
+			, ${send}
+			, ${receive}
+			, ${title}
+			, ${content}
+		)
+	</insert>
+	
+	<select id="selectAll" resultType="com.bs.mail.vo.MailVo">
+		SELECT 
+			M.MAIL_NO
+			, E.NICK SEND
+			, M.RECEIVE
+			, M.TITLE
+			, M.CONTENT
+			, M.ENROLL_DATE
+			, R.STAR
+			, R.REFERENCE
+			, R.READ_YN
+		FROM MAIL M
+			INNER JOIN MAIL_RECEIVE R
+			ON M.MAIL_NO = R.MAIL_NO
+			INNER JOIN EMPLOYEE E
+			ON M.SEND = E.EMP_NO
+		WHERE M.STATUS=0
+		AND M.RECEIVE=${empNo}
+	</select>
+	
+	<update id="updateStar">
+		UPDATE MAIL_RECEIVE
+		SET STAR = ${star}
+		WHERE MAIL_NO = ${mailNo}
+	</update>
+	
+	<select id="selectOne" resultType="com.bs.mail.vo.MailVo">
+		SELECT 
+			M.MAIL_NO
+			, E.NICK SEND
+			, M.RECEIVE
+			, M.TITLE
+			, M.CONTENT
+			, M.ENROLL_DATE
+			, R.STAR
+			, R.REFERENCE
+			, R.READ_YN
+		FROM MAIL M
+			INNER JOIN MAIL_RECEIVE R
+				ON M.MAIL_NO = R.MAIL_NO
+			INNER JOIN EMPLOYEE E
+				ON M.SEND = E.EMP_NO
+		WHERE M.STATUS=0
+		AND M.MAIL_NO = ${mailNo}
+	</select>
+	
+	<select id="selectStar" resultType="String">
+		SELECT STAR
+		FROM MAIL_RECEIVE
+		WHERE MAIL_NO=${mailNo}
+	</select>
+
 </mapper>
