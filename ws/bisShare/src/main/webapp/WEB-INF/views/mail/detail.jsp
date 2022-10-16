@@ -7,24 +7,27 @@
 		<button class="btn btn-success mx-2">답장하기</button>
 		<button class="btn btn-primary mx-2">전달하기</button>
 	</nav>
-	<div class="form-group">
-		<div class="text-truncate align-">보낸 사람</div>
-		<div id="detail-send">exam@gggg.com</div>
+	<div class="my-1 form-control">
+		<span class="text-truncate align- font-weight-bolder mr-lg-5">발신</span>
+		<span id="detail-send"></span>
 	</div>
-	<div class="form-group">
-		<div class="text-truncate align-">참조</div>
-		<div id="detail-ref"></div>
+	<div class="my-1 form-control">
+		<span class="text-truncate align- font-weight-bolder mr-5">참조</span>
+		<span id="detail-ref"></span>
 	</div>
-	<div class="form-group">
-		<div class="text-truncate align-">제목</div>
-		<div id="detail-title">제목</div>
+	<div class="my-1 form-control">
+		<span class="text-truncate align- font-weight-bolder mr-5">제목</span>
+		<span id="detail-title"></span>
 	</div>
-	<div class="form-group">
-		<div class="text-truncate align-">내용</div>
-		<div id="detail-content">content</div>
+	<div class="my-1">
+		<div class="text-truncate align- font-weight-bolder form-label">내용</div>
+		<div id="detail-content" class="form-control"></div>
 	</div>
-	<div class="form-group">
-		<div class="text-truncate align-">첨부된 파일</div>
-		<input type="file" class="form-control">
+	<div class="my-1 form-control">
+		
+	</div>
+	<div class="my-1 form-control">
+		<div class="text-truncate align- font-weight-bolder">첨부된 파일</div>
+		<input type="file">
 	</div>
 </div>

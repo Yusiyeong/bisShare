@@ -70,5 +70,11 @@
 		FROM MAIL_RECEIVE
 		WHERE MAIL_NO=${mailNo}
 	</select>
+	
+	<update id="updateReadYn">
+		UPDATE MAIL_RECEIVE
+		SET READ_YN = 'Y'
+		WHERE MAIL_NO = ${mailNo}
+	</update>
 
 </mapper>
