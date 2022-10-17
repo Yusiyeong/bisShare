@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class AddressVo {
 
-	private String no;
+	private String empNo;
 	private String nick;
 	private String rankNo;
 	private String deptNo;

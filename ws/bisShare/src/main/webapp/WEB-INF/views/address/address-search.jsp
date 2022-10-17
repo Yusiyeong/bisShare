@@ -73,6 +73,14 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach var="addr" items="${voList}">
+							<td>${addr.nick}</td>
+							<td>${addr.rankNo}</td>
+							<td>${addr.deptNo}</td>
+							<td>${addr.phone}</td>
+							<td>${addr.email}</td>
+		    			</c:forEach>
+						
 						<tr>
 							<td>유재석</td>
 							<td>부장</td>
@@ -116,13 +124,6 @@
 							<td>haha@kh.com</td>
 						</tr>
 						<tr>
-							<td>길성준</td>
-							<td>사원</td>
-							<td>영업3팀</td>
-							<td>010-7777-8888</td>
-							<td>gill@kh.com</td>
-						</tr>
-						<tr>
 							<td>권지용</td>
 							<td>전무</td>
 							<td>영업3팀</td>
@@ -136,10 +137,11 @@
 							<td>010-9999-0000</td>
 							<td>pdkim@kh.com</td>
 						</tr>
+						
 					</tbody>
     			</table>
     			
-    			<c:forEach var="addr" items="${list}">
+    			<c:forEach var="addr3" items="${list}">
     				<c:if test="${empty list}">
     					<tr>
     						<td>조회된 직원이 없습니다.</td>

@@ -4,7 +4,7 @@
 
 	<select id="selectList" resultType="com.bs.address.vo.AddressVo">
 		SELECT 
-			NO
+			EMP_NO
 			,NICK
 			,RANK_NO
 			,DEPT_NO

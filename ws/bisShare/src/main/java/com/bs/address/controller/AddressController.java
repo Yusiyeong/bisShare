@@ -26,8 +26,8 @@ public class AddressController {
 	//조직도
 	@GetMapping("list")
 	public String addressList(Model model) {
-//		List<AddressVo> voList = adds.selectList();
-//		model.addAttribute("voList", voList);
+		List<AddressVo> voList = adds.selectList();
+		model.addAttribute("voList", voList);
 		model.addAttribute("page", "address/address-list");
 		return "layout/template";
 	}
@@ -35,6 +35,8 @@ public class AddressController {
 	//주소록 검색
 	@GetMapping("search")
 	public String addressSearch(Model model) {
+		List<AddressVo> voList = adds.selectList();
+		model.addAttribute("voList", voList);
 		model.addAttribute("page", "address/address-search");
 		return "layout/template";
 	}
