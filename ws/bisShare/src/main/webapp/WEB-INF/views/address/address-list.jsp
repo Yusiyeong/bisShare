@@ -34,6 +34,15 @@
 								</tr>
 							</thead>
 							<tbody>
+								<c:forEach var="addr" items="${voList}">
+									<td><input type="checkbox" name="chk"></td>
+									<td>${addr.nick}</td>
+									<td>${addr.rankNo}</td>
+									<td>${addr.deptNo}</td>
+									<td>${addr.phone}</td>
+									<td>${addr.email}</td>
+				    			</c:forEach>
+							
 								<tr>
 									<td><input type="checkbox" name="chk"></td>
 									<td>유재석</td>
@@ -84,14 +93,6 @@
 								</tr>
 								<tr>
 									<td><input type="checkbox" name="chk"></td>
-									<td>길성준</td>
-									<td>사원</td>
-									<td>영업3팀</td>
-									<td>010-7777-8888</td>
-									<td>gill@kh.com</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" name="chk"></td>
 									<td>권지용</td>
 									<td>전무</td>
 									<td>영업3팀</td>
@@ -106,8 +107,10 @@
 									<td>010-9999-0000</td>
 									<td>pdkim@kh.com</td>
 								</tr>
+								
 							</tbody>
                         </table>
+                        
                     </div>
                 </div> <!-- card body -->
                 
