@@ -1,5 +1,7 @@
 package com.bs.employee.service;
 
+import java.util.List;
+
 import com.bs.employee.vo.EmployeeVo;
 
 public interface EmployeeService {
@@ -9,6 +11,8 @@ public interface EmployeeService {
 	
 	// 사원등록
 	int insertMember(EmployeeVo ev);
+
+	List<EmployeeVo> getList();
 	
 	
 }//interface

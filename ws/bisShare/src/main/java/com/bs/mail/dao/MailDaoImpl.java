@@ -40,6 +40,16 @@ public class MailDaoImpl implements MailDao{
 		sst.update("mailMapper.updateReadYn",mailNo);
 	}
 
+	@Override
+	public List<MailVo> selectStarList(SqlSessionTemplate sst, String empNo) {
+		return sst.selectList("mailMapper.selectStarList",empNo);
+	}
+
+	@Override
+	public String selectnotReadCnt(SqlSessionTemplate sst, String empNo) {
+		return sst.selectOne("mailMapper.selectNotReadCnt", empNo);
+	}
+
 	
 
 }

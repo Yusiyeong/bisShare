@@ -50,10 +50,12 @@ public class MailController {
 		
 		EmployeeVo ev = (EmployeeVo) session.getAttribute("loginVo");
 		
+		String notReadCnt = ms.notRead(ev.getEmpNo());
+		
 		List<MailVo> list = ms.receive(ev.getEmpNo());
 		
+		model.addAttribute("notReadCnt",notReadCnt);
 		model.addAttribute("receiveMail", list);
-		
 		return "layout/template";
 	}
 	
@@ -71,9 +73,19 @@ public class MailController {
 	 * 중요 메일함 이동
 	 */
 	@GetMapping("important")
-	public String star(Model model) {
+	public String star(Model model, HttpSession session) {
+		
+		EmployeeVo ev = (EmployeeVo) session.getAttribute("loginVo");
+		
+		List<MailVo> list = ms.star(ev.getEmpNo());
+		
+		String notReadCnt = ms.notRead(ev.getEmpNo());
+		
+		model.addAttribute("notReadCnt",notReadCnt);
+		model.addAttribute("receiveMail", list);
+		
 		model.addAttribute("title", "STAR MAIL");
-		model.addAttribute("page", "mail/star");
+		model.addAttribute("page", "mail/received");
 		
 		return "layout/template";
 	}

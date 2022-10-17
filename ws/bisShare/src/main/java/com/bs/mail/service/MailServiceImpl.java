@@ -71,4 +71,16 @@ public class MailServiceImpl implements MailService{
 		return md.selectOne(sst,mailNo);
 	}
 
+
+	@Override
+	public List<MailVo> star(String empNo) {
+		return md.selectStarList(sst,empNo);
+	}
+
+
+	@Override
+	public String notRead(String empNo) {
+		return md.selectnotReadCnt(sst,empNo);
+	}
+
 }

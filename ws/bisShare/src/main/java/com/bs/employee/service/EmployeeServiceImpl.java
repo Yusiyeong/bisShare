@@ -1,5 +1,7 @@
 package com.bs.employee.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -47,6 +49,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		
 	}//insertMember
+
+	@Override
+	public List<EmployeeVo> getList() {
+		return md.getList(sst);
+	}
 
 	
 }//class

@@ -20,5 +20,9 @@ public interface MailDao {
 
 	void updateReadYn(SqlSessionTemplate sst, String mailNo);
 
+	List<MailVo> selectStarList(SqlSessionTemplate sst, String empNo);
+
+	String selectnotReadCnt(SqlSessionTemplate sst, String empNo);
+
 
 }

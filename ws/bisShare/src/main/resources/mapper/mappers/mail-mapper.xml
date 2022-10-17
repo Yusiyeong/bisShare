@@ -76,5 +76,39 @@
 		SET READ_YN = 'Y'
 		WHERE MAIL_NO = ${mailNo}
 	</update>
+	
+	<select id="selectStarList" resultType="com.bs.mail.vo.MailVo">
+		SELECT 
+			M.MAIL_NO
+			, E.NICK SEND
+			, M.RECEIVE
+			, M.TITLE
+			, M.CONTENT
+			, M.ENROLL_DATE
+			, R.STAR
+			, R.REFERENCE
+			, R.READ_YN
+		FROM MAIL M
+			INNER JOIN MAIL_RECEIVE R
+			ON M.MAIL_NO = R.MAIL_NO
+			INNER JOIN EMPLOYEE E
+			ON M.SEND = E.EMP_NO
+		WHERE M.STATUS=0
+		AND M.RECEIVE=${empNo}
+		AND R.STAR = 'Y'
+	</select>
+	
+	<select id="selectNotReadCnt" resultType="String">
+		SELECT 
+			COUNT(R.READ_YN)
+		FROM MAIL M
+			INNER JOIN MAIL_RECEIVE R
+			ON M.MAIL_NO = R.MAIL_NO
+			INNER JOIN EMPLOYEE E
+			ON M.SEND = E.EMP_NO
+		WHERE M.STATUS=0
+		AND M.RECEIVE=${empNo}
+		AND R.READ_YN = 'N'
+	</select>
 
 </mapper>
