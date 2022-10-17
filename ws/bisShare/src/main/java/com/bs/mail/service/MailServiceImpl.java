@@ -64,6 +64,10 @@ public class MailServiceImpl implements MailService{
 
 	@Override
 	public MailVo detail(String mailNo) {
+		
+//		읽음표시하기
+		md.updateReadYn(sst,mailNo);
+		
 		return md.selectOne(sst,mailNo);
 	}
 

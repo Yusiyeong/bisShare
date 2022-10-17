@@ -18,5 +18,7 @@ public interface MailDao {
 
 	MailVo selectOne(SqlSessionTemplate sst, String mailNo);
 
+	void updateReadYn(SqlSessionTemplate sst, String mailNo);
+
 
 }

@@ -35,6 +35,11 @@ public class MailDaoImpl implements MailDao{
 		return sst.selectOne("mailMapper.selectOne",mailNo);
 	}
 
+	@Override
+	public void updateReadYn(SqlSessionTemplate sst, String mailNo) {
+		sst.update("mailMapper.updateReadYn",mailNo);
+	}
+
 	
 
 }
