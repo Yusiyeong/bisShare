@@ -53,7 +53,7 @@
                     카테고리  
                     <br>
                     <select id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>기타</option>
+                        <option value="5" selected>기타</option>
                         <option value="1">회의</option>
                         <option value="2">휴가</option>
                         <option value="3">반차</option>
