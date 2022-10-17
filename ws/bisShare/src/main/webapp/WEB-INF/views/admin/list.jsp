@@ -79,6 +79,8 @@
 					  <div class="tab-content" id="pills-tabContent">
 					  	  <!-- 전체사원start -->
 						  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+						  
+						  <c:forEach items="" var="">
 						    	 <!-- 테이블start -->
 		                       <div class="table-responsive" style="overflow: auto">
 		
@@ -93,7 +95,7 @@
 				                                       <th width="7%" class="text-center">직급</th>
 				                                       <th width="20%" class="text-center">메일</th>
 				                                       <th width="20%" class="text-center">연락처</th>
-				                                       <th width="10%" class="text-center" style="font-size:15px;">보기/편집</th>
+				                                       <th width="10%" class="text-center" style="font-size:15px;"><a href="${root}/admin/detail/">보기/편집</a></th>
 				                                   </tr>
 				                               </thead>
 				                              
@@ -113,26 +115,13 @@
 				                                       <td class="text-center">010-4039-8988</td>
 				                                       <td class="text-center"><a href="${root}/admin/detail" class="far fa-eye" style="font-size:17px;"></a></td>
 				                                   </tr>  
-				                                   <tr>
-				                                       <td class="text-center">
-				                                          <div id="profile-img-area">
-				                                      <img src="${root}/resources/img/undraw_profile_3.svg">
-				                                   </div>
-				                                       </td>
-				                                       
-				                                       <td class="text-center">02</td>
-				                                       <td class="text-center">유시영</td>
-				                                       <td class="text-center">개발</td>
-				                                       <td class="text-center">과장</td>
-				                                       <td class="text-center">kh1234@google.com</td>
-				                                       <td class="text-center">010-4039-8988</td>
-													   <td class="text-center"><a href="#" class="far fa-eye" style="font-size:17px;"></a></td>				                                   
-													</tr>  
-				                               </tbody> 
-				                           </table>
+			                               </tbody> 
+			                           </table>
 				                  </div>
 		                       </div>
                        <!-- 테이블end -->
+                       </c:forEach>
+                       
 						  </div>
 						  <!-- 전체사원end -->
 						  
