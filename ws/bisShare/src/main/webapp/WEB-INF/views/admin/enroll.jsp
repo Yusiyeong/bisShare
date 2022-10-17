@@ -138,38 +138,43 @@
                         <div class="row">
                            <div class="col">
                               <label class="visually-hidden" for="autoSizingSelect">회사명</label>
-                              <input type="text" name="compName" class="form-control" placeholder="회사명을 입력하세요.">
+                              <select name="companyNo" class="form-select form-control" id="autoSizingSelect" >
+                                 <option value="1" selected>체크마인</option>
+                                 <option value="2">마카데미아</option>
+                                 <option value="3">에브리웨어</option>
+                              </select>
+                              
                            </div>
                         </div>
 
 						<div class="row" style="margin-top: 15px;">
 							<div class="col">
 							   <label class="visually-hidden" for="autoSizingSelect">회사 주소</label>
-							   <input type="text" name="compAddress" class="form-control" placeholder="회사 주소를 입력하세요.">
+							   <input type="text" name="compAddress" class="form-control" placeholder="서울">
 							</div>
 						</div>
 
                         <div class="row" style="margin-top: 15px;">
                            <div class="col">
                               <label class="visually-hidden" for="autoSizingSelect">직급</label>
-                              <select name="rankName" class="form-select form-control" id="autoSizingSelect">
-                                 <option value="a" selected>사원</option>
-                                 <option value="b">주임</option>
-                                 <option value="c">대리</option>
-                                 <option value="d">과장</option>
-                                 <option value="e">차장</option>
-                                 <option value="f">부장</option>
-                                 <option value="g">이사</option>
-                                 <option value="h">대표</option>
+                              <select name="rankNo" class="form-select form-control" id="autoSizingSelect">
+                                 <option value="1" selected>사원</option>
+                                 <option value="2">주임</option>
+                                 <option value="3">대리</option>
+                                 <option value="4">과장</option>
+                                 <option value="5">차장</option>
+                                 <option value="6">부장</option>
+                                 <option value="7">이사</option>
+                                 <option value="8">대표</option>
                               </select>
                            </div>
       
                            <div class="col">
                               <label class="visually-hidden" for="autoSizingSelect">부서</label>
-                              <select name="deptName" class="form-select form-control" id="autoSizingSelect">
-                                 <option value="i" selected>인사</option>
-                                 <option value="j">개발</option>
-                                 <option value="k">영업</option>
+                              <select name="deptNo" class="form-select form-control" id="autoSizingSelect">
+                                 <option value="1" selected>인사</option>
+                                 <option value="2">개발</option>
+                                 <option value="3">영업</option>
                               </select>
                            </div>
                         </div>

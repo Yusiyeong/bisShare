@@ -42,9 +42,9 @@
 		    ,#{hireDate} 
 		    ,#{salary}
 		    ,#{profilePath}
-		    , SEQ_COMPANY_NO.NEXTVAL
-		    , SEQ_DEPT_NO.NEXTVAL
-		    , SEQ_RANK_NO.NEXTVAL
+		    ,#{companyNo}
+		    ,#{deptNo}
+		    ,#{rankNo}
 		)
 	</insert>
 	
