@@ -99,6 +99,9 @@
       </div>
       
       <div class="card-body">
+       <!--form start-->
+         <form action="${root}/employee/enroll" method="post" enctype="multipart/form-data">
+         
          <!--start-->
          <div class="">
             <div class="row row-cols-2">
@@ -138,14 +141,14 @@
                         <div class="row">
                            <div class="col">
                               <label class="visually-hidden" for="autoSizingSelect">회사명</label>
-                              <input type="text" class="form-control" placeholder="회사명을 입력하세요.">
+                              <input type="text" class="form-control" placeholder="회사명을 입력하세요." readonly>
                            </div>
                         </div>
 
 						<div class="row" style="margin-top: 15px;">
 							<div class="col">
 							   <label class="visually-hidden" for="autoSizingSelect">회사 주소</label>
-							   <input type="text" class="form-control" placeholder="회사 주소를 입력하세요.">
+							   <input type="text" class="form-control" placeholder="회사 주소를 입력하세요." readonly>
 							</div>
 						</div>
 
@@ -153,23 +156,23 @@
                            <div class="col">
                               <label class="visually-hidden" for="autoSizingSelect">직급</label>
                               <select class="form-select form-control" id="autoSizingSelect">
-                                 <option value="" selected>사원</option>
-                                 <option value="">주임</option>
-                                 <option value="">대리</option>
-                                 <option value="">과장</option>
-                                 <option value="">차장</option>
-                                 <option value="">부장</option>
-                                 <option value="">이사</option>
-                                 <option value="">대표</option>
+                                 <option value="1" selected>사원</option>
+                                 <option value="2">주임</option>
+                                 <option value="3">대리</option>
+                                 <option value="4">과장</option>
+                                 <option value="5">차장</option>
+                                 <option value="6">부장</option>
+                                 <option value="7">이사</option>
+                                 <option value="8">대표</option>
                               </select>
                            </div>
       
                            <div class="col">
                               <label class="visually-hidden" for="autoSizingSelect">부서</label>
                               <select class="form-select form-control" id="autoSizingSelect">
-                                 <option value="" selected>인사</option>
-                                 <option value="">개발</option>
-                                 <option value="">영업</option>
+                                 <option value="1" selected>인사</option>
+                                 <option value="2">개발</option>
+                                 <option value="3">영업</option>
                               </select>
                            </div>
                         </div>
@@ -197,12 +200,12 @@
                                  
                               <div class="col">
                                  <label class="visually-hidden" for="autoSizingSelect">아이디</label>
-                                 <input type="text" class="form-control" placeholder="아이디를 입력하세요.">
+                                 <input type="text" class="form-control" value="${loginMember.id}" placeholder="아이디를 입력하세요." readonly>
                               </div>
 
                               <div class="col">
                                  <label class="visually-hidden" for="autoSizingSelect">닉네임</label>
-                                 <input type="text" class="form-control" placeholder="닉네임 입력하세요.">
+                                 <input type="text" class="form-control" value="${loginMember.nick}" placeholder="닉네임 입력하세요." readonly>
                               </div>
 
 							  <div class="col">
@@ -219,17 +222,17 @@
                                  
                               <div class="col">
                                  <label class="visually-hidden" for="autoSizingSelect">주민번호</label>
-                                 <input type="text" class="form-control" placeholder="숫자만 입력하세요.">
+                                 <input type="text" class="form-control" value="${loginMember.ssNo}" placeholder="숫자만 입력하세요." readonly>
                               </div>
 
                               <div class="col">
                                  <label class="visually-hidden" for="autoSizingSelect">이메일</label>
-                                 <input type="email" class="form-control" placeholder="이메일을 입력하세요.">
+                                 <input type="email" class="form-control" value="${loginMember.email}" placeholder="이메일을 입력하세요." readonly>
                               </div>
 
                               <div class="col">
                                  <label class="visually-hidden" for="autoSizingSelect">연락처</label>
-                                 <input type="tel" class="form-control" placeholder="숫자만 입력하세요.">
+                                 <input type="tel" class="form-control" value="${loginMember.phone}" placeholder="숫자만 입력하세요." readonly>
                               </div>
 
                            </div>
@@ -241,51 +244,23 @@
                                  
                               <div class="col">
                                  <label class="visually-hidden" for="autoSizingSelect">연봉</label>
-                                 <input type="text" class="form-control" placeholder="숫자만 입력하세요.">
+                                 <input type="text" class="form-control" value="${loginMember.salary}" placeholder="숫자만 입력하세요.">
                               </div>
 
                               <div class="col">
                                  <label class="visually-hidden" for="autoSizingSelect">입사일</label>
-                                 <input type="text" class="form-control" id="datepicker">
+                                 <input type="text" class="form-control" value="${loginMember.hireDate}" id="datepicker" readonly>
                               </div>
 
                            </div>
                         <!--사원정보 내부end-->
-                        <!--주소1 start-->
-                           
-                           <div class="row" style="margin-top: 15px;">
-                                 
-                              <div class="col">
-                                 <label class="visually-hidden" for="autoSizingSelect">주소</label>
-                                  	<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호">
-                              </div>
-
-                              <div class="col" style="margin-top: 35px;">
-  									<input type="button" class="btn btn-outline-primary btn-sm" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-                              </div>
-
-                           </div>
-                        
-                        <!--주소1 end-->
                         
                           <!--주소2 start-->
-                           
                            <div class="row" style="margin-top: 15px;">
-                                 
                               <div class="col">
-                                 <input type="text" class="form-control" id="sample6_address" placeholder="주소">
+                                 <input type="text" class="form-control" value="${loginMember.address}" id="sample6_detailAddress" placeholder="상세주소">
                               </div>
-
-                              <div class="col">
-                                 <input type="text" class="form-control" id="sample6_extraAddress" placeholder="참고항목">
-                              </div>
-
-                              <div class="col">
-                                 <input type="text" class="form-control" id="sample6_detailAddress" placeholder="상세주소">
-                              </div>
-
                            </div>
-                        
                         <!--주소2 end-->
                         
                         </div>
@@ -305,6 +280,8 @@
 
          </div>
          <!--end-->
+         </form>
+         <!--form end-->
       </div>
 
    </div>

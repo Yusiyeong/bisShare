@@ -100,6 +100,7 @@
       <div class="card-body">
          <!--form start-->
          <form action="${root}/employee/enroll" method="post" enctype="multipart/form-data">
+         <!--start-->
          <div class="">
             <div class="row row-cols-2">
               <div class="col">
@@ -309,6 +310,7 @@
             </div>
 
          </div>
+          <!--end-->
          </form>
          <!--form end-->
       </div>
