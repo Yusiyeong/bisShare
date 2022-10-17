@@ -101,11 +101,11 @@
 								            </div>
 								            <div class="cate">
 								                카테고리  <select id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
-														  <option selected>기타</option>
-														  <option value="1">회의</option>
-														  <option value="2">휴가</option>
-														  <option value="3">반차</option>
-														  <option value="4">외근</option>
+														  <option value="1" selected>기타</option>
+														  <option value="2">회의</option>
+														  <option value="3">휴가</option>
+														  <option value="4">반차</option>
+														  <option value="5">외근</option>
 														</select>
 								            </div>
 								            <div id="start">
