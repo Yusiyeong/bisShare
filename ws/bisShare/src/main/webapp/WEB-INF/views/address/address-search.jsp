@@ -31,23 +31,28 @@
 	    <div class="card-body">
 	    	<div style="height: 50px;">
 	            <div style="float: right;">
-					<tr>
-                   		<td>
-                   			<select id="field1" name="field1" class="btn-link" style="color: black;">
-	                            <option selected value="company">회사검색</option>
-	                            <option value="company1">체크마인</option>
-	                            <option value="company2">마카데미아</option>
-	                            <option value="company3">에브리웨어</option>
-							</select>
-                   		</td>
-		             </tr>	            
                    	<tr>
                    		<td>
-                   			<select id="field2" name="field2" class="btn-link" style="color: black;">
+                   			<select id="field1" name="field1" class="btn-link" style="color: black;">
 	                            <option selected value="dept">부서검색</option>
 	                            <option value="dept1">인사</option>
 	                            <option value="dept2">개발</option>
 	                            <option value="dept3">영업</option>
+							</select>
+                   		</td>
+		             </tr>
+		             <tr>
+                   		<td>
+                   			<select id="field2" name="field2" class="btn-link" style="color: black;">
+	                            <option selected value="rank">직급검색</option>
+	                            <option value="rank1">사원</option>
+	                            <option value="rank2">주임</option>
+	                            <option value="rank3">대리</option>
+	                            <option value="rank4">과장</option>
+	                            <option value="rank5">차장</option>
+	                            <option value="rank6">부장</option>
+	                            <option value="rank7">이사</option>
+	                            <option value="rank8">대표</option>
 							</select>
                    		</td>
 		             </tr>
@@ -61,7 +66,7 @@
  					<thead>
 						<tr>
 							<th>이름</th>
-							<th>직위</th>
+							<th>직급</th>
 							<th>부서</th>
 							<th>연락처</th>
 							<th>이메일</th>

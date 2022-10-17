@@ -27,7 +27,7 @@
 								<tr>
 									<th><input type="checkbox" id="cbx_chkAll" /></th>
 									<th>이름</th>
-									<th>직위</th>
+									<th>직급</th>
 									<th>부서</th>
 									<th>연락처</th>
 									<th>이메일</th>

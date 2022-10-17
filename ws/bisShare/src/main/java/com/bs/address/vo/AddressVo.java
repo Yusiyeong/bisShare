@@ -11,4 +11,5 @@ public class AddressVo {
 	private String deptNo;
 	private String phone;
 	private String email;
+	private String status;
 }
