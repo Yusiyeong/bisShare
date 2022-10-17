@@ -22,8 +22,11 @@
 		</span>
 	</button>
 	<button class="btn btn-success mx-2" id="mail-send-btn">메일 작성</button>
-	<button class="btn btn-primary mx-2">받은 메일함</button>
-	<button class="btn btn-primary mx-2">보낸 메일함</button>
-	<button class="btn btn-warning mx-2">중요 메일함</button>
-	<button class="btn btn-primary mx-2">내게 쓴 메일함</button>
+	<button class="btn btn-primary mx-2" onclick="location.href=root+'/mail/receive';">
+		받은 메일
+		<span class="badge badge-danger badge-counter" id="notReadCnt">${notReadCnt}</span>
+	</button>
+	<button class="btn btn-primary mx-2">보낸 메일</button>
+	<button class="btn btn-warning mx-2" onclick="location.href=root+'/mail/important';">중요 메일</button>
+	<button class="btn btn-primary mx-2">내게 쓴 메일</button>
 </nav>

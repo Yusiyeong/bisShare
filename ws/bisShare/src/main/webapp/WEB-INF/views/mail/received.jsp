@@ -17,7 +17,7 @@
 	<div class=" col-xl-6 col-lg-6">
 		<div class="card shadow border-left-primary mb-4">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">받은 메일함</h6>
+				<h6 class="m-0 font-weight-bold text-primary">받은 메일</h6>
 			</div>
 			<div class="card-body">
 				<jsp:include page="mail-nav.jsp"></jsp:include>
@@ -90,3 +90,4 @@
 <script src="../resources/js/mail/mail-nav.js"></script>
 <script src="https://unpkg.com/@yaireo/tagify"></script>
 <script src="${root}/resources/js/mail/write.js"></script>
+<script src="${root}/resources/js/mail/tagify.js"></script>

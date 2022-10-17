@@ -40,37 +40,3 @@ $('#mail-content').summernote({
 
 
 
-
-let received = document.querySelector('[name="received"]');
-let ref = document.querySelector('[name="ref"]');
-new Tagify(received , {
-    // 배열 형식으로 전달
-    whitelist : ["foo", "bar", "baz"],
-    dropdown : {
-        // 보여줄 개수
-        maxItems : 5,
-        enabled : 0,
-        // 선택하면 닫기
-        closeOnSelect : false
-    },
-    // 이메일 형식만 받기
-    pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-
-
-})
-
-new Tagify(ref , {
-    // 배열 형식으로 전달
-    whitelist : ["foo", "bar", "baz"],
-    dropdown : {
-        // 보여줄 개수
-        maxItems : 5,
-        enabled : 0,
-        // 선택하면 닫기
-        closeOnSelect : false
-    },
-    // 이메일 형식만 받기
-    pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-
-
-})

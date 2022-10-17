@@ -14,4 +14,8 @@ public interface MailService {
 
 	MailVo detail(String mailNo);
 
+	List<MailVo> star(String empNo);
+
+	String notRead(String empNo);
+
 }

@@ -8,6 +8,7 @@
 		SELECT *
 		FROM EMPLOYEE
 		WHERE STATUS='Y'
+		AND ID=#{id}
 	</select>
 	
 	<!-- 사원 등록 -->
@@ -47,6 +48,18 @@
 		    ,#{rankNo}
 		)
 	</insert>
+	
+	
+	<select id="getList" resultType="ev">
+		SELECT 
+			EMP_NO,
+			NICK,
+			EMAIL,
+			DEPT_NO,
+			RANK_NO
+		FROM EMPLOYEE
+		WHERE STATUS='Y'
+	</select>
 	
 	
 </mapper>
