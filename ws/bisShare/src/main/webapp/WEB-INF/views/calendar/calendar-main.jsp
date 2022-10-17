@@ -102,7 +102,7 @@
                         console.log(end_date); //end_date strat_date+1 되는 현상 고쳐야함
 
                         $.ajax({
-                            url:"{{route('calendar.store')}}", //여기는 spring oracle에 맞게 url 변경 필요
+                            url:"<%=request.getContextPath()%>/calendar", //여기는 spring oracle에 맞게 url 변경 필요
                             type:"POST", 
                             dataType:'json', 
                             data:{title, select, detail, start_date, end_date}, 
