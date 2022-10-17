@@ -2,6 +2,8 @@ package com.bs.address.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.bs.address.vo.AddressVo;
 
 public interface AddressService {

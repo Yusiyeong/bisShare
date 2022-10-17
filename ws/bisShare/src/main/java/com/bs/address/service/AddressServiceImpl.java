@@ -13,19 +13,19 @@ public class AddressServiceImpl implements AddressService{
 
 	private final SqlSessionTemplate sst;
 	
-	private final AddressDao adddao;
-	
-	public AddressServiceImpl(SqlSessionTemplate sst, AddressDao adddao) {
+	private final AddressDao dao;
+
+	public AddressServiceImpl(SqlSessionTemplate sst, AddressDao dao) {
+		super();
 		this.sst = sst;
-		this.adddao = adddao;
+		this.dao = dao;
 	}
 
-
-
+	
 	//주소록 조회
 	@Override
 	public List<AddressVo> selectList() {
-		return adddao.selectList(sst);
+		return dao.selectList(sst);
 	}
 
 }

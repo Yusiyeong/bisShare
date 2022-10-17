@@ -16,12 +16,12 @@ import com.bs.address.vo.AddressVo;
 @RequestMapping("address")
 public class AddressController {
 	
-//	private final AddressService adds;
-//	
-//	@Autowired
-//	public AddressController(AddressService adds) {
-//		this.adds = adds;
-//	}
+	private final AddressService adds;
+	
+	@Autowired
+	public AddressController(AddressService adds) {
+		this.adds = adds;
+	}
 
 	//조직도
 	@GetMapping("list")
