@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.bs.employee.vo.EmployeeVo;
 import com.bs.mail.vo.MailVo;
 
 public interface MailDao {
@@ -23,6 +24,7 @@ public interface MailDao {
 	List<MailVo> selectStarList(SqlSessionTemplate sst, String empNo);
 
 	String selectnotReadCnt(SqlSessionTemplate sst, String empNo);
+
 
 
 }

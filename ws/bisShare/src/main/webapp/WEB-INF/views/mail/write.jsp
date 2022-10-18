@@ -119,23 +119,27 @@
 .users-list .tagify__dropdown__itemsGroup:not(:first-of-type){
     border-top: 1px solid #DDD;
 }
+
+.rankTag {
+	justify-self: end;
+}
 </style>
 
-<form class="user" id="mail-write">
+<form class="user" id="mail-write" method="post" enctype="multipart/form-data"  action="${root}/mail/write">
 	<div class="form-group">
 		<div class="text-truncate align-">받는 사람</div>
-		<input name="receive">
+		<input name="receive" required>
 	</div>
 	<div class="form-group">
 		<div class="text-truncate align-">참조</div>
-		<input name="ref">
+		<input name="reference">
 	</div>
 	<div class="form-group">
 		<div class="text-truncate align-">제목</div>
-		<input class="form-control" placeholder="제목">
+		<input class="form-control" placeholder="제목" name="title" required>
 	</div>
 	<div class="form-group custom-file mb-3">
-		<input type="file" class="form-control custom-file-input" id="customFile">
+		<input type="file" class="form-control custom-file-input" id="customFile" name="f">
 		<label class="custom-file-label" for="customFile">파일선택</label>
 	</div>
 	
@@ -144,6 +148,6 @@
 	</div>
 
 
-	<a href="index.html" class="btn btn-primary btn-user btn-block">
-		전송 </a>
+	<button class="btn btn-primary btn-user btn-block">
+		전송 </button>
 </form>
