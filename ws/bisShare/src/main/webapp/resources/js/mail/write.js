@@ -23,7 +23,7 @@ $('#mail-content').summernote({
                 const url = reader.result;
                 $.ajax({
                     data : {img : url},
-                    url : "/test/mail/imgUpload",
+                    url : root+"/mail/imgUpload",
                     method : "post",
                     success : function(path) {
                         console.log('success');

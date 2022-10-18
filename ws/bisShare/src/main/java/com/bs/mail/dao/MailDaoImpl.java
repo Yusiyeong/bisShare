@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.bs.employee.vo.EmployeeVo;
 import com.bs.mail.vo.MailVo;
 
 @Repository
@@ -49,7 +50,4 @@ public class MailDaoImpl implements MailDao{
 	public String selectnotReadCnt(SqlSessionTemplate sst, String empNo) {
 		return sst.selectOne("mailMapper.selectNotReadCnt", empNo);
 	}
-
-	
-
 }

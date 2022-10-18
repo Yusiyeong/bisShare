@@ -1,11 +1,13 @@
 package com.bs.mail.service;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bs.employee.vo.EmployeeVo;
 import com.bs.mail.dao.MailDao;
 import com.bs.mail.vo.MailVo;
 
@@ -27,7 +29,10 @@ public class MailServiceImpl implements MailService{
 	 */
 	@Override
 	public int write(MailVo mv) {
-		return md.insertOne(sst,mv);
+		
+		int result = md.insertOne(sst,mv);
+		
+		return result;
 	}
 
 	/**
