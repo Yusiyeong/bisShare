@@ -7,8 +7,8 @@ public class AddressVo {
 
 	private String empNo;
 	private String nick;
-	private String rankNo;
-	private String deptNo;
+	private String rankName;
+	private String deptName;
 	private String phone;
 	private String email;
 	private String status;

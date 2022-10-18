@@ -37,8 +37,8 @@
 								<c:forEach var="addr" items="${voList}">
 									<td><input type="checkbox" name="chk"></td>
 									<td>${addr.nick}</td>
-									<td>${addr.rankNo}</td>
-									<td>${addr.deptNo}</td>
+									<td>${addr.rankName}</td>
+									<td>${addr.deptName}</td>
 									<td>${addr.phone}</td>
 									<td>${addr.email}</td>
 				    			</c:forEach>

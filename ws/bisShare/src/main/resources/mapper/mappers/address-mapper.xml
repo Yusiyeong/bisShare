@@ -4,15 +4,19 @@
 
 	<select id="selectList" resultType="com.bs.address.vo.AddressVo">
 		SELECT 
-			EMP_NO
-			,NICK
-			,RANK_NO
-			,DEPT_NO
-			,PHONE
-			,EMAIL
-			,STATUS
-		FROM EMPLOYEE
-		WHERE STATUS = 'Y'
+		    E.EMP_NO
+		    ,E.NICK
+		    ,R.RANK_NAME
+		    ,D.DEPT_NAME
+		    ,E.PHONE
+		    ,E.EMAIL
+		    ,E.STATUS
+		FROM EMPLOYEE E
+		INNER JOIN RANK R
+		ON E.RANK_NO = R.RANK_NO
+		INNER JOIN DEPT D
+		ON E.DEPT_NO = D.DEPT_NO
+		WHERE E.STATUS = 'Y'
 	</select>
 
 </mapper>
