@@ -28,9 +28,16 @@ public class MailServiceImpl implements MailService{
 	 * 메일 발송
 	 */
 	@Override
-	public int write(MailVo mv) {
+	public int write(MailVo mv, List<EmployeeVo> recList, List<EmployeeVo> refList) {
 		
 		int result = md.insertOne(sst,mv);
+		
+		for(int i = 0; i<recList.size() ; i++) {
+			recList.get(i).getEmpNo();
+		}
+		for(int i=0; i<refList.size(); i++) {
+			refList.get(i).getEmpNo();
+		}
 		
 		return result;
 	}

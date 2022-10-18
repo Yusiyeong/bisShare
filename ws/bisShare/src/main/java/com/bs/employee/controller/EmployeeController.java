@@ -77,7 +77,7 @@ public class EmployeeController {
 		
 	}//enroll
 	
-	@GetMapping("getList")
+	@GetMapping(value="getList", produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String getList() {
 		

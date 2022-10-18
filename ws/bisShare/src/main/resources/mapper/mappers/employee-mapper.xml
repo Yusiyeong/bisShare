@@ -52,12 +52,16 @@
 	
 	<select id="getList" resultType="ev">
 		SELECT 
-			EMP_NO,
-			NICK,
-			EMAIL,
-			DEPT_NO,
-			RANK_NO
-		FROM EMPLOYEE
+			E.EMP_NO VALUE,
+			E.NICK,
+			E.EMAIL,
+			D.DEPT_NAME DEPT_NO,
+			R.RANK_NAME RANK_NO
+		FROM EMPLOYEE E
+		JOIN RANK R
+			ON R.RANK_NO = E.RANK_NO
+		JOIN DEPT D
+			ON D.DEPT_NO = E.DEPT_NO
 		WHERE STATUS='Y'
 	</select>
 	
