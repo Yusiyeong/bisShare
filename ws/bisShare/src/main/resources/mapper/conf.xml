@@ -7,6 +7,14 @@
 	</settings>
 	
 	<typeAliases>
+		<typeAlias type="com.bs.approval.vo.ApprovalVo" alias="av"/>
 		<typeAlias type="com.bs.employee.vo.EmployeeVo" alias="ev"/>
+		<typeAlias type="com.bs.mail.vo.MailVo" alias="mv"/>
+		<typeAlias type="com.bs.calendar.vo.CalendarVo" alias="calvo"/>
+		<typeAlias type="com.bs.address.vo.AddressVo" alias="addressvo"/>
+<!-- 		<typeAlias type="com.bs.notice.vo.NoticeVo" alias="nv"/>
+		<typeAlias type="com.bs.free.vo.FreeVo" alias="fv"/>
+		<typeAlias type="com.bs.blind.vo.BlindVo" alias="bv"/>
+		<typeAlias type="com.bs.cloud.vo.CloudVo" alias="cv"/> -->
 	</typeAliases>
 </configuration>
