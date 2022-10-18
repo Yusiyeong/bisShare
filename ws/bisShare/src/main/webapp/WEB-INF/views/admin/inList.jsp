@@ -66,13 +66,13 @@
 					<!-- 내부start -->
 					   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 						  <li class="nav-item" role="presentation">
- 							<a class="nav-link active btn btn-sm" aria-current="page" href="${root}/admin/list">전체</a>
+ 							<a class="nav-link btn btn-sm" aria-current="page" href="${root}/admin/list">전체</a>
  						  </li>
 						  <li class="nav-item" role="presentation">
-							<a class="nav-link  btn btn-sm" aria-current="page" href="${root}/admin/inList">재직</a>
+							<a class="nav-link active btn btn-sm" aria-current="page" href="${root}/admin/inList">재직</a>
 						  </li>
 						  <li class="nav-item" role="presentation">
-							<a class="nav-link  btn btn-sm" aria-current="page" href="${root}/admin/ouList">퇴직</a>						  
+							<a class="nav-link  btn btn-sm" aria-current="page" href="${root}/admin/outList">퇴직</a>						  
 						  </li>
 					  </ul>
 					  
@@ -80,7 +80,7 @@
 					  <div class="tab-content" id="pills-tabContent">
 					  	  <!-- 전체사원start -->
 					  	   <!--form start-->
-         					<form action="${root}/admin/list" method="get" enctype="multipart/form-data">
+         					<form action="${root}/admin/inList" method="get" enctype="multipart/form-data">
 						  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 				    	 <!-- 테이블start -->
 						  

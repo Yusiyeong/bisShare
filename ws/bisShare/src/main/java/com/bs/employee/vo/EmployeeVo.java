@@ -22,8 +22,9 @@ public class EmployeeVo {
 	private String profilePath;			// == fileName
 	private MultipartFile profile;		// 추가 함
 	private String companyNo;
-	private String deptNo;
-	private String rankNo;
+	private String companyAdr;	// 추가 함
+	private String deptNo;		// 부서
+	private String rankNo;		// 직급
 	
 	
 	// 암호화

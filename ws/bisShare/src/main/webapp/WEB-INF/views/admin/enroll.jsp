@@ -138,7 +138,7 @@
                         <!--회사내부start-->
                         <div class="row">
                            <div class="col">
-                              <label class="visually-hidden" for="autoSizingSelect">회사명</label>
+                              <label class="visually" for="autoSizingSelect">회사명</label>
                               <select name="companyNo" class="form-select form-control" id="autoSizingSelect" >
                                  <option value="1" selected>체크마인</option>
                                  <option value="2">마카데미아</option>
@@ -150,14 +150,14 @@
 
 						<div class="row" style="margin-top: 15px;">
 							<div class="col">
-							   <label class="visually-hidden" for="autoSizingSelect">회사 주소</label>
+							   <label class="visually" for="autoSizingSelect">회사 주소</label>
 							   <input type="text" name="compAddress" class="form-control" placeholder="서울">
 							</div>
 						</div>
 
                         <div class="row" style="margin-top: 15px;">
                            <div class="col">
-                              <label class="visually-hidden" for="autoSizingSelect">직급</label>
+                              <label class="visually" for="autoSizingSelect">직급</label>
                               <select name="rankNo" class="form-select form-control" id="autoSizingSelect">
                                  <option value="1" selected>사원</option>
                                  <option value="2">주임</option>
@@ -171,7 +171,7 @@
                            </div>
       
                            <div class="col">
-                              <label class="visually-hidden" for="autoSizingSelect">부서</label>
+                              <label class="visually" for="autoSizingSelect">부서</label>
                               <select name="deptNo" class="form-select form-control" id="autoSizingSelect">
                                  <option value="1" selected>인사</option>
                                  <option value="2">개발</option>
@@ -202,17 +202,17 @@
                            <div class="row">
                                  
                               <div class="col">
-                                 <label class="visually-hidden" for="autoSizingSelect">아이디</label>
+                                 <label class="visually" for="autoSizingSelect">아이디</label>
                                  <input type="text" name="id" class="form-control" placeholder="아이디를 입력하세요.">
                               </div>
 
                               <div class="col">
-                                 <label class="visually-hidden" for="autoSizingSelect">닉네임</label>
+                                 <label class="visually" for="autoSizingSelect">닉네임</label>
                                  <input type="text" name="nick" class="form-control" placeholder="닉네임 입력하세요.">
                               </div>
 
 							  <div class="col">
-                                 <label class="visually-hidden" for="autoSizingSelect">임시 비밀번호</label>
+                                 <label class="visually" for="autoSizingSelect">임시 비밀번호</label>
                                  <input type="text" name="pwd" class="form-control" placeholder="비밀번호를 입력하세요.">
                               </div>
                               
@@ -224,17 +224,17 @@
                            <div class="row" style="margin-top: 15px;">
                                  
                               <div class="col">
-                                 <label class="visually-hidden" for="autoSizingSelect">주민번호</label>
+                                 <label class="visually" for="autoSizingSelect">주민번호</label>
                                  <input type="text" name="ssNo" class="form-control" placeholder="숫자만 입력하세요.">
                               </div>
 
                               <div class="col">
-                                 <label class="visually-hidden" for="autoSizingSelect">이메일</label>
+                                 <label class="visually for="autoSizingSelect">이메일</label>
                                  <input type="email" name="email" class="form-control" placeholder="이메일을 입력하세요.">
                               </div>
 
                               <div class="col">
-                                 <label class="visually-hidden" for="autoSizingSelect">연락처</label>
+                                 <label class="visually" for="autoSizingSelect">연락처</label>
                                  <input type="tel" name="phone" class="form-control" placeholder="숫자만 입력하세요.">
                               </div>
 
@@ -246,12 +246,12 @@
                            <div class="row" style="margin-top: 15px;">
                                  
                               <div class="col">
-                                 <label class="visually-hidden" for="autoSizingSelect">연봉</label>
+                                 <label class="visually" for="autoSizingSelect">연봉</label>
                                  <input type="text" name="salary" class="form-control" placeholder="숫자만 입력하세요.">
                               </div>
 
                               <div class="col">
-                                 <label class="visually-hidden" for="autoSizingSelect">입사일</label>
+                                 <label class="visually" for="autoSizingSelect">입사일</label>
                                  <input type="text" name="hireDate" class="form-control" id="datepicker">
                               </div>
 
@@ -262,7 +262,7 @@
                            <div class="row" style="margin-top: 15px;">
                                  
                               <div class="col">
-                                 <label class="visually-hidden" for="autoSizingSelect">주소</label>
+                                 <label class="visually" for="autoSizingSelect">주소</label>
                                   	<input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호">
                               </div>
 
