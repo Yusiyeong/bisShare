@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class EmployeeVo {
 	
+	private String value;
 	private String empNo;
 	private String id;
 	private String pwd;
