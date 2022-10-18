@@ -61,5 +61,6 @@
 		WHERE STATUS='Y'
 	</select>
 	
+
 	
 </mapper>

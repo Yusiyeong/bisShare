@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="adminMapper">
+
+	<!-- 사원 조회(전체) -->
+	<select id="entireList" resultType="ev">
+	 SELECT
+          E.EMP_NO AS empNo
+          ,E.NICK
+          ,R.RANK_NAME AS rankNo
+          ,D.DEPT_NAME AS deptNo
+          ,E.EMAIL
+          ,E.PHONE
+      FROM EMPLOYEE E 
+      INNER JOIN DEPT D
+          ON E.DEPT_NO = D.DEPT_NO
+      INNER JOIN RANK R
+          ON E.RANK_NO = R.RANK_NO
+      ORDER BY EMPNO ASC
+	</select>
+
+	<!-- 사원 조회(재직) -->
+	<select id="inList" resultType="ev">
+	 SELECT
+          E.EMP_NO AS empNo
+          ,E.NICK
+          ,R.RANK_NAME AS rankNo
+          ,D.DEPT_NAME AS deptNo
+          ,E.EMAIL
+          ,E.PHONE
+      FROM EMPLOYEE E 
+      INNER JOIN DEPT D
+          ON E.DEPT_NO = D.DEPT_NO
+      INNER JOIN RANK R
+          ON E.RANK_NO = R.RANK_NO
+          WHERE STATUS = 'Y'
+      ORDER BY EMPNO ASC
+	</select>
+	
+	<!-- 사원 관리 조회(퇴직) -->
+	<select id="outList"  resultType="ev">
+	 SELECT
+          E.EMP_NO AS empNo
+          ,E.NICK
+          ,R.RANK_NAME AS rankNo
+          ,D.DEPT_NAME AS deptNo
+          ,E.EMAIL
+          ,E.PHONE
+      FROM EMPLOYEE E 
+      INNER JOIN DEPT D
+          ON E.DEPT_NO = D.DEPT_NO
+      INNER JOIN RANK R
+          ON E.RANK_NO = R.RANK_NO
+          WHERE STATUS = 'N'
+      ORDER BY EMPNO ASC
+	</select>
+	
+	<!-- 상세조회(사원번호로 조회) - 전체/재직/퇴직 -->
+	<select id="selectOne" resultType="ev">
+	       SELECT
+         E.EMP_NO AS empNo
+        ,E.ID
+        ,E.PWD
+        ,E.NICK
+        ,E.PHONE
+        ,E.EMAIL
+        ,E.ADDRESS
+        , RPAD(SUBSTR(E.SS_NO,1,7),13,'*') AS ssNo
+        ,TO_CHAR(E.HIRE_DATE, 'YYYY"년" MM"월" DD"일"') AS hireDate
+        ,E.SALARY
+        ,E.STATUS
+        ,E.PROFILE_PATH AS profilePath
+        ,C.COMP_NAME AS companyNo
+        ,C.COMP_ADDRESS AS companyAdr
+        ,D.DEPT_NAME AS deptNo
+        ,R.RANK_NAME AS rankNo
+      FROM EMPLOYEE E 
+      INNER JOIN COMPANY C
+          ON E.COMPANY_NO = C.COMP_NO
+      INNER JOIN DEPT D
+          ON E.DEPT_NO = D.DEPT_NO
+      INNER JOIN RANK R
+          ON E.RANK_NO = R.RANK_NO
+       WHERE E.EMP_NO = #{empNo}
+	</select>
+	
+	
+	
+</mapper>

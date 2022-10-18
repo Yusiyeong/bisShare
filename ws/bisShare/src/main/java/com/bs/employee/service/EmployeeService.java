@@ -13,6 +13,6 @@ public interface EmployeeService {
 	int insertMember(EmployeeVo ev);
 
 	List<EmployeeVo> getList();
-	
+
 	
 }//interface
