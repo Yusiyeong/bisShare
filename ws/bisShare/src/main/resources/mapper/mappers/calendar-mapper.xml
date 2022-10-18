@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="calendarMapper">
 
+
+	<!-- 일정 작성 -->
+	
+	
+	<!-- 일정 삭제 -->
+	
+	
+	<!-- 일정 수정 -->
+
 </mapper>

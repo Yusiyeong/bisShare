@@ -67,8 +67,7 @@ public class CalendarController {
 	 
 	//일정 수정
 	@GetMapping("calendar/edit")
-	public String edit(Model model) {
-		model.addAttribute("page", "calendar/calendar-edit");
+	public String edit(@PathVariable String no, CalendarVo vo, HttpSession session) {
 		return "layout/template";
 	}
 	
