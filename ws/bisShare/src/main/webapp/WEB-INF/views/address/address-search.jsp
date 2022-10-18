@@ -75,8 +75,8 @@
 					<tbody>
 						<c:forEach var="addr" items="${voList}">
 							<td>${addr.nick}</td>
-							<td>${addr.rankNo}</td>
-							<td>${addr.deptNo}</td>
+							<td>${addr.rankName}</td>
+							<td>${addr.deptName}</td>
 							<td>${addr.phone}</td>
 							<td>${addr.email}</td>
 		    			</c:forEach>
