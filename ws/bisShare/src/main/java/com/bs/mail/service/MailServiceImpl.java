@@ -101,7 +101,13 @@ public class MailServiceImpl implements MailService{
 		
 		List<MailAttVo> mavList = md.selectFilePath(sst,mv);
 		
-		vo.setMavList(mavList);
+		if(mavList.size() == 0) {
+			mavList = null;
+		}
+		if (mavList != null) {
+			vo.setMavList(mavList);
+		}
+		
 		return vo;
 	}
 
@@ -121,6 +127,50 @@ public class MailServiceImpl implements MailService{
 	@Override
 	public void insertMailAtt(MailAttVo mav) {
 		md.insertMailAtt(sst,mav);
+	}
+
+
+	@Override
+	public int delChecked(List<String> checkArr) {
+		
+		int result = 1;
+		
+		for(int i=0 ; i < checkArr.size() ; i++) {
+			int x = md.updateCheckStatus(sst,checkArr.get(i));
+			result = result * x;
+		}
+		
+		return result;
+	}
+
+
+	@Override
+	public List<MailVo> reference(String empNo) {
+		
+		
+		
+		return md.reference(sst,empNo);
+	}
+
+
+	@Override
+	public MailVo detailRef(MailVo mv) {
+		
+//		읽음표시하기
+		md.updateReadYn(sst,mv);
+		
+		MailVo vo = md.selectRefOne(sst,mv);
+		
+		List<MailAttVo> mavList = md.selectFilePath(sst,mv);
+		
+		if(mavList.size() == 0) {
+			mavList = null;
+		}
+		if (mavList != null) {
+			vo.setMavList(mavList);
+		}
+		
+		return vo;
 	}
 
 }

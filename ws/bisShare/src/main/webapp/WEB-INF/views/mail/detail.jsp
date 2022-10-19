@@ -13,7 +13,7 @@
 
 <div class="user" id="mail-detail">
 	<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-		<button class="btn btn-danger ml-2 mr-5">삭제하기</button>
+		<button class="btn btn-danger ml-2 mr-5" onclick="removeOneBtn()">삭제하기</button>
 		<button class="btn btn-success mx-2">답장하기</button>
 		<button class="btn btn-primary mx-2">전달하기</button>
 	</nav>

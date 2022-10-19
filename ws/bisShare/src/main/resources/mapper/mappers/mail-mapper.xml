@@ -80,23 +80,54 @@
 	<select id="selectOne" resultType="mv">
 		SELECT 
 			M.MAIL_NO
-			, E.NICK SEND
+			, EE.NICK SEND
 			, R.SEND
-			, R.RECEIVE
+			, E.NICK RECEIVE
 			, M.TITLE
 			, M.CONTENT
 			, M.ENROLL_DATE
 			, R.STAR
-			, R.REFERENCE
+			, EM.NICK REFERENCE
 			, R.READ_YN
 		FROM MAIL M
 			INNER JOIN MAIL_RECEIVE R
 				ON M.MAIL_NO = R.MAIL_NO
 			INNER JOIN EMPLOYEE E
 				ON R.RECEIVE = E.EMP_NO
+			INNER JOIN EMPLOYEE EE
+				ON R.SEND = EE.EMP_NO
+			INNER JOIN EMPLOYEE EM
+				ON R.REFERENCE = EM.EMP_NO
 		WHERE M.STATUS=0
 		AND M.MAIL_NO = ${mailNo}
 		AND R.RECEIVE = ${receive}
+	</select>
+	
+	<select id="selectRefOne" resultType="mv">
+		SELECT
+			M.MAIL_NO
+			, EE.NICK SEND
+			, R.SEND
+			, E.NICK RECEIVE
+			, M.TITLE
+			, M.CONTENT
+			, M.ENROLL_DATE
+			, R.STAR
+			, EM.NICK REFERENCE
+			, R.READ_YN
+		FROM MAIL M
+			INNER JOIN MAIL_RECEIVE R
+				ON M.MAIL_NO = R.MAIL_NO
+			INNER JOIN EMPLOYEE E
+				ON R.RECEIVE = E.EMP_NO
+			INNER JOIN EMPLOYEE EE
+				ON R.SEND = EE.EMP_NO
+			INNER JOIN EMPLOYEE EM
+				ON R.REFERENCE = EM.EMP_NO
+		WHERE M.STATUS=0
+		AND M.MAIL_NO = ${mailNo}
+		AND R.REFERENCE = ${reference}
+		AND E.NICK = ${receive}
 	</select>
 	
 	<select id="selectStar" resultType="String">
@@ -154,5 +185,30 @@
 		WHERE MAIL_NO = ${mailNo}
 	</select>
 	
+	<update id="updateCheckStatus">
+		UPDATE MAIL
+		SET STATUS = 1
+		WHERE MAIL_NO = ${mailNo}
+	</update>
+	
+	<select id="reference" resultType="mv">
+		SELECT 
+			M.MAIL_NO
+			, E.NICK SEND
+			, R.RECEIVE
+			, M.TITLE
+			, M.CONTENT
+			, M.ENROLL_DATE
+			, R.STAR
+			, R.REFERENCE
+			, R.READ_YN
+		FROM MAIL M
+			INNER JOIN MAIL_RECEIVE R
+			ON M.MAIL_NO = R.MAIL_NO
+			INNER JOIN EMPLOYEE E
+			ON R.RECEIVE = E.EMP_NO
+		WHERE M.STATUS=0
+		AND R.REFERENCE=${empNo}
+	</select>
 	
 </mapper>

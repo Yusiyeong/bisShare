@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -164,21 +165,32 @@ public class MailController {
 	/**
 	 * 상세 보기
 	 */
-	@GetMapping("detail")
+	@PostMapping("detail/{filter}")
 	@ResponseBody
-	public String detail(String mailNo, HttpSession session) {
+	public String detail(MailVo mailInfo, HttpSession session, @PathVariable int filter) {
 		Gson gson = new Gson();
 
 		MailVo vo = new MailVo();
 
 		EmployeeVo loginVo = (EmployeeVo) session.getAttribute("loginVo");
 		String empNo = loginVo.getEmpNo();
+		MailVo mv = null;
+		if(filter==0) {
+//			받은 메일 조회
+			vo.setReceive(empNo);
+			vo.setMailNo(mailInfo.getMailNo());
+			mv = ms.detail(vo);
+		}else if(filter == 1){
+//			참조된 메일 조회
+			vo.setReceive("\'"+mailInfo.getReceive()+"\'");
+			vo.setReference(empNo);
+			vo.setMailNo(mailInfo.getMailNo());
+			System.out.println(vo);
+			mv = ms.detailRef(vo);
+			System.out.println(mv);
+		}
 
-		vo.setReceive(empNo);
-		vo.setMailNo(mailNo);
-
-		MailVo mv = ms.detail(vo);
-
+		System.out.println(mv);
 		String mvStr = gson.toJson(mv);
 
 		return mvStr;
@@ -217,6 +229,9 @@ public class MailController {
 		return savePath;
 	}
 	
+	/**
+	 * 첨부파일 다운로드
+	 */
 	@GetMapping("download/{name}/{origin}")
 	public ResponseEntity<ByteArrayResource> download(@PathVariable String name,@PathVariable String origin, HttpServletRequest req) throws IOException {
 		String fileName = URLEncoder.encode(origin, "UTF-8");
@@ -240,6 +255,36 @@ public class MailController {
 				.body(res);
 	}
 	
+	/*
+	 * 체크된 메일 삭제
+	 */
+	@GetMapping("delChecked")
+	@ResponseBody
+	public int delChecked(@RequestParam(value="checkArr[]") List<String> checkArr) {
+		
+		int result = ms.delChecked(checkArr);
+		
+		return result;
+	}
 	
+	/**
+	 * 참조된 메일
+	 */
+	@GetMapping("reference")
+	public String reference(Model model, HttpSession session) {
+		
+		EmployeeVo ev = (EmployeeVo) session.getAttribute("loginVo");
 
+		List<MailVo> list = ms.reference(ev.getEmpNo());
+
+		String notReadCnt = ms.notRead(ev.getEmpNo());
+
+		model.addAttribute("notReadCnt", notReadCnt);
+		model.addAttribute("receiveMail", list);
+
+		model.addAttribute("title", "STAR MAIL");
+		model.addAttribute("page", "mail/received");
+
+		return "layout/template";
+	}
 }

@@ -20,3 +20,34 @@ function selectAll(check) {
       e.checked = check.checked;
     });
 }
+
+function removeBtn() {
+  const checked = document.querySelectorAll('input[type="checkbox"]:checked:not(.form-check-input):not(#checkAll)');
+  let checkArr = [];
+  checked.forEach((check)=> {
+    checkArr.push(check.value);
+  })
+  removeAjax(checkArr);
+}
+function removeOneBtn() {
+  let checkArr = [];
+  checkArr.push(oneNo);
+  removeAjax(checkArr);
+}
+
+function removeAjax(checkArr) {
+  $.ajax({
+    type: "get",
+    url: `${root}/mail/delChecked`,
+    data: {
+      checkArr : checkArr
+    },
+    success: function (res) {
+      if(res == 1) {
+        location.reload();
+      } else {
+        alert('삭제 실패');
+      }
+    }
+});
+}

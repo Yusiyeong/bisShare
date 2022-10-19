@@ -67,4 +67,19 @@ public class MailDaoImpl implements MailDao{
 		return sst.selectList("mailMapper.selectFilePath",mv);
 	}
 
+	@Override
+	public int updateCheckStatus(SqlSessionTemplate sst, String string) {
+		return sst.update("mailMapper.updateCheckStatus",string);
+	}
+
+	@Override
+	public List<MailVo> reference(SqlSessionTemplate sst, String empNo) {
+		return sst.selectList("mailMapper.reference",empNo);
+	}
+
+	@Override
+	public MailVo selectRefOne(SqlSessionTemplate sst, MailVo mv) {
+		return sst.selectOne("mailMapper.selectRefOne",mv);
+	}
+
 }

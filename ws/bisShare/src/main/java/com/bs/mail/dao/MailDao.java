@@ -31,6 +31,12 @@ public interface MailDao {
 
 	List<MailAttVo> selectFilePath(SqlSessionTemplate sst, MailVo mv);
 
+	int updateCheckStatus(SqlSessionTemplate sst, String string);
+
+	List<MailVo> reference(SqlSessionTemplate sst, String empNo);
+
+	MailVo selectRefOne(SqlSessionTemplate sst, MailVo mv);
+
 
 
 }

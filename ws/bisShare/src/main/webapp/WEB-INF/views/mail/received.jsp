@@ -29,15 +29,15 @@
 								<th>번호</th>
 								<th>중요</th>
 								<th>메일명</th>
-								<th>발신인</th>
+								<th id="nick">발신인</th>
 								<th>시간</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${receiveMail}" var="r">
 								<tr>
-									<td><input type="checkbox"></td>
-									<td>${r.mailNo}</td>
+									<td><input type="checkbox" value="${r.mailNo}"></td>
+									<td></td>
 									<c:if test="${ r.star eq 'N'}">
 										<td>☆</td>
 									</c:if>
@@ -91,3 +91,4 @@
 <script src="https://unpkg.com/@yaireo/tagify"></script>
 <script src="${root}/resources/js/mail/write.js"></script>
 <script src="${root}/resources/js/mail/tagify.js"></script>
+<script src="${root}/resources/js/mail/detail.js"></script>
