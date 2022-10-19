@@ -27,7 +27,9 @@ public class AddressController {
 	@GetMapping("list")
 	public String addressList(Model model) {
 		List<AddressVo> voList = adds.selectList();
+		List<AddressVo> dvoList = adds.detailList();
 		model.addAttribute("voList", voList);
+		model.addAttribute("dvoList", dvoList);
 		model.addAttribute("page", "address/address-list");
 		return "layout/template";
 	}

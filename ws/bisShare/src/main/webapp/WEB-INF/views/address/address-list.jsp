@@ -7,6 +7,18 @@
 	#address-page{
 		margin-left: 240px;
 	}
+
+	#img{
+		width: 200px;
+		height: 200px;
+		display: flex;
+		margin: auto;
+		padding: 0px 0px 0px 10px;
+	}
+
+	#t1{
+		text-align: center;
+	}
 </style>
 
 <!-- Begin Page Content -->
@@ -140,13 +152,57 @@
 			</div>
 		</div>
 		
-		<div class="col-xl-6 col-lg-6">
+		<!-- 조직도에서 직원정보가있는 행을 클릭하면 직원 상세정보뜨게 하기 -->
+		<!-- <div class="col-xl-6 col-lg-6">
 			<div class="card shadow mb-4 border-left-primary">
 				<div class="card-header py-3">
 	        		<h6 class="m-0 font-weight-bold text-primary" >상세정보를 보려면 멤버 목록을 클릭하세요</h6>
 	    		</div>
 			</div>
+		</div> -->
+		
+		
+		<div class="col-xl-6 col-lg-6">
+			<div class="card shadow mb-4 border-left-primary">
+				<div class="card-header py-3">
+	        		<h6 class="m-0 font-weight-bold text-primary" >직원상세정보</h6>
+	    		</div>
+	    		
+	    		<div class="card-body">
+		            <div class="table-responsive">
+		                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+		                	<img id="img" src="${root}/resources/img/undraw_profile_2.svg">
+		                	<c:forEach var="addr2" items="${dvoList}">
+			                	<tr id="box">
+			                		<td id="t1">이름:&nbsp ${addr2.nick}</td>
+			                	</tr>
+			                	<tr>
+			                		<td id="t1">직급:&nbsp ${addr2.rankName}</td>
+			                	</tr>
+								<tr>
+									<td id="t1">부서:&nbsp ${addr2.deptName}</td>
+			                	</tr>
+								<tr>
+									<td id="t1">연락처:&nbsp ${addr2.phone}</td>
+			                	</tr>
+								<tr>
+									<td id="t1">이메일:&nbsp ${addr2.email}</td>
+			                	</tr>
+			                	<tr>
+									<td id="t1">주소:&nbsp ${addr2.address}</td>
+			                	</tr>
+			                	<tr>
+									<td id="t1">입사일:&nbsp ${addr2.hireDate}</td>
+			                	</tr>
+		                	</c:forEach>
+		                </table>
+		            </div>
+		        </div>
+	    		
+			</div>
 		</div>
+		
+		
 		
 	</div> <!-- row -->
 	  

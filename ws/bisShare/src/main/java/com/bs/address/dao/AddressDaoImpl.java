@@ -17,4 +17,10 @@ public class AddressDaoImpl implements AddressDao{
 		return sst.selectList("addressMapper.selectList");
 	}
 
+	@Override
+	public List<AddressVo> detailList(SqlSessionTemplate sst) {
+		return sst.selectList("addressMapper.detailList");
+	}
+	
+
 }
