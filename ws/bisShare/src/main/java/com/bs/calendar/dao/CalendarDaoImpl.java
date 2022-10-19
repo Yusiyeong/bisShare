@@ -20,4 +20,10 @@ public class CalendarDaoImpl implements CalendarDao{
 		return sst.update("calendarMapper.deleteCalendar", no);
 	}
 
+	//일정 수정
+	@Override
+	public int updateOne(SqlSessionTemplate sst, CalendarVo vo) {
+		return sst.update("calendarMapper.updateOne", vo);
+	}
+
 }

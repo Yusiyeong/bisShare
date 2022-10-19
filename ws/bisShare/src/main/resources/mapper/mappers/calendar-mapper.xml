@@ -4,11 +4,65 @@
 
 
 	<!-- 일정 작성 -->
+	<insert id="insertCalendar">
+		INSERT INTO CALENDAR
+		(
+			CAL_NO
+			CATE_NO
+			CAL_DATE
+			TITLE
+			CONTENT
+			WRITER
+			START_DATE
+			END_DATE
+		)VALUES
+		(
+			SEQ_CALENDAR_NO.NEXTVAL
+			, #{calNo}
+			, #{cateNo}
+			, #{calDate}
+			, #{title}
+			, #{content}
+			, #{writer}
+			, #{stratDate}
+			, #{endDate}
+		)
+	</insert>
 	
 	
 	<!-- 일정 삭제 -->
+	<update id="deleteCalendar">
+		UPDATE CALENDAR
+			SET
+				STATUS = 'X'
+			WHERE CAL_NO = #{calNo}
+	</update>
 	
 	
 	<!-- 일정 수정 -->
+	<update id="updateOne">
+		UPDATE CALENDAR
+			SET
+				TITLE = #{title}
+				, CATE_NO = #{cateNo}
+				, START_DATE = #{stratDate}
+				, END_DATE = #{endDate}
+				, CONTENT = #{content}
+				, MODIFY_DATE = SYSDATE
+			WHERE CAL_NO = #{calNo}
+	</update>
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

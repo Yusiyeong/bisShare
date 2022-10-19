@@ -66,9 +66,21 @@ public class CalendarController {
 	
 	 
 	//일정 수정
-	@GetMapping("calendar/edit")
+	@GetMapping("calendar/edit{no}")
 	public String edit(@PathVariable String no, CalendarVo vo, HttpSession session) {
-		return "layout/template";
+		
+		vo.setCalNo(no);
+		
+		int result = cs.edit(vo);
+		
+		if(result == 1) {
+			session.setAttribute("alertMsg", "일정수정 성공");
+			return "layout/template";
+		}else {
+			session.setAttribute("alertMsg", "일정 수정 실패");
+			return "layout/template";
+		}
+		
 	}
 	
 	

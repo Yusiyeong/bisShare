@@ -10,4 +10,7 @@ public interface CalendarService {
 	//일정 삭제
 	int delete(String no);
 
+	//일정 수정
+	int edit(CalendarVo vo);
+
 }
