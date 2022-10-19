@@ -17,7 +17,7 @@
 	class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 	<input type="checkbox" id="checkAll" class="mr-1"
 		onclick="selectAll(this)"></input>
-	<button class="btn btn-danger mx-2">
+	<button class="btn btn-danger mx-2" onclick="removeBtn()">
 		<span class="icon text-white-50"> <i class="fas fa-trash"></i>
 		</span>
 	</button>
@@ -28,5 +28,5 @@
 	</button>
 	<button class="btn btn-primary mx-2">보낸 메일</button>
 	<button class="btn btn-warning mx-2" onclick="location.href=root+'/mail/important';">중요 메일</button>
-	<button class="btn btn-primary mx-2">내게 쓴 메일</button>
+	<button class="btn btn-primary mx-2" onclick="location.href=root+'/mail/reference'">참조된 메일</button>
 </nav>

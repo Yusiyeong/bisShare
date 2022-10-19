@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
-import com.bs.employee.vo.EmployeeVo;
+import com.bs.mail.vo.MailAttVo;
 import com.bs.mail.vo.MailVo;
 
 public interface MailDao {
@@ -17,13 +17,25 @@ public interface MailDao {
 	
 	void updateStar(SqlSessionTemplate sst, MailVo mv);
 
-	MailVo selectOne(SqlSessionTemplate sst, String mailNo);
+	MailVo selectOne(SqlSessionTemplate sst, MailVo mv);
 
-	void updateReadYn(SqlSessionTemplate sst, String mailNo);
+	void updateReadYn(SqlSessionTemplate sst, MailVo mv);
 
 	List<MailVo> selectStarList(SqlSessionTemplate sst, String empNo);
 
 	String selectnotReadCnt(SqlSessionTemplate sst, String empNo);
+
+	void insertRecInfo(SqlSessionTemplate sst, MailVo mv);
+
+	void insertMailAtt(SqlSessionTemplate sst, MailAttVo mav);
+
+	List<MailAttVo> selectFilePath(SqlSessionTemplate sst, MailVo mv);
+
+	int updateCheckStatus(SqlSessionTemplate sst, String string);
+
+	List<MailVo> reference(SqlSessionTemplate sst, String empNo);
+
+	MailVo selectRefOne(SqlSessionTemplate sst, MailVo mv);
 
 
 

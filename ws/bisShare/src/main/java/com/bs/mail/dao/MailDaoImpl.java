@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bs.employee.vo.EmployeeVo;
+import com.bs.mail.vo.MailAttVo;
 import com.bs.mail.vo.MailVo;
 
 @Repository
@@ -32,13 +33,13 @@ public class MailDaoImpl implements MailDao{
 	}
 
 	@Override
-	public MailVo selectOne(SqlSessionTemplate sst, String mailNo) {
-		return sst.selectOne("mailMapper.selectOne",mailNo);
+	public MailVo selectOne(SqlSessionTemplate sst, MailVo mv) {
+		return sst.selectOne("mailMapper.selectOne",mv);
 	}
 
 	@Override
-	public void updateReadYn(SqlSessionTemplate sst, String mailNo) {
-		sst.update("mailMapper.updateReadYn",mailNo);
+	public void updateReadYn(SqlSessionTemplate sst, MailVo mv) {
+		sst.update("mailMapper.updateReadYn",mv);
 	}
 
 	@Override
@@ -50,4 +51,35 @@ public class MailDaoImpl implements MailDao{
 	public String selectnotReadCnt(SqlSessionTemplate sst, String empNo) {
 		return sst.selectOne("mailMapper.selectNotReadCnt", empNo);
 	}
+
+	@Override
+	public void insertRecInfo(SqlSessionTemplate sst, MailVo mv) {
+		sst.insert("mailMapper.insertRecInfo", mv);
+	}
+
+	@Override
+	public void insertMailAtt(SqlSessionTemplate sst, MailAttVo mav) {
+		sst.insert("mailMapper.insertAtt", mav);
+	}
+
+	@Override
+	public List<MailAttVo> selectFilePath(SqlSessionTemplate sst, MailVo mv) {
+		return sst.selectList("mailMapper.selectFilePath",mv);
+	}
+
+	@Override
+	public int updateCheckStatus(SqlSessionTemplate sst, String string) {
+		return sst.update("mailMapper.updateCheckStatus",string);
+	}
+
+	@Override
+	public List<MailVo> reference(SqlSessionTemplate sst, String empNo) {
+		return sst.selectList("mailMapper.reference",empNo);
+	}
+
+	@Override
+	public MailVo selectRefOne(SqlSessionTemplate sst, MailVo mv) {
+		return sst.selectOne("mailMapper.selectRefOne",mv);
+	}
+
 }

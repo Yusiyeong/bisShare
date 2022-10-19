@@ -139,7 +139,7 @@
 		<input class="form-control" placeholder="제목" name="title" required>
 	</div>
 	<div class="form-group custom-file mb-3">
-		<input type="file" class="form-control custom-file-input" id="customFile" name="f">
+		<input type="file" class="form-control custom-file-input" id="customFile" name="file" multiple>
 		<label class="custom-file-label" for="customFile">파일선택</label>
 	</div>
 	

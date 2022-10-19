@@ -1,5 +1,7 @@
 package com.bs.mail.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -15,5 +17,5 @@ public class MailVo {
 	private String star;
 	private String reference;
 	private String readYn;
-	
+	private List<MailAttVo> mavList;
 }
