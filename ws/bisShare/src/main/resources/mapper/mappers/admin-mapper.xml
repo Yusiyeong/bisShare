@@ -10,6 +10,7 @@
           ,E.NICK
           ,R.RANK_NAME AS rankNo
           ,D.DEPT_NAME AS deptNo
+          ,E.PROFILE_PATH AS profilePath
           ,E.EMAIL
           ,E.PHONE
       FROM EMPLOYEE E 
@@ -17,6 +18,20 @@
           ON E.DEPT_NO = D.DEPT_NO
       INNER JOIN RANK R
           ON E.RANK_NO = R.RANK_NO
+          
+	<choose>
+		<when test="condition == 'nick'">
+			AND NICK LIKE 
+		</when>
+		<when test="condition == 'email'">
+			AND EMAIL LIKE 
+		</when>
+		<otherwise>
+			AND PHONE LIKE 
+		</otherwise>
+	</choose>
+	'%${keyword}%'
+	
       ORDER BY EMPNO ASC
 	</select>
 
@@ -27,6 +42,7 @@
           ,E.NICK
           ,R.RANK_NAME AS rankNo
           ,D.DEPT_NAME AS deptNo
+          ,E.PROFILE_PATH AS profilePath
           ,E.EMAIL
           ,E.PHONE
       FROM EMPLOYEE E 
@@ -35,6 +51,20 @@
       INNER JOIN RANK R
           ON E.RANK_NO = R.RANK_NO
           WHERE STATUS = 'Y'
+
+	<choose>
+		<when test="condition == 'nick'">
+			AND NICK LIKE 
+		</when>
+		<when test="condition == 'email'">
+			AND EMAIL LIKE 
+		</when>
+		<otherwise>
+			AND PHONE LIKE 
+		</otherwise>
+	</choose>
+	'%${keyword}%'
+	
       ORDER BY EMPNO ASC
 	</select>
 	
@@ -45,6 +75,7 @@
           ,E.NICK
           ,R.RANK_NAME AS rankNo
           ,D.DEPT_NAME AS deptNo
+          ,E.PROFILE_PATH AS profilePath
           ,E.EMAIL
           ,E.PHONE
       FROM EMPLOYEE E 
@@ -53,12 +84,26 @@
       INNER JOIN RANK R
           ON E.RANK_NO = R.RANK_NO
           WHERE STATUS = 'N'
+
+	<choose>
+		<when test="condition == 'nick'">
+			AND NICK LIKE 
+		</when>
+		<when test="condition == 'email'">
+			AND EMAIL LIKE 
+		</when>
+		<otherwise>
+			AND PHONE LIKE 
+		</otherwise>
+	</choose>
+	'%${keyword}%'
+	
       ORDER BY EMPNO ASC
 	</select>
 	
 	<!-- 상세조회(사원번호로 조회) - 전체/재직/퇴직 -->
 	<select id="selectOne" resultType="ev">
-	       SELECT
+	  SELECT
          E.EMP_NO AS empNo
         ,E.ID
         ,E.PWD
@@ -85,6 +130,15 @@
        WHERE E.EMP_NO = #{empNo}
 	</select>
 	
-	
+	<!-- 수정(업데이트)-->
+	<update id="updateOne">
+		UPDATE EMPLOYEE
+			SET 
+                RANK_NO = #{rankNo}
+				, DEPT_NO = #{deptNo}
+		WHERE EMP_NO = #{empNo}
+	</update>
+
+
 	
 </mapper>

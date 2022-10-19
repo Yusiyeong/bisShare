@@ -4,13 +4,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 
+<!-- alert 띄우기 위함 -->
+<c:set var="alertMsg" value="${sessionScope.alertMsg}"/>
+<c:remove var="alertMsg" scope="session"/>
+
+<c:if test="${not empty alertMsg}">
+ <script>
+ 	alert('${alertMsg}');
+ </script>
+</c:if>
+
     
 <!-- 직급, 부서 select -->
-<!-- <script>
+<script>
    $(function(){
-       $("#rank").val("${vo.rankNo}").attr("selected","selected");
+      console.log(("${vo.rankNo}"));
+      console.log(("${vo.deptNo}"));
+
+     
+       //$("#rank").val("${vo.rankNo}").attr("selected","selected");
    });
-</script> -->
+</script> 
 
 
 <!-- Begin Page Content -->
@@ -23,8 +37,17 @@
       
       <div class="card-body">
        <!--form start-->
-         <form action="${root}/employee/detail" method="post" enctype="multipart/form-data">
+         <form action="" method="post" enctype="multipart/form-data">
          
+         <!--취소, 수정 버튼start-->
+         <div style="margin-bottom: 15px;">
+            <!-- 목록 -->
+            <a href="${root}/admin/list" class="btn btn-outline-secondary btn-sm">목록으로</a> 
+            <!-- 수정 -->
+            <input type="submit" class="btn btn-outline-primary btn-sm" value="수정하기">
+         </div>
+         <!--취소, 수정 버튼end-->
+                     
          <!--start-->
          <div class="">
             <div class="row row-cols-2">
@@ -39,7 +62,7 @@
 						<div style="font-size: 13px; margin-bottom: 5px;">사진은 가로 100px, 세로 100px이상을 권장 합니다.</div>
 
                         <div>
-                           <input type="file" name="profile">
+                           <input hidden type="file" name="profile">
                         </div>
                      
                         <div id="profile-tumb" style="margin-top: 10px;">
@@ -167,7 +190,7 @@
                                  
                               <div class="col">
                                  <label class="visually" for="autoSizingSelect">연봉</label>
-                                 <input type="text" class="form-control" value="${vo.salary}" placeholder="숫자만 입력하세요.">
+                                 <input type="text" class="form-control" value="${vo.salary}" placeholder="숫자만 입력하세요." readonly>
                               </div>
 
                               <div class="col">
@@ -190,15 +213,6 @@
                         </div>
                      </div>
                      <!--사원정보end-->
-
-                      <!--취소, 등록 버튼start-->
-                     <div style="margin-bottom: 7px; float: right;">
-                        <!-- 취소 -->
-                        <a href="#" class="btn btn-outline-secondary btn-sm">취소</a> 
-                        <!-- 등록 -->
-                        <a href="#" class="btn btn-outline-primary btn-sm">등록</a>
-                     </div>
-                     <!--취소, 등록 버튼end-->
 
             </div>
 

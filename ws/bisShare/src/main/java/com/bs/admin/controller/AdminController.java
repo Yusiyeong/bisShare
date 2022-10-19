@@ -1,6 +1,11 @@
 package com.bs.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,10 +34,20 @@ public class AdminController {
 	
 	// 사원 관리 조회(화면+진행) - 전체
 	@GetMapping("list")
-	public String list(Model model) {
+	public String list(Model model, HttpServletRequest req) {
 		
+		// 데이터 꺼내기(검색)
+		String keyword = req.getParameter("keyword");
+		String condition = req.getParameter("condition");
+		
+		// 데이터 뭉치기(검색)
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("keyword", keyword);
+		map.put("condition", condition);
+				
+				
 		// 서비스 호출
-		List<EmployeeVo> voList = as.entireList();
+		List<EmployeeVo> voList = as.entireList(map);
 		model.addAttribute("voList", voList);
 				
 		model.addAttribute("title", "MEMBER LIST");
@@ -44,10 +59,19 @@ public class AdminController {
 	
 	// 사원 관리 조회(화면+진행) - 재직
 	@GetMapping("inList")
-	public String inList(Model model) {
+	public String inList(Model model, HttpServletRequest req) {
 		
+		// 데이터 꺼내기(검색)
+		String keyword = req.getParameter("keyword");
+		String condition = req.getParameter("condition");
+		
+		// 데이터 뭉치기(검색)
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("keyword", keyword);
+		map.put("condition", condition);
+				
 		// 서비스 호출
-		List<EmployeeVo> voList = as.inList();
+		List<EmployeeVo> voList = as.inList(map);
 		model.addAttribute("voList", voList);
 				
 		model.addAttribute("title", "MEMBER LIST");
@@ -59,10 +83,19 @@ public class AdminController {
 	
 	// 사원 관리 조회(화면+진행) - 퇴직
 	@GetMapping("outList")
-	public String outList(Model model) {
+	public String outList(Model model, HttpServletRequest req) {
 		
+		// 데이터 꺼내기(검색)
+		String keyword = req.getParameter("keyword");
+		String condition = req.getParameter("condition");
+		
+		// 데이터 뭉치기(검색)
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("keyword", keyword);
+		map.put("condition", condition);
+				
 		// 서비스 호출
-		List<EmployeeVo> voList = as.outList();
+		List<EmployeeVo> voList = as.outList(map);
 		model.addAttribute("voList", voList);
 				
 		model.addAttribute("title", "MEMBER LIST");
@@ -82,14 +115,36 @@ public class AdminController {
 		EmployeeVo vo = as.selectOne(empNo);
 		model.addAttribute("vo", vo);
 		
-		System.out.println("사원번호로 조회 vo::: " +  vo);
-
 		model.addAttribute("title", "MEMBER");
 		model.addAttribute("page", "admin/detail");
 
 		return "layout/template";
 		
 	}//detail
+	
+	
+	// 수정하기(진행)
+	@PostMapping("detail/{empNo}")
+	public String edit(@PathVariable String empNo, EmployeeVo vo, HttpSession session) {
+		
+		vo.setEmpNo(empNo);
+		
+		// 서비스 호출
+		int result = as.edit(vo);
+		
+		if(result == 1) {
+			// 성공
+			session.setAttribute("alertMsg", "수정 성공!");
+			return "redirect:/admin/detail/" + empNo;
+		}else {
+			// 실패
+			session.setAttribute("alertMsg", "수정 실패!");
+			return "redirect:/admin/detail/" + empNo;
+		}//if
+				
+		
+	}//edit
+	
 	
 	// 사원 등록(화면)
 	@GetMapping("enroll")
@@ -101,8 +156,5 @@ public class AdminController {
 		return "layout/template";
 		
 	}//enroll
-	
-
-	
 	
 }//class
