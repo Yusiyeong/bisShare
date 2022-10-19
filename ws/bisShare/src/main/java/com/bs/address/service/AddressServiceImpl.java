@@ -28,4 +28,10 @@ public class AddressServiceImpl implements AddressService{
 		return dao.selectList(sst);
 	}
 
+	//조직도 상세조회
+	@Override
+	public List<AddressVo> detailList() {
+		return dao.detailList(sst);
+	}
+
 }

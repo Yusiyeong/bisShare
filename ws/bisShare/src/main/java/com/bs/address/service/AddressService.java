@@ -11,6 +11,9 @@ public interface AddressService {
 	//주소록 조회
 	List<AddressVo> selectList();
 
+	//조직도 상세조회
+	List<AddressVo> detailList();
+
 	
 
 }

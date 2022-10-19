@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="addressMapper">
 
-	<select id="selectList" resultType="com.bs.address.vo.AddressVo">
+	<select id="selectList" resultType="addressvo">
 		SELECT 
 		    E.EMP_NO
 		    ,E.NICK
@@ -18,5 +18,23 @@
 		ON E.DEPT_NO = D.DEPT_NO
 		WHERE E.STATUS = 'Y'
 	</select>
-
+	
+	<select id="detailList" resultType="addressvo">
+		SELECT 
+		    E.EMP_NO
+		    ,E.NICK
+		    ,R.RANK_NAME
+		    ,D.DEPT_NAME
+		    ,E.PHONE
+		    ,E.EMAIL
+		    ,E.ADDRESS
+		    ,E.HIRE_DATE
+		    ,E.STATUS
+		FROM EMPLOYEE E
+		INNER JOIN RANK R
+		ON E.RANK_NO = R.RANK_NO
+		INNER JOIN DEPT D
+		ON E.DEPT_NO = D.DEPT_NO
+		WHERE E.STATUS = 'Y'
+	</select>
 </mapper>
