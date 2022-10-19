@@ -12,4 +12,7 @@ public interface CalendarDao {
 	//일정 삭제
 	int delete(SqlSessionTemplate sst, String no);
 
+	//일정 수정
+	int updateOne(SqlSessionTemplate sst, CalendarVo vo);
+
 }

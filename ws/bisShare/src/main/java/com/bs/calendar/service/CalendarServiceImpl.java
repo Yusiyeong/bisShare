@@ -31,4 +31,10 @@ public class CalendarServiceImpl implements CalendarService{
 		return dao.delete(sst, no);
 	}
 
+	//일정 수정
+	@Override
+	public int edit(CalendarVo vo) {
+		return dao.updateOne(sst, vo);
+	}
+
 }

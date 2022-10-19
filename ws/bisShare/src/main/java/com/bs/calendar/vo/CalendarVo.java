@@ -10,6 +10,7 @@ public class CalendarVo {
 	private String calDate;
 	private String title;
 	private String content;
+	private String writer;
 	private String enrollDate;
 	private String startDate;
 	private String endDate;
