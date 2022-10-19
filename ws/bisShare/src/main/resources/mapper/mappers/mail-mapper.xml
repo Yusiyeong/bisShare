@@ -5,25 +5,57 @@
 	<insert id="insertOne">
 		INSERT INTO MAIL(
 				MAIL_NO
-				, SEND
-				, RECEIVE
 				, TITLE
 				, CONTENT
 		)
 		VALUES (
 			SEQ_MAIL_NO.NEXTVAL
-			, ${send}
-			, ${receive}
-			, ${title}
-			, ${content}
+			, #{title}
+			, #{content}
 		)
 	</insert>
 	
-	<select id="selectAll" resultType="com.bs.mail.vo.MailVo">
+	<insert id="insertRecInfo">
+		INSERT INTO MAIL_RECEIVE(
+			MAIL_REC_NO
+			, MAIL_NO
+			, SEND
+			, RECEIVE
+			<if test="reference != null">
+				, REFERENCE
+			</if>
+		)
+		VALUES (
+			SEQ_MAIL_RECEIVE_NO.NEXTVAL
+			, SEQ_MAIL_NO.CURRVAL
+			, ${send}
+			, ${receive}
+			<if test="reference != null">
+				, ${reference}
+			</if>
+		)
+	</insert>
+	
+	<insert id="insertAtt">
+		INSERT INTO MAIL_ATT(
+			MAIL_ATT_NO
+			, MAIL_NO
+			, ORIGIN_NAME
+			, NAME
+		)
+		VALUES (
+			SEQ_MAIL_ATT_NO.NEXTVAL
+			, SEQ_MAIL_NO.CURRVAL
+			, #{originName}
+			, #{name}
+		)
+	</insert>
+	
+	<select id="selectAll" resultType="mv">
 		SELECT 
 			M.MAIL_NO
 			, E.NICK SEND
-			, M.RECEIVE
+			, R.RECEIVE
 			, M.TITLE
 			, M.CONTENT
 			, M.ENROLL_DATE
@@ -34,9 +66,9 @@
 			INNER JOIN MAIL_RECEIVE R
 			ON M.MAIL_NO = R.MAIL_NO
 			INNER JOIN EMPLOYEE E
-			ON M.SEND = E.EMP_NO
+			ON R.SEND = E.EMP_NO
 		WHERE M.STATUS=0
-		AND M.RECEIVE=${empNo}
+		AND R.RECEIVE=${empNo}
 	</select>
 	
 	<update id="updateStar">
@@ -45,11 +77,12 @@
 		WHERE MAIL_NO = ${mailNo}
 	</update>
 	
-	<select id="selectOne" resultType="com.bs.mail.vo.MailVo">
+	<select id="selectOne" resultType="mv">
 		SELECT 
 			M.MAIL_NO
 			, E.NICK SEND
-			, M.RECEIVE
+			, R.SEND
+			, R.RECEIVE
 			, M.TITLE
 			, M.CONTENT
 			, M.ENROLL_DATE
@@ -60,9 +93,10 @@
 			INNER JOIN MAIL_RECEIVE R
 				ON M.MAIL_NO = R.MAIL_NO
 			INNER JOIN EMPLOYEE E
-				ON M.SEND = E.EMP_NO
+				ON R.RECEIVE = E.EMP_NO
 		WHERE M.STATUS=0
 		AND M.MAIL_NO = ${mailNo}
+		AND R.RECEIVE = ${receive}
 	</select>
 	
 	<select id="selectStar" resultType="String">
@@ -77,11 +111,11 @@
 		WHERE MAIL_NO = ${mailNo}
 	</update>
 	
-	<select id="selectStarList" resultType="com.bs.mail.vo.MailVo">
+	<select id="selectStarList" resultType="mv">
 		SELECT 
 			M.MAIL_NO
 			, E.NICK SEND
-			, M.RECEIVE
+			, R.RECEIVE
 			, M.TITLE
 			, M.CONTENT
 			, M.ENROLL_DATE
@@ -92,9 +126,9 @@
 			INNER JOIN MAIL_RECEIVE R
 			ON M.MAIL_NO = R.MAIL_NO
 			INNER JOIN EMPLOYEE E
-			ON M.SEND = E.EMP_NO
+			ON R.RECEIVE = E.EMP_NO
 		WHERE M.STATUS=0
-		AND M.RECEIVE=${empNo}
+		AND R.RECEIVE=${empNo}
 		AND R.STAR = 'Y'
 	</select>
 	
@@ -104,11 +138,21 @@
 		FROM MAIL M
 			INNER JOIN MAIL_RECEIVE R
 			ON M.MAIL_NO = R.MAIL_NO
-			INNER JOIN EMPLOYEE E
-			ON M.SEND = E.EMP_NO
 		WHERE M.STATUS=0
-		AND M.RECEIVE=${empNo}
+		AND R.RECEIVE=${empNo}
 		AND R.READ_YN = 'N'
 	</select>
-
+	
+	<select id="selectFilePath" resultType="com.bs.mail.vo.MailAttVo">
+		SELECT 
+			MAIL_ATT_NO
+			, MAIL_NO
+			, NAME
+			, ORIGIN_NAME
+			, ENROLL_DATE
+		FROM MAIL_ATT
+		WHERE MAIL_NO = ${mailNo}
+	</select>
+	
+	
 </mapper>

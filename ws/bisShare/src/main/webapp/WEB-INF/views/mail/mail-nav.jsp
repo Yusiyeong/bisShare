@@ -28,5 +28,5 @@
 	</button>
 	<button class="btn btn-primary mx-2">보낸 메일</button>
 	<button class="btn btn-warning mx-2" onclick="location.href=root+'/mail/important';">중요 메일</button>
-	<button class="btn btn-primary mx-2">내게 쓴 메일</button>
+	<button class="btn btn-primary mx-2">참조된 메일</button>
 </nav>
