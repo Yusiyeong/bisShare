@@ -12,7 +12,7 @@ public interface MailService {
 
 	List<MailVo> receive(String empNo);
 
-	String checkStar(String mailNo);
+	String checkStar(MailVo mv);
 
 	MailVo detail(MailVo mv);
 

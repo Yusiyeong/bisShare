@@ -53,93 +53,152 @@
 	
 	<select id="selectAll" resultType="mv">
 		SELECT 
-			M.MAIL_NO
-			, E.NICK SEND
-			, R.RECEIVE
-			, M.TITLE
-			, M.CONTENT
-			, M.ENROLL_DATE
-			, R.STAR
-			, R.REFERENCE
-			, R.READ_YN
-		FROM MAIL M
-			INNER JOIN MAIL_RECEIVE R
-			ON M.MAIL_NO = R.MAIL_NO
-			INNER JOIN EMPLOYEE E
-			ON R.SEND = E.EMP_NO
-		WHERE M.STATUS=0
-		AND R.RECEIVE=${empNo}
+		    MAIL_NO,
+		    SEND,
+		    LISTAGG(RECEIVE,',') WITHIN GROUP(ORDER BY RECEIVE) AS RECEIVE,
+		    TITLE,
+		    CONTENT,
+		    ENROLL_DATE,
+		    STAR,
+		    LISTAGG(REFERENCE,',') WITHIN GROUP(ORDER BY REFERENCE) AS REFERENCE,
+		    READ_YN
+		FROM (
+				SELECT 
+					M.MAIL_NO
+					, E.NICK SEND
+					, EE.NICK RECEIVE
+					, M.TITLE
+					, M.CONTENT
+					, M.ENROLL_DATE
+					, R.STAR
+					, R.REFERENCE
+					, R.READ_YN
+				FROM MAIL M
+					INNER JOIN MAIL_RECEIVE R
+					ON M.MAIL_NO = R.MAIL_NO
+					INNER JOIN EMPLOYEE E
+					ON R.SEND = E.EMP_NO
+		            JOIN EMPLOYEE EE
+		            ON R.RECEIVE = EE.EMP_NO
+				WHERE M.STATUS=0
+		        AND R.RECEIVE=${receive}
+		        AND R.REFERENCE IS NULL
+		        ) 
+		GROUP BY MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, READ_YN, SEND 
 	</select>
 	
 	<update id="updateStar">
 		UPDATE MAIL_RECEIVE
 		SET STAR = ${star}
-		WHERE MAIL_NO = ${mailNo}
+		WHERE MAIL_NO=${mailNo}
+		<if test="receive != null">
+			AND RECEIVE=${receive}
+			AND REFERENCE IS NULL
+		</if>
+		<if test="reference != null">
+			AND REFERENCE=${reference}
+		</if>
 	</update>
 	
 	<select id="selectOne" resultType="mv">
 		SELECT 
-			M.MAIL_NO
-			, EE.NICK SEND
-			, R.SEND
-			, E.NICK RECEIVE
-			, M.TITLE
-			, M.CONTENT
-			, M.ENROLL_DATE
-			, R.STAR
-			, EM.NICK REFERENCE
-			, R.READ_YN
-		FROM MAIL M
-			INNER JOIN MAIL_RECEIVE R
-				ON M.MAIL_NO = R.MAIL_NO
-			INNER JOIN EMPLOYEE E
-				ON R.RECEIVE = E.EMP_NO
-			INNER JOIN EMPLOYEE EE
-				ON R.SEND = EE.EMP_NO
-			INNER JOIN EMPLOYEE EM
-				ON R.REFERENCE = EM.EMP_NO
-		WHERE M.STATUS=0
-		AND M.MAIL_NO = ${mailNo}
-		AND R.RECEIVE = ${receive}
+		    MAIL_NO,
+		    SEND,
+		    LISTAGG(RECEIVE,',') WITHIN GROUP(ORDER BY RECEIVE) AS RECEIVE,
+		    TITLE,
+		    CONTENT,
+		    ENROLL_DATE,
+		    STAR,
+		    LISTAGG(REFERENCE,',') WITHIN GROUP(ORDER BY REFERENCE) AS REFERENCE,
+		    READ_YN
+		FROM (
+				SELECT 
+					M.MAIL_NO
+					, E.NICK SEND
+					, EE.NICK RECEIVE
+					, M.TITLE
+					, M.CONTENT
+					, M.ENROLL_DATE
+					, R.STAR
+					, R.REFERENCE
+					, R.READ_YN
+				FROM MAIL M
+					INNER JOIN MAIL_RECEIVE R
+					ON M.MAIL_NO = R.MAIL_NO
+					INNER JOIN EMPLOYEE E
+					ON R.SEND = E.EMP_NO
+		            JOIN EMPLOYEE EE
+		            ON R.RECEIVE = EE.EMP_NO
+				WHERE M.STATUS=0
+		        AND R.RECEIVE=${receive}
+		        ) 
+                WHERE MAIL_NO = ${mailNo}
+		GROUP BY MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, READ_YN, SEND 
 	</select>
 	
 	<select id="selectRefOne" resultType="mv">
-		SELECT
-			M.MAIL_NO
-			, EE.NICK SEND
-			, R.SEND
-			, E.NICK RECEIVE
-			, M.TITLE
-			, M.CONTENT
-			, M.ENROLL_DATE
-			, R.STAR
-			, EM.NICK REFERENCE
-			, R.READ_YN
-		FROM MAIL M
-			INNER JOIN MAIL_RECEIVE R
-				ON M.MAIL_NO = R.MAIL_NO
-			INNER JOIN EMPLOYEE E
-				ON R.RECEIVE = E.EMP_NO
-			INNER JOIN EMPLOYEE EE
-				ON R.SEND = EE.EMP_NO
-			INNER JOIN EMPLOYEE EM
-				ON R.REFERENCE = EM.EMP_NO
-		WHERE M.STATUS=0
-		AND M.MAIL_NO = ${mailNo}
-		AND R.REFERENCE = ${reference}
-		AND E.NICK = ${receive}
+		SELECT 
+		    MAIL_NO,
+		    SEND,
+		    LISTAGG(RECEIVE,',') WITHIN GROUP(ORDER BY RECEIVE) AS RECEIVE,
+		    TITLE,
+		    CONTENT,
+		    ENROLL_DATE,
+		    STAR,
+		    REFERENCE,
+		    READ_YN
+		FROM (
+				SELECT 
+					M.MAIL_NO
+					, E.NICK SEND
+					, EE.NICK RECEIVE
+					, M.TITLE
+					, M.CONTENT
+					, M.ENROLL_DATE
+					, R.STAR
+					, EM.NICK REFERENCE
+					, R.READ_YN
+				FROM MAIL M
+					INNER JOIN MAIL_RECEIVE R
+					ON M.MAIL_NO = R.MAIL_NO
+					INNER JOIN EMPLOYEE E
+					ON R.SEND = E.EMP_NO
+		            JOIN EMPLOYEE EE
+		            ON R.RECEIVE = EE.EMP_NO
+		            JOIN EMPLOYEE EM
+		            ON R.REFERENCE = EM.EMP_NO
+				WHERE M.STATUS=0
+		        AND EM.EMP_NO = ${reference}
+		        ) 
+		WHERE MAIL_NO = ${mailNo}
+		group by MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, 
+		REFERENCE, READ_YN, SEND 
 	</select>
 	
 	<select id="selectStar" resultType="String">
 		SELECT STAR
 		FROM MAIL_RECEIVE
 		WHERE MAIL_NO=${mailNo}
+		<if test="receive != null">
+			AND RECEIVE=${receive}
+			AND REFERENCE IS NULL
+		</if>
+		<if test="reference != null">
+			AND REFERENCE=${reference}
+		</if>
 	</select>
 	
 	<update id="updateReadYn">
 		UPDATE MAIL_RECEIVE
 		SET READ_YN = 'Y'
-		WHERE MAIL_NO = ${mailNo}
+		WHERE MAIL_NO=${mailNo}
+		<if test="receive != null">
+			AND RECEIVE=${receive}
+			AND REFERENCE IS NULL
+		</if>
+		<if test="reference != null">
+			AND REFERENCE=${reference}
+		</if>
 	</update>
 	
 	<select id="selectStarList" resultType="mv">
@@ -193,22 +252,40 @@
 	
 	<select id="reference" resultType="mv">
 		SELECT 
-			M.MAIL_NO
-			, E.NICK SEND
-			, R.RECEIVE
-			, M.TITLE
-			, M.CONTENT
-			, M.ENROLL_DATE
-			, R.STAR
-			, R.REFERENCE
-			, R.READ_YN
-		FROM MAIL M
-			INNER JOIN MAIL_RECEIVE R
-			ON M.MAIL_NO = R.MAIL_NO
-			INNER JOIN EMPLOYEE E
-			ON R.RECEIVE = E.EMP_NO
-		WHERE M.STATUS=0
-		AND R.REFERENCE=${empNo}
+		    MAIL_NO,
+		    SEND,
+		    LISTAGG(RECEIVE,',') WITHIN GROUP(ORDER BY RECEIVE) AS RECEIVE,
+		    TITLE,
+		    CONTENT,
+		    ENROLL_DATE,
+		    STAR,
+		    REFERENCE,
+		    READ_YN
+		FROM (
+				SELECT 
+					M.MAIL_NO
+					, E.NICK SEND
+					, EE.NICK RECEIVE
+					, M.TITLE
+					, M.CONTENT
+					, M.ENROLL_DATE
+					, R.STAR
+					, EM.NICK REFERENCE
+					, R.READ_YN
+				FROM MAIL M
+					INNER JOIN MAIL_RECEIVE R
+					ON M.MAIL_NO = R.MAIL_NO
+					INNER JOIN EMPLOYEE E
+					ON R.SEND = E.EMP_NO
+		            JOIN EMPLOYEE EE
+		            ON R.RECEIVE = EE.EMP_NO
+		            JOIN EMPLOYEE EM
+		            ON R.REFERENCE = EM.EMP_NO
+				WHERE M.STATUS=0
+		        AND EM.EMP_NO = ${reference}
+		        )     
+		group by MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, 
+		REFERENCE, READ_YN, SEND 
 	</select>
 	
 </mapper>

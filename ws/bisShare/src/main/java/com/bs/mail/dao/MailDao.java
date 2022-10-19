@@ -13,7 +13,7 @@ public interface MailDao {
 
 	List<MailVo> selectAll(SqlSessionTemplate sst, String empNo);
 
-	String selectStar(SqlSessionTemplate sst, String mailNo);
+	String selectStar(SqlSessionTemplate sst, MailVo mv);
 	
 	void updateStar(SqlSessionTemplate sst, MailVo mv);
 

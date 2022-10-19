@@ -1,35 +1,31 @@
   // 상세보기
-  $('#dataTable tbody').on('click','tr td:nth-child(4)', function() {
+  $('#dataTable tbody').on('click','tr td:nth-child(3)', function() {
     const data = table.row(this).data();
-    let refCheck;
-    if (location.href.includes('reference')) {
-      refCheck = 1;
-    } else if (location.href.includes('receive')) {
-      refCheck = 0;
-    }
-    let numFilter = /[^0-9]/g;
-    console.log(data[0].replace(numFilter,""));
+    // 읽으면 글씨체 얇게
     $(this).removeClass("font-weight-bolder");
-    let notReadCnt = document.querySelector('#notReadCnt').innerHTML;
-    if (notReadCnt > 0) document.querySelector('#notReadCnt').innerHTML = notReadCnt-1;
+    // 파일 중복해서 추가되는거 방지
     document.querySelector('#receivedFiles').innerHTML = "";
+    // 데이터 가져오기
     $.ajax({
       type: "post",
       url: `${root}/mail/detail/${refCheck}`,
       data: {
-        mailNo : data[0].replace(numFilter,""),
-        receive : data[4]
+        // input태그 가져와서 value만 추출
+        mailNo : data[0].replace(numFilter,"")
       },
       dataType : "json",
       success: function (mailVo) {
+        // 상세보기 삭제를 위한 mailNo 넘겨주기
         oneNo = mailVo.mailNo;
+        // 데이터 넣어주기
         document.querySelector('#detail-send').innerHTML = mailVo.send;
         if (mailVo.reference != null) {
           document.querySelector('#detail-ref').innerHTML = mailVo.reference;
         }
         document.querySelector('#detail-title').innerHTML = mailVo.title;
         document.querySelector('#detail-content').innerHTML = mailVo.content;
-        if(mailVo.mavList.length>0) {
+        // 파일이 하나 이상일때 표시
+        if( mailVo.mavList != null) {
           document.querySelector('#receivedFiles').style.display = 'block';
           for(let x of mailVo.mavList) {
             const files = document.querySelector('#receivedFiles');
@@ -51,10 +47,13 @@
             files.innerHTML += htmlTag;
           }
         } else {
+          // 아니면 보이지 않기
           document.querySelector('#receivedFiles').style.display = 'none';
         }
       }
     });
+
+
 
     mailWrite.style.display = 'none';
     mailDetail.style.display = 'block';
