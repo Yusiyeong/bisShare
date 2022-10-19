@@ -7,14 +7,23 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.bs.approval.vo.ApprovalVo" alias="av"/>
+		<!-- 결재 -->
+		<typeAlias type="com.bs.approval.vo.ApprovalVo" alias="aprvVo"/>
+		<typeAlias type="com.bs.approval.vo.AgreemnetVo" alias="agreeVo"/>
+		<typeAlias type="com.bs.approval.vo.ApproveRefVo" alias="refVo"/>
+		<typeAlias type="com.bs.approval.vo.ApproverVo" alias="aprverVo"/>
+		<!-- 멤버 -->
 		<typeAlias type="com.bs.employee.vo.EmployeeVo" alias="ev"/>
+		<!-- 메일 -->
 		<typeAlias type="com.bs.mail.vo.MailVo" alias="mv"/>
+		<!-- 일정 -->
 		<typeAlias type="com.bs.calendar.vo.CalendarVo" alias="calvo"/>
+		<!-- 주소록 -->
 		<typeAlias type="com.bs.address.vo.AddressVo" alias="addressvo"/>
-<!-- 		<typeAlias type="com.bs.notice.vo.NoticeVo" alias="nv"/>
+		<!-- 게시판 -->
+		<typeAlias type="com.bs.notice.vo.NoticeVo" alias="nv"/>
 		<typeAlias type="com.bs.free.vo.FreeVo" alias="fv"/>
 		<typeAlias type="com.bs.blind.vo.BlindVo" alias="bv"/>
-		<typeAlias type="com.bs.cloud.vo.CloudVo" alias="cv"/> -->
+		<typeAlias type="com.bs.cloud.vo.CloudVo" alias="cv"/>
 	</typeAliases>
 </configuration>
