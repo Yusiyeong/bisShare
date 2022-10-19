@@ -26,10 +26,10 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${root}/notice/list">공지사항</a>
-                        <a class="collapse-item" href="${root}/free/list">자유게시판</a>
-                        <a class="collapse-item" href="${root}/blind/list">블라인드게시판</a>
-                        <a class="collapse-item" href="${root}/cloud/list">자료실</a>
+                        <a class="collapse-item" href="${root}/notice/list/1">공지사항</a>
+                        <a class="collapse-item" href="${root}/free/list/1">자유게시판</a>
+                        <a class="collapse-item" href="${root}/blind/list/1">블라인드게시판</a>
+                        <a class="collapse-item" href="${root}/cloud/list/1">자료실</a>
                     </div>
                 </div>
             </li>
