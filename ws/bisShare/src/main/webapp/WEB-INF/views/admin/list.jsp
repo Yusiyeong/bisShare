@@ -56,12 +56,32 @@
                   
                     <!--검색버튼start-->
                     <div style="height: 50px;">
-                        <div style="position: absolute; right: 20px;">
-                            Search : <input type="text">
+                        <div style="float: right;">
+
+							<select name="condition" style="height:30px;">
+								<option value="nick">닉네임</option>
+								<option value="email">메일</option>
+								<option value="phone">연락처</option>
+							</select>
+			
+                            <input type="text" name="keyword" value="${keyword}">
                             <input type="submit" value="검색" class="btn-primary" style="border-radius: 3px;" >
                         </div>
                     </div>
                     <!--검색버튼end-->
+                    
+                  <!-- ------------------------------------------------------------------------->		
+                    
+					<c:if test="${not empty condition}">
+						<script>
+							window.onload = function(){
+								document.querySelector('option[value=${condition}]').selected = true;
+							}
+						</script>
+					</c:if>
+					
+	             <!-- ------------------------------------------------------------------------->		
+	
                     
 					<!-- 내부start -->
 					   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -72,25 +92,22 @@
 							<a class="nav-link  btn btn-sm" aria-current="page" href="${root}/admin/inList">재직</a>
 						  </li>
 						  <li class="nav-item" role="presentation">
-							<a class="nav-link  btn btn-sm" aria-current="page" href="${root}/admin/ouList">퇴직</a>						  
+							<a class="nav-link  btn btn-sm" aria-current="page" href="${root}/admin/outList">퇴직</a>						  
 						  </li>
 					  </ul>
 					  
 					  
 					  <div class="tab-content" id="pills-tabContent">
 					  	  <!-- 전체사원start -->
-					  	   <!--form start-->
-         					<form action="${root}/admin/list" method="get" enctype="multipart/form-data">
 						  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 				    	 <!-- 테이블start -->
-						  
-		                       <div class="table-responsive" style="overflow: auto">
-				                  <div style="height: ; overflow: auto"> 
+		                       <div class="table-responsive" style="height: 530px; overflow: auto;">
+				                  <div> 
 				                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 				                               <thead>
 				                                   <tr>
 				                                       <th width="7%" class="text-center">사진</th>
-				                                       <th width="10%" class="text-center">사원번호</th>
+				                                       <th width="10%" class="text-center">사번</th>
 				                                       <th width="10%" class="text-center">닉네임</th>
 				                                       <th width="7%" class="text-center">부서</th>
 				                                       <th width="7%" class="text-center">직급</th>
@@ -105,8 +122,8 @@
 				                                   <tr>
 				                                       <td class="text-center">
 				                                          <div id="profile-img-area">
-				                                      <img src="${root}/resources/profile/${x.profilePath}">
-				                                   </div>
+				                                      		<img src="${root}/resources/profile/${x.profilePath}">
+				                                   		  </div>
 				                                       </td>
 				                                       
 				                                       <td class="text-center">${x.empNo}</td>
@@ -126,15 +143,13 @@
                        
                        <!-- 테이블end -->
 						  </div>
-                       </form>
-                       <!--form end-->
+                      
 						  <!-- 전체사원end -->
 						  
 					  </div>
 					<!-- 내부end -->
-					
-					<!--end-->
 				  </div>
+				<!--end-->
 	
 			  </div>
 			<!-- DataTales Example End-->

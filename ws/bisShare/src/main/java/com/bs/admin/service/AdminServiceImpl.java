@@ -1,6 +1,7 @@
 package com.bs.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,20 +26,20 @@ public class AdminServiceImpl implements AdminService{
 
 	// 전체 사원 조회
 	@Override
-	public List<EmployeeVo> entireList() {
-		return ad.entireList(sst);
+	public List<EmployeeVo> entireList(Map<String, String> map) {
+		return ad.entireList(sst, map);
 	}//selectList
 
 	// 사원 조회(재직)
 	@Override
-	public List<EmployeeVo> inList() {
-		return ad.inList(sst);
+	public List<EmployeeVo> inList(Map<String, String> map) {
+		return ad.inList(sst, map);
 	}//inList
 
 	// 사원 관리 조회(퇴직)
 	@Override
-	public List<EmployeeVo> outList() {
-		return ad.outList(sst);
+	public List<EmployeeVo> outList(Map<String, String> map) {
+		return ad.outList(sst, map);
 	}//outList
 
 	// 상세조회(사원번호로 조회) - 전체/재직/퇴직
@@ -46,6 +47,15 @@ public class AdminServiceImpl implements AdminService{
 	public EmployeeVo selectOne(String empNo) {
 		return ad.selectOne(sst, empNo);
 	}//selectOne
+
+
+	// 수정하기
+	@Override
+	public int edit(EmployeeVo vo) {
+		return ad.updateOne(sst, vo);
+	}//edit
+
+
 	
 	
 }//class

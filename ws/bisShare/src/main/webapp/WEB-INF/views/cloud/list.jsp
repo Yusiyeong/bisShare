@@ -21,16 +21,34 @@
                        <h6 class="m-0 font-weight-bold text-primary" >자료실</h6>
                    </div>
                    <div class="card-body">
-
-                   
-                        <!--검색버튼start-->
-                       <div style="height: 50px;">
-                           <div style="float: right;">
-                               Search : <input type="text">
-                               <input type="submit" value="검색" class="btn-primary" style="border-radius: 3px;" >
-                           </div>
-                       </div>
-                       <!--검색버튼end-->
+                    <!--start-->
+                    <!--검색버튼start-->
+                    <div style="height: 50px;">
+                        <div style="float: right;">
+							<select name="condition" style="height:30px;">
+								<option value="title">제목</option>
+								<option value="content">내용</option>
+								<option value="writer">작성자</option>
+							</select>
+			
+                            <input type="text" name="keyword" value="${keyword}">
+                            <input type="submit" value="검색" class="btn-primary" style="border-radius: 3px;" >
+                        </div>
+                    </div>
+                    <!--검색버튼end-->
+                    
+					<!-- ------------------------------------------------------------------------->		
+                    
+					<c:if test="${not empty condition}">
+						<script>
+							window.onload = function(){
+								document.querySelector('option[value=${condition}]').selected = true;
+							}
+						</script>
+					</c:if>
+					
+	                <!-- ------------------------------------------------------------------------->
+                       
                        
                        <!-- 테이블start -->
                        <div class="table-responsive">
@@ -206,11 +224,12 @@
                                    </nav>
                                <!--페이징end-->
                                
-                   </div>
+                  </div>
+                   <!--end-->      
                </div>
-
+			   <!-- DataTales Example End-->
            </div>
-           <!-- /.container-fluid -->
+           <!-- End Page Content -->
            
            
         
