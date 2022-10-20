@@ -25,5 +25,9 @@
 		<typeAlias type="com.bs.free.vo.FreeVo" alias="fv"/>
 		<typeAlias type="com.bs.blind.vo.BlindVo" alias="bv"/>
 		<typeAlias type="com.bs.cloud.vo.CloudVo" alias="cv"/>
+		<!-- 게시판 댓글 -->
+		<typeAlias type="com.bs.notice.vo.NoticeReplyVo" alias="nrv"/>
+		<typeAlias type="com.bs.free.vo.FreeReplyVo" alias="frv"/>
+		<typeAlias type="com.bs.blind.vo.BlindReplyVo" alias="brv"/>
 	</typeAliases>
 </configuration>

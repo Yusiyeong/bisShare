@@ -229,13 +229,39 @@
         width: 100%;
         height: 500px;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 4.5fr 1fr 4.5fr;
     }
-    #aprv-select-area>div{
+    #non-select-emp-area, #select-emp-area{
         border: 0.5px dotted red;
         box-sizing: border-box;
         height: 100%;
+        display: grid;
+        grid-template-rows: 1fr 9fr;
     }
+    #select-dept-list-area{
+        border: 1px solid green;
+    }
+    #select-dept-list-area>div{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin: 0;
+    }
+    #select-dept-list-area>div>div{
+        border: 1px solid grey;
+    }
+
+
+
+
+    /*모달창 버튼 영역 */
+    #select-controll-area{
+        display: grid;
+        grid-template-rows: 4fr 1fr 0.5fr 1fr 4fr;
+    }
+    #select-controll-area>div>button{
+        width: 100%;
+    }
+
 </style>
 
 
@@ -254,26 +280,87 @@
 
                 <div id="aprv-select-area">
                     <div id="non-select-emp-area">
-                        
+                        <div>
+                            <label for="select-dept">부서 선택</label>
+                            <select name="selectDept" id="select-dept">
+                                <option value="1">인사</option>
+                                <option value="2">개발</option>
+                                <option value="3">영업</option>
+                            </select>
+                        </div>
+                        <div id="select-dept-list-area">
+                            <div class="table table-bordered">
+                                <div>선택</div>
+                                <div>부서</div>
+                                <div>직급</div>
+                                <div>이름</div>
+                            </div>
+                            <div class="table table-bordered">
+                                <div><input type="checkbox"></div>
+                                <div>개발팀</div>
+                                <div>주임</div>
+                                <div>박한솔</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="select-controll-area">
+                        <div></div>
+                        <div>
+                            <button id="select-plus-btn" class="btn btn-sm btn-primary">추가</button>
+                        </div>
+                        <div></div>
+                        <div>
+                            <button id="select-minus-btn" class="btn btn-sm btn-danger">삭제</button>
+                        </div>
+                        <div></div>
                     </div>
                     <div id="select-emp-area">
-
+                        <div>
+                        </div>
+                        <div id="select-dept-list-area">
+                            <div class="table table-bordered">
+                                <div>선택</div>
+                                <div>부서</div>
+                                <div>직급</div>
+                                <div>이름</div>
+                            </div>
+                            <div class="table table-bordered">
+                                <div><input type="checkbox" value="1"></div>
+                                <div>개발팀</div>
+                                <div>주임</div>
+                                <div>박한솔</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                <button class="btn btn-primary" type="button" data-dismiss="modal">선택완료</button>
+                <button class="btn btn-success" type="button" data-dismiss="modal">선택완료</button>
             </div>
         </div>
     </div>
 </div>       
 
 <script type="text/javascript">
-	const lineSelector = document.querySelector('#aprv-line-select');
-    lineSelector.addEventListener('click', function(){
-        // alert('hi~');
-    });
+	const pbtn = document.querySelector('#select-plus-btn');
+    const mbtn = document.querySelector('#select-minus-btn');
+
+    const SEA = document.querySelector('#select-emp-area>#select-dept-list-area');
+    const NSEA = document.querySelector('#non-select-emp-area>#select-dept-list-area');
+
+    // 추가 버튼 클릭 했을 때 이벤트
+    pbtn.addEventListener('click',()=>{
+        $(SEA).append("<div class='table table-bordered'><div><input type='checkbox' value='1'></div><div>개발팀</div><div>주임</div><div>박한솔</div></div>");
+    })
+
+    // 삭제 버튼 클릭 했을 때 이벤트
+    mbtn.addEventListener('click',()=>{
+        alert('무야호');
+        $(SEA).remove('#table table-bordered:last-child');
+    })
+    
+
 </script>
 
