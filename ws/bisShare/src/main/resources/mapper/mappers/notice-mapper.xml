@@ -3,8 +3,41 @@
 
 <mapper namespace="noticeMapper">
 
+	<!--페이징 처리 -->
+	<select id="selectCountAll" resultType="int">
+		SELECT COUNT(BOARD_NO)
+		FROM NOTICE_BOARD
+		WHERE STATUS = 'Y'
+	</select>
 
-
+	<!-- 게시글 목록 조회 -->
+	<select id="selectList" resultType="nv">
+	SELECT 
+	    ROW_NUMBER() OVER (ORDER BY N.BOARD_NO DESC) AS num,
+	        N.BOARD_NO AS boardNo
+	        ,N.TITLE
+	        ,N.CONTENT
+	        ,N.CNT
+	        ,TO_CHAR(N.ENROLL_DATE, 'YYYY"." MM"." DD') AS enrollDate
+	        ,N.MODIFY_DATE AS modifyDate
+	        ,N.STATUS
+	        ,E.NICK AS WRITER			
+    FROM NOTICE_BOARD N JOIN EMPLOYEE E
+    ON N.WRITER = E.EMP_NO
+    WHERE N.STATUS = 'Y'
+    
+    <choose>
+		<when test="condition == 'title'">
+			AND TITLE LIKE 
+		</when>
+		<otherwise>
+			AND WRITER LIKE 
+		</otherwise>
+	</choose>
+	'%${keyword}%'
+	
+    ORDER BY N.BOARD_NO DESC
+	</select>
 
 
 </mapper>

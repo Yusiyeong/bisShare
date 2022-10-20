@@ -54,6 +54,8 @@
 	               <button class="btn btn-outline-primary btn-sm" style="position: absolute;" onclick = "location.href ='${root}/admin/enroll'">사원 등록</button>            
 	               <!-- 사원등록 버튼 end  -->
                   
+                   <!--form start-->
+         			<form action="${root}/admin/list" method="get" enctype="multipart/form-data">
                     <!--검색버튼start-->
                     <div style="height: 50px;">
                         <div style="float: right;">
@@ -141,15 +143,17 @@
 				                  </div>
 		                       </div>
                        
-                       <!-- 테이블end -->
+                        <!-- 테이블end -->
 						  </div>
                       
 						  <!-- 전체사원end -->
 						  
 					  </div>
 					<!-- 내부end -->
+					   </form>
+                       <!--form end-->
+					<!--end-->
 				  </div>
-				<!--end-->
 	
 			  </div>
 			<!-- DataTales Example End-->
