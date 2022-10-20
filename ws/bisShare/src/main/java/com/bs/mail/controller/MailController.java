@@ -124,10 +124,24 @@ public class MailController {
 	/**
 	 * 중요 표시
 	 */
-	@GetMapping("checkStar")
+	@GetMapping("checkStar/{filter}")
 	@ResponseBody
-	public String checkStar(String mailNo) {
-		return ms.checkStar(mailNo);
+	public String checkStar(String mailNo,HttpSession session, @PathVariable int filter) {
+		EmployeeVo ev = (EmployeeVo) session.getAttribute("loginVo");
+		MailVo mv = new MailVo();
+		
+		if (filter == 0) {
+			mv.setMailNo(mailNo);
+			mv.setReceive(ev.getEmpNo());
+			ms.checkStar(mv);
+		} else if (filter == 1) {
+			mv.setMailNo(mailNo);
+			mv.setReference(ev.getEmpNo());
+			ms.checkStar(mv);
+		}
+		
+		
+		return null;
 	}
 
 	/**
@@ -182,15 +196,11 @@ public class MailController {
 			mv = ms.detail(vo);
 		}else if(filter == 1){
 //			참조된 메일 조회
-			vo.setReceive("\'"+mailInfo.getReceive()+"\'");
 			vo.setReference(empNo);
 			vo.setMailNo(mailInfo.getMailNo());
-			System.out.println(vo);
 			mv = ms.detailRef(vo);
-			System.out.println(mv);
 		}
 
-		System.out.println(mv);
 		String mvStr = gson.toJson(mv);
 
 		return mvStr;
@@ -276,7 +286,7 @@ public class MailController {
 		EmployeeVo ev = (EmployeeVo) session.getAttribute("loginVo");
 
 		List<MailVo> list = ms.reference(ev.getEmpNo());
-
+		System.out.println(list);
 		String notReadCnt = ms.notRead(ev.getEmpNo());
 
 		model.addAttribute("notReadCnt", notReadCnt);

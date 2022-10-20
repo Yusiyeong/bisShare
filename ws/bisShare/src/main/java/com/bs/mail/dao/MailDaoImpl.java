@@ -23,8 +23,8 @@ public class MailDaoImpl implements MailDao{
 	}
 	
 	@Override
-	public String selectStar(SqlSessionTemplate sst, String mailNo) {
-		return sst.selectOne("mailMapper.selectStar", mailNo);
+	public String selectStar(SqlSessionTemplate sst, MailVo mv) {
+		return sst.selectOne("mailMapper.selectStar", mv);
 	}
 	
 	@Override

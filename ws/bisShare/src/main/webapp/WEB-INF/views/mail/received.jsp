@@ -26,7 +26,6 @@
 						<thead>
 							<tr>
 								<th></th>
-								<th>번호</th>
 								<th>중요</th>
 								<th>메일명</th>
 								<th id="nick">발신인</th>
@@ -37,7 +36,6 @@
 							<c:forEach items="${receiveMail}" var="r">
 								<tr>
 									<td><input type="checkbox" value="${r.mailNo}"></td>
-									<td></td>
 									<c:if test="${ r.star eq 'N'}">
 										<td>☆</td>
 									</c:if>

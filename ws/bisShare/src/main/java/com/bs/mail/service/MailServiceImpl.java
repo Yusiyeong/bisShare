@@ -38,7 +38,6 @@ public class MailServiceImpl implements MailService{
 		for(int i = 0; i<recList.size() ; i++) {
 			if (refList != null) {
 				for(int j=0; j<refList.size(); j++) {
-					System.out.println(recList.get(i).getValue());
 					String rec = recList.get(i).getValue();
 					String ref = refList.get(j).getValue();
 					mv.setReceive(rec);
@@ -52,6 +51,11 @@ public class MailServiceImpl implements MailService{
 				mv.setReference(null);
 				md.insertRecInfo(sst,mv);
 			}
+		}
+		
+		if (refList != null) {
+			mv.setReference(null);
+			md.insertRecInfo(sst, mv);
 		}
 		
 		return result;
@@ -69,9 +73,9 @@ public class MailServiceImpl implements MailService{
 	 *	중요 표시 변경 
 	 */
 	@Override
-	public String checkStar(String mailNo) {
+	public String checkStar(MailVo mv) {
 		
-		String star = md.selectStar(sst,mailNo);
+		String star = md.selectStar(sst,mv);
 		String changeStar = "";
 		
 		if(star.equals("Y")) {
@@ -79,8 +83,6 @@ public class MailServiceImpl implements MailService{
 		} else {
 			changeStar = "'Y'";
 		}
-		MailVo mv = new MailVo();
-		mv.setMailNo(mailNo);
 		mv.setStar(changeStar);
 		
 		md.updateStar(sst,mv);
