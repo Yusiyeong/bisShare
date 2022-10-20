@@ -15,20 +15,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bs.common.PageVo;
 import com.bs.common.Pagination;
+import com.bs.notice.service.NoticeReplyService;
 import com.bs.notice.service.NoticeService;
+import com.bs.notice.vo.NoticeReplyVo;
 import com.bs.notice.vo.NoticeVo;
 
 @Controller
 @RequestMapping("notice")
 public class NoticeController {
 
-	private final NoticeService bs;
+	private final NoticeService ns;
+	private final NoticeReplyService nrs;		// 댓글
 	
 	// 생성자
 	@Autowired
-	public NoticeController(NoticeService bs) {
+	public NoticeController(NoticeService ns, NoticeReplyService nrs) {
 		super();
-		this.bs = bs;
+		this.ns = ns;
+		this.nrs = nrs;
 	}
 
 
@@ -58,12 +62,12 @@ public class NoticeController {
 				
 		
 		// 페이징 처리 //서비스 호출
-		int totalCount = bs.selectTotalCnt();
+		int totalCount = ns.selectTotalCnt();
 		
 		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
 		
 		// 서비스 호출
-		List<NoticeVo> voList = bs.selectList(pv, map);
+		List<NoticeVo> voList = ns.selectList(pv, map);
 		model.addAttribute("voList", voList);
 		model.addAttribute("pv", pv);
 		
@@ -75,9 +79,18 @@ public class NoticeController {
 	}//list
 	
 
-	// 게시글 상세조회(화면)
-	@GetMapping("detail")
-	public String detail(Model model) {
+	// 게시글 상세조회(화면+진행) + 댓글 조회
+	@GetMapping("detail/{boardNo}")
+	public String detail(@PathVariable String boardNo, Model model) {
+
+		NoticeVo vo = ns.selectOne(boardNo);
+		
+		List<NoticeReplyVo> replyList = nrs.selectList(boardNo);	// 댓글 조회
+		
+		System.out.println("replyList::::" + replyList );
+		
+		model.addAttribute("vo", vo);
+		model.addAttribute("replyList", replyList);
 
 		model.addAttribute("title", "POST");
 		model.addAttribute("page", "notice/detail");

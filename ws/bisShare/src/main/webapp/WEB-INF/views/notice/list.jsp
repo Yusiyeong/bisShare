@@ -78,11 +78,7 @@ a:hover { text-decoration:none !important }
                           </div>
                           <!-- 테이블end -->
                            
-                     <!-- 글쓰기 버튼 start  -->
-                     <c:if test="${not empty loginVo}">
-                        <button class="btn btn-primary btn-sm" onclick = "location.href ='${root}/notice/write'">글쓰기</button>            
-                     </c:if>
-                     <!-- 글쓰기 버튼 end  -->
+                   
 
                                <!--페이징start-->    
                                <nav aria-label="..." style="width: 10%; margin: 0 auto;">
@@ -126,6 +122,13 @@ a:hover { text-decoration:none !important }
                                
                         </form>
                        <!--form end-->
+                       
+                     <!-- 글쓰기 버튼 start  -->
+                     <c:if test="${not empty loginVo}">
+                        <button class="btn btn-primary btn-sm" onclick = "location.href ='${root}/notice/write'">글쓰기</button>            
+                     </c:if>
+                     <!-- 글쓰기 버튼 end  -->
+                     
                    </div>
                    <!--end-->      
                </div>

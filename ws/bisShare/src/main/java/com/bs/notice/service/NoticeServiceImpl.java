@@ -39,6 +39,20 @@ public class NoticeServiceImpl implements NoticeService{
 	}//selectList
 
 
+	// 게시글 상세 조회 + 조회수 증가
+	@Override
+	public NoticeVo selectOne(String boardNo) {
+		
+		int result = nd.increaseCnt(sst, boardNo);	// 조회수 증가
+		if(result == 1) {
+			return nd.selectOne(sst, boardNo);	// 상세 조회
+		}else {
+			return null;
+		}
+		
+	}//selectOne
+
+
 
 
 
