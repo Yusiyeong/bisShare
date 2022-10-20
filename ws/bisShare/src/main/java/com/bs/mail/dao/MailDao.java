@@ -31,11 +31,27 @@ public interface MailDao {
 
 	List<MailAttVo> selectFilePath(SqlSessionTemplate sst, MailVo mv);
 
-	int updateCheckStatus(SqlSessionTemplate sst, String string);
+	int updateCheckStatus(SqlSessionTemplate sst, MailVo mv);
 
 	List<MailVo> reference(SqlSessionTemplate sst, String empNo);
 
 	MailVo selectRefOne(SqlSessionTemplate sst, MailVo mv);
+
+	String selectReferences(SqlSessionTemplate sst, MailVo mv);
+
+	List<MailVo> selectSendList(SqlSessionTemplate sst, String empNo);
+
+	MailVo selectSendOne(SqlSessionTemplate sst, MailVo mv);
+
+	String selectSendReferences(SqlSessionTemplate sst, MailVo mv);
+
+	List<MailVo> selectStatusOne(SqlSessionTemplate sst, String empNo);
+
+	MailVo selectTrashOne(SqlSessionTemplate sst, MailVo mv);
+
+	String selectTrashReferences(SqlSessionTemplate sst, MailVo mv);
+
+	int delelte(SqlSessionTemplate sst, MailVo mv);
 
 
 

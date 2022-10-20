@@ -13,9 +13,9 @@
 
 <div class="user" id="mail-detail">
 	<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-		<button class="btn btn-danger ml-2 mr-5" onclick="removeOneBtn()">삭제하기</button>
-		<button class="btn btn-success mx-2">답장하기</button>
-		<button class="btn btn-primary mx-2">전달하기</button>
+		<button class="btn btn-danger ml-2 mr-5" onclick="removeOneBtn()" id="navTrash">삭제하기</button>
+		<button class="btn btn-success mx-2" onclick="replyBtn()" id="navReply">답장하기</button>
+		<button class="btn btn-primary mx-2" onclick="passBtn()" id="navPass">전달하기</button>
 	</nav>
 	<div class="my-1 border border-secondary border-5 rounded-2 p-1">
 		<span class="font-weight-bolder mx-5">발신</span>

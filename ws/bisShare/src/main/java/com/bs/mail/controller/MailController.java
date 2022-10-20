@@ -169,10 +169,18 @@ public class MailController {
 	 * 보낸 메일함 이동
 	 */
 	@GetMapping("send")
-	public String send(Model model) {
-		model.addAttribute("title", "SEND MAIL");
-		model.addAttribute("page", "mail/send");
+	public String send(Model model, HttpSession session) {
+		
+		EmployeeVo ev = (EmployeeVo) session.getAttribute("loginVo");
 
+		List<MailVo> list = ms.send(ev.getEmpNo());
+		String notReadCnt = ms.notRead(ev.getEmpNo());
+
+		model.addAttribute("notReadCnt", notReadCnt);
+		model.addAttribute("receiveMail", list);
+
+		model.addAttribute("title", "SEND MAIL");
+		model.addAttribute("page", "mail/received");
 		return "layout/template";
 	}
 
@@ -199,6 +207,16 @@ public class MailController {
 			vo.setReference(empNo);
 			vo.setMailNo(mailInfo.getMailNo());
 			mv = ms.detailRef(vo);
+		} else if (filter == 2) {
+//			보낸 메일 조회
+			vo.setSend(empNo);
+			vo.setMailNo(mailInfo.getMailNo());
+			mv = ms.detailSend(vo);
+		} else if (filter == 3) {
+//			휴지통
+			vo.setReceive(empNo);
+			vo.setMailNo(mailInfo.getMailNo());
+			mv = ms.detailTrash(vo);
 		}
 
 		String mvStr = gson.toJson(mv);
@@ -219,7 +237,6 @@ public class MailController {
 
 		String savePath = realPath + fileName;
 
-		System.out.println(savePath);
 
 		File f = new File(savePath);
 		FileOutputStream fos;
@@ -268,11 +285,17 @@ public class MailController {
 	/*
 	 * 체크된 메일 삭제
 	 */
-	@GetMapping("delChecked")
+	@GetMapping("delChecked/{filter}")
 	@ResponseBody
-	public int delChecked(@RequestParam(value="checkArr[]") List<String> checkArr) {
+	public int delChecked(@RequestParam(value="checkArr[]") List<String> checkArr, @PathVariable int filter, HttpSession session) {
 		
-		int result = ms.delChecked(checkArr);
+		EmployeeVo loginVo = (EmployeeVo) session.getAttribute("loginVo");
+		int result = 0;
+		if (filter != 3) {
+			result = ms.delChecked(checkArr, loginVo);
+		} else {
+			result = ms.delete(checkArr, loginVo);
+		}
 		
 		return result;
 	}
@@ -286,13 +309,42 @@ public class MailController {
 		EmployeeVo ev = (EmployeeVo) session.getAttribute("loginVo");
 
 		List<MailVo> list = ms.reference(ev.getEmpNo());
-		System.out.println(list);
 		String notReadCnt = ms.notRead(ev.getEmpNo());
 
 		model.addAttribute("notReadCnt", notReadCnt);
 		model.addAttribute("receiveMail", list);
 
-		model.addAttribute("title", "STAR MAIL");
+		model.addAttribute("title", "REFERENCE MAIL");
+		model.addAttribute("page", "mail/received");
+
+		return "layout/template";
+	}
+	
+	/**
+	 * 안읽은 메일 수 업데이트
+	 */
+	@GetMapping("updateCnt")
+	@ResponseBody
+	public String updateCnt(HttpSession session) {
+		EmployeeVo ev = (EmployeeVo) session.getAttribute("loginVo");
+		return ms.notRead(ev.getEmpNo());
+	}
+	
+	/**
+	 * 휴지통
+	 */
+	@GetMapping("trashcan")
+	public String trashcan(Model model, HttpSession session) {
+		
+		EmployeeVo ev = (EmployeeVo) session.getAttribute("loginVo");
+
+		List<MailVo> list = ms.trashcan(ev.getEmpNo());
+		String notReadCnt = ms.notRead(ev.getEmpNo());
+
+		model.addAttribute("notReadCnt", notReadCnt);
+		model.addAttribute("receiveMail", list);
+
+		model.addAttribute("title", "REFERENCE MAIL");
 		model.addAttribute("page", "mail/received");
 
 		return "layout/template";

@@ -22,10 +22,20 @@ public interface MailService {
 
 	void insertMailAtt(MailAttVo mav);
 
-	int delChecked(List<String> checkArr);
+	int delChecked(List<String> checkArr, EmployeeVo loginVo);
 
 	List<MailVo> reference(String empNo);
 
 	MailVo detailRef(MailVo vo);
+
+	List<MailVo> send(String empNo);
+
+	MailVo detailSend(MailVo vo);
+
+	List<MailVo> trashcan(String empNo);
+
+	MailVo detailTrash(MailVo vo);
+
+	int delete(List<String> checkArr, EmployeeVo loginVo);
 
 }
