@@ -106,7 +106,7 @@
                 </a>
                 <div id="collapsefour" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${root}/address/list?p=1">조직도</a>
+                        <a class="collapse-item" href="${root}/address/list?p=1">조직도</a> <!-- 수정 -->
                         <a class="collapse-item" href="${root}/address/search?p=1">주소록 검색</a>
                     </div>
                 </div>
