@@ -1,12 +1,14 @@
 package com.bs.address.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
 import com.bs.address.dao.AddressDao;
 import com.bs.address.vo.AddressVo;
+import com.bs.common.PageVo;
 
 @Service
 public class AddressServiceImpl implements AddressService{
@@ -24,8 +26,8 @@ public class AddressServiceImpl implements AddressService{
 	
 	//주소록 조회
 	@Override
-	public List<AddressVo> selectList() {
-		return dao.selectList(sst);
+	public List<AddressVo> selectList(PageVo pvo, Map<String, String> map) {
+		return dao.selectList(sst, pvo, map);
 	}
 
 	//조직도 상세조회
@@ -33,5 +35,17 @@ public class AddressServiceImpl implements AddressService{
 	public List<AddressVo> detailList() {
 		return dao.detailList(sst);
 	}
+
+	//목록 갯수 조회
+	@Override
+	public int selectListCount(Map<String, String> map) {
+		return dao.selectListCount(sst, map);
+	}
+
+
+	
+
+
+	
 
 }

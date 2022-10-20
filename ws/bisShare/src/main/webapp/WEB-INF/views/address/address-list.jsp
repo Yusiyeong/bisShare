@@ -19,6 +19,7 @@
 	#t1{
 		text-align: center;
 	}
+	
 </style>
 
 <!-- Begin Page Content -->
@@ -140,7 +141,6 @@
 		</div>
 		
 		
-		
 	</div> <!-- row -->
 	  
 </div>
@@ -162,3 +162,4 @@
 			});
 		});
 </script>
+
