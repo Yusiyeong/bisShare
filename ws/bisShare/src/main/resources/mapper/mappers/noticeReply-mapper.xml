@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="noticeReplyMapper">
+
+	<!-- 댓글 조회 -->
+	<select id="selectListByBno" resultType="nrv">
+	SELECT
+	    R.REPLY_NO	AS replyNo
+	    , R.CONTENT
+	    , R.BNO
+	    , E.NICK AS writer
+	    , R.ENROLL_DATE	AS enrollDate
+	    , R.MODIFY_DATE AS modifyDate
+	    , R.STATUS
+	FROM NOTICE_REPLY R JOIN EMPLOYEE E
+	ON R.WRITER = E.EMP_NO
+	WHERE R.STATUS = 'Y'
+	AND R.BNO = #{bno}
+	ORDER BY R.REPLY_NO DESC
+	</select>
+
+	<!-- 댓글 작성 -->
+	<insert id="insertOne">
+	INSERT INTO NOTICE_REPLY
+		(
+			REPLY_NO
+			,CONTENT
+			,BNO
+			,WRITER
+		)
+		VALUES
+		(
+			SEQ_NOTICE_REPLY_NO.NEXTVAL
+			, #{content}
+			, #{bno}
+			, #{writer}
+		)
+	</insert>
+
+</mapper>

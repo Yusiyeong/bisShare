@@ -16,5 +16,11 @@ public interface NoticeDao {
 	// 게시글 목록 조회
 	List<NoticeVo> selectList(SqlSessionTemplate sst, PageVo pv, Map<String, String> map);
 
+	// 조회수 증가
+	int increaseCnt(SqlSessionTemplate sst, String boardNo);
+
+	// 게시글 상세 조회
+	NoticeVo selectOne(SqlSessionTemplate sst, String boardNo);
+
 
 }//interface

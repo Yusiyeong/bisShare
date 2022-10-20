@@ -39,5 +39,29 @@
     ORDER BY N.BOARD_NO DESC
 	</select>
 
-
+	<!--  게시글 상세조회 -->
+	<select id="selectOne" resultType="nv">
+	SELECT
+	    N.BOARD_NO
+	    , N.TITLE
+	    , N.CONTENT
+	    , E.NICK AS writer
+	    , N.CNT
+	    , TO_CHAR(N.ENROLL_DATE, 'YYYY"년" MM"월" DD"일"') AS enrollDate
+	    , TO_CHAR(N.MODIFY_DATE, 'YYYY"년" MM"월" DD"일"') AS modifyDate
+	    , N.STATUS
+	FROM NOTICE_BOARD N JOIN EMPLOYEE E
+	ON N.WRITER = E.EMP_NO
+	WHERE N.BOARD_NO = #{boardNo}
+	AND N.STATUS = 'Y'
+	</select>
+	
+	
+	<!-- 조회수 증가 -->
+	<update id="increaseCnt">
+	UPDATE NOTICE_BOARD
+			SET CNT = CNT + 1
+	WHERE BOARD_NO = #{boardNo}
+	AND STATUS = 'Y'
+	</update>
 </mapper>

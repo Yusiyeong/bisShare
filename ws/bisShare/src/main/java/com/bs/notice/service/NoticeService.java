@@ -16,5 +16,8 @@ public interface NoticeService {
 	// 게시글 목록 조회
 	List<NoticeVo> selectList(PageVo pv, Map<String, String> map);
 
+	// 게시글 상세 조회
+	NoticeVo selectOne(String boardNo);
+
 
 }//interface

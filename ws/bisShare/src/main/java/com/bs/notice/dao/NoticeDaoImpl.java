@@ -28,5 +28,17 @@ public class NoticeDaoImpl implements NoticeDao{
 		return sst.selectList("noticeMapper.selectList", map, rb);
 	}//selectList
 
+	// 조회수 증가
+	@Override
+	public int increaseCnt(SqlSessionTemplate sst, String boardNo) {
+		return sst.update("noticeMapper.increaseCnt", boardNo);
+	}//increaseCnt
+
+	// 게시글 상세 조회
+	@Override
+	public NoticeVo selectOne(SqlSessionTemplate sst, String boardNo) {
+		return sst.selectOne("noticeMapper.selectOne", boardNo);
+	}//selectOne
+
 
 }//class
