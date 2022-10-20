@@ -295,11 +295,35 @@
                                 <div>직급</div>
                                 <div>이름</div>
                             </div>
-                            <div class="table table-bordered">
-                                <div><input type="checkbox"></div>
+                            <div id="non-added-emp" class="table table-bordered">
+                                <div><input name="add-aprver-list" type="checkbox"></div>
                                 <div>개발팀</div>
                                 <div>주임</div>
                                 <div>박한솔</div>
+                            </div>
+                            <div id="non-added-emp" class="table table-bordered">
+                                <div><input type="checkbox"></div>
+                                <div>인사팀</div>
+                                <div>부장</div>
+                                <div>박서영</div>
+                            </div>
+                            <div id="non-added-emp" class="table table-bordered">
+                                <div><input type="checkbox"></div>
+                                <div>영업팀</div>
+                                <div>사원</div>
+                                <div>민동언</div>
+                            </div>
+                            <div id="non-added-emp" class="table table-bordered">
+                                <div><input type="checkbox"></div>
+                                <div>개발팀</div>
+                                <div>대리</div>
+                                <div>유시영</div>
+                            </div>
+                            <div id="non-added-emp" class="table table-bordered">
+                                <div><input type="checkbox"></div>
+                                <div>영업팀</div>
+                                <div>과장</div>
+                                <div>박찬수</div>
                             </div>
                         </div>
                     </div>
@@ -324,7 +348,7 @@
                                 <div>직급</div>
                                 <div>이름</div>
                             </div>
-                            <div class="table table-bordered">
+                            <div id="added-emp" class="table table-bordered">
                                 <div><input type="checkbox" value="1"></div>
                                 <div>개발팀</div>
                                 <div>주임</div>
@@ -352,13 +376,27 @@
 
     // 추가 버튼 클릭 했을 때 이벤트
     pbtn.addEventListener('click',()=>{
-        $(SEA).append("<div class='table table-bordered'><div><input type='checkbox' value='1'></div><div>개발팀</div><div>주임</div><div>박한솔</div></div>");
+        // 체크한 데이터 담을 배열
+        const arrChecked = [];
+        // 리스트에서 체크박스 변수 생성
+        const checkedbox = document.getElementsByName('add-aprver-list');
+        // 체크된 만큼 값 넘겨줄거
+        for(let i = 0; i < checkedbox.length; i++){
+            arrChecked[i] = checkedbox[i];
+            console.log(arrChecked[i]);
+            if(checkedbox[i].checked==true){
+                const deptName = $(checkedbox[i]).parent().children().eq(1).text();
+                const rankName = $(checkedbox[i]).parent().children().eq(2).text();
+                const empName = $(checkedbox[i]).parent().children().eq(3).text();
+                $(SEA).append("<div id='added-emp' class='table table-bordered'><div><input type='checkbox' value='1'></div><div>" + deptName + "</div><div>" + rankName + "</div><div>" + empName + "</div></div>");
+            }
+        }
     })
 
     // 삭제 버튼 클릭 했을 때 이벤트
     mbtn.addEventListener('click',()=>{
         alert('무야호');
-        $(SEA).remove('#table table-bordered:last-child');
+        $(SEA).children().last().remove('#added-emp');
     })
     
 
