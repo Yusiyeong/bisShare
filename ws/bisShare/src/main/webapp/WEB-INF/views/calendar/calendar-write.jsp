@@ -8,7 +8,7 @@
     #page{
         width: 95%;
         height: 100%;
-        margin: auto;
+        margin: 0 auto;
         background-color: white;
     }
 
@@ -22,6 +22,7 @@
         font-size: 30px;
         font-weight: 600;
     }
+    
     textarea:focus {
         outline: none;
     }

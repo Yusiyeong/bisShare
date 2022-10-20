@@ -28,7 +28,7 @@ public class CalendarController {
 	
 	
 	//일정 메인
-	@GetMapping("calendar/main")
+	@GetMapping("main")
 	public String main(Model model) {
 		model.addAttribute("page", "calendar/calendar-main");
 		return "layout/template";
@@ -37,14 +37,15 @@ public class CalendarController {
 	
 	
 	//일정 작성 (화면)
-	@GetMapping("calendar/write")
+	@GetMapping("write")
 	public String write(Model model) {
+		model.addAttribute("title", "STAR MAIL");
 		model.addAttribute("page", "calendar/calendar-write");
 		return "layout/template";
 	}
 	
 	//일정 작성
-	@PostMapping("calendar/write")
+	@PostMapping("write")
 	public String write(CalendarVo vo, Model model, HttpSession session) {
 		
 		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginvo");
@@ -54,7 +55,7 @@ public class CalendarController {
 		
 		//화면 선택
 		if(result == 1) {
-			session.setAttribute("alertMsg", "일정 등록 완료");
+			model.addAttribute("alertMsg", "일정 등록 완료");
 			return "layout/template";
 		}else {
 			model.addAttribute("msg" , "일정 등록 실패");
@@ -66,18 +67,18 @@ public class CalendarController {
 	
 	 
 	//일정 수정
-	@GetMapping("calendar/edit{no}")
-	public String edit(@PathVariable String no, CalendarVo vo, HttpSession session) {
+	@GetMapping("edit{no}")
+	public String edit(@PathVariable String no, Model model, CalendarVo vo, HttpSession session) {
 		
 		vo.setCalNo(no);
 		
 		int result = cs.edit(vo);
 		
 		if(result == 1) {
-			session.setAttribute("alertMsg", "일정수정 성공");
+			model.addAttribute("alertMsg", "일정수정 성공");
 			return "layout/template";
 		}else {
-			session.setAttribute("alertMsg", "일정 수정 실패");
+			model.addAttribute("alertMsg", "일정 수정 실패");
 			return "layout/template";
 		}
 		
@@ -86,7 +87,7 @@ public class CalendarController {
 	
 	
 	//일정 삭제
-	@GetMapping("calendar/delete{no}")
+	@GetMapping("delete{no}")
 	public String delete(@PathVariable String no , HttpSession session , Model model) {
 		
 		int result = cs.delete(no);
@@ -103,14 +104,14 @@ public class CalendarController {
 	
 	
 	//일정 조회
-	@GetMapping("calendar/view")
+	@GetMapping("view")
 	public String view(Model model) {
 		model.addAttribute("page", "calendar/calendar-view");
 		return "layout/template"; 
 	}
 	
 	//일정 상세 조회
-	@GetMapping("calendar/detail")
+	@GetMapping("detail")
 	public String detail(Model model) {
 		model.addAttribute("page", "calendar/calendar-detail");
 		return "layout/template";
