@@ -28,7 +28,7 @@
 		    ,E.PHONE
 		    ,E.EMAIL
 		    ,E.ADDRESS
-		    ,E.HIRE_DATE
+		    ,TO_CHAR(E.HIRE_DATE, 'YYYY-MM-DD')
 		    ,E.STATUS
 		FROM EMPLOYEE E
 		INNER JOIN RANK R
