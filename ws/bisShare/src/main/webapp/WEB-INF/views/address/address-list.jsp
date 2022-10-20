@@ -47,78 +47,15 @@
 							</thead>
 							<tbody>
 								<c:forEach var="addr" items="${voList}">
-									<td><input type="checkbox" name="chk"></td>
-									<td>${addr.nick}</td>
-									<td>${addr.rankName}</td>
-									<td>${addr.deptName}</td>
-									<td>${addr.phone}</td>
-									<td>${addr.email}</td>
+									<tr>
+										<td><input type="checkbox" name="chk"></td>
+										<td>${addr.nick}</td>
+										<td>${addr.rankName}</td>
+										<td>${addr.deptName}</td>
+										<td>${addr.phone}</td>
+										<td>${addr.email}</td>
+									</tr>
 				    			</c:forEach>
-							
-								<tr>
-									<td><input type="checkbox" name="chk"></td>
-									<td>유재석</td>
-									<td>부장</td>
-									<td>영업3팀</td>
-									<td>010-1111-2222</td>
-									<td>jsyou@kh.com</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" name="chk"></td>
-									<td>박명수</td>
-									<td>차장</td>
-									<td>영업3팀</td>
-									<td>010-2222-3333</td>
-									<td>mspark@kh.com</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" name="chk"></td>
-									<td>정준하</td>
-									<td>과장</td>
-									<td>영업3팀</td>
-									<td>010-3333-4444</td>
-									<td>jhjung@kh.com</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" name="chk"></td>
-									<td>정형돈</td>
-									<td>대리</td>
-									<td>영업3팀</td>
-									<td>010-4444-5555</td>
-									<td>hdjung@kh.com</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" name="chk"></td>
-									<td>노홍철</td>
-									<td>사원</td>
-									<td>영업3팀</td>
-									<td>010-5555-6666</td>
-									<td>hcno@kh.com</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" name="chk"></td>
-									<td>하동훈</td>
-									<td>사원</td>
-									<td>영업3팀</td>
-									<td>010-6666-7777</td>
-									<td>haha@kh.com</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" name="chk"></td>
-									<td>권지용</td>
-									<td>전무</td>
-									<td>영업3팀</td>
-									<td>010-8888-9999</td>
-									<td>gd@kh.com</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" name="chk"></td>
-									<td>김태호</td>
-									<td>이사</td>
-									<td>영업3팀</td>
-									<td>010-9999-0000</td>
-									<td>pdkim@kh.com</td>
-								</tr>
 								
 							</tbody>
                         </table>

@@ -31,6 +31,8 @@
 	    <div class="card-body">
 	    	<div style="height: 50px;">
 	            <div style="float: right;">
+	            <form action="/test/address/search" method="get">
+	            	<input type="hidden" name="p" value="1">
                    	<tr>
                    		<td>
                    			<select id="field1" name="field1" class="btn-link" style="color: black;">
@@ -56,11 +58,28 @@
 							</select>
                    		</td>
 		             </tr>
-	                <input type="text">
+	                <input type="text" name="keyword" value="${keyword}">
 	                <input type="submit" value="검색" class="btn-primary" style="border-radius: 3px;" >
+	            	</form>
 	            </div>
             </div>
-	    
+	    	
+	    	<c:if test="${not empty field1}">
+				<script>
+				window.onload = function(){
+					document.querySelector('option[value=${field1}]').selected = true;
+				}
+				</script>
+			</c:if>
+			
+			<c:if test="${not empty field2}">
+				<script>
+				window.onload = function(){
+					document.querySelector('option[value=${field2}]').selected = true;
+				}
+				</script>
+			</c:if>
+	    	
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">  
  					<thead>
@@ -74,80 +93,19 @@
 					</thead>
 					<tbody>
 						<c:forEach var="addr" items="${voList}">
-							<td>${addr.nick}</td>
-							<td>${addr.rankName}</td>
-							<td>${addr.deptName}</td>
-							<td>${addr.phone}</td>
-							<td>${addr.email}</td>
+							<tr>
+								<td>${addr.nick}</td>
+								<td>${addr.rankName}</td>
+								<td>${addr.deptName}</td>
+								<td>${addr.phone}</td>
+								<td>${addr.email}</td>
+							</tr>
 		    			</c:forEach>
 						
-						<tr>
-							<td>유재석</td>
-							<td>부장</td>
-							<td>영업3팀</td>
-							<td>010-1111-2222</td>
-							<td>jsyou@kh.com</td>
-						</tr>
-						<tr>
-							<td>박명수</td>
-							<td>차장</td>
-							<td>영업3팀</td>
-							<td>010-2222-3333</td>
-							<td>mspark@kh.com</td>
-						</tr>
-						<tr>
-							<td>정준하</td>
-							<td>과장</td>
-							<td>영업3팀</td>
-							<td>010-3333-4444</td>
-							<td>jhjung@kh.com</td>
-						</tr>
-						<tr>
-							<td>정형돈</td>
-							<td>대리</td>
-							<td>영업3팀</td>
-							<td>010-4444-5555</td>
-							<td>hdjung@kh.com</td>
-						</tr>
-						<tr>
-							<td>노홍철</td>
-							<td>사원</td>
-							<td>영업3팀</td>
-							<td>010-5555-6666</td>
-							<td>hcno@kh.com</td>
-						</tr>
-						<tr>
-							<td>하동훈</td>
-							<td>사원</td>
-							<td>영업3팀</td>
-							<td>010-6666-7777</td>
-							<td>haha@kh.com</td>
-						</tr>
-						<tr>
-							<td>권지용</td>
-							<td>전무</td>
-							<td>영업3팀</td>
-							<td>010-8888-9999</td>
-							<td>gd@kh.com</td>
-						</tr>
-						<tr>
-							<td>김태호</td>
-							<td>이사</td>
-							<td>영업3팀</td>
-							<td>010-9999-0000</td>
-							<td>pdkim@kh.com</td>
-						</tr>
 						
 					</tbody>
     			</table>
     			
-    			<c:forEach var="addr3" items="${list}">
-    				<c:if test="${empty list}">
-    					<tr>
-    						<td>조회된 직원이 없습니다.</td>
-    					</tr>
-    				</c:if>
-    			</c:forEach>
     			
     			<!-- page -->
     			<nav id="address-page">
