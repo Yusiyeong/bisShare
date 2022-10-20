@@ -19,6 +19,7 @@
 		WHERE E.STATUS = 'Y'
 	</select>
 	
+	
 	<select id="detailList" resultType="addressvo">
 		SELECT 
 		    E.EMP_NO
@@ -28,7 +29,7 @@
 		    ,E.PHONE
 		    ,E.EMAIL
 		    ,E.ADDRESS
-		    ,TO_CHAR(E.HIRE_DATE, 'YYYY-MM-DD')
+		    ,TO_CHAR(E.HIRE_DATE, 'YYYY-MM-DD') AS HIRE_DATE
 		    ,E.STATUS
 		FROM EMPLOYEE E
 		INNER JOIN RANK R
@@ -36,5 +37,11 @@
 		INNER JOIN DEPT D
 		ON E.DEPT_NO = D.DEPT_NO
 		WHERE E.STATUS = 'Y'
+	</select>
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+ 		FROM EMPLOYEE
+ 		WHERE STATUS = 'Y'
 	</select>
 </mapper>

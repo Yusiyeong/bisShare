@@ -29,13 +29,13 @@
 	    </div>
        
 	    <div class="card-body">
+	       <form action="${root}/address/search" method="get">
 	    	<div style="height: 50px;">
 	            <div style="float: right;">
-	            <form action="/test/address/search" method="get">
 	            	<input type="hidden" name="p" value="1">
                    	<tr>
                    		<td>
-                   			<select id="field1" name="field1" class="btn-link" style="color: black;">
+                   			<select id="field1" name="field1">
 	                            <option selected value="dept">부서검색</option>
 	                            <option value="dept1">인사</option>
 	                            <option value="dept2">개발</option>
@@ -45,7 +45,7 @@
 		             </tr>
 		             <tr>
                    		<td>
-                   			<select id="field2" name="field2" class="btn-link" style="color: black;">
+                   			<select id="field2" name="field2">
 	                            <option selected value="rank">직급검색</option>
 	                            <option value="rank1">사원</option>
 	                            <option value="rank2">주임</option>
@@ -60,9 +60,9 @@
 		             </tr>
 	                <input type="text" name="keyword" value="${keyword}">
 	                <input type="submit" value="검색" class="btn-primary" style="border-radius: 3px;" >
-	            	</form>
 	            </div>
             </div>
+	      
 	    	
 	    	<c:if test="${not empty field1}">
 				<script>
@@ -133,6 +133,6 @@
     			
     		</div>
     	</div>
-    	
+    	</form>
     </div>               
 </div>
