@@ -62,7 +62,7 @@
                     <span class="badge badge-danger badge-counter">7</span>
                     <i class="fas fa-clipboard fa-fw"></i>
                     <!-- Counter - Messages -->
-                    <span>전자결재</span>
+                    <span>전자결재(수정중)</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
