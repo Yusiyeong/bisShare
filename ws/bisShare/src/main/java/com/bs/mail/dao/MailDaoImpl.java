@@ -68,8 +68,8 @@ public class MailDaoImpl implements MailDao{
 	}
 
 	@Override
-	public int updateCheckStatus(SqlSessionTemplate sst, String string) {
-		return sst.update("mailMapper.updateCheckStatus",string);
+	public int updateCheckStatus(SqlSessionTemplate sst, MailVo mv) {
+		return sst.update("mailMapper.updateCheckStatus",mv);
 	}
 
 	@Override
@@ -81,5 +81,46 @@ public class MailDaoImpl implements MailDao{
 	public MailVo selectRefOne(SqlSessionTemplate sst, MailVo mv) {
 		return sst.selectOne("mailMapper.selectRefOne",mv);
 	}
+
+	@Override
+	public String selectReferences(SqlSessionTemplate sst, MailVo mv) {
+		return sst.selectOne("mailMapper.selectRef", mv);
+	}
+
+	@Override
+	public List<MailVo> selectSendList(SqlSessionTemplate sst, String empNo) {
+		return sst.selectList("mailMapper.selectSendList",empNo);
+	}
+
+	@Override
+	public MailVo selectSendOne(SqlSessionTemplate sst, MailVo mv) {
+		return sst.selectOne("mailMapper.selectSendOne",mv);
+	}
+
+	@Override
+	public String selectSendReferences(SqlSessionTemplate sst, MailVo mv) {
+		return sst.selectOne("mailMapper.selectSendRef", mv);
+	}
+
+	@Override
+	public List<MailVo> selectStatusOne(SqlSessionTemplate sst, String empNo) {
+		return sst.selectList("mailMapper.selectStatusOne",empNo);
+	}
+
+	@Override
+	public MailVo selectTrashOne(SqlSessionTemplate sst, MailVo mv) {
+		return sst.selectOne("mailMapper.selectTrashOne", mv);
+	}
+
+	@Override
+	public String selectTrashReferences(SqlSessionTemplate sst, MailVo mv) {
+		return sst.selectOne("mailMapper.selectTrashRef", mv);
+	}
+
+	@Override
+	public int delelte(SqlSessionTemplate sst, MailVo mv) {
+		return sst.update("mailMapper.deleteStatus",mv);
+	}
+
 
 }

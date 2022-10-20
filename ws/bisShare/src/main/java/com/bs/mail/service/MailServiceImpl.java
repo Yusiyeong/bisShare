@@ -100,7 +100,8 @@ public class MailServiceImpl implements MailService{
 		md.updateReadYn(sst,mv);
 		
 		MailVo vo = md.selectOne(sst,mv);
-		
+		String references = md.selectReferences(sst,mv);
+		vo.setReference(references);
 		List<MailAttVo> mavList = md.selectFilePath(sst,mv);
 		
 		if(mavList.size() == 0) {
@@ -133,12 +134,17 @@ public class MailServiceImpl implements MailService{
 
 
 	@Override
-	public int delChecked(List<String> checkArr) {
+	public int delChecked(List<String> checkArr, EmployeeVo loginVo) {
 		
 		int result = 1;
 		
 		for(int i=0 ; i < checkArr.size() ; i++) {
-			int x = md.updateCheckStatus(sst,checkArr.get(i));
+			
+			MailVo mv = new MailVo();
+			mv.setReceive(loginVo.getEmpNo());
+			mv.setMailNo(checkArr.get(i));
+			
+			int x = md.updateCheckStatus(sst, mv);
 			result = result * x;
 		}
 		
@@ -148,9 +154,6 @@ public class MailServiceImpl implements MailService{
 
 	@Override
 	public List<MailVo> reference(String empNo) {
-		
-		
-		
 		return md.reference(sst,empNo);
 	}
 
@@ -173,6 +176,81 @@ public class MailServiceImpl implements MailService{
 		}
 		
 		return vo;
+	}
+
+
+	@Override
+	public List<MailVo> send(String empNo) {
+		return md.selectSendList(sst,empNo);
+	}
+
+
+	@Override
+	public MailVo detailSend(MailVo mv) {
+		
+//		읽음표시하기
+		md.updateReadYn(sst,mv);
+		
+		MailVo vo = md.selectSendOne(sst,mv);
+		String references = md.selectSendReferences(sst,mv);
+		vo.setReference(references);
+		List<MailAttVo> mavList = md.selectFilePath(sst,mv);
+		
+		if(mavList.size() == 0) {
+			mavList = null;
+		}
+		if (mavList != null) {
+			vo.setMavList(mavList);
+		}
+		
+		return vo;
+	}
+
+
+	@Override
+	public List<MailVo> trashcan(String empNo) {
+		return md.selectStatusOne(sst,empNo);
+	}
+
+
+	@Override
+	public MailVo detailTrash(MailVo mv) {
+		
+//		읽음표시하기
+		md.updateReadYn(sst,mv);
+		
+		MailVo vo = md.selectTrashOne(sst,mv);
+		String references = md.selectTrashReferences(sst,mv);
+		vo.setReference(references);
+		List<MailAttVo> mavList = md.selectFilePath(sst,mv);
+		
+		if(mavList.size() == 0) {
+			mavList = null;
+		}
+		if (mavList != null) {
+			vo.setMavList(mavList);
+		}
+		
+		return vo;
+	}
+
+
+	@Override
+	public int delete(List<String> checkArr, EmployeeVo loginVo) {
+		
+		int result = 1;
+		
+		for(int i=0 ; i < checkArr.size() ; i++) {
+			
+			MailVo mv = new MailVo();
+			mv.setReceive(loginVo.getEmpNo());
+			mv.setMailNo(checkArr.get(i));
+			
+			int x = md.delelte(sst, mv);
+			result = result * x;
+		}
+		
+		return result;
 	}
 
 }

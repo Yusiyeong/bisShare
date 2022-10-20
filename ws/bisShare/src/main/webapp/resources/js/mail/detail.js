@@ -1,10 +1,18 @@
   // 상세보기
   $('#dataTable tbody').on('click','tr td:nth-child(3)', function() {
+
+
+
+
     const data = table.row(this).data();
     // 읽으면 글씨체 얇게
     $(this).removeClass("font-weight-bolder");
     // 파일 중복해서 추가되는거 방지
     document.querySelector('#receivedFiles').innerHTML = "";
+    document.querySelector('#detail-send').innerHTML = "";
+    document.querySelector('#detail-ref').innerHTML = "";
+    document.querySelector('#detail-title').innerHTML = "";
+    document.querySelector('#detail-content').innerHTML = "";
     // 데이터 가져오기
     $.ajax({
       type: "post",
@@ -57,4 +65,20 @@
 
     mailWrite.style.display = 'none';
     mailDetail.style.display = 'block';
+
+
+    // 안읽은 메일 수 업데이트
+    $.ajax({
+      type: "get",
+      url: `${root}/mail/updateCnt`,
+      success: function (response) {
+        let cnt;
+        if(response > 0) {
+          cnt = response-1;
+        } else {
+          cnt = response;
+        }
+        document.querySelector('#notReadCnt').innerHTML = cnt;
+      }
+    });
   });

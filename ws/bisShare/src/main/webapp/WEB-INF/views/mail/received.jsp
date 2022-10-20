@@ -70,7 +70,6 @@
 
 				<!-- 메일 상세보기 -->
 				<jsp:include page="detail.jsp"></jsp:include>
-
 			</div>
 		</div>
 	</div>
