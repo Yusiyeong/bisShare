@@ -22,5 +22,11 @@ public class NoticeReplyDaoImpl implements NoticeReplyDao{
 		return sst.insert("noticeReplyMapper.insertOne", vo);
 	}//inserReply
 
+	// 댓글 삭제
+	@Override
+	public int delete(SqlSessionTemplate sst, String boardNo) {
+		return sst.update("noticeReplyMapper.deleteReply", boardNo);
+	}//update
+
 
 }//NoticeReplyDaoImpl

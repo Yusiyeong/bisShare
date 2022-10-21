@@ -22,5 +22,8 @@ public interface NoticeDao {
 	// 게시글 상세 조회
 	NoticeVo selectOne(SqlSessionTemplate sst, String boardNo);
 
+	// 게시글 삭제
+	int delete(SqlSessionTemplate sst, String boardNo);
+
 
 }//interface

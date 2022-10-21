@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -85,9 +86,8 @@ public class NoticeController {
 
 		NoticeVo vo = ns.selectOne(boardNo);
 		
-		List<NoticeReplyVo> replyList = nrs.selectList(boardNo);	// 댓글 조회
-		
-		System.out.println("replyList::::" + replyList );
+		// 댓글 조회
+		List<NoticeReplyVo> replyList = nrs.selectList(boardNo);	
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("replyList", replyList);
@@ -98,6 +98,26 @@ public class NoticeController {
 		return "layout/template";
 		
 	}//detail
+	
+	// 게시글 삭제
+	@GetMapping("delete/{boardNo}")
+	public String delete(@PathVariable String boardNo, HttpSession session, Model model) {
+		
+		// 서비스 호출
+		int result = ns.delete(boardNo);
+		
+		if(result == 1) {
+			//성공
+			session.setAttribute("alertMsg", "게시글 삭제 성공!");
+			return "redirect:/notice/list/1";
+		}else {
+			// 실패
+			session.setAttribute("alertMsg", "게시글 삭제 실패!");
+			return "redirect:/notice/list/" + boardNo;
+		}//if
+		
+	}//delete
+	
 		
 		
 }//class

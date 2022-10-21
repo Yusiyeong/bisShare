@@ -3,6 +3,16 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <c:set var="root" value="${pageContext.request.contextPath}"/>
     
+<!-- alert 띄우기 위함 -->
+<c:set var="alertMsg" value="${sessionScope.alertMsg}"/>
+<c:remove var="alertMsg" scope="session"/>
+
+<c:if test="${not empty alertMsg}">
+	 <script>
+	 	alert('${alertMsg}');
+	 </script>
+</c:if>
+
 <!-- 수정, 삭제 이모티콘 -->
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,13 +45,16 @@
                   <div style="margin-bottom: 12px; font-size: 13px;">
                      
                <!--수정, 삭제 버튼start-->
-               <div style="margin-bottom: 7px; float: right;">
-                  <!-- 수정 -->
-                  <a href="#" class="btn btn-outline-warning btn-sm">수정</a> 
-                  <!-- 삭제 -->
-                  <a href="#" class="btn btn-outline-danger btn-sm">삭제</a>
-                  <a href="" class="btn btn-outline-primary btn-sm">목록으로</a>
-               </div>
+               <c:if test="${vo.writer eq loginVo.nick}">	
+	               <div style="margin-bottom: 7px; float: right;">
+	                  <!-- 수정 -->
+	                  <a href="${root}/notice/edit/${vo.boardNo}" class="btn btn-outline-warning btn-sm">수정</a> 
+	                  <!-- 삭제 -->
+	                  <a href="${root}/notice/delete/${vo.boardNo}" class="btn btn-outline-danger btn-sm">삭제</a>
+               </c:if>
+	                  <!-- 목록으로 -->
+	                  <a href="${root}/notice/list/1" style="float: right; margin-left: 3px;" class="btn btn-outline-primary btn-sm">목록으로</a>
+	               </div>
                <!--수정, 삭제 버튼end-->
                     
                      <h5>${vo.title}</h5>
@@ -74,24 +87,29 @@
                   <h6 class="card-subtitle mb-2 text-muted">${x.enrollDate}</h6>
                   <span class="card-text">${x.content}</span>
                   
-                   <div style="float: right;">
-                       <!-- 수정 -->
-                     <a href="#" class="card-link fa fa-pencil" style="font-size:17px;"></a> 
-                     <!-- 삭제 -->
-                     <a href="#" class="card-link far fa-trash-alt" style="font-size:17px;"></a>
-                  </div>
+                   <c:if test="${x.writer eq loginVo.nick}">	
+	                   <div style="float: right;">
+	                       <!-- 수정 -->
+	                       <a href="#" class="card-link fa fa-pencil" style="font-size:17px;"></a> 
+	                       <!-- 삭제 -->
+	                       <a href="${root}/noticeReply/delete/${vo.boardNo}" class="card-link far fa-trash-alt" style="font-size:17px;"></a>
+	                  </div>
+                  </c:if>
+                  
                 </div>               
              </div>  
              </c:forEach>
             <!-- 댓글 목록 조회end  --> 
                
                <!-- 댓글 작성start  -->
+               <c:if test="${not empty loginVo}">
                <div id="reply-top">
                   <div class="input-group mb-3" style="height: 100px;">
                      <input type="text" id="reply-content" name="content" style="height: 100%;"class="form-control" placeholder="Please type in the comments !">
                      <button id="reply-btn" class="btn btn-outline-primary">등록</button>
                   </div>
-               </div>
+               </div> 
+               </c:if>
                <!-- 댓글 작성end  -->
                
             </div>

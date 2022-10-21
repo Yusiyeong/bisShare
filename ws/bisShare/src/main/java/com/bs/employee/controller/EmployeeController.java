@@ -63,6 +63,9 @@ public class EmployeeController {
 			ev.setProfilePath(changeName);
 		}
 		
+		// 이메일
+		ev.setEmail(ev.getId() + "@bisshare.com");
+		
 		// 서비스 호출
 		int result = ms.insertMember(ev);
 		

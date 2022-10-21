@@ -4,6 +4,7 @@
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 
 
+
 <!--달력-->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -227,11 +228,7 @@
                                  <label class="visually" for="autoSizingSelect">주민번호</label>
                                  <input type="text" name="ssNo" class="form-control" placeholder="숫자만 입력하세요.">
                               </div>
-
-                              <div class="col">
-                                 <label class="visually for="autoSizingSelect">이메일</label>
-                                 <input type="email" name="email" class="form-control" placeholder="이메일을 입력하세요.">
-                              </div>
+                              
 
                               <div class="col">
                                  <label class="visually" for="autoSizingSelect">연락처</label>

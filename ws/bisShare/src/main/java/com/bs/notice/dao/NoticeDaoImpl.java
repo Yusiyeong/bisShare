@@ -40,5 +40,11 @@ public class NoticeDaoImpl implements NoticeDao{
 		return sst.selectOne("noticeMapper.selectOne", boardNo);
 	}//selectOne
 
+	// 게시글 삭제
+	@Override
+	public int delete(SqlSessionTemplate sst, String boardNo) {
+		return sst.update("noticeMapper.deleteBoard", boardNo);
+	}//delete
+
 
 }//class

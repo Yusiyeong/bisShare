@@ -19,5 +19,8 @@ public interface NoticeService {
 	// 게시글 상세 조회
 	NoticeVo selectOne(String boardNo);
 
+	// 게시글 삭제
+	int delete(String boardNo);
+
 
 }//interface

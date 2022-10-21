@@ -12,4 +12,7 @@ public interface NoticeReplyService {
 	// 댓글 작성
 	int write(NoticeReplyVo vo);
 
+	// 댓글 삭제 
+	int delete(String boardNo);
+
 }//interface
