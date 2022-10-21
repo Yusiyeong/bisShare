@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bs.address.dao.AddressDao;
@@ -17,6 +18,7 @@ public class AddressServiceImpl implements AddressService{
 	
 	private final AddressDao dao;
 
+	@Autowired
 	public AddressServiceImpl(SqlSessionTemplate sst, AddressDao dao) {
 		super();
 		this.sst = sst;
@@ -42,10 +44,7 @@ public class AddressServiceImpl implements AddressService{
 		return dao.selectListCount(sst, map);
 	}
 
-
 	
-
-
 	
 
 }

@@ -11,10 +11,6 @@
 	#field1{
 		margin-right: 5px;
 	}
-
-	#field2{
-		margin-right: 10px;
-	}
 	
 </style>
 
@@ -35,26 +31,12 @@
 	            	<input type="hidden" name="p" value="1">
                    	<tr>
                    		<td>
-                   			<select id="field1" name="field1">
-	                            <option selected value="dept">부서검색</option>
-	                            <option value="dept1">인사</option>
-	                            <option value="dept2">개발</option>
-	                            <option value="dept3">영업</option>
-							</select>
-                   		</td>
-		             </tr>
-		             <tr>
-                   		<td>
-                   			<select id="field2" name="field2">
-	                            <option selected value="rank">직급검색</option>
-	                            <option value="rank1">사원</option>
-	                            <option value="rank2">주임</option>
-	                            <option value="rank3">대리</option>
-	                            <option value="rank4">과장</option>
-	                            <option value="rank5">차장</option>
-	                            <option value="rank6">부장</option>
-	                            <option value="rank7">이사</option>
-	                            <option value="rank8">대표</option>
+                   			<select id="field" name="field">
+	                            <option selected value="nick">이름</option>
+	                            <option value="rank">직급</option>
+	                            <option value="dept">부서</option>
+	                            <option value="phone">연락처</option>
+	                            <option value="email">이메일</option>
 							</select>
                    		</td>
 		             </tr>
@@ -64,21 +46,14 @@
             </div>
 	      
 	    	
-	    	<c:if test="${not empty field1}">
+	    	<c:if test="${not empty field}">
 				<script>
 				window.onload = function(){
-					document.querySelector('option[value=${field1}]').selected = true;
+					document.querySelector('option[value=${field}]').selected = true;
 				}
 				</script>
 			</c:if>
 			
-			<c:if test="${not empty field2}">
-				<script>
-				window.onload = function(){
-					document.querySelector('option[value=${field2}]').selected = true;
-				}
-				</script>
-			</c:if>
 	    	
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">  
@@ -124,6 +99,10 @@
 	                  </li>
 	                  
 	                  <li class="page-item"><a class="page-link" href="">5</a></li>
+	                   
+	                 <!--  <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
+							<a href="/${root}/address/search?p=${i}&field=${field}&keyword=${keyword}">${i}</a>
+					  </c:forEach> -->
 	                                                                
 	                  <li class="page-item">
 	                      <a class="page-link" href="">다음</a>
