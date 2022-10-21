@@ -290,12 +290,7 @@ public class MailController {
 	public int delChecked(@RequestParam(value="checkArr[]") List<String> checkArr, @PathVariable int filter, HttpSession session) {
 		
 		EmployeeVo loginVo = (EmployeeVo) session.getAttribute("loginVo");
-		int result = 0;
-		if (filter != 3) {
-			result = ms.delChecked(checkArr, loginVo);
-		} else {
-			result = ms.delete(checkArr, loginVo);
-		}
+		int result = ms.delChecked(checkArr, loginVo, filter);
 		
 		return result;
 	}

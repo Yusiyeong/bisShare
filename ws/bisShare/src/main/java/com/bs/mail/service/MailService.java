@@ -22,7 +22,7 @@ public interface MailService {
 
 	void insertMailAtt(MailAttVo mav);
 
-	int delChecked(List<String> checkArr, EmployeeVo loginVo);
+	int delChecked(List<String> checkArr, EmployeeVo loginVo, int filter);
 
 	List<MailVo> reference(String empNo);
 
@@ -35,7 +35,4 @@ public interface MailService {
 	List<MailVo> trashcan(String empNo);
 
 	MailVo detailTrash(MailVo vo);
-
-	int delete(List<String> checkArr, EmployeeVo loginVo);
-
 }
