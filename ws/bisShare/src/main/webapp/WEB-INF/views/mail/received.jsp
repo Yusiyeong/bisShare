@@ -28,7 +28,7 @@
 								<th></th>
 								<th>중요</th>
 								<th>메일명</th>
-								<th id="nick">발신인</th>
+								<th id="nick">발신</th>
 								<th>시간</th>
 							</tr>
 						</thead>
@@ -48,7 +48,15 @@
 									<c:if test="${r.readYn eq 'Y'}">
 										<td>${r.title}</td>
 									</c:if>
-									<td>${r.send}</td>
+									<c:if test="${empty r.readYn}">
+										<td>${r.title}</td>
+									</c:if>
+									<c:if test="${!empty r.send }">
+										<td>${r.send}</td>
+									</c:if>
+									<c:if test="${empty r.send }">
+										<td>${r.receive}</td>
+									</c:if>
 									<td>${r.enrollDate}</td>
 								</tr>
 							</c:forEach>

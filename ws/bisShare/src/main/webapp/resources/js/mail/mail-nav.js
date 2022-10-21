@@ -64,11 +64,7 @@ function removeAjax(checkArr) {
       checkArr : checkArr
     },
     success: function (res) {
-      if(res == 1) {
         location.reload();
-      } else {
-        alert('삭제 실패');
-      }
     }
 });
 }

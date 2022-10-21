@@ -148,6 +148,7 @@ public class MailServiceImpl implements MailService{
 			if (filter == 0) {
 				mv.setStatus("1");
 			} else if (filter == 1) {
+//				참조된 메일 삭제는 휴지통 X 바로 삭제
 				mv.setReference(loginVo.getEmpNo());
 				mv.setStatus("2");
 			} else if (filter == 2) {

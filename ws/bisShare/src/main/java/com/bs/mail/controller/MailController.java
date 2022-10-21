@@ -153,7 +153,6 @@ public class MailController {
 		EmployeeVo ev = (EmployeeVo) session.getAttribute("loginVo");
 
 		List<MailVo> list = ms.star(ev.getEmpNo());
-
 		String notReadCnt = ms.notRead(ev.getEmpNo());
 
 		model.addAttribute("notReadCnt", notReadCnt);

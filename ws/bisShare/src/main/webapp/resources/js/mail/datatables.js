@@ -3,12 +3,16 @@ const numFilter = /[^0-9]/g;
 let refCheck = 0;
 if (location.href.includes('reference')) {
   refCheck = 1;
+  document.querySelector('#nick').innerHTML = '발신';
 } else if (location.href.includes('receive')) {
   refCheck = 0;
+  document.querySelector('#nick').innerHTML = '발신';
 } else if (location.href.includes('send')) {
   refCheck = 2;
+  document.querySelector('#nick').innerHTML = '수신';
 } else if (location.href.includes('trashcan')) {
   refCheck = 3;
+  document.querySelector('#nick').innerHTML = '발신';
 }
 
 if(refCheck == 2) {
@@ -30,7 +34,7 @@ const table = $('#dataTable').DataTable({
         } ,
         { targets : 0, width : 20},
         { targets : 1, width : 40},
-        { targets : 4, width : 100}
+        { targets : 2, width : 300}
       ],
       select: {
       style:    'os',
