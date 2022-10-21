@@ -8,7 +8,7 @@
     #page{
         width: 95%;
         height: 100%;
-        margin: 0 auto;
+        margin: auto;
         background-color: white;
     }
 
@@ -33,9 +33,9 @@
 
     #select{
         width: 100px;
-        height: 20px;
+        height: 23px;
         font-size: 13px;
-        margin-left: 50px;
+
         border: none;
     }
 
@@ -43,13 +43,13 @@
         margin-left: 50px;
     }
 
-    #create, #start, #end, .cate, #file{
+    #create, #start, #end, #cate, #file, #line{
         margin-left: 10%;
         margin-top: 10px;
         font-size: 15px;
     }
 
-    .datepicker-start, .datepicker-end, #write{
+    .datepicker-start, .datepicker-end, #now_date{
         margin-left: 67px;
         height: 20px;
         border: none;
@@ -98,10 +98,14 @@
 								                <textarea id="title" placeholder="제목 없음"></textarea>
 								            </div>
 								            <div id="create">
-								                작성일 <input id="write" type="textarea">
+								                작성일 <input id="now_date" type="date" value="">
+												<script>document.getElementById('now_date').valueAsDate = new Date();</script>
 								            </div>
-								            <div class="cate">
-								                카테고리  <select id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
+								            <div id="cate">
+												<div>
+													카테고리  
+												</div>
+												<select id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
 														  <option value="1" selected>기타</option>
 														  <option value="2">회의</option>
 														  <option value="3">휴가</option>
@@ -134,8 +138,7 @@
 								            <div>
 								                <textarea id="con" placeholder="내용을 입력하세요"></textarea>
 								            </div>
-								            <a href="" id="submit" class="btn btn-primary btn-user btn-block">
-								                확인 </a>
+								            <a href="" id="submit" class="btn btn-primary btn-user btn-block">확인</a>
 								        </div>
 								    </form>
 									<!--end-->
