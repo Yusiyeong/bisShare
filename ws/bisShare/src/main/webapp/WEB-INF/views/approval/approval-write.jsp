@@ -17,7 +17,7 @@
 </script>
 
 <style>
-    #approve-submit-area>a:last-child{margin-left: 10px;}
+    #approve-submit-area>button:last-child{margin-left: 10px;}
     #apprve-write-outer{width: 80vw;height: 100%;}
     #stamp-area>td{height: 150px;}
     input[name=title]{width: 100%;}
@@ -69,8 +69,8 @@
 <div class="card shadow mb-4" id="apprve-write-outer">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary" id="approve-submit-area">
-            <a class="btn btn-sm btn-primary" href="">기안하기</a>
-            <a class="btn btn-sm btn-primary" href="">임시저장</a>
+            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#submitModal">기안하기</a>
+            <button class="btn btn-sm btn-primary" id="submit-temp">임시저장</a>
         </h6>
     </div>
     <div class="card-body">
@@ -298,7 +298,8 @@
                             <c:forEach items="${empList}" var="l">
 	                            <div class="table table-bordered">
 	                                <div>
-                                        <input class="non-added" name="move-check" type="checkbox" value="${l.empNo}">
+                                        <input class="non-added" name="move-check" type="checkbox">
+                                        <input type="hidden" name="empNo" value="${l.value}">
                                     </div>
 	                                <div>${l.deptNo}</div>
 	                                <div>${l.rankNo}</div>
@@ -335,15 +336,37 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                <button class="btn btn-success" type="button" data-dismiss="modal">선택완료</button>
+                <button id="select-complete" class="btn btn-success" type="button" data-dismiss="modal">선택완료</button>
             </div>
         </div>
     </div>
 </div>       
 
+
+<!-- 기안 할건지 물어보는 모달-->
+<div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">비즈쉐어</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">기안 하시겠습니까?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+                <button class="btn btn-primary" id="submit-btn">기안</a>
+            </div>
+        </div>
+    </div>
+</div>      
+
 <script type="text/javascript">
 	const pbtn = document.querySelector('#select-plus-btn');
     const mbtn = document.querySelector('#select-minus-btn');
+    const cbtn = document.querySelector('#select-complete');
 
     const SEA = document.querySelector('#select-emp-area>#select-dept-list-area');
     const NSEA = document.querySelector('#non-select-emp-area>#select-dept-list-area');
@@ -352,8 +375,6 @@
     pbtn.addEventListener('click',()=>{
         // 리스트에서 체크박스 변수 생성
         const checkbox = document.getElementsByClassName('non-added');
-        console.log(checkbox);
-        console.log(checkbox.length);
         // 체크된 만큼 값 넘겨줄거
         for(let i = 0; i < checkbox.length; i++){
             if(checkbox[i].checked==true){
@@ -369,11 +390,8 @@
 
     // 삭제 버튼 클릭 했을 때 이벤트
     mbtn.addEventListener('click',()=>{
-        alert('무야호~');
         // 리스트에서 체크박스 변수 생성
         const checkbox = document.getElementsByClassName('added');
-        console.log(checkbox);
-        console.log(checkbox.length);
         // 체크된 만큼 값 넘겨줄거
         for(let i = 0; i < checkbox.length; i++){
             if(checkbox[i].checked==true){
@@ -386,6 +404,59 @@
         }
     })
     
-
+    
+    
+    //선택 다 하고 선택 완료 눌렀을 때
+    $(cbtn).click(()=>{
+        //넘겨줄 배열
+        const eNos = [];
+        const eDepts = [];
+        const eNames = [];
+        const eRanks = [];
+        //반복문 사용 -> 선택된 input에서 사원 번호만 가져옴
+        $(".added+input[name='empNo']").each(function(i){
+            eNos.push($(".added+input[name='empNo']").eq(i).attr("value"));
+            eDepts.push($(".added+input[name='empNo']").eq(i).parent().parent().children().eq(1).text());
+            eRanks.push($(".added+input[name='empNo']").eq(i).parent().parent().children().eq(2).text());
+            eNames.push($(".added+input[name='empNo']").eq(i).parent().parent().children().eq(3).text());
+            $('#approve-line-area').children().eq(i+1).append("<input type='hidden' name='empNo' value='"+ eNos[i] +"'>");
+            $('#approve-line-area').children().eq(i+1).children().eq(0).text(eRanks[i]);
+            $('#approve-line-area').children().eq(i+1).children().eq(2).text(eNames[i]);
+        });
+        
+    })
+    
+    //기안하기 버튼 눌럿을 때
+    $('#submit-btn').click(()=>{
+    	
+    	//결재 TABLE 에 삽입해줄 ajax
+    	$.ajax({
+    		url : "${root}/approval/write"
+    		, type : "post"
+    		, data : {
+    			{
+	    			empNo : '1'
+	    			, categoryNo : '1'
+	    			, adcName : 'test'
+	    			, adcContent : 'test'
+    			}
+    			,{
+    				aprvEmpNo : '4'
+    				, aprvNo : '1'
+    			}
+    		}
+    		, success : (result) => {
+				if(result == 'ok'){
+					alert('결재 작성 성공');
+					location.href = '${root}/main';
+				}
+			}
+    	})
+    	
+    })
+    
+    
 </script>
+
+
 
