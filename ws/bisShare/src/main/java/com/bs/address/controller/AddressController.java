@@ -34,13 +34,11 @@ public class AddressController {
 	public String addressList(Model model, HttpServletRequest req) {
 		
 		String keyword = req.getParameter("keyword");
-		String field1 = req.getParameter("field1");
-		String field2 = req.getParameter("field2");
+		String field = req.getParameter("field");
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("keyword", keyword);
-		map.put("field1", field1);
-		map.put("field2", field2);
+		map.put("field", field);
 		
 		int listCount = adds.selectListCount(map);	
 		int currentPage = Integer.parseInt(req.getParameter("p"));	
@@ -53,6 +51,7 @@ public class AddressController {
 		List<AddressVo> dvoList = adds.detailList();
 		model.addAttribute("voList", voList);
 		model.addAttribute("dvoList", dvoList);
+		model.addAttribute("pvo", pvo);
 		model.addAttribute("page", "address/address-list");
 		return "layout/template";
 	}
@@ -61,13 +60,11 @@ public class AddressController {
 	@GetMapping("search")
 	public String addressSearch(Model model, HttpServletRequest req) {
 		String keyword = req.getParameter("keyword");
-		String field1 = req.getParameter("field1");
-		String field2 = req.getParameter("field2");
+		String field = req.getParameter("field");
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("keyword", keyword);
-		map.put("field1", field1);
-		map.put("field2", field2);
+		map.put("field", field);
 		
 		int listCount = adds.selectListCount(map);	
 		int currentPage = Integer.parseInt(req.getParameter("p"));	
@@ -78,6 +75,7 @@ public class AddressController {
 		
 		List<AddressVo> voList = adds.selectList(pvo, map);
 		model.addAttribute("voList", voList);
+		model.addAttribute("pvo", pvo);
 		model.addAttribute("page", "address/address-search");
 		return "layout/template";
 	}
