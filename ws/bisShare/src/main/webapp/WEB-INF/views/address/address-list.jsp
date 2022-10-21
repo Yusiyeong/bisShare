@@ -64,26 +64,28 @@
                     </div>
                 </div> <!-- card body -->
                 
-                <nav id="address-page">
+                <!-- page -->
+    			<nav id="address-page">
 	          		<ul class="pagination">
-	                  <li class="page-item">
-	                      <a class="page-link" href="">이전</a>
-	                  </li>
-	                   <li class="page-item"><a class="page-link" href="">1</a></li>
-	                  
-	                  <li class="page-item"><a class="page-link" href="">2</a></li>
-	                  
-	                  <li class="page-item"><a class="page-link" href="">3</a></li>
-	                  
-	                  <li class="page-item active" aria-current="page">
-	                      <a class="page-link" href="">4</a>
-	                  </li>
-	                  
-	                  <li class="page-item"><a class="page-link" href="">5</a></li>
+	          		
+		          		<li class="page-item">
+			          		<c:if test="${pvo.startPage ne 1}">
+								<a href="${root}/address/search/?p=${pvo.startPage -1}" class="page-link">이전</a>	
+							</c:if>
+						</li>
+						
+						<li class="page-item active" aria-current="page">
+							<c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
+								<a href="${root}/address/search/?p=${i}" class="page-link">${i}</a>
+							</c:forEach>
+						</li>
+						
+						<li class="page-item">
+							<c:if test="${pvo.endPage ne pvo.maxPage}">
+								<a href="${root}/address/search/?p=${pvo.endPage +1}" class="page-link">다음</a>
+							</c:if>
+		          		</li>
 	                                                                
-	                  <li class="page-item">
-	                      <a class="page-link" href="">다음</a>
-	                  </li>
 	               </ul>
                 </nav>
                 
