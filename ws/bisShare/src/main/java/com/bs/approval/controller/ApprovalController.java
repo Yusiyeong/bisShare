@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bs.approval.service.ApprovalService;
+import com.bs.approval.vo.ApprovalVo;
+import com.bs.approval.vo.ApproverVo;
 import com.bs.employee.service.EmployeeService;
 import com.bs.employee.vo.EmployeeVo;
 
@@ -44,6 +48,18 @@ public class ApprovalController {
 		model.addAttribute("title", "기안서 작성");
 		model.addAttribute("page", "approval/approval-write");
 		return "layout/template";
+	}
+	
+	//결재 작성 진행
+	@PostMapping("write")
+	@ResponseBody
+	public String write(Model model, ApprovalVo aprvVo, ApproverVo aprverVo) {
+		
+		System.out.println(aprvVo);
+		System.out.println(aprverVo);
+		
+		model.addAttribute("page", "approval/detail");
+		return"ok";
 	}
 	
 	//임시저장 화면
