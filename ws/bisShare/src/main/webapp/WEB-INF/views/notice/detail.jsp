@@ -68,13 +68,13 @@
 
            <!-- 댓글 목록 조회start  -->
            <c:forEach items="${replyList}" var="x">
-            <div class="card" style="width: 100%; margin-bottom: 15px;">
+            <div id="reply-list" class="card" style="width: 100%; margin-bottom: 15px;">
                <div class="card-body">
                   <h5 class="card-title">${x.writer}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">${x.enrollDate}</h6>
                   <span class="card-text">${x.content}</span>
                   
-              	  <div style="float: right;">
+                   <div style="float: right;">
                        <!-- 수정 -->
                      <a href="#" class="card-link fa fa-pencil" style="font-size:17px;"></a> 
                      <!-- 삭제 -->
@@ -87,10 +87,10 @@
                
                <!-- 댓글 작성start  -->
                <div id="reply-top">
-	               <div class="input-group mb-3" style="height: 100px;">
-	                  <input type="text" id="reply-content" name="content" style="height: 100%;"class="form-control" placeholder="Please type in the comments !">
-	                  <button id="reply-btn" class="btn btn-outline-primary">등록</button>
-	               </div>
+                  <div class="input-group mb-3" style="height: 100px;">
+                     <input type="text" id="reply-content" name="content" style="height: 100%;"class="form-control" placeholder="Please type in the comments !">
+                     <button id="reply-btn" class="btn btn-outline-primary">등록</button>
+                  </div>
                </div>
                <!-- 댓글 작성end  -->
                
@@ -103,43 +103,70 @@
 <!-- End Page Content -->
 
 
-	<script>
-	
-	/* 댓글 작성 + 조회 에이잭스 */
-	 const replyBtn = document.querySelector('#reply-btn');
-	
-	 replyBtn.addEventListener('click' , function(){
-			
-			const replyContent = document.querySelector('#reply-content').value;		
-			const boardNo = ${vo.boardNo};		
-			const replyWriterNick = '${sessionScope.loginVo.nick}';		
-			
-			$.ajax({
-				url : "${root}/noticeReply/write" ,
-				type : "POST" ,
-				data : { 
-					"content" : replyContent ,
-					"bno" : boardNo		
-				} ,
-				success : function(result){
-					if(result == 'ok'){
-						alert("댓글 작성 성공 !");
-						
-						// 댓글 조회
-						const target = document.querySelector('#reply-list');
-						$(target).prepend( replyContent + replyWriterNick);
+   <script>
+   /* 댓글 작성 + 조회 에이잭스 */
+    const replyBtn = document.querySelector('#reply-btn');
+      replyBtn.addEventListener('click' , function(){
+         
+         const replyContent = document.querySelector('#reply-content').value;      
+         const boardNo = ${vo.boardNo};      
+         const replyWriterNick = '${sessionScope.loginVo.nick}';      
+         
+         // 작성일
+         var today = new Date();
 
-						document.querySelector('#reply-content').value = '';
-					}else{
-						alert("댓글 작성 실패!");
-					}
-				} ,
-				error : function(){
-					alert("통신 에러!");
-				}
-			});
-		});
-	
-	</script>
-	
-	
+         var year = today.getFullYear();
+         var month = ('0' + (today.getMonth() + 1)).slice(-2);
+         var day = ('0' + today.getDate()).slice(-2);
+         var hours = ('0' + today.getHours()).slice(-2); 
+         var minutes = ('0' + today.getMinutes()).slice(-2);
+         var seconds = ('0' + today.getSeconds()).slice(-2); 
+
+         var dateString = year + '-' + month  + '-' + day + ' ' + hours + ':' + minutes  + ':' + seconds;
+         
+         $.ajax({
+            url : "${root}/noticeReply/write" ,
+            type : "POST" ,
+            data : { 
+               "content" : replyContent ,
+               "bno" : boardNo      
+            } ,
+            success : function(result){
+               if(result == 'ok'){
+                  alert("댓글 작성 성공 !");
+                  
+                  // 댓글 조회
+                  const target = document.querySelector('#reply-list');
+                  
+                  var html = 
+
+	                  "<div class='card' style='width: 100%; margin-bottom: 15px;'>"+
+	                     "<div class='card-body'>"+
+	                        "<h5 class='card-title'>"+replyWriterNick+"</h5>"+
+	                        "<h6 class='card-subtitle mb-2 text-muted'>"+dateString+"</h6>"+
+	                        "<span class='card-text'>"+replyContent+"</span>"+
+	                        
+	                         "<div style='float: right;'>"+
+	                           "<a href='#' class='card-link fa fa-pencil' style='font-size:17px;'>"+"</a>"+ 
+	                           "<a href='#' class='card-link far fa-trash-alt' style='font-size:17px;'>"+"</a>"+ 
+	                        "</div>"+
+	                      "</div>"+         
+	                   "</div>";
+                      
+                  $(target).prepend(html);
+                  
+                            
+                  document.querySelector('#reply-content').value = '';
+                  
+               }else{
+                  alert("댓글 작성 실패!");
+               }
+            } ,
+            error : function(){
+               alert("통신 에러!");
+            }
+         });
+      });
+   </script>
+   
+   

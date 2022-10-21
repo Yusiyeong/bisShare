@@ -116,10 +116,6 @@ a:hover { text-decoration:none !important }
                           </div>
                           <!-- 테이블end -->
                            
-							<!-- 글쓰기 버튼 start  -->
-							<button class="btn btn-primary btn-sm" onclick = "location.href ='${root}/blind/write'">글쓰기</button>				
-							<!-- 글쓰기 버튼 end  -->
-
                                <!--페이징start-->                                 
                                    <nav aria-label="..." style="float: right;">
                                    		<ul class="pagination">
@@ -138,10 +134,17 @@ a:hover { text-decoration:none !important }
                                    </nav>
                                <!--페이징end-->
                                
-                   </div>
-                   <!--end-->      
-               </div>
-			   <!-- DataTales Example End-->
-           </div>
-           <!-- End Page Content -->
+                               
+				                 <!-- 글쓰기 버튼 start  -->
+			                     <c:if test="${not empty loginVo}">
+			                        <button class="btn btn-primary btn-sm" onclick = "location.href ='${root}/blind/write'">글쓰기</button>            
+			                     </c:if>
+			                     <!-- 글쓰기 버튼 end  -->
+                      
+	                   </div>
+	                   <!--end-->      
+	               </div>
+				   <!-- DataTales Example End-->
+	           </div>
+	           <!-- End Page Content -->
 
