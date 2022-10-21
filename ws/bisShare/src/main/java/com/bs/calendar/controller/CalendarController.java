@@ -39,7 +39,7 @@ public class CalendarController {
 	//일정 작성 (화면)
 	@GetMapping("write")
 	public String write(Model model) {
-		model.addAttribute("title", "STAR MAIL");
+		model.addAttribute("title", "CALENDAR");
 		model.addAttribute("page", "calendar/calendar-write");
 		return "layout/template";
 	}
@@ -55,10 +55,10 @@ public class CalendarController {
 		
 		//화면 선택
 		if(result == 1) {
-			model.addAttribute("alertMsg", "일정 등록 완료");
+			session.setAttribute("alertMsg", "일정 등록 완료");
 			return "layout/template";
 		}else {
-			model.addAttribute("msg" , "일정 등록 실패");
+			session.setAttribute("msg" , "일정 등록 실패");
 			return "error/errorPage";
 		}
 		
