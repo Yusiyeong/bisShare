@@ -118,8 +118,8 @@ public class MailDaoImpl implements MailDao{
 	}
 
 	@Override
-	public int delelte(SqlSessionTemplate sst, MailVo mv) {
-		return sst.update("mailMapper.deleteStatus",mv);
+	public String selectRefForRef(SqlSessionTemplate sst, MailVo mv) {
+		return sst.selectOne("mailMapper.selectRefForRef", mv);
 	}
 
 

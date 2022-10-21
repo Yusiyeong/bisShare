@@ -45,17 +45,19 @@ public class MailServiceImpl implements MailService{
 					
 					md.insertRecInfo(sst,mv);
 				}
+				String rec = recList.get(i).getValue();
+				mv.setReceive(rec);
+				mv.setReference(null);
+				
+				md.insertRecInfo(sst,mv);
+				
 			} else {
 				String rec = recList.get(i).getValue();
 				mv.setReceive(rec);
 				mv.setReference(null);
 				md.insertRecInfo(sst,mv);
 			}
-		}
-		
-		if (refList != null) {
-			mv.setReference(null);
-			md.insertRecInfo(sst, mv);
+			
 		}
 		
 		return result;
@@ -134,7 +136,7 @@ public class MailServiceImpl implements MailService{
 
 
 	@Override
-	public int delChecked(List<String> checkArr, EmployeeVo loginVo) {
+	public int delChecked(List<String> checkArr, EmployeeVo loginVo, int filter) {
 		
 		int result = 1;
 		
@@ -143,7 +145,16 @@ public class MailServiceImpl implements MailService{
 			MailVo mv = new MailVo();
 			mv.setReceive(loginVo.getEmpNo());
 			mv.setMailNo(checkArr.get(i));
-			
+			if (filter == 0) {
+				mv.setStatus("1");
+			} else if (filter == 1) {
+				mv.setReference(loginVo.getEmpNo());
+				mv.setStatus("2");
+			} else if (filter == 2) {
+				mv.setStatus("1");
+			} else if (filter == 3) {
+				mv.setStatus("2");
+			}
 			int x = md.updateCheckStatus(sst, mv);
 			result = result * x;
 		}
@@ -165,7 +176,8 @@ public class MailServiceImpl implements MailService{
 		md.updateReadYn(sst,mv);
 		
 		MailVo vo = md.selectRefOne(sst,mv);
-		
+		String references = md.selectRefForRef(sst,mv);
+		vo.setReference(references);
 		List<MailAttVo> mavList = md.selectFilePath(sst,mv);
 		
 		if(mavList.size() == 0) {
@@ -232,25 +244,6 @@ public class MailServiceImpl implements MailService{
 		}
 		
 		return vo;
-	}
-
-
-	@Override
-	public int delete(List<String> checkArr, EmployeeVo loginVo) {
-		
-		int result = 1;
-		
-		for(int i=0 ; i < checkArr.size() ; i++) {
-			
-			MailVo mv = new MailVo();
-			mv.setReceive(loginVo.getEmpNo());
-			mv.setMailNo(checkArr.get(i));
-			
-			int x = md.delelte(sst, mv);
-			result = result * x;
-		}
-		
-		return result;
 	}
 
 }

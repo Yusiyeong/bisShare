@@ -51,7 +51,7 @@ public interface MailDao {
 
 	String selectTrashReferences(SqlSessionTemplate sst, MailVo mv);
 
-	int delelte(SqlSessionTemplate sst, MailVo mv);
+	String selectRefForRef(SqlSessionTemplate sst, MailVo mv);
 
 
 

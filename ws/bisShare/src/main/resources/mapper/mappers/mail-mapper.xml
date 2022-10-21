@@ -5,11 +5,13 @@
 	<insert id="insertOne">
 		INSERT INTO MAIL(
 				MAIL_NO
+				, SEND
 				, TITLE
 				, CONTENT
 		)
 		VALUES (
 			SEQ_MAIL_NO.NEXTVAL
+			, ${send}
 			, #{title}
 			, #{content}
 		)
@@ -19,7 +21,6 @@
 		INSERT INTO MAIL_RECEIVE(
 			MAIL_REC_NO
 			, MAIL_NO
-			, SEND
 			, RECEIVE
 			<if test="reference != null">
 				, REFERENCE
@@ -28,7 +29,6 @@
 		VALUES (
 			SEQ_MAIL_RECEIVE_NO.NEXTVAL
 			, SEQ_MAIL_NO.CURRVAL
-			, ${send}
 			, ${receive}
 			<if test="reference != null">
 				, ${reference}
@@ -77,7 +77,7 @@
 					INNER JOIN MAIL_RECEIVE R
 					ON M.MAIL_NO = R.MAIL_NO
 					INNER JOIN EMPLOYEE E
-					ON R.SEND = E.EMP_NO
+					ON M.SEND = E.EMP_NO
 		            JOIN EMPLOYEE EE
 		            ON R.RECEIVE = EE.EMP_NO
 				WHERE R.STATUS=0
@@ -107,13 +107,13 @@
 		    , EE.NICK RECEIVE
 		    , M.TITLE
 		    , M.CONTENT
-		FROM MAIL_RECEIVE R
+		FROM MAIL M
 		JOIN EMPLOYEE E
-			ON E.EMP_NO = R.SEND
+			ON E.EMP_NO = M.SEND
+        JOIN MAIL_RECEIVE R
+			ON M.MAIL_NO = R.MAIL_NO
 		JOIN EMPLOYEE EE
 			ON EE.EMP_NO = R.RECEIVE
-		JOIN MAIL M
-			ON M.MAIL_NO = R.MAIL_NO
 		WHERE R.STATUS = 0
 			AND M.MAIL_NO = ${mailNo}
 			AND R.RECEIVE = ${receive}
@@ -132,6 +132,18 @@
 			AND R.STATUS=0
 	</select>
 	
+	<select id="selectRefForRef" resultType="String">
+		SELECT LISTAGG(E.NICK,',') WITHIN GROUP(ORDER BY R.REFERENCE) AS REFERENCE
+		FROM MAIL_RECEIVE R
+		JOIN EMPLOYEE E
+			ON E.EMP_NO = R.REFERENCE
+		JOIN MAIL M
+			ON M.MAIL_NO = R.MAIL_NO
+		WHERE R.MAIL_NO = ${mailNo}
+			AND R.REFERENCE=${reference}
+			AND R.STATUS=0
+	</select>
+	
 	<select id="selectRefOne" resultType="mv">
 		SELECT 
 		    MAIL_NO,
@@ -140,9 +152,7 @@
 		    TITLE,
 		    CONTENT,
 		    ENROLL_DATE,
-		    STAR,
-		    REFERENCE,
-		    READ_YN
+		    STAR
 		FROM (
 				SELECT 
 					M.MAIL_NO
@@ -152,23 +162,19 @@
 					, M.CONTENT
 					, M.ENROLL_DATE
 					, R.STAR
-					, EM.NICK REFERENCE
 					, R.READ_YN
 				FROM MAIL M
 					INNER JOIN MAIL_RECEIVE R
 					ON M.MAIL_NO = R.MAIL_NO
 					INNER JOIN EMPLOYEE E
-					ON R.SEND = E.EMP_NO
+					ON M.SEND = E.EMP_NO
 		            JOIN EMPLOYEE EE
 		            ON R.RECEIVE = EE.EMP_NO
-		            JOIN EMPLOYEE EM
-		            ON R.REFERENCE = EM.EMP_NO
 				WHERE R.STATUS=0
-		        AND EM.EMP_NO = ${reference}
 		        ) 
-		WHERE MAIL_NO = ${mailNo}
+		WHERE MAIL_NO = 3
 		group by MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, 
-		REFERENCE, READ_YN, SEND 
+		READ_YN, SEND
 	</select>
 	
 	<select id="selectStar" resultType="String">
@@ -215,6 +221,7 @@
 			ON R.RECEIVE = E.EMP_NO
 		WHERE R.STATUS=0
 		AND R.RECEIVE=${empNo}
+		OR R.REFERENCE=${empNo}
 		AND R.STAR = 'Y'
 	</select>
 	
@@ -241,16 +248,15 @@
 	
 	<update id="updateCheckStatus">
 		UPDATE MAIL_RECEIVE
-		SET STATUS = 1
+		SET STATUS = ${status}
 		WHERE MAIL_NO = ${mailNo}
-		AND RECEIVE = ${receive}
-	</update>
-	
-	<update id="deleteStatus">
-		UPDATE MAIL_RECEIVE
-		SET STATUS = 2
-		WHERE MAIL_NO = ${mailNo}
-		AND RECEIVE = ${receive}
+		<if test="reference == null">
+			AND RECEIVE = ${receive}
+			AND REFERENCE IS NULL
+		</if>
+		<if test="reference != null">
+			AND REFERENCE = ${reference}
+		</if>
 	</update>
 	
 	<select id="reference" resultType="mv">
@@ -279,7 +285,7 @@
 					INNER JOIN MAIL_RECEIVE R
 					ON M.MAIL_NO = R.MAIL_NO
 					INNER JOIN EMPLOYEE E
-					ON R.SEND = E.EMP_NO
+					ON M.SEND = E.EMP_NO
 		            JOIN EMPLOYEE EE
 		            ON R.RECEIVE = EE.EMP_NO
 		            JOIN EMPLOYEE EM
@@ -317,11 +323,11 @@
 					INNER JOIN MAIL_RECEIVE R
 					ON M.MAIL_NO = R.MAIL_NO
 					INNER JOIN EMPLOYEE E
-					ON R.SEND = E.EMP_NO
+					ON M.SEND = E.EMP_NO
 		            JOIN EMPLOYEE EE
 		            ON R.RECEIVE = EE.EMP_NO
 				WHERE R.STATUS=0
-		        AND R.SEND=${send}
+		        AND M.SEND=${send}
 		        AND R.REFERENCE IS NULL
 		        ) 
 		GROUP BY MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, READ_YN, SEND 
@@ -336,14 +342,14 @@
 		    , M.CONTENT
 		FROM MAIL_RECEIVE R
 		JOIN EMPLOYEE E
-			ON E.EMP_NO = R.SEND
+			ON E.EMP_NO = M.SEND
 		JOIN EMPLOYEE EE
 			ON EE.EMP_NO = R.RECEIVE
 		JOIN MAIL M
 			ON M.MAIL_NO = R.MAIL_NO
 		WHERE R.STATUS = 0
 			AND M.MAIL_NO = ${mailNo}
-			AND R.SEND = ${send}
+			AND M.SEND = ${send}
 			AND R.REFERENCE IS NULL 
         group by M.MAIL_NO, E.NICK, M.TITLE, M.CONTENT
 	</select>
@@ -356,10 +362,11 @@
 		JOIN MAIL M
 			ON M.MAIL_NO = R.MAIL_NO
 		WHERE R.MAIL_NO = ${mailNo}
-			AND R.SEND=${send}
+			AND M.SEND=${send}
 			AND R.STATUS=0
 	</select>
 	
+	<!-- 휴지통 -->
 	<select id="selectStatusOne" resultType="mv">
 		SELECT 
 		    MAIL_NO,
@@ -386,12 +393,11 @@
 					INNER JOIN MAIL_RECEIVE R
 					ON M.MAIL_NO = R.MAIL_NO
 					INNER JOIN EMPLOYEE E
-					ON R.SEND = E.EMP_NO
+					ON M.SEND = E.EMP_NO
 		            JOIN EMPLOYEE EE
 		            ON R.RECEIVE = EE.EMP_NO
 				WHERE R.STATUS=1
 		        AND R.RECEIVE=${receive}
-		        AND R.REFERENCE IS NULL
 		        ) 
 		GROUP BY MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, READ_YN, SEND 
 	</select>
@@ -404,19 +410,18 @@
 		    , M.TITLE
 		    , M.CONTENT
 		FROM MAIL_RECEIVE R
-		JOIN EMPLOYEE E
-			ON E.EMP_NO = R.SEND
-		JOIN EMPLOYEE EE
-			ON EE.EMP_NO = R.RECEIVE
 		JOIN MAIL M
 			ON M.MAIL_NO = R.MAIL_NO
+		JOIN EMPLOYEE E
+			ON E.EMP_NO = M.SEND
+		JOIN EMPLOYEE EE
+			ON EE.EMP_NO = R.RECEIVE
 		WHERE R.STATUS = 1
 			AND M.MAIL_NO = ${mailNo}
 			AND R.RECEIVE = ${receive}
-			AND R.REFERENCE IS NULL
 	</select>
 	
-	<select id="selectTrashRef" resultType="mv">
+	<select id="selectTrashRef" resultType="String">
 		SELECT LISTAGG(E.NICK,',') WITHIN GROUP(ORDER BY R.REFERENCE) AS REFERENCE
 		FROM MAIL_RECEIVE R
 		JOIN EMPLOYEE E
