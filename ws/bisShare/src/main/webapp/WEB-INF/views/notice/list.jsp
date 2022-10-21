@@ -27,7 +27,7 @@ a:hover { text-decoration:none !important }
                         <div style="float: right;">
                      <select name="condition" style="height:30px;">
                         <option value="title">제목</option>
-                        <option value="writer">작성자</option>
+                        <option value="nick">작성자</option>
                      </select>
          
                             <input type="text" name="keyword" value="${keyword}">
