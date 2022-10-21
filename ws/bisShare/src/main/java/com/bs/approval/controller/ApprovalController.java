@@ -1,14 +1,29 @@
 package com.bs.approval.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bs.approval.service.ApprovalService;
+import com.bs.employee.service.EmployeeService;
+import com.bs.employee.vo.EmployeeVo;
+
 @Controller
 @RequestMapping("approval")
 public class ApprovalController {
 
+	private final EmployeeService empService;
+	private final ApprovalService aprvService;
+	
+	@Autowired
+	public ApprovalController(EmployeeService empService, ApprovalService aprvService) {
+		this.empService = empService;
+		this.aprvService = aprvService;
+	}
 	
 	//나의 기안서 화면
 	@GetMapping("my")
@@ -18,9 +33,14 @@ public class ApprovalController {
 		return "layout/template";
 	}
 	
+
 	//결재 작성 화면
 	@GetMapping("write")
 	public String write(Model model) {
+		
+		List<EmployeeVo> empList = empService.getList();
+		
+		model.addAttribute("empList", empList);
 		model.addAttribute("title", "기안서 작성");
 		model.addAttribute("page", "approval/approval-write");
 		return "layout/template";

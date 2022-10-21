@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="root" value="${pageContext.request.contextPath}" />   
+<c:set var="root" value="${pageContext.request.contextPath}" />
 
 <!-- 써머노트 관련 js -->
 <script>
@@ -295,36 +295,16 @@
                                 <div>직급</div>
                                 <div>이름</div>
                             </div>
-                            <div id="non-added-emp" class="table table-bordered">
-                                <div><input name="add-aprver-list" type="checkbox"></div>
-                                <div>개발팀</div>
-                                <div>주임</div>
-                                <div>박한솔</div>
-                            </div>
-                            <div id="non-added-emp" class="table table-bordered">
-                                <div><input type="checkbox"></div>
-                                <div>인사팀</div>
-                                <div>부장</div>
-                                <div>박서영</div>
-                            </div>
-                            <div id="non-added-emp" class="table table-bordered">
-                                <div><input type="checkbox"></div>
-                                <div>영업팀</div>
-                                <div>사원</div>
-                                <div>민동언</div>
-                            </div>
-                            <div id="non-added-emp" class="table table-bordered">
-                                <div><input type="checkbox"></div>
-                                <div>개발팀</div>
-                                <div>대리</div>
-                                <div>유시영</div>
-                            </div>
-                            <div id="non-added-emp" class="table table-bordered">
-                                <div><input type="checkbox"></div>
-                                <div>영업팀</div>
-                                <div>과장</div>
-                                <div>박찬수</div>
-                            </div>
+                            <c:forEach items="${empList}" var="l">
+	                            <div class="table table-bordered">
+	                                <div>
+                                        <input class="non-added" name="move-check" type="checkbox" value="${l.empNo}">
+                                    </div>
+	                                <div>${l.deptNo}</div>
+	                                <div>${l.rankNo}</div>
+	                                <div>${l.nick}</div>
+	                            </div>
+                            </c:forEach>
                         </div>
                     </div>
                     <div id="select-controll-area">
@@ -348,12 +328,6 @@
                                 <div>직급</div>
                                 <div>이름</div>
                             </div>
-                            <div id="added-emp" class="table table-bordered">
-                                <div><input type="checkbox" value="1"></div>
-                                <div>개발팀</div>
-                                <div>주임</div>
-                                <div>박한솔</div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -376,27 +350,40 @@
 
     // 추가 버튼 클릭 했을 때 이벤트
     pbtn.addEventListener('click',()=>{
-        // 체크한 데이터 담을 배열
-        const arrChecked = [];
         // 리스트에서 체크박스 변수 생성
-        const checkedbox = document.getElementsByName('add-aprver-list');
+        const checkbox = document.getElementsByClassName('non-added');
+        console.log(checkbox);
+        console.log(checkbox.length);
         // 체크된 만큼 값 넘겨줄거
-        for(let i = 0; i < checkedbox.length; i++){
-            arrChecked[i] = checkedbox[i];
-            console.log(arrChecked[i]);
-            if(checkedbox[i].checked==true){
-                const deptName = $(checkedbox[i]).parent().children().eq(1).text();
-                const rankName = $(checkedbox[i]).parent().children().eq(2).text();
-                const empName = $(checkedbox[i]).parent().children().eq(3).text();
-                $(SEA).append("<div id='added-emp' class='table table-bordered'><div><input type='checkbox' value='1'></div><div>" + deptName + "</div><div>" + rankName + "</div><div>" + empName + "</div></div>");
+        for(let i = 0; i < checkbox.length; i++){
+            if(checkbox[i].checked==true){
+                //옮겨질것 클래스 명 미리 변경 non-added -> added
+                $(NSEA).children().eq(i+1).children().first().children().first().attr('class','added');
+                //select-area로 넘겨버리기
+                const addCont = $(NSEA).children().eq(i+1);
+                $(SEA).append(addCont);
             }
         }
+        
     })
 
     // 삭제 버튼 클릭 했을 때 이벤트
     mbtn.addEventListener('click',()=>{
-        alert('무야호');
-        $(SEA).children().last().remove('#added-emp');
+        alert('무야호~');
+        // 리스트에서 체크박스 변수 생성
+        const checkbox = document.getElementsByClassName('added');
+        console.log(checkbox);
+        console.log(checkbox.length);
+        // 체크된 만큼 값 넘겨줄거
+        for(let i = 0; i < checkbox.length; i++){
+            if(checkbox[i].checked==true){
+                //옮겨질것 클래스 명 미리 변경 added -> non-added
+                $(SEA).children().eq(i+1).children().first().children().first().attr('class','non-added');
+                //non-select-area로 넘기기
+                const addCont = $(SEA).children().eq(i+1);
+                $(NSEA).append(addCont);
+            }
+        }
     })
     
 
