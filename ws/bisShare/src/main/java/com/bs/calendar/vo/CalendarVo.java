@@ -7,11 +7,11 @@ public class CalendarVo {
 	
 	private String calNo;
 	private String cateNo;
-	private String calDate;
+	private String writer;
 	private String title;
 	private String content;
-	private String writer;
 	private String enrollDate;
+	private String modifyDate;
 	private String startDate;
 	private String endDate;
 	private String progress;

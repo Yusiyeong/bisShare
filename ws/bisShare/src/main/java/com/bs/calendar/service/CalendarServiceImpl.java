@@ -1,11 +1,14 @@
 package com.bs.calendar.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bs.calendar.dao.CalendarDao;
 import com.bs.calendar.vo.CalendarVo;
+import com.bs.common.PageVo;
 
 @Service
 public class CalendarServiceImpl implements CalendarService{
@@ -35,6 +38,18 @@ public class CalendarServiceImpl implements CalendarService{
 	@Override
 	public int edit(CalendarVo vo) {
 		return dao.updateOne(sst, vo);
+	}
+
+	//일정 목록 조회
+	@Override
+	public List<CalendarVo> selectList(PageVo pv) {
+		return dao.selectList(sst, pv);
+	}
+
+	//일정 갯수 조회
+	@Override
+	public int selectToatalCnt() {
+		return dao.selectCountAll(sst);
 	}
 
 }
