@@ -134,12 +134,17 @@
 	
 	<select id="selectRefForRef" resultType="String">
 		SELECT LISTAGG(E.NICK,',') WITHIN GROUP(ORDER BY R.REFERENCE) AS REFERENCE
-		FROM MAIL_RECEIVE R
+		FROM (
+            SELECT DISTINCT REFERENCE
+                , MAIL_NO
+                , STATUS
+            FROM MAIL_RECEIVE
+        ) R
 		JOIN EMPLOYEE E
 			ON E.EMP_NO = R.REFERENCE
 		JOIN MAIL M
 			ON M.MAIL_NO = R.MAIL_NO
-		WHERE R.MAIL_NO = ${mailNo}
+		WHERE R.MAIL_NO =${mailNo}
 			AND R.REFERENCE=${reference}
 			AND R.STATUS=0
 	</select>
@@ -148,7 +153,6 @@
 		SELECT 
 		    MAIL_NO,
 		    SEND,
-		    LISTAGG(RECEIVE,',') WITHIN GROUP(ORDER BY RECEIVE) AS RECEIVE,
 		    TITLE,
 		    CONTENT,
 		    ENROLL_DATE,
@@ -157,7 +161,6 @@
 				SELECT 
 					M.MAIL_NO
 					, E.NICK SEND
-					, EE.NICK RECEIVE
 					, M.TITLE
 					, M.CONTENT
 					, M.ENROLL_DATE
@@ -168,11 +171,10 @@
 					ON M.MAIL_NO = R.MAIL_NO
 					INNER JOIN EMPLOYEE E
 					ON M.SEND = E.EMP_NO
-		            JOIN EMPLOYEE EE
-		            ON R.RECEIVE = EE.EMP_NO
 				WHERE R.STATUS=0
+                AND R.REFERENCE=${reference}
 		        ) 
-		WHERE MAIL_NO = 3
+		WHERE MAIL_NO = ${mailNo}
 		group by MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, 
 		READ_YN, SEND
 	</select>
@@ -207,7 +209,6 @@
 		SELECT 
 			M.MAIL_NO
 			, E.NICK SEND
-			, R.RECEIVE
 			, M.TITLE
 			, M.CONTENT
 			, M.ENROLL_DATE
@@ -221,6 +222,7 @@
 			ON R.RECEIVE = E.EMP_NO
 		WHERE R.STATUS=0
 		AND R.RECEIVE=${empNo}
+        AND R.STAR = 'Y'
 		OR R.REFERENCE=${empNo}
 		AND R.STAR = 'Y'
 	</select>
@@ -268,7 +270,6 @@
 		    CONTENT,
 		    ENROLL_DATE,
 		    STAR,
-		    REFERENCE,
 		    READ_YN
 		FROM (
 				SELECT 
@@ -279,7 +280,7 @@
 					, M.CONTENT
 					, M.ENROLL_DATE
 					, R.STAR
-					, EM.NICK REFERENCE
+					, R.REFERENCE
 					, R.READ_YN
 				FROM MAIL M
 					INNER JOIN MAIL_RECEIVE R
@@ -288,30 +289,25 @@
 					ON M.SEND = E.EMP_NO
 		            JOIN EMPLOYEE EE
 		            ON R.RECEIVE = EE.EMP_NO
-		            JOIN EMPLOYEE EM
-		            ON R.REFERENCE = EM.EMP_NO
 				WHERE R.STATUS=0
-		        AND EM.EMP_NO = ${reference}
-		        )     
-		group by MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, 
-		REFERENCE, READ_YN, SEND 
+		        AND R.REFERENCE=${reference}
+		        ) 
+		GROUP BY MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, 
+                READ_YN, SEND
 	</select>
 	
 	<select id="selectSendList" resultType="mv">
 		SELECT 
 		    MAIL_NO,
-		    SEND,
 		    LISTAGG(RECEIVE,',') WITHIN GROUP(ORDER BY RECEIVE) AS RECEIVE,
 		    TITLE,
 		    CONTENT,
 		    ENROLL_DATE,
 		    STAR,
-		    LISTAGG(REFERENCE,',') WITHIN GROUP(ORDER BY REFERENCE) AS REFERENCE,
-		    READ_YN
+		    LISTAGG(REFERENCE,',') WITHIN GROUP(ORDER BY REFERENCE) AS REFERENCE
 		FROM (
 				SELECT 
 					M.MAIL_NO
-					, E.NICK SEND
 					, EE.NICK RECEIVE
 					, M.TITLE
 					, M.CONTENT
@@ -330,7 +326,7 @@
 		        AND M.SEND=${send}
 		        AND R.REFERENCE IS NULL
 		        ) 
-		GROUP BY MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, READ_YN, SEND 
+		GROUP BY MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR
 	</select>
 	
 	<select id="selectSendOne" resultType="mv">
@@ -341,12 +337,12 @@
 		    , M.TITLE
 		    , M.CONTENT
 		FROM MAIL_RECEIVE R
+		JOIN MAIL M
+			ON M.MAIL_NO = R.MAIL_NO
 		JOIN EMPLOYEE E
 			ON E.EMP_NO = M.SEND
 		JOIN EMPLOYEE EE
 			ON EE.EMP_NO = R.RECEIVE
-		JOIN MAIL M
-			ON M.MAIL_NO = R.MAIL_NO
 		WHERE R.STATUS = 0
 			AND M.MAIL_NO = ${mailNo}
 			AND M.SEND = ${send}
@@ -355,8 +351,13 @@
 	</select>
 	
 	<select id="selectSendRef" resultType="String">
-		SELECT LISTAGG(E.NICK,',') WITHIN GROUP(ORDER BY R.REFERENCE) AS REFERENCE
-		FROM MAIL_RECEIVE R
+        SELECT LISTAGG(E.NICK,',') WITHIN GROUP(ORDER BY R.REFERENCE) AS REFERENCE
+		FROM (
+            SELECT DISTINCT REFERENCE
+                , MAIL_NO
+                , STATUS
+            FROM MAIL_RECEIVE
+        ) R
 		JOIN EMPLOYEE E
 			ON E.EMP_NO = R.REFERENCE
 		JOIN MAIL M
@@ -371,24 +372,22 @@
 		SELECT 
 		    MAIL_NO,
 		    SEND,
-		    LISTAGG(RECEIVE,',') WITHIN GROUP(ORDER BY RECEIVE) AS RECEIVE,
 		    TITLE,
 		    CONTENT,
 		    ENROLL_DATE,
 		    STAR,
-		    LISTAGG(REFERENCE,',') WITHIN GROUP(ORDER BY REFERENCE) AS REFERENCE,
-		    READ_YN
+		    READ_YN,
+            STATUS
 		FROM (
 				SELECT 
 					M.MAIL_NO
 					, E.NICK SEND
-					, EE.NICK RECEIVE
 					, M.TITLE
 					, M.CONTENT
 					, M.ENROLL_DATE
 					, R.STAR
-					, R.REFERENCE
 					, R.READ_YN
+                    , R.STATUS
 				FROM MAIL M
 					INNER JOIN MAIL_RECEIVE R
 					ON M.MAIL_NO = R.MAIL_NO
@@ -396,10 +395,11 @@
 					ON M.SEND = E.EMP_NO
 		            JOIN EMPLOYEE EE
 		            ON R.RECEIVE = EE.EMP_NO
-				WHERE R.STATUS=1
-		        AND R.RECEIVE=${receive}
+				WHERE R.RECEIVE=${receive}
+                OR R.REFERENCE=${reference}
 		        ) 
-		GROUP BY MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, READ_YN, SEND 
+        WHERE STATUS = 1
+		GROUP BY MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, READ_YN, SEND , STATUS
 	</select>
 	
 	<select id="selectTrashOne" resultType="mv">
@@ -419,6 +419,7 @@
 		WHERE R.STATUS = 1
 			AND M.MAIL_NO = ${mailNo}
 			AND R.RECEIVE = ${receive}
+			
 	</select>
 	
 	<select id="selectTrashRef" resultType="String">
