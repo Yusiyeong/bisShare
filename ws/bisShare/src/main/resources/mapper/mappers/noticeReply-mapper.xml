@@ -37,5 +37,23 @@
 			, #{writer}
 		)
 	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<update id="deleteReply">
+	UPDATE
+	(SELECT
+		    R.REPLY_NO	AS replyNo
+		    , R.CONTENT
+		    , R.BNO
+		    , R.STATUS  
+	        , B.BOARD_NO AS boardNo
+		FROM NOTICE_REPLY R JOIN NOTICE_BOARD B
+		ON R.BNO = B.BOARD_NO
+		WHERE R.STATUS = 'Y'
+		AND R.BNO = #{bno})
+	SET STATUS = 'N'
+	</update>
+	
+	
 
 </mapper>

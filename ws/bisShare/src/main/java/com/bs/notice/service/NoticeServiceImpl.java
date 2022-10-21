@@ -52,6 +52,12 @@ public class NoticeServiceImpl implements NoticeService{
 		
 	}//selectOne
 
+	// 게시글 삭제
+	@Override
+	public int delete(String boardNo) {
+		return nd.delete(sst, boardNo);
+	}//delete
+
 
 
 

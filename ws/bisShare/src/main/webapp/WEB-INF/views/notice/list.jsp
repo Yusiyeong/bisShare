@@ -2,7 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-    
+  
+  
+<!-- alert 띄우기 위함 -->
+<c:set var="alertMsg" value="${sessionScope.alertMsg}"/>
+<c:remove var="alertMsg" scope="session"/>
+
+<c:if test="${not empty alertMsg}">
+	 <script>
+	 	alert('${alertMsg}');
+	 </script>
+</c:if>
+  
 <style>
 a { text-decoration:none !important ;
 color: gray;}

@@ -14,18 +14,6 @@
  </script>
 </c:if>
 
-    
-<!-- 직급, 부서 select -->
-<script>
-   $(function(){
-      console.log(("${vo.rankNo}"));
-      console.log(("${vo.deptNo}"));
-
-     
-       //$("#rank").val("${vo.rankNo}").attr("selected","selected");
-   });
-</script> 
-
 
 <!-- Begin Page Content -->
 <div class="container-fluid">

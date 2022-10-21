@@ -14,4 +14,8 @@ public interface NoticeReplyDao {
 	// 댓글 작성
 	int insertReply(SqlSessionTemplate sst, NoticeReplyVo vo);
 
+	// 댓글 삭제
+	int delete(SqlSessionTemplate sst, String boardNo);
+
+
 }//interface

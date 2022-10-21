@@ -64,4 +64,14 @@
 	WHERE BOARD_NO = #{boardNo}
 	AND STATUS = 'Y'
 	</update>
+	
+	<!-- 게시글 삭제 -->
+	<update id="deleteBoard">
+	UPDATE NOTICE_BOARD
+		SET
+			STATUS = 'N'
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	
 </mapper>

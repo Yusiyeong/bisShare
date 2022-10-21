@@ -35,4 +35,14 @@ public class NoticeReplyServiceImpl implements NoticeReplyService{
 		return nrd.insertReply(sst, vo);
 	}//write
 
+
+	// 댓글 삭제
+	@Override
+	public int delete(String boardNo) {
+		return nrd.delete(sst, boardNo);
+	}//delete
+	
+	
+	
+
 }//class
