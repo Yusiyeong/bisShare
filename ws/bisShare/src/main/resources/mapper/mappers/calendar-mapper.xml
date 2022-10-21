@@ -5,28 +5,28 @@
 
 	<!-- 일정 작성 -->
 	<insert id="insertCalendar">
-		INSERT INTO CALENDAR
-		(
+		INSERT INTO CALENDAR 
+		( 
 			CAL_NO
-			CATE_NO
-			CAL_DATE
-			TITLE
-			CONTENT
-			WRITER
-			START_DATE
-			END_DATE
-		)VALUES
-		(
-			SEQ_CALENDAR_NO.NEXTVAL
-			, #{calNo}
-			, #{cateNo}
-			, #{calDate}
+			,CATE_NO
+			,TITLE
+			,CONTENT
+			,WRITER
+			,ENROLL_DATE
+			,START_DATE
+			,END_DATE 
+		) 
+		VALUES 
+		( 
+			SEQ_CALENDAR_NO.NEXTVAL 
+			, #{cateNo} 
 			, #{title}
 			, #{content}
-			, #{writer}
-			, #{stratDate}
+			, #{writer} 
+			, #{enrollDate} 
+			, #{startDate}
 			, #{endDate}
-		)
+		) 
 	</insert>
 	
 	
@@ -45,12 +45,41 @@
 			SET
 				TITLE = #{title}
 				, CATE_NO = #{cateNo}
+				, CONTENT = #{content}
 				, START_DATE = #{stratDate}
 				, END_DATE = #{endDate}
-				, CONTENT = #{content}
 				, MODIFY_DATE = SYSDATE
 			WHERE CAL_NO = #{calNo}
 	</update>
+
+
+	<!-- 일정 조회 -->
+	<select id="selectList" resultType="calvo">
+		SELECT 
+			C.CAL_NO
+			,C.CATE_NO
+			,C.TITLE
+			,C.CONTENT
+			,C.ENROLL_DATE
+			,C.MODIFY_DATE
+			,C.START_DATE
+			,C.END_DATE
+			,C.STATUS
+			,E.NICK AS WRITER
+		FROM CALENDAR C
+		JOIN EMPLOYEE E
+		ON C.WRITER = E.EMP_NO
+		WHERE C.STATUS = 'O'
+		ORDER BY C.CAL_NO DESC
+	</select>
+	
+	
+	<!-- 일정 갯수 -->
+	<select id="selectCountAll" resultType="int">
+		SELECT COUNT(CAL_NO)
+		FROM CALENDAR
+		WHERE STATUS = 'O'
+	</select>
 
 </mapper>
 

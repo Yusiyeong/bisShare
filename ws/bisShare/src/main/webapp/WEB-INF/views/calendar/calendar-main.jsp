@@ -37,6 +37,8 @@
       .modal-title{
         font-size: 30px;
       }
+
+      
 	</style>
 
     <!-- Modal -->

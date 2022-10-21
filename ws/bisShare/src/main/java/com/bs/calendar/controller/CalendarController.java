@@ -1,5 +1,8 @@
 package com.bs.calendar.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bs.calendar.service.CalendarService;
 import com.bs.calendar.vo.CalendarVo;
+import com.bs.common.PageVo;
+import com.bs.common.Pagination;
 import com.bs.employee.vo.EmployeeVo;
 
 @Controller
@@ -105,10 +110,22 @@ public class CalendarController {
 	
 	//일정 조회
 	@GetMapping("view")
-	public String view(Model model) {
+	public String view(Model model, @PathVariable int pno, HttpServletRequest req) {
 		model.addAttribute("page", "calendar/calendar-view");
+		
+		int totalCount = cs.selectToatalCnt();
+		
+		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
+		
+		//데이터 조회
+		List<CalendarVo> cvoList = cs.selectList(pv);
+		
+		model.addAttribute("cvoList", cvoList);
+		model.addAttribute("pv", pv);
+		
 		return "layout/template"; 
 	}
+	
 	
 	//일정 상세 조회
 	@GetMapping("detail")

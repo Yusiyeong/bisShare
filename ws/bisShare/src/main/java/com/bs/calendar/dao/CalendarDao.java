@@ -1,8 +1,11 @@
 package com.bs.calendar.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.bs.calendar.vo.CalendarVo;
+import com.bs.common.PageVo;
 
 public interface CalendarDao {
 
@@ -14,5 +17,11 @@ public interface CalendarDao {
 
 	//일정 수정
 	int updateOne(SqlSessionTemplate sst, CalendarVo vo);
+
+	//일정 목록 조회
+	List<CalendarVo> selectList(SqlSessionTemplate sst, PageVo pv);
+
+	//일정 갯수 조회
+	int selectCountAll(SqlSessionTemplate sst);
 
 }
