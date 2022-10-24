@@ -30,8 +30,8 @@ public class AddressController {
 	}
 
 	//조직도
-	@GetMapping("list")
-	public String addressList(Model model, HttpServletRequest req) {
+	@GetMapping("list/{pno}")
+	public String addressList(Model model, HttpServletRequest req, @PathVariable int pno) {
 		
 		String keyword = req.getParameter("keyword");
 		String field = req.getParameter("field");
@@ -40,12 +40,9 @@ public class AddressController {
 		map.put("keyword", keyword);
 		map.put("field", field);
 		
-		int listCount = adds.selectListCount(map);	
-		int currentPage = Integer.parseInt(req.getParameter("p"));	
-		int pageLimit = 5;	
-		int boardLimit = 9;
+		int totalCount = adds.selectTotalCnt();
 		
-		PageVo pvo = Pagination.getPageVo(listCount, currentPage, pageLimit, boardLimit);
+		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
 		
 		List<AddressVo> voList = adds.selectList(pvo, map);
 		List<AddressVo> dvoList = adds.detailList();
@@ -57,8 +54,14 @@ public class AddressController {
 	}
 	
 	//주소록 검색
-	@GetMapping("search")
-	public String addressSearch(Model model, HttpServletRequest req) {
+	@GetMapping(value = {"search/{pno}" , "search"})
+	public String addressSearch(Model model, HttpServletRequest req, @PathVariable(required = false) Integer pno) {
+		
+		//pno가 null일때 1의 값을 주도록함, int -> Integer로 변경
+		if(pno == null) {
+			pno = 1;
+		}
+		
 		String keyword = req.getParameter("keyword");
 		String field = req.getParameter("field");
 		
@@ -66,12 +69,9 @@ public class AddressController {
 		map.put("keyword", keyword);
 		map.put("field", field);
 		
-		int listCount = adds.selectListCount(map);	
-		int currentPage = Integer.parseInt(req.getParameter("p"));	
-		int pageLimit = 5;	
-		int boardLimit = 9;
+		int totalCount = adds.selectTotalCnt();
 		
-		PageVo pvo = Pagination.getPageVo(listCount, currentPage, pageLimit, boardLimit);
+		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
 		
 		List<AddressVo> voList = adds.selectList(pvo, map);
 		model.addAttribute("voList", voList);

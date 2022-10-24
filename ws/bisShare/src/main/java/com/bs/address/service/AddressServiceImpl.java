@@ -40,8 +40,8 @@ public class AddressServiceImpl implements AddressService{
 
 	//목록 갯수 조회
 	@Override
-	public int selectListCount(Map<String, String> map) {
-		return dao.selectListCount(sst, map);
+	public int selectTotalCnt() {
+		return dao.selectCountAll(sst);
 	}
 
 	

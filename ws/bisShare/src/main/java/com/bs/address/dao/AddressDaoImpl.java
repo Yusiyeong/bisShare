@@ -3,6 +3,7 @@ package com.bs.address.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,8 @@ public class AddressDaoImpl implements AddressDao{
 
 	//목록 갯수 조회
 	@Override
-	public int selectListCount(SqlSessionTemplate sst, Map<String, String> map) {
-		return sst.selectOne("addressMapper.selectListCount", map);
+	public int selectCountAll(SqlSessionTemplate sst) {
+		return sst.selectOne("addressMapper.selectCountAll");
 	}
 
 

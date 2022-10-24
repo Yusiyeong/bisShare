@@ -17,7 +17,7 @@ public interface AddressDao {
 	List<AddressVo> detailList(SqlSessionTemplate sst);
 
 	//목록 갯수 조회
-	int selectListCount(SqlSessionTemplate sst, Map<String, String> map);
+	int selectCountAll(SqlSessionTemplate sst);
 
 	
 

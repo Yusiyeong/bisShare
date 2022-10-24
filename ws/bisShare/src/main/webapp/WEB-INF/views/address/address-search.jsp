@@ -12,7 +12,15 @@
 	#field1{
 		margin-right: 5px;
 	}
+
+	#page{
+		text-align: center;
+	}
 	
+	#page>a{
+		margin: 0px 10px 0px 10px;
+	}
+
 </style>
 
 <!-- Begin Page Content -->
@@ -29,7 +37,6 @@
 	       <form action="${root}/address/search" method="get">
 	    	<div style="height: 50px;">
 	            <div style="float: right;">
-	            	<input type="hidden" name="p" value="1">
 	           			<select id="field" name="field">
 		                    <option selected value="nick">이름</option>
 		                    <option value="rankName">직급</option>
@@ -80,30 +87,19 @@
     			
     			
     			<!-- page -->
-    			<nav id="address-page">
-	          		<ul class="pagination">
-	          		
-		          		<li class="page-item">
-			          		<c:if test="${pvo.startPage ne 1}">
-								<a href="${root}/address/search?p=${pvo.startPage -1}" class="page-link">이전</a>	
-							</c:if>
-						</li>
-						
-						<li class="page-item active" aria-current="page">
-							<c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
-								<a href="${root}/address/search?p=${i}" class="page-link">${i}</a>
-							</c:forEach>
-						</li>
-						
-						<li class="page-item">
-							<c:if test="${pvo.endPage ne pvo.maxPage}">
-								<a href="${root}/address/search?p=${pvo.endPage +1}" class="page-link">다음</a>
-							</c:if>
-		          		</li>
-	                                                                
-	               </ul>
-                </nav>
-    			
+    				<div id="page">
+		          		<c:if test="${pvo.startPage ne 1}">
+							<a href="${root}/address/search/${pvo.startPage -1}" class="btn btn-outline-primary">이전</a>	
+						</c:if>
+					
+						<c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
+							<a href="${root}/address/search/${i}" class="btn btn-primary">${i}</a>
+						</c:forEach>
+					
+						<c:if test="${pvo.endPage ne pvo.maxPage}">
+							<a href="${root}/address/search/${pvo.endPage +1}" class="btn btn-outline-primary">다음</a>
+						</c:if>
+    				</div>
     			
     			</div>
     		</div>
