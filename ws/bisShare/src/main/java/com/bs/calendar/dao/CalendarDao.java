@@ -24,4 +24,7 @@ public interface CalendarDao {
 	//일정 갯수 조회
 	int selectCountAll(SqlSessionTemplate sst);
 
+	//일정 상세 조회 (번호)
+	CalendarVo selectOne(SqlSessionTemplate sst, String no);
+
 }

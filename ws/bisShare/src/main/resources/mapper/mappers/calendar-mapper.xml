@@ -80,6 +80,27 @@
 		FROM CALENDAR
 		WHERE STATUS = 'O'
 	</select>
+	
+	
+	<!-- 일정 상세 조회 -->
+	<select id="selectOne" resultType="calvo">
+		SELECT
+			C.CAL_NO
+			,C.CATE_NO
+			,C.TITLE
+			,C.CONTENT
+			,C.ENROLL_DATE
+			,C.MODIFY_DATE
+			,C.START_DATE
+			,C.END_DATE
+			,C.STATUS
+			,E.NICK AS WRITER
+		FROM CALENDAR C
+		JOIN EMPLOYEE E
+		ON C.WRITER = E.EMP_NO
+		WHERE C.CAL_NO = #{calNo}
+		AND C.STATUS = 'O'
+	</select>
 
 </mapper>
 
