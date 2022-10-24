@@ -21,6 +21,9 @@ public interface ApprovalDao {
 	//나의 기안서 목록 (내가 기안자인 결재문서)
 	List<String> getListByNo(SqlSessionTemplate sst, String empNo);
 	
+	//기안서 하나 조회
+	ApprovalVo getOneByNo(SqlSessionTemplate sst, String adcNo);
+	
 	//임시저장한 기안서
 	
 }

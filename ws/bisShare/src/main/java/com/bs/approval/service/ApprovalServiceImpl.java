@@ -71,6 +71,11 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return dao.getListByNo(sst, empNo);
 	}
 
+	@Override
+	public ApprovalVo getOneByNo(String adcNo) {
+		return dao.getOneByNo(sst, adcNo);
+	}
+
 	
 	
 	

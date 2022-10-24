@@ -585,11 +585,13 @@
     $('#submit-btn').click(()=>{
         // 결재권자 가져오기
     	const aprverEmpNos_ = document.getElementsByClassName('added');
-        const aprverEmpNos = [];
-        const aprverNoArr = [];
+        let aprverEmpNos = "";
         for(let i = 0; i < aprverEmpNos_.length; ++i){
-            aprverEmpNos[i] = $(".added+input[name='empNo']").eq(i).attr("value");
-            aprverNoArr[i] = (i+1).toString(10);
+            if(i==0){
+                aprverEmpNos += $(".added+input[name='empNo']").eq(i).attr("value");
+            } else{
+                aprverEmpNos += "," + $(".added+input[name='empNo']").eq(i).attr("value");
+            }
         }
         //결재 상세내용(제목, 컨텐츠) 가져오기
         const adcName = $('input[name=adcName]').val();
@@ -597,18 +599,22 @@
 
         //합의자, 참조자 가져오기
         const agree_ = document.getElementsByClassName('agree-added');
-        const agreeEmpNos = [];
-        const agreeNoArr = [];
+        let agreeEmpNos = "";
         for(let i = 0; i < agree_.length; ++i){
-            agreeEmpNos[i] = $(".agree-added+input[name='agree-empNo']").eq(i).attr("value");
-            agreeNoArr[i] = (i+1).toString(10);
+            if(i==0){
+                agreeEmpNos += $(".agree-added+input[name='agree-empNo']").eq(i).attr("value");
+            } else{
+                agreeEmpNos += "," + $(".agree-added+input[name='agree-empNo']").eq(i).attr("value");
+            }
         }
         const ref_ = document.getElementsByClassName('ref-added');
-        const refEmpNos = [];
-        const refNoArr = [];
+        let refEmpNos = "";
         for(let i = 0; i < ref_.length; ++i){
-            refEmpNos[i] = $(".ref-added+input[name='ref-empNo']").eq(i).attr("value");
-            refNoArr[i] = (i+1).toString(10);
+            if(i==0){
+                refEmpNos += $(".ref-added+input[name='ref-empNo']").eq(i).attr("value");
+            } else{
+                refEmpNos += "," + $(".ref-added+input[name='ref-empNo']").eq(i).attr("value");
+            }
         }
 
     	//결재 TABLE 에 삽입해줄 ajax
@@ -620,12 +626,9 @@
 	    			, categoryNo : '1'
 	    			, adcName : adcName
 	    			, adcContent : adcContent
-    				, aprvEmpNo : aprverEmpNos
-    				, aprvNo : aprverNoArr
+    				, aprverEmpNo : aprverEmpNos
 		    		, agreeEmpNo : agreeEmpNos
-					, agreeNo : agreeNoArr
 		    		, refEmpNo : refEmpNos
-					, refNo : refNoArr
     		}
     		, success : (result) => {
 				if(result == 'ok'){

@@ -11,7 +11,8 @@
 		INSERT INTO APPROVER (ADC_NO, EMP_NO, APRV_NO) VALUES(APRV_DOCU_NO.CURRVAL,#{aprvEmpNo},#{aprvNo})
 	</insert>
 	<insert id="insertIntoAgree">
-		INSERT INTO AGREEMENT (ADC_NO, EMP_NO, AGREE_NO) VALUES(APRV_DOCU_NO.CURRVAL,#{agreeEmpNo},#{agreeNo})
+		INSERT INTO AGREEMENT (ADC_NO, EMP_NO, AGREE_NO) 
+		VALUES(APRV_DOCU_NO.CURRVAL,#{agreeEmpNo},#{agreeNo})
 	</insert>
 	<insert id="insertIntoRef">
 		INSERT INTO APRV_REF (ADC_NO, EMP_NO, REF_NO) VALUES(APRV_DOCU_NO.CURRVAL,#{refEmpNo},#{refNo})
@@ -36,6 +37,9 @@
 		WHERE A.CANCEL = 'N'
 		AND A.EMP_NO = #{empNo}
 		ORDER BY ENROLL_DATE DESC
+	</select>
+	
+	<select id="getOneByNo">
 	</select>
 
 </mapper>
