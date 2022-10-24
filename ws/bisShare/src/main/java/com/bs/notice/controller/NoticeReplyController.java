@@ -31,15 +31,13 @@ public class NoticeReplyController {
 	@ResponseBody
 	public String write(NoticeReplyVo vo, HttpSession session) {
 		
-		
 		EmployeeVo loginVo = (EmployeeVo)session.getAttribute("loginVo");
 		vo.setWriter(loginVo.getEmpNo());
-		
 		
 		// 서비스 호출
 		int result = nrs.write(vo);
 		
-		System.out.println("이건 write에서 확인::: vo.getReplyNo()::: " + vo.getReplyNo());//ysy
+		System.out.println("write에서 확인::: vo.getReplyNo()::: " + vo.getReplyNo());//ysy
 		System.out.println("write_vo::: " + vo);//ysy
 		
 		if(result == 1) {
@@ -63,7 +61,7 @@ public class NoticeReplyController {
 		// 서비스 호출
 		int result = nrs.delete(vo);
 		
-		System.out.println("이건 delete에서 확인::: vo.getReplyNo()::: " + vo.getReplyNo());//ysy
+		System.out.println("delete에서 확인::: vo.getReplyNo()::: " + vo.getReplyNo());//ysy
 		System.out.println("delete_vo::: " + vo);//ysy
 
 		
@@ -88,10 +86,9 @@ public class NoticeReplyController {
 		// 서비스 호출
 		int result = nrs.edit(vo);
 		
-		System.out.println("이건 edit에서 확인::: vo.getReplyNo()::: " + vo.getReplyNo());//ysy
+		System.out.println("edit에서 확인::: vo.getReplyNo()::: " + vo.getReplyNo());//ysy
 		System.out.println("edit_vo::: " + vo);//ysy
 
-		
 		if(result == 1) {
 			//성공
 			return "ok";
