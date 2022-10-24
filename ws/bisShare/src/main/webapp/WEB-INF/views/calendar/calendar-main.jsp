@@ -44,7 +44,7 @@
     <!-- Modal -->
     <div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-        <div class="modal-content">
+        <form class="modal-content">
             <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">일정추가</h1>
             </div>
@@ -69,7 +69,7 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
             <button type="button" id="saveBtn" class="btn btn-primary">확인</button>
             </div>
-        </div>
+        </form>
         </div>
     </div>
 
@@ -104,7 +104,7 @@
                         console.log(end_date); //end_date strat_date+1 되는 현상 고쳐야함
 
                         $.ajax({
-                            url:"<%=request.getContextPath()%>/calendar", //여기는 spring oracle에 맞게 url 변경 필요
+                            url:"${root}/calendar/controller/CalendarController.java", //여기는 spring oracle에 맞게 url 변경 필요
                             type:"POST", 
                             dataType:'json', 
                             data:{title, select, detail, start_date, end_date}, 

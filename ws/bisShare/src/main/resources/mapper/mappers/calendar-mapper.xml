@@ -12,7 +12,6 @@
 			,TITLE
 			,CONTENT
 			,WRITER
-			,ENROLL_DATE
 			,START_DATE
 			,END_DATE 
 		) 
@@ -23,7 +22,6 @@
 			, #{title}
 			, #{content}
 			, #{writer} 
-			, #{enrollDate} 
 			, #{startDate}
 			, #{endDate}
 		) 
@@ -46,7 +44,7 @@
 				TITLE = #{title}
 				, CATE_NO = #{cateNo}
 				, CONTENT = #{content}
-				, START_DATE = #{stratDate}
+				, START_DATE = #{startDate}
 				, END_DATE = #{endDate}
 				, MODIFY_DATE = SYSDATE
 			WHERE CAL_NO = #{calNo}
