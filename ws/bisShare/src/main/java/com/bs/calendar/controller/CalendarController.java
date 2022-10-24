@@ -128,9 +128,14 @@ public class CalendarController {
 	
 	
 	//일정 상세 조회
-	@GetMapping("detail")
-	public String detail(Model model) {
+	@GetMapping("detail{no}")
+	public String detail(@PathVariable String no, Model model) {
 		model.addAttribute("page", "calendar/calendar-detail");
+		
+		CalendarVo cvo = cs.selectOne(no);
+		
+		model.addAttribute("cvo", cvo);
+		
 		return "layout/template";
 	}
 	

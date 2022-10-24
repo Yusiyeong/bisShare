@@ -69,9 +69,9 @@
         resize: none;
     }
 
-    #submit{
+    #submit, #center-bot{
         margin: auto;
-        width: 60px;
+        width: 100px;
     }
 
 
@@ -138,7 +138,7 @@
 								            <div>
 								                <textarea id="con" placeholder="내용을 입력하세요"></textarea>
 								            </div>
-								            <a href="" id="submit" class="btn btn-primary btn-user btn-block">확인</a>
+								            <div id="center-bot" ><input class="btn btn-primary btn-user btn-block" type="submit" value="작성하기"></div>
 								        </div>
 								    </form>
 									<!--end-->

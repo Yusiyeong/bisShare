@@ -144,12 +144,12 @@
 							            <div>
 							                <textarea id="con" placeholder="내용을 입력하세요"></textarea>
 							            </div>
-                                        <div id="buttons">
-                                            <a href="" id="edit" class="btn btn-primary btn-user btn-block">
-                                                수정하기 </a>
-                                            <a href="" id="delete" class="btn btn-primary btn-user btn-block">
-                                                삭제하기 </a>
-                                        </div>
+							            <c:if test="${ vo.writer eq loginVo.nick }">
+											<div id="center-bot">
+												<a href="${root}/calendar/edit/${vo.no}">수정하기</a>
+												<a href="${root}/calendar/delete/${vo.no}">삭제하기</a>
+											</div>
+										</c:if>
 							        </div>
 							    </form>
 								<!--end-->

@@ -22,5 +22,8 @@ public interface CalendarService {
 	//전체 일정 갯수 조회
 	int selectToatalCnt();
 
+	//일정 상세조회 (번호)
+	CalendarVo selectOne(String no);
+
 
 }

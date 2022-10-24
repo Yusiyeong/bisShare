@@ -52,4 +52,10 @@ public class CalendarServiceImpl implements CalendarService{
 		return dao.selectCountAll(sst);
 	}
 
+	//일정 상세조회(번호)
+	@Override
+	public CalendarVo selectOne(String no) {
+		return dao.selectOne(sst, no);
+	}
+
 }

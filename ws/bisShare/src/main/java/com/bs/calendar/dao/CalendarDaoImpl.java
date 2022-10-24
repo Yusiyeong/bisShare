@@ -46,4 +46,10 @@ public class CalendarDaoImpl implements CalendarDao{
 		return sst.selectOne("calendarMapper.selectCountAll");
 	}
 
+	//일정 상세 조회(번호)
+	@Override
+	public CalendarVo selectOne(SqlSessionTemplate sst, String no) {
+		return sst.selectOne("calendarMapper.selectOne", no);
+	}
+
 }
