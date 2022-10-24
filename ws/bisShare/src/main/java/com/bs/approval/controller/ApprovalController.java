@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,9 +40,8 @@ public class ApprovalController {
 	public String my(Model model, HttpSession session) {
 		//로그인한 멤버의 정보 (empNo 필요)
 		EmployeeVo vo = (EmployeeVo) session.getAttribute("loginVo");
-		System.out.println(vo);
 		List<String> aprvList = aprvService.getListByEmpNo(vo.getEmpNo());
-		System.out.println(aprvList);
+		
 		if(aprvList != null) {
 			model.addAttribute("aprvList", aprvList);
 			model.addAttribute("title", "나의 기안서");
@@ -73,17 +73,16 @@ public class ApprovalController {
 		
 		System.out.println(avo);
 		
-		int result = aprvService.insertOne(avo);
-		// 결과로 나와야 될 수 구하기
-		int completeResult = 1 + avo.getAprvEmpNo().length + avo.getAgreeEmpNo().length + avo.getRefEmpNo().length;
-		
-		if(result == completeResult) {
-			model.addAttribute("page", "approval/detail");
-			return"ok";
-		} else {
-			//작성실패
-			return"fail";
-		}
+//		int result = aprvService.insertOne(avo);
+//		
+//		if(result == 1) {
+//			model.addAttribute("page", "approval/detail");
+//			return"ok";
+//		} else {
+//			//작성실패
+//			return"fail";
+//		}
+		return "ok";
 	}
 	
 	//임시저장 화면
@@ -103,8 +102,11 @@ public class ApprovalController {
 	}
 	
 	//결재 디테일 화면
-	@GetMapping("Detail")
-	public String Detail(Model model) {
+	@GetMapping("detail/{adcNo}")
+	public String Detail(Model model, @PathVariable String adcNo) {
+		
+//		ApprovalVo vo = aprvService.getOneByNo(adcNo);
+		
 		model.addAttribute("title", "결재 서류");
 		model.addAttribute("page", "approval/detail");
 		return "layout/template";

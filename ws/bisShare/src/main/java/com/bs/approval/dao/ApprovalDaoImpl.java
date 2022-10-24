@@ -36,6 +36,12 @@ public class ApprovalDaoImpl implements ApprovalDao{
 		return sst.selectList("approvalMapper.getListByNo", empNo);
 	}
 	
+	//기안서 하나 조회
+	@Override
+	public ApprovalVo getOneByNo(SqlSessionTemplate sst, String adcNo) {
+		return sst.selectOne("approvalMapper.getOneByNo", adcNo);
+	}
+	
 	
 
 	
