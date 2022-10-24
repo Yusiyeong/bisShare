@@ -58,20 +58,11 @@
 		INNER JOIN DEPT D
 		ON E.DEPT_NO = D.DEPT_NO
 		WHERE E.STATUS = 'Y'
-		AND LOWER(NICK) LIKE LOWER('%')
-		AND UPPER(NICK) LIKE UPPER('%')
 	</select>
 	
-	<select id="selectListCount" resultType="_int">
-		SELECT COUNT(*)
+	<select id="selectCountAll" resultType="int">
+		SELECT COUNT(EMP_NO)
  		FROM EMPLOYEE
  		WHERE STATUS = 'Y'
- 		
- 		<if test="field == 'nick'">
-	 		AND NICK LIKE '%' || #{keyword} || '%'
- 		</if>
- 		<if test="field == 'email'">
-	 		AND EMAIL LIKE '%' || #{keyword} || '%'
- 		</if>
 	</select>
 </mapper>

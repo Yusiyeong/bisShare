@@ -16,7 +16,8 @@ public interface AddressService {
 	//조직도 상세조회
 	List<AddressVo> detailList();
 
-	int selectListCount(Map<String, String> map);
+	//전체 목록 갯수 조회
+	int selectTotalCnt();
 
 	
 
