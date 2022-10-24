@@ -21,7 +21,7 @@
 	</select>
 
 	<!-- 댓글 작성 -->
-	<insert id="insertOne" useGeneratedKeys="true" keyColumn="REPLY_NO" keyProperty="replyNo">
+	<insert id="insertOne">
      INSERT INTO NOTICE_REPLY
       (
          REPLY_NO
@@ -45,6 +45,7 @@
 			STATUS = 'N'
 	WHERE REPLY_NO = #{replyNo}
 	</update>
+	
 	
 	<!-- 댓글 수정 -->
 	<update id="updateOne">

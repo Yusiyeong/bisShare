@@ -64,50 +64,35 @@
 
             <!-- 댓글start  -->
             <div id="reply-area">
-
-           <!-- 댓글 목록 조회start  -->
-            <div class="card" style="width: 100%; margin-bottom: 15px;">
-               <div class="card-body">
-                  <h5 class="card-title">유시영</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">2022.01.05 10:12</h6>
-                  <span class="card-text">댓글내용!!!</span>
-              <div style="float: right;">
-                       <!-- 수정 -->
-                     <a href="#" class="card-link fa fa-pencil" style="font-size:17px;"></a> 
-                     <!-- 삭제 -->
-                     <a href="#" class="card-link far fa-trash-alt" style="font-size:17px;"></a>
-                  </div>
-               </div>               
-            </div>      
-               <!-- 댓글 목록 조회end  --> 
-               
-          <!-- 댓글 목록 조회start  -->
-            <div class="card" style="width: 100%; margin-bottom: 15px;">
-               <div class="card-body">
-                  <h5 class="card-title">유시영</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">2022.01.05 10:12</h6>
-                  <span class="card-text">댓글내용!!!</span>
-              <div style="float: right;">
-                       <!-- 수정 -->
-                     <a href="#" class="card-link fa fa-pencil" style="font-size:17px;"></a> 
-                     <!-- 삭제 -->
-                     <a href="#" class="card-link far fa-trash-alt" style="font-size:17px;"></a>
-                  </div>
-               </div>               
-            </div>      
-               <!-- 댓글 목록 조회end  -->  
-               
+            
                <!-- 댓글 작성start  -->
-               <div id="reply-top">
-
-               <div class="input-group mb-3" style="height: 100px;">
-                  <input type="text" style="height: 100%;"class="form-control" placeholder="Please type in the comments !">
-                  <button class="btn btn-outline-primary">등록</button>
-               </div>
-
-               </div>
-               <!-- 댓글 작성end  -->
-               
+                  <div id="reply-top">
+   
+                  <div class="input-group mb-3" style="height: 100px;">
+                     <input type="text" style="height: 100%;"class="form-control" placeholder="Please type in the comments !">
+                     <button class="btn btn-outline-primary">등록</button>
+                  </div>
+   
+                  </div>
+                  <!-- 댓글 작성end  -->
+   
+   
+                 <!-- 댓글 목록 조회start  -->
+                  <div class="card" style="width: 100%; margin-bottom: 15px;">
+                     <div class="card-body">
+                        <h5 class="card-title">유시영</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">2022.01.05 10:12</h6>
+                        <span class="card-text">댓글내용!!!</span>
+                    <div style="float: right;">
+                             <!-- 수정 -->
+                           <a href="#" class="card-link fa fa-pencil" style="font-size:17px;"></a> 
+                           <!-- 삭제 -->
+                           <a href="#" class="card-link far fa-trash-alt" style="font-size:17px;"></a>
+                        </div>
+                     </div>               
+                  </div>      
+                  <!-- 댓글 목록 조회end  --> 
+                     
                
             </div>
          <!-- 댓글end  -->
