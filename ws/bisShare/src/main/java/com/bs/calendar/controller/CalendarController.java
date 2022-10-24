@@ -39,6 +39,12 @@ public class CalendarController {
 		return "layout/template";
 	}
 	
+	//일정 캘린더에서 드래그로 작성
+	@PostMapping("modalWrite")
+	public String modalWrite(Model model) {
+		
+		return "layout/template";
+	}
 	
 	
 	//일정 작성 (화면)
@@ -53,14 +59,20 @@ public class CalendarController {
 	@PostMapping("write")
 	public String write(CalendarVo vo, Model model, HttpSession session) {
 		
-		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginvo");
+		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginVo");
 		String no = loginvo.getEmpNo();
 		
+		System.out.println(vo.getStartDate());
+		System.out.println(vo.getEndDate());
+		vo.setWriter(no);
 		int result = cs.write(vo);
+		
+		System.out.println(result);
 		
 		//화면 선택
 		if(result == 1) {
 			session.setAttribute("alertMsg", "일정 등록 완료");
+			model.addAttribute("page", "calendar/calendar-view");
 			return "layout/template";
 		}else {
 			session.setAttribute("msg" , "일정 등록 실패");
@@ -92,7 +104,7 @@ public class CalendarController {
 	
 	
 	//일정 삭제
-	@GetMapping("delete{no}")
+	@GetMapping("delete/{no}")
 	public String delete(@PathVariable String no , HttpSession session , Model model) {
 		
 		int result = cs.delete(no);
@@ -109,7 +121,7 @@ public class CalendarController {
 	
 	
 	//일정 조회
-	@GetMapping("view")
+	@GetMapping("view/{pno}")
 	public String view(Model model, @PathVariable int pno, HttpServletRequest req) {
 		model.addAttribute("page", "calendar/calendar-view");
 		
@@ -128,7 +140,7 @@ public class CalendarController {
 	
 	
 	//일정 상세 조회
-	@GetMapping("detail{no}")
+	@GetMapping("detail/{no}")
 	public String detail(@PathVariable String no, Model model) {
 		model.addAttribute("page", "calendar/calendar-detail");
 		

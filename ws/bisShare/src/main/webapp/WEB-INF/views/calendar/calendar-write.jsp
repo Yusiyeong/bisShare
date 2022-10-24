@@ -95,7 +95,7 @@
 								    <form action="" method="post">
 								        <div id="page">
 								            <div>
-								                <textarea id="title" placeholder="제목 없음"></textarea>
+								                <textarea id="title" name="title" placeholder="제목 없음"></textarea>
 								            </div>
 								            <div id="create">
 								                작성일 <input id="now_date" type="date" value="">
@@ -105,7 +105,7 @@
 												<div>
 													카테고리  
 												</div>
-												<select id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
+												<select name="cateNo" id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
 														  <option value="1" selected>기타</option>
 														  <option value="2">회의</option>
 														  <option value="3">휴가</option>
@@ -114,7 +114,7 @@
 														</select>
 								            </div>
 								            <div id="start">
-								                시작일 <input class="datepicker-start">
+								                시작일 <input class="datepicker-start" name="startDate">
 								                <script>
 								                  $(function(){
 								                    $( ".datepicker-start" ).datepicker({ minDate: 0});
@@ -123,7 +123,7 @@
 								                </script>
 								            </div>
 								            <div id="end">
-								                종료일 <input class="datepicker-end">
+								                종료일 <input class="datepicker-end" name="endDate">
 								                <script>
 								                  $(function(){
 								                    $('.datepicker-end').datepicker({ minDate: 0});
@@ -131,12 +131,10 @@
 								                  })
 								                </script>
 								            </div>
-								            <div id="file">
-								                첨부파일 <input type="file" id="file-name">
-								            </div>
+
 								            <hr id="line">
 								            <div>
-								                <textarea id="con" placeholder="내용을 입력하세요"></textarea>
+								                <textarea id="con" placeholder="내용을 입력하세요" name="content"></textarea>
 								            </div>
 								            <div id="center-bot" ><input class="btn btn-primary btn-user btn-block" type="submit" value="작성하기"></div>
 								        </div>

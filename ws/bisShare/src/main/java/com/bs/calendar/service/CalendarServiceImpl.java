@@ -1,5 +1,9 @@
 package com.bs.calendar.service;
 
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -25,7 +29,26 @@ public class CalendarServiceImpl implements CalendarService{
 	//일정 작성
 	@Override
 	public int write(CalendarVo vo) {
-		return dao.insertCalendar(sst, vo);
+		
+		int result = 0;
+		
+		try {
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		    Date parsedSDate = dateFormat.parse(vo.getStartDate());
+		    Date parsedEDate = dateFormat.parse(vo.getEndDate());
+		    Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
+		    Timestamp timestamp2 = new java.sql.Timestamp(parsedEDate.getTime());
+		    vo.setStartDate(timestamp.toString());
+		    vo.setEndDate(timestamp2.toString());
+		    
+		    
+		    result = dao.insertCalendar(sst, vo);
+		} catch(Exception e) { 
+			e.printStackTrace();
+		}
+		
+		return result;
+		
 	}
 
 	//일정 삭제
