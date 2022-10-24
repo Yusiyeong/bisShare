@@ -73,5 +73,32 @@
 		WHERE BOARD_NO = #{boardNo}
 	</update>
 	
+	<!-- 게시글 작성 -->
+	<insert id="insertBoard">
+	INSERT INTO NOTICE_BOARD
+		(
+			BOARD_NO
+			, TITLE
+			, CONTENT
+			, WRITER
+		)
+		VALUES
+		(
+			SEQ_NOTICE_BOARD_NO.NEXTVAL
+			, #{title}
+			, #{content}
+			, #{writer}
+		)
+	</insert>
+	
+	<!-- 수정하기 -->
+	<update id="edit">
+	UPDATE NOTICE_BOARD
+		SET 
+			TITLE = #{title}
+			, CONTENT = #{content}
+			, MODIFY_DATE = SYSDATE
+		WHERE BOARD_NO = #{boardNo}
+	</update>
 	
 </mapper>

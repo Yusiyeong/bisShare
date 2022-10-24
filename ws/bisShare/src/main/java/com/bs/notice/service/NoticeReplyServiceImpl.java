@@ -38,9 +38,17 @@ public class NoticeReplyServiceImpl implements NoticeReplyService{
 
 	// 댓글 삭제
 	@Override
-	public int delete(String boardNo) {
-		return nrd.delete(sst, boardNo);
+	public int delete(NoticeReplyVo vo) {
+		return nrd.delete(sst, vo);
 	}//delete
+
+
+	// 댓글 수정
+	@Override
+	public int edit(NoticeReplyVo vo) {
+		return nrd.edit(sst, vo);
+	}//edit
+
 	
 	
 	

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.bs.common.PageVo;
 import com.bs.notice.dao.NoticeDao;
+import com.bs.notice.vo.NoticeAttachVo;
 import com.bs.notice.vo.NoticeVo;
 
 @Service
@@ -57,6 +58,20 @@ public class NoticeServiceImpl implements NoticeService{
 	public int delete(String boardNo) {
 		return nd.delete(sst, boardNo);
 	}//delete
+
+
+	// 게시글 작성
+	@Override
+	public int write(NoticeVo vo) {
+		return nd.insertBoard(sst, vo);
+	}//write
+
+
+	// 수정하기
+	@Override
+	public int edit(NoticeVo vo) {
+		return nd.edit(sst, vo);
+	}//edit
 
 
 

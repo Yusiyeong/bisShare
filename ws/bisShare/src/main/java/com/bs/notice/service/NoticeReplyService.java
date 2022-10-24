@@ -13,6 +13,9 @@ public interface NoticeReplyService {
 	int write(NoticeReplyVo vo);
 
 	// 댓글 삭제 
-	int delete(String boardNo);
+	int delete(NoticeReplyVo vo);
+
+	// 댓글 수정
+	int edit(NoticeReplyVo vo);
 
 }//interface

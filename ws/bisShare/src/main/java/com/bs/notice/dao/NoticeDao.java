@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.bs.common.PageVo;
+import com.bs.notice.vo.NoticeAttachVo;
 import com.bs.notice.vo.NoticeVo;
 
 public interface NoticeDao {
@@ -24,6 +25,13 @@ public interface NoticeDao {
 
 	// 게시글 삭제
 	int delete(SqlSessionTemplate sst, String boardNo);
+
+	// 게시글 작성
+	int insertBoard(SqlSessionTemplate sst, NoticeVo vo);
+
+	// 수정하기
+	int edit(SqlSessionTemplate sst, NoticeVo vo);
+
 
 
 }//interface

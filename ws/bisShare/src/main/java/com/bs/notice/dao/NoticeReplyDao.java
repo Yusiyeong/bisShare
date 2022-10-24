@@ -15,7 +15,10 @@ public interface NoticeReplyDao {
 	int insertReply(SqlSessionTemplate sst, NoticeReplyVo vo);
 
 	// 댓글 삭제
-	int delete(SqlSessionTemplate sst, String boardNo);
+	int delete(SqlSessionTemplate sst, NoticeReplyVo vo);
+
+	// 댓글 수정
+	int edit(SqlSessionTemplate sst, NoticeReplyVo vo);
 
 
 }//interface

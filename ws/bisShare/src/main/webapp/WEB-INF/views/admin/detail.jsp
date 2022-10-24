@@ -30,7 +30,7 @@
          <!--취소, 수정 버튼start-->
          <div style="margin-bottom: 15px;">
             <!-- 목록 -->
-            <a href="${root}/admin/list" class="btn btn-outline-secondary btn-sm">목록으로</a> 
+            <a onclick="history.go(-1)" class="btn btn-outline-secondary btn-sm">목록으로</a> 
             <!-- 수정 -->
             <input type="submit" class="btn btn-outline-primary btn-sm" value="수정하기">
          </div>

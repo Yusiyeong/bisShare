@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bs.common.PageVo;
+import com.bs.notice.vo.NoticeAttachVo;
 import com.bs.notice.vo.NoticeVo;
 
 @Repository
@@ -43,8 +44,23 @@ public class NoticeDaoImpl implements NoticeDao{
 	// 게시글 삭제
 	@Override
 	public int delete(SqlSessionTemplate sst, String boardNo) {
-		return sst.update("noticeMapper.deleteBoard", boardNo);
+		return sst.delete("noticeMapper.deleteBoard", boardNo);
 	}//delete
+
+	// 게시글 작성
+	@Override
+	public int insertBoard(SqlSessionTemplate sst, NoticeVo vo) {
+		return sst.insert("noticeMapper.insertBoard", vo);
+	}//insertBoard
+
+
+	// 수정하기
+	@Override
+	public int edit(SqlSessionTemplate sst, NoticeVo vo) {
+		return sst.update("noticeMapper.edit", vo);
+	}//updateBoard
+
+
 
 
 }//class

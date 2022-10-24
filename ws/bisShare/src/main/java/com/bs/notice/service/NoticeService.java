@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.bs.common.PageVo;
+import com.bs.notice.vo.NoticeAttachVo;
 import com.bs.notice.vo.NoticeVo;
 
 public interface NoticeService {
@@ -21,6 +22,14 @@ public interface NoticeService {
 
 	// 게시글 삭제
 	int delete(String boardNo);
+
+	// 게시글 작성
+	int write(NoticeVo vo);
+
+	// 수정하기
+	int edit(NoticeVo vo);
+
+
 
 
 }//interface
