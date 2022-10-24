@@ -68,17 +68,15 @@
 
 
     // 안읽은 메일 수 업데이트
+    setTimeout(updateCnt,100);
+  });
+
+  function updateCnt() {
     $.ajax({
       type: "get",
       url: `${root}/mail/updateCnt`,
       success: function (response) {
-        let cnt;
-        if(response > 0) {
-          cnt = response-1;
-        } else {
-          cnt = response;
-        }
-        document.querySelector('#notReadCnt').innerHTML = cnt;
+        document.querySelector('#notReadCnt').innerHTML = response;
       }
     });
-  });
+  }
