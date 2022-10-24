@@ -12,15 +12,7 @@ public static String fileUpload(MultipartFile f, String savePath) {
 		// 원본파일명 
 		String originName = f.getOriginalFilename();
 		
-		// 확장자명
-		String ext = originName.substring(originName.lastIndexOf(".") );	// .jpg
-		
-		// 변경된 파일명
-		long now = System.currentTimeMillis();
-		int random = (int)(Math.random() * 90000 + 10000);
-		String changeName = now + "_" + random + ext;
-		
-		File target = new File(savePath + changeName);
+		File target = new File(savePath + originName);
 		
 		try {
 			f.transferTo(target);
@@ -28,7 +20,7 @@ public static String fileUpload(MultipartFile f, String savePath) {
 			e.printStackTrace();
 		}
 		
-		return changeName;
+		return originName;
 		
 	}
 

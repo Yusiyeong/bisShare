@@ -38,7 +38,7 @@
                   <a href="#" class="btn btn-outline-warning btn-sm">수정</a> 
                   <!-- 삭제 -->
                   <a href="#" class="btn btn-outline-danger btn-sm">삭제</a>
-                  <a href="" class="btn btn-outline-primary btn-sm">목록으로</a>
+                  <a onclick="history.go(-1)" class="btn btn-outline-primary btn-sm">목록으로</a>
                </div>
                <!--수정, 삭제 버튼end-->
 

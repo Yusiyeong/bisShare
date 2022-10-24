@@ -10,20 +10,23 @@
                <!-- DataTales Example Start-->
                <div class="card shadow mb-4">
                    <div class="card-header py-3">
-                       <h6 class="m-0 font-weight-bold text-primary" >글 작성</h6>
+                       <h6 class="m-0 font-weight-bold text-primary" >파일 업로드</h6>
                    </div>
                    <div class="card-body">
                    <!-- form start -->
-                     <form method="post" action="">
+                     <form method="post" action="${root}/cloud/write" enctype="multipart/form-data">
                      
                         <input type="text" name="title" style="width: 84%;" placeholder=" title"/>
                         
                         <a onclick="history.go(-1)" class="btn btn-secondary btn-sm" style="float: right; width: 7%;">취소</a> 
-                        <input type="submit" value="작성" class="btn btn-primary btn-sm" style="float: right; width: 7%; margin-right: 8px;" onclick="goWrite(this.form)"/> 
+                        <input type="submit" value="업로드" class="btn btn-primary btn-sm" style="float: right; width: 7%; margin-right: 8px;" onclick="goWrite(this.form)"/> 
                        
                         <br><br> 
                         
-                        <textarea class="summernote" name="content"></textarea>
+                        <input type="file" name="profile">	
+                        <br><br> 
+                        
+                        <textarea class="summernote" name="content" ></textarea>
                         
                      </form>
                      <!-- form end -->
@@ -37,12 +40,13 @@
 
 <script>
 $('.summernote').summernote({
-   height: 700,               
+   height: 500,               
    minHeight: null,          
    maxHeight: null,             
    focus: true,             
-   lang: "ko-KR",            // 한글 설정
+   lang: "ko-KR",            	// 한글 설정
    placeholder: 'content',      //placeholder 설정
+  
    callbacks : {
       onImageUpload : function(files) {
          var reader = new FileReader();
@@ -51,7 +55,7 @@ $('.summernote').summernote({
             const url = reader.result;
             $.ajax({
                data : {img : url},
-               url : "${root}/notice/imgUpload",
+               url : "${root}/cloud/imgUpload",
                method : "POST",
                success : function(path) {
                   console.log('success');

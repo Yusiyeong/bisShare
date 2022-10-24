@@ -298,7 +298,7 @@
                       <!--취소, 등록 버튼start-->
                      <div style="margin-bottom: 7px; float: right;">
                         <!-- 취소 -->
-                        <a href="${root}/admin/list" class="btn btn-outline-secondary btn-sm">취소</a> 
+                        <a onclick="history.go(-1)" class="btn btn-outline-secondary btn-sm">취소</a> 
                         <!-- 등록 -->
                         <input type="submit" class="btn btn-outline-primary btn-sm" value="등록">
                      </div>

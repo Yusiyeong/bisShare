@@ -4,9 +4,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,7 +31,6 @@ public class NoticeReplyController {
 	@ResponseBody
 	public String write(NoticeReplyVo vo, HttpSession session) {
 		
-		System.out.println("댓글작성확인vo:::" + vo);
 		
 		EmployeeVo loginVo = (EmployeeVo)session.getAttribute("loginVo");
 		vo.setWriter(loginVo.getEmpNo());
@@ -42,6 +38,9 @@ public class NoticeReplyController {
 		
 		// 서비스 호출
 		int result = nrs.write(vo);
+		
+		System.out.println("이건 write에서 확인::: vo.getReplyNo()::: " + vo.getReplyNo());//ysy
+		System.out.println("write_vo::: " + vo);//ysy
 		
 		if(result == 1) {
 			// 성공
@@ -54,25 +53,55 @@ public class NoticeReplyController {
 	}//write
 	
 	// 댓글 삭제 
-	@GetMapping("delete/{boardNo}")
-	public String delete(@PathVariable String boardNo, HttpSession session, Model model) {
+	@PostMapping("delete")
+	@ResponseBody
+	public String delete(NoticeReplyVo vo, HttpSession session) {
+		
+		EmployeeVo loginVo = (EmployeeVo)session.getAttribute("loginVo");
+		vo.setWriter(loginVo.getEmpNo());
 		
 		// 서비스 호출
-		int result = nrs.delete(boardNo);
+		int result = nrs.delete(vo);
+		
+		System.out.println("이건 delete에서 확인::: vo.getReplyNo()::: " + vo.getReplyNo());//ysy
+		System.out.println("delete_vo::: " + vo);//ysy
+
 		
 		if(result == 1) {
 			//성공
-			session.setAttribute("alertMsg", "댓글 삭제 성공!");
-			return "redirect:/notice/detail/" + boardNo;
+			return "ok";
 		}else {
 			// 실패
-			session.setAttribute("alertMsg", "댓글 삭제 실패!");
-			return "redirect:/notice/detail/" + boardNo;
+			return "fail";
 		}//if
 		
 	}//delete
 	
-	
+	// 댓글 수정
+	@PostMapping("edit")
+	@ResponseBody
+	public String edit(NoticeReplyVo vo, HttpSession session) {
+
+		EmployeeVo loginVo = (EmployeeVo)session.getAttribute("loginVo");
+		vo.setWriter(loginVo.getEmpNo());
+		
+		// 서비스 호출
+		int result = nrs.edit(vo);
+		
+		System.out.println("이건 edit에서 확인::: vo.getReplyNo()::: " + vo.getReplyNo());//ysy
+		System.out.println("edit_vo::: " + vo);//ysy
+
+		
+		if(result == 1) {
+			//성공
+			return "ok";
+		}else {
+			// 실패
+			return "fail";
+		}//if
+		
+		
+	}//edit
 	
 	
 	

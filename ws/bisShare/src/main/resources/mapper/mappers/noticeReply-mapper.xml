@@ -21,39 +21,39 @@
 	</select>
 
 	<!-- 댓글 작성 -->
-	<insert id="insertOne">
-	INSERT INTO NOTICE_REPLY
-		(
-			REPLY_NO
-			,CONTENT
-			,BNO
-			,WRITER
-		)
-		VALUES
-		(
-			SEQ_NOTICE_REPLY_NO.NEXTVAL
-			, #{content}
-			, #{bno}
-			, #{writer}
-		)
-	</insert>
-	
+	<insert id="insertOne" useGeneratedKeys="true" keyColumn="REPLY_NO" keyProperty="replyNo">
+     INSERT INTO NOTICE_REPLY
+      (
+         REPLY_NO
+         ,CONTENT
+         ,BNO
+         ,WRITER
+      )
+      VALUES
+      (
+         SEQ_NOTICE_REPLY_NO.NEXTVAL
+         , #{content}
+         , #{bno}
+         , #{writer}
+      )
+     </insert>
+      
 	<!-- 댓글 삭제 -->
 	<update id="deleteReply">
-	UPDATE
-	(SELECT
-		    R.REPLY_NO	AS replyNo
-		    , R.CONTENT
-		    , R.BNO
-		    , R.STATUS  
-	        , B.BOARD_NO AS boardNo
-		FROM NOTICE_REPLY R JOIN NOTICE_BOARD B
-		ON R.BNO = B.BOARD_NO
-		WHERE R.STATUS = 'Y'
-		AND R.BNO = #{bno})
-	SET STATUS = 'N'
+	UPDATE NOTICE_REPLY 
+		SET
+			STATUS = 'N'
+	WHERE REPLY_NO = #{replyNo}
 	</update>
 	
-	
+	<!-- 댓글 수정 -->
+	<update id="updateOne">
+	UPDATE NOTICE_REPLY
+		SET 
+			 CONTENT = #{content}
+            , ENROLL_DATE = SYSDATE
+			, MODIFY_DATE = SYSDATE
+	WHERE REPLY_NO = #{replyNo}
+	</update>
 
 </mapper>

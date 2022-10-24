@@ -53,7 +53,7 @@
 	                  <a href="${root}/notice/delete/${vo.boardNo}" class="btn btn-outline-danger btn-sm">삭제</a>
                </c:if>
 	                  <!-- 목록으로 -->
-	                  <a href="${root}/notice/list/1" style="float: right; margin-left: 3px;" class="btn btn-outline-primary btn-sm">목록으로</a>
+	                  <a onclick="history.go(-1)" style="float: right; margin-left: 3px;" class="btn btn-outline-primary btn-sm">목록으로</a>
 	               </div>
                <!--수정, 삭제 버튼end-->
                     
@@ -84,15 +84,25 @@
             <div id="reply-list" class="card" style="width: 100%; margin-bottom: 15px;">
                <div class="card-body">
                   <h5 class="card-title">${x.writer}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">${x.enrollDate}</h6>
-                  <span class="card-text">${x.content}</span>
+                  <h6 id="enrollDate" class="card-subtitle mb-2 text-muted">${x.enrollDate}</h6>
+                  <span id="edit-content" class="card-text">${x.content}</span>
                   
                    <c:if test="${x.writer eq loginVo.nick}">	
 	                   <div style="float: right;">
 	                       <!-- 수정 -->
-	                       <a href="#" class="card-link fa fa-pencil" style="font-size:17px;"></a> 
+	                       <a type="button" id="edit-btn" data-value="${x.replyNo}" class="card-link fa fa-pencil" style="font-size:17px;"></a> 
 	                       <!-- 삭제 -->
-	                       <a href="${root}/noticeReply/delete/${vo.boardNo}" class="card-link far fa-trash-alt" style="font-size:17px;"></a>
+	                       <a type="button" id="delete-btn" data-value="${x.replyNo}" class="card-link far fa-trash-alt" style="font-size:17px;"></a>
+	                       
+	                       <!-- 연필 클릭 시 -> 수정 생성 폼start -->
+			               <div id="reply-top" hidden>
+			                  <div id="enroll" class="input-group mb-3" style="height: 100px;">
+			                     <input type="text" id="editText-content" name="content" style="height: 100%;"class="form-control" placeholder="Please type in the comments !">
+			                     <button id="editComplete-btn" class="btn btn-outline-primary">수정하기</button>
+			                  </div>
+			               </div> 
+			               <!-- 연필 클릭 시 -> 수정 생성 폼end -->
+               
 	                  </div>
                   </c:if>
                   
@@ -112,6 +122,7 @@
                </c:if>
                <!-- 댓글 작성end  -->
                
+               
             </div>
          <!-- 댓글end  -->
            </div>
@@ -124,11 +135,12 @@
    <script>
    /* 댓글 작성 + 조회 에이잭스 */
     const replyBtn = document.querySelector('#reply-btn');
-      replyBtn.addEventListener('click' , function(){
+      replyBtn.addEventListener("click" , function(){
          
          const replyContent = document.querySelector('#reply-content').value;      
          const boardNo = ${vo.boardNo};      
-         const replyWriterNick = '${sessionScope.loginVo.nick}';      
+         const replyWriterNick = '${sessionScope.loginVo.nick}';   
+
          
          // 작성일
          var today = new Date();
@@ -147,7 +159,7 @@
             type : "POST" ,
             data : { 
                "content" : replyContent ,
-               "bno" : boardNo      
+               "bno" : boardNo , 
             } ,
             success : function(result){
                if(result == 'ok'){
@@ -165,15 +177,14 @@
 	                        "<span class='card-text'>"+replyContent+"</span>"+
 	                        
 	                         "<div style='float: right;'>"+
-	                           "<a href='#' class='card-link fa fa-pencil' style='font-size:17px;'>"+"</a>"+ 
-	                           "<a href='#' class='card-link far fa-trash-alt' style='font-size:17px;'>"+"</a>"+ 
+	                         	"<a type='button' id='edit-btn' data-value='${x.replyNo}' class='card-link fa fa-pencil' style='font-size:17px;'>"+"</a>"+ 
+	                            "<a type='button' id='delete-btn' data-value='${x.replyNo}' class='card-link far fa-trash-alt' style='font-size:17px;'>"+"</a>"+
 	                        "</div>"+
 	                      "</div>"+         
 	                   "</div>";
                       
                   $(target).prepend(html);
                   
-                            
                   document.querySelector('#reply-content').value = '';
                   
                }else{
@@ -187,4 +198,136 @@
       });
    </script>
    
+   <script>
+   /*댓글 삭제*/
+   const deleteBtn = document.querySelector('#delete-btn');
+   
+   deleteBtn.addEventListener("click", function(){
+	   
+   var replyNo = document.getElementById("delete-btn").getAttribute('data-value');
+   console.log(replyNo); 
+   
+	   $.ajax({
+		   
+		   url : "${root}/noticeReply/delete" ,
+           type : "POST" ,
+           data : { 
+              "replyNo" : replyNo ,
+           } ,
+           success : function(result){
+        	   if(result == 'ok'){
+        		   alert('댓글 삭제 성공!')
+        		   
+        		   // 삭제된거 빼고 다시 댓글 조회
+                   $("#reply-list").empty();
+                   
+        	   }else{
+        		   alert('댓글 삭제 실패!')
+        	   }
+        	   
+           },
+           error : function(){
+        	   alert("통신 에러!");
+           }
+		   
+	   });
+	   
+   });
+   </script>
+   
+   
+    <script>
+   /*댓글 수정*/
+   /* 연필 버튼 클릭 시 -> 수정 폼 생성 */
+   const editBtn = document.querySelector('#edit-btn');
+   editBtn.addEventListener("click", function(){
+	   
+	   // 기존span 지우기
+	   $("#edit-content").empty();//ysy
+	   $("#enrollDate").empty();//ysy
+	   
+	   // 연필, 휴지통 이모티콘 숨기기 -- 추가함
+	   $('a').hide();
+	   
+	   // 수정 폼 나타내기
+	   const target = document.querySelector('#enroll');
+	   $("#edit-content").append(target);//ysy
+	   console.log(target)
+   
+   });
+   
+    //--------------------------------------------------
+
+    /* text입력 후 '수정하기'버튼 누르면 수정 완료! -> 수정된거 조회*/
+   const editCompleteBtn = document.querySelector('#editComplete-btn');
+   
+   editCompleteBtn.addEventListener("click", function(){
+	   
+	   // 수정하는 댓글의 replyNo 가져오기
+	   var replyNo = document.getElementById("edit-btn").getAttribute('data-value');
+	   console.log(replyNo); 
+	   
+	   // 수정하는 댓글의 text 가져오기
+	   const editContent = document.querySelector('#editText-content').value;      
+	   
+	   // 작성일
+       var today = new Date();
+
+       var year = today.getFullYear();
+       var month = ('0' + (today.getMonth() + 1)).slice(-2);
+       var day = ('0' + today.getDate()).slice(-2);
+       var hours = ('0' + today.getHours()).slice(-2); 
+       var minutes = ('0' + today.getMinutes()).slice(-2);
+       var seconds = ('0' + today.getSeconds()).slice(-2); 
+
+       var dateString = year + '-' + month  + '-' + day + ' ' + hours + ':' + minutes  + ':' + seconds;
+       
+       
+	 	$.ajax({
+			   
+			   url : "${root}/noticeReply/edit" ,
+	           type : "POST" ,
+	           data : { 
+	              "replyNo" : replyNo ,
+	              "content" : editContent
+	           } ,
+	           success : function(result){
+	        	   if(result == 'ok'){
+	        		   alert('댓글 수정 성공!')
+	        		   
+	        		   // 수정 된 댓글 조회
+	        		   // 1. 기존span 지우기
+	        		   $("#edit-content").empty();//ysy
+	        		   
+	        		   //2. 수정된 것으로 조회하기
+	        		   const target = document.querySelector('#enrollDate');
+	                   var html = 
+
+	                	   '<h6 id="enrollDate" class="card-subtitle mb-2 text-muted">' + dateString + '</h6>'+
+	                       '<span id="edit-content" class="card-text">' + editContent + '</span>'+
+	                       
+	                       '<div style="float: right;">'+
+	                           '<a type="button" id="edit-btn" data-value="${x.replyNo}" class="card-link fa fa-pencil" style="font-size:17px;">'+'</a>'+ 
+	                           '<a type="button" id="delete-btn" data-value="${x.replyNo}" class="card-link far fa-trash-alt" style="font-size:17px;">'+'</a>'+ 
+                       	   '</div>';
+                        
+                       	   
+	                   $(target).append(html);
+	                   
+	        		   
+	        	   }else{
+	        		   alert('댓글 수정 실패!')
+	        	   }
+	        	   
+	           },
+	           error : function(){
+	        	   alert("통신 에러!");
+	           }
+			   
+		   });
+	   
+	   
+   });
+   
+   </script>
    
