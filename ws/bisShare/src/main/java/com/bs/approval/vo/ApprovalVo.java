@@ -14,4 +14,21 @@ public class ApprovalVo {
 	private String enrollDate;	//결재 생성 날짜
 	private String cancel;		//취소 여부
 	
+	//결재권자 정보
+	private String[] aprvEmpNo;	//회원번호(결재권자의 회원번호)
+	private String[] aprvNo;	//결재 순번
+	private String[] aprvYn;	//승인여부
+	
+	//합의자 정보
+	private String[] agreeEmpNo;//회원번호(결재권자의 회원번호)
+	private String[] agreeNo;	//합의 순번
+	private String[] agreeYn;	//확인여부
+	
+	//참조자 정보
+	private String[] refEmpNo;	//회원번호(결재권자의 회원번호)
+	private String[] refNo;		//참조 순번
+	private String[] checkYn;	//확인여부
+	
+	
+	
 }

@@ -9,9 +9,6 @@
 	<typeAliases>
 		<!-- 결재관련 -->
 		<typeAlias type="com.bs.approval.vo.ApprovalVo" alias="aprvVo"/>
-		<typeAlias type="com.bs.approval.vo.AgreementVo" alias="agreeVo"/>
-		<typeAlias type="com.bs.approval.vo.ApproveRefVo" alias="refVo"/>
-		<typeAlias type="com.bs.approval.vo.ApproverVo" alias="aprverVo"/>
 		<!-- 멤버 -->
 		<typeAlias type="com.bs.employee.vo.EmployeeVo" alias="ev"/>
 		<!-- 메일 -->

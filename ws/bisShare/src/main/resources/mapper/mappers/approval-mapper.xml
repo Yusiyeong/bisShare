@@ -2,6 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="approvalMapper">
 
-
+	<!-- 기안서 작성하기 -->
+	<insert id="insertOneIntoDocu">
+		INSERT INTO APPROVAL_DOCU(ADC_NO, EMP_NO, CATEGORY_NO, ADC_NAME, ADC_CONTENT)
+		VALUES(APRV_DOCU_NO.NEXTVAL,#{empNo},#{categoryNo},#{adcName},#{adcContent})
+	</insert>
+	<insert id="insertIntoAprver">
+		INSERT INTO APPROVER (ADC_NO, EMP_NO, APRV_NO) VALUES(APRV_DOCU_NO.CURRVAL,#{aprvEmpNo},#{aprvNo})
+	</insert>
+	<insert id="insertIntoAgree">
+		INSERT INTO AGREEMENT (ADC_NO, EMP_NO, AGREE_NO) VALUES(APRV_DOCU_NO.CURRVAL,#{agreeEmpNo},#{agreeNo})
+	</insert>
+	<insert id="insertIntoRef">
+		INSERT INTO APRV_REF (ADC_NO, EMP_NO, REF_NO) VALUES(APRV_DOCU_NO.CURRVAL,#{refEmpNo},#{refNo})
+	</insert>
+	
+	
+	<!-- 결재 디테일 -->
+	<select id="getListByNo" resultType="aprvVo">
+		SELECT 
+		    A.ADC_NO
+		    , E.NICK            EMP_NO
+		    , C.CATEGORY_NAME   CATEGORY_NO
+		    , A.ADC_NAME
+		    , A.ADC_CONTENT
+		    , A.ENROLL_DATE
+		    , A.CANCEL
+		FROM APPROVAL_DOCU A
+		JOIN EMPLOYEE E
+		ON (A.EMP_NO = E.EMP_NO)
+		JOIN APRV_CATEGORY C
+		ON (A.CATEGORY_NO = C.CATEGORY_NO)
+		WHERE A.CANCEL = 'N'
+		AND A.EMP_NO = #{empNo}
+		ORDER BY ENROLL_DATE DESC
+	</select>
 
 </mapper>

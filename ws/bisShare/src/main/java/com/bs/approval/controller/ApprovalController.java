@@ -1,6 +1,11 @@
 package com.bs.approval.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,11 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bs.approval.service.ApprovalService;
 import com.bs.approval.vo.ApprovalVo;
-import com.bs.approval.vo.ApproverVo;
 import com.bs.employee.service.EmployeeService;
 import com.bs.employee.vo.EmployeeVo;
 
@@ -31,10 +36,21 @@ public class ApprovalController {
 	
 	//나의 기안서 화면
 	@GetMapping("my")
-	public String my(Model model) {
-		model.addAttribute("title", "나의 기안서");
-		model.addAttribute("page", "approval/my");
-		return "layout/template";
+	public String my(Model model, HttpSession session) {
+		//로그인한 멤버의 정보 (empNo 필요)
+		EmployeeVo vo = (EmployeeVo) session.getAttribute("loginVo");
+		System.out.println(vo);
+		List<String> aprvList = aprvService.getListByEmpNo(vo.getEmpNo());
+		System.out.println(aprvList);
+		if(aprvList != null) {
+			model.addAttribute("aprvList", aprvList);
+			model.addAttribute("title", "나의 기안서");
+			model.addAttribute("page", "approval/my");
+			return "layout/template";
+		} else {
+			//실패
+			return "";
+		}
 	}
 	
 
@@ -53,13 +69,21 @@ public class ApprovalController {
 	//결재 작성 진행
 	@PostMapping("write")
 	@ResponseBody
-	public String write(Model model, ApprovalVo aprvVo, ApproverVo aprverVo) {
+	public String write(Model model, ApprovalVo avo) {
 		
-		System.out.println(aprvVo);
-		System.out.println(aprverVo);
+		System.out.println(avo);
 		
-		model.addAttribute("page", "approval/detail");
-		return"ok";
+		int result = aprvService.insertOne(avo);
+		// 결과로 나와야 될 수 구하기
+		int completeResult = 1 + avo.getAprvEmpNo().length + avo.getAgreeEmpNo().length + avo.getRefEmpNo().length;
+		
+		if(result == completeResult) {
+			model.addAttribute("page", "approval/detail");
+			return"ok";
+		} else {
+			//작성실패
+			return"fail";
+		}
 	}
 	
 	//임시저장 화면
