@@ -37,6 +37,15 @@
       .modal-title{
         font-size: 30px;
       }
+      #center-bot1, #center-bot2{
+      	margin: 10px;
+      	width: 100px;
+      }
+      
+      #center-bot2{
+      	margin-right:120px;
+      }
+      
 
       
 	</style>
@@ -44,17 +53,17 @@
     <!-- Modal -->
     <div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-        <form class="modal-content">
+        <form class="modal-content" method="post">
             <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">일정추가</h1>
             </div>
             <div class="modal-body">
             일정 제목
-            <input type="text" class="form-control" id="title">
+            <input type="text" class="form-control" id="title" name="title">
                 <div id="cate">
                     카테고리  
                     <br>
-                    <select id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <select name="cateNo" id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
                         <option value="5" selected>기타</option>
                         <option value="1">회의</option>
                         <option value="2">휴가</option>
@@ -63,11 +72,11 @@
                       </select>
                 </div>
                 내용
-                <input type="text" class="form-control" id="detail">
+                <input type="text" class="form-control" id="detail" name="content">
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-            <button type="button" id="saveBtn" class="btn btn-primary">확인</button>
+			<div id="center-bot1" ><input class="btn btn-primary btn-user btn-block" type="submit" value="작성하기"></div>
+			<div id="center-bot2" ><input class="btn btn-primary btn-user btn-block" type="" value="취소하기"></div>
             </div>
         </form>
         </div>
@@ -94,8 +103,8 @@
                         var title = $('#title').val();
                         var select = $('#select').val();
                         var detail = $('#detail').val();
-                        var start_date = moment(start).format('YYYY-MM-DD');
-                        var end_date = moment(end).format('YYYY-MM-DD');
+                        var start_date = moment(start).format('MM/dd/yyyy');
+                        var end_date = moment(end).format('MM/dd/yyyy');
 
                         console.log(title);
                         console.log(select);

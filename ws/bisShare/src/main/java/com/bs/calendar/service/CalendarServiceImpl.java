@@ -33,7 +33,7 @@ public class CalendarServiceImpl implements CalendarService{
 		int result = 0;
 		
 		try {
-		    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy"); 
 		    Date parsedSDate = dateFormat.parse(vo.getStartDate());
 		    Date parsedEDate = dateFormat.parse(vo.getEndDate());
 		    Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
@@ -49,6 +49,30 @@ public class CalendarServiceImpl implements CalendarService{
 		
 		return result;
 		
+	}
+	
+	//캘린더에서 일정 작성
+	@Override
+	public int modalwrite(CalendarVo vo) {
+		
+		int result = 0;
+		
+		try {
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy"); 
+		    Date parsedSDate = dateFormat.parse(vo.getStartDate());
+		    Date parsedEDate = dateFormat.parse(vo.getEndDate());
+		    Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
+		    Timestamp timestamp2 = new java.sql.Timestamp(parsedEDate.getTime());
+		    vo.setStartDate(timestamp.toString());
+		    vo.setEndDate(timestamp2.toString());
+		    
+		    
+		    result = dao.insertModalCalendar(sst, vo);
+		} catch(Exception e) { 
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	//일정 삭제
@@ -80,5 +104,6 @@ public class CalendarServiceImpl implements CalendarService{
 	public CalendarVo selectOne(String no) {
 		return dao.selectOne(sst, no);
 	}
+
 
 }

@@ -66,9 +66,9 @@
 									  
 									  	<div class="card" style="width: 18rem; height: 10rem;">
 										  <div class="card-body">
-										    <h5 class="card-title">2022.10.12 휴가</h5>
+										    <h5 class="card-title">2022.10.25 휴가</h5>
 										    <h6 class="card-subtitle mb-2 text-muted">박서영</h6>
-										    <p class="card-text">내일 저 없어요</p>
+										    <p class="card-text">속세를 떠납니다</p>
 										  </div>
 										</div>
 										

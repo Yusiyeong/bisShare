@@ -41,9 +41,28 @@ public class CalendarController {
 	
 	//일정 캘린더에서 드래그로 작성
 	@PostMapping("modalWrite")
-	public String modalWrite(Model model) {
+	public String modalWrite(CalendarVo vo, Model model, HttpSession session) {
 		
-		return "layout/template";
+		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginVo");
+		String no = loginvo.getEmpNo();
+		
+		System.out.println(vo.getStartDate());
+		System.out.println(vo.getEndDate());
+		vo.setWriter(no);
+		int result = cs.modalwrite(vo);
+		
+		System.out.println(result);
+		
+		//화면 선택
+		if(result == 1) {
+			session.setAttribute("alertMsg", "일정 등록 완료");
+			model.addAttribute("page", "calendar/calendar-view");
+			return "layout/template";
+		}else {
+			session.setAttribute("msg" , "일정 등록 실패");
+			return "error/errorPage";
+		}
+		
 	}
 	
 	
