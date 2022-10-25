@@ -17,7 +17,11 @@ public class AddressDaoImpl implements AddressDao{
 	//주소록 조회
 	@Override
 	public List<AddressVo> selectList(SqlSessionTemplate sst, PageVo pvo, Map<String, String> map) {
-		return sst.selectList("addressMapper.selectList", map);
+		int offset = (pvo.getCurrentPage()-1) * pvo.getBoardLimit();
+		
+		RowBounds rb = new RowBounds(offset , pvo.getBoardLimit());
+		
+		return sst.selectList("addressMapper.selectList", map, rb);
 	}
 
 	//직원상세조회
