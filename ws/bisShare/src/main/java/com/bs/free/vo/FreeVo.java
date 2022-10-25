@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class FreeVo {
 
+	private String num; 	// 추가 함 // 로우넘
 	private String boardNo;
 	private String title;
 	private String content;

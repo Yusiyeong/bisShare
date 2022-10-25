@@ -49,8 +49,8 @@ public class NoticeReplyServiceImpl implements NoticeReplyService{
 		return nrd.edit(sst, vo);
 	}//edit
 
-	
-	
+
+
 	
 
 }//class

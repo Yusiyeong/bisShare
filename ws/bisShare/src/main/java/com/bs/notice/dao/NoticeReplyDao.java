@@ -21,4 +21,5 @@ public interface NoticeReplyDao {
 	int edit(SqlSessionTemplate sst, NoticeReplyVo vo);
 
 
+
 }//interface

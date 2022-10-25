@@ -19,7 +19,7 @@
                         <input type="text" name="title" style="width: 84%;" placeholder=" title"/>
                         
                         <a onclick="history.go(-1)" class="btn btn-secondary btn-sm" style="float: right; width: 7%;">취소</a> 
-                        <input type="submit" value="작성" class="btn btn-primary btn-sm" style="float: right; width: 7%; margin-right: 8px;" onclick="goWrite(this.form)"/> 
+                        <input type="submit" id="gogo" value="작성" class="btn btn-primary btn-sm" style="float: right; width: 7%; margin-right: 8px;" onclick="goWrite(this.form)"/> 
                        
                         <br><br> 
                         
@@ -36,7 +36,9 @@
       
 
 <script>
+
 $('.summernote').summernote({
+
    height: 700,               
    minHeight: null,          
    maxHeight: null,             
@@ -53,18 +55,20 @@ $('.summernote').summernote({
                data : {img : url},
                url : "${root}/notice/imgUpload",
                method : "POST",
+
                success : function(path) {
                   console.log('success');
                   const imgNode = document.createElement('img');
                   imgNode.setAttribute('src',path);
                   $('.summernote').summernote('insertNode',imgNode);
+                  
                }//success
+               
             });//ajax
          };//function
       }//onImageUpload
    }//callbacks
-   
+	
 });
-
 
 </script>

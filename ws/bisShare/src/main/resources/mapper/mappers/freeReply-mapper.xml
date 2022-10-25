@@ -4,4 +4,58 @@
 <mapper namespace="freeReplyMapper">
 
 
+	<!-- 댓글 조회 -->
+	<select id="selectListByBno" resultType="frv">
+	SELECT
+	    R.REPLY_NO	AS replyNo
+	    , R.CONTENT
+	    , R.BNO
+	    , E.NICK AS writer
+	    , R.ENROLL_DATE	AS enrollDate
+	    , R.MODIFY_DATE AS modifyDate
+	    , R.STATUS
+	FROM FREE_REPLY R JOIN EMPLOYEE E
+	ON R.WRITER = E.EMP_NO
+	WHERE R.STATUS = 'Y'
+	AND R.BNO = #{bno}
+	ORDER BY R.REPLY_NO DESC
+	</select>
+	
+	<!-- 댓글 작성 -->
+	<insert id="insertOne">
+     INSERT INTO FREE_REPLY
+      (
+         REPLY_NO
+         ,CONTENT
+         ,BNO
+         ,WRITER
+      )
+      VALUES
+      (
+         SEQ_FREE_REPLY_NO.NEXTVAL
+         , #{content}
+         , #{bno}
+         , #{writer}
+      )
+     </insert>
+      
+	<!-- 댓글 삭제 -->
+	<update id="deleteReply">
+	UPDATE FREE_REPLY 
+		SET
+			STATUS = 'N'
+	WHERE REPLY_NO = #{replyNo}
+	</update>
+	
+	
+	<!-- 댓글 수정 -->
+	<update id="updateOne">
+	UPDATE FREE_REPLY
+		SET 
+			 CONTENT = #{content}
+            , ENROLL_DATE = SYSDATE
+			, MODIFY_DATE = SYSDATE
+	WHERE REPLY_NO = #{replyNo}
+	</update>
+
 </mapper>

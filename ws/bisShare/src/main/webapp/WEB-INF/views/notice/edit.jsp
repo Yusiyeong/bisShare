@@ -33,7 +33,7 @@
                        
                         <br><br> 
                         
-                        <textarea class="summernote" name="content" value="${vo.content}"></textarea>
+                        <Textarea class="summernote"  id="floatingTextarea" name="content" value="${vo.content}"></Textarea>
                         
                      </form>
                      <!-- form end -->
@@ -44,6 +44,12 @@
          </div>
       <!-- End Page Content -->
       
+ 
+ 
+<script>
+	document.querySelector('#floatingTextarea').innerHtml = ${vo.content};
+</script>
+
 
 <script>
 $('.summernote').summernote({
@@ -75,6 +81,5 @@ $('.summernote').summernote({
    }//callbacks
    
 });
-
 
 </script>

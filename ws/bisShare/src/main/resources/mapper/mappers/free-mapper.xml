@@ -4,7 +4,102 @@
 <mapper namespace="freeMapper">
 
 
+	<!--페이징 처리 -->
+	<select id="selectCountAll" resultType="int">
+		SELECT COUNT(BOARD_NO)
+		FROM FREE_BOARD
+		WHERE STATUS = 'Y'
+	</select>
+
+	<!-- 게시글 목록 조회 -->
+	<select id="selectList" resultType="fv">
+	SELECT 
+	    ROW_NUMBER() OVER (ORDER BY F.BOARD_NO DESC) AS num,
+	        F.BOARD_NO AS boardNo
+	        ,F.TITLE
+	        ,F.CONTENT
+	        ,F.CNT
+	        ,TO_CHAR(F.ENROLL_DATE, 'YYYY"." MM"." DD') AS enrollDate
+	        ,F.MODIFY_DATE AS modifyDate
+	        ,F.STATUS
+	        ,E.NICK AS WRITER			
+    FROM FREE_BOARD F JOIN EMPLOYEE E
+    ON F.WRITER = E.EMP_NO
+    WHERE F.STATUS = 'Y'
+    
+    <choose>
+		<when test="condition == 'title'">
+			AND TITLE LIKE 
+		</when>
+		<otherwise>
+			AND NICK LIKE 
+		</otherwise>
+	</choose>
+	'%${keyword}%'
+	
+    ORDER BY F.BOARD_NO DESC
+	</select>
 
 
+	<!--  게시글 상세조회 -->
+	<select id="selectOne" resultType="fv">
+	SELECT
+	    F.BOARD_NO
+	    , F.TITLE
+	    , F.CONTENT
+	    , E.NICK AS writer
+	    , F.CNT
+	    , TO_CHAR(F.ENROLL_DATE, 'YYYY"년" MM"월" DD"일"') AS enrollDate
+	    , TO_CHAR(F.MODIFY_DATE, 'YYYY"년" MM"월" DD"일"') AS modifyDate
+	    , F.STATUS
+	FROM FREE_BOARD F JOIN EMPLOYEE E
+	ON F.WRITER = E.EMP_NO
+	WHERE F.BOARD_NO = #{boardNo}
+	AND F.STATUS = 'Y'
+	</select>
+	
+	
+	<!-- 조회수 증가 -->
+	<update id="increaseCnt">
+	UPDATE FREE_BOARD
+			SET CNT = CNT + 1
+	WHERE BOARD_NO = #{boardNo}
+	AND STATUS = 'Y'
+	</update>
 
+	<!-- 게시글 삭제 -->
+	<update id="deleteBoard">
+	UPDATE FREE_BOARD
+		SET
+			STATUS = 'N'
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+
+	<!-- 게시글 작성 -->
+	<insert id="insertBoard">
+	INSERT INTO FREE_BOARD
+		(
+			BOARD_NO
+			, TITLE
+			, CONTENT
+			, WRITER
+		)
+		VALUES
+		(
+			SEQ_FREE_BOARD_NO.NEXTVAL
+			, #{title}
+			, #{content}
+			, #{writer}
+		)
+	</insert>
+	
+	<!-- 수정하기 -->
+	<update id="edit">
+	UPDATE FREE_BOARD
+		SET 
+			TITLE = #{title}
+			, CONTENT = #{content}
+			, MODIFY_DATE = SYSDATE
+		WHERE BOARD_NO = #{boardNo}
+	</update>
 </mapper>

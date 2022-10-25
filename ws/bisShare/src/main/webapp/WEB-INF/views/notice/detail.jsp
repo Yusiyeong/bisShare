@@ -70,11 +70,16 @@
              
              <!-- 내용start  -->
             <div class="form-floating">
-               <textarea style="height: 350px;" class="form-control" placeholder="Leave a comment here" id="floatingTextarea">${vo.content}</textarea>
+               <div style="height: 350px;  overflow: auto;" class="form-control" placeholder="Leave a comment here" id="floatingTextarea">${vo.content}</div>
             </div>
             <!-- 내용end -->
            
             <br>
+            
+            <script>
+               document.querySelector('#floatingTextarea').innerHtml = ${vo.content};
+            </script>
+
 
              <!-- 댓글start  -->
             <div id="reply-area">
@@ -117,7 +122,7 @@
                                  </div>
                               </div> 
                               <!-- 연필 클릭 시 -> 수정 생성 폼end -->
-                           </div>
+                            </div>
                         </c:if>
                         <!-- 댓글 수정/삭제 폼end -->
                   
@@ -206,61 +211,62 @@
    
    <script>
    /*댓글 삭제*/
-   const deleteBtn = document.querySelector('#delete-btn');
+   const deleteBtnArray = document.querySelectorAll('#delete-btn');
    
-   deleteBtn.addEventListener("click", function(){
-      
-	   var replyNo = document.getElementById("delete-btn").getAttribute('data-value');
-	   console.log(replyNo); 
-	   
-	   var ans = confirm("선택하신 댓글을 삭제하시겠습니까?");
-	   if(!ans) return false;
+   for (let i = 0; i < deleteBtnArray.length; i++) {
    
-      $.ajax({
-         
-         url : "${root}/noticeReply/delete" ,
-           type : "POST" ,
-           data : { 
-              "replyNo" : replyNo ,
-           } ,
-           success : function(result){
-              if(result == 'ok'){
-                 alert('댓글 삭제 성공!')
+         deleteBtnArray[i].addEventListener("click", function(){
+            
+              // 댓글 번호 가져오기
+              var replyNo = deleteBtnArray[i].getAttribute('data-value');
+               
+               var ans = confirm("선택하신 댓글을 삭제하시겠습니까?");
+               if(!ans) return false;
+            
+                $.ajax({
+                  
+                  url : "${root}/noticeReply/delete" ,
+                    type : "POST" ,
+                    data : { 
+                       "replyNo" : replyNo ,
+                    } ,
+                    success : function(result){
+                       if(result == 'ok'){
+                          alert('댓글 삭제 성공!')
+                          
+                          // 삭제된거 빼고 다시 댓글 조회
+                          location.reload();      //자동 새로고침
+                          //$('#test-ysy').load(location.href + ' #test-ysy');
+                          //$("#reply-area").show();//ysy
+                          
+                       }else{
+                          alert('댓글 삭제 실패!')
+                       }
+                       
+                    },
+                    error : function(){
+                       alert("통신 에러!");
+                    }
                  
-                 // 삭제된거 빼고 다시 댓글 조회
-                 location.reload();      //자동 새로고침
-                 //$('#test-ysy').load(location.href + ' #test-ysy');
-                 
-                 
-                 $("#reply-area").show();//ysy
-                 
-              }else{
-                 alert('댓글 삭제 실패!')
-              }
-              
-           },
-           error : function(){
-              alert("통신 에러!");
-           }
-         
-      });
-      
-   });
+               });//ajax
+            });//addEventListener
+            
+         }//for
+   
    </script>
    
    
-   
     <script>
-	   // 수정하는 댓글의 replyNo 가져오기
+   // 수정하는 댓글의 replyNo 가져오기
     var replyNo = document.getElementById("edit-btn").getAttribute('data-value');
-    console.log(replyNo); 
+    //console.log(replyNo); 
     
    /*댓글 수정*/
    /* 연필 버튼 클릭 시 -> 수정 폼 생성 */
    const editBtn = document.querySelector('#edit-btn');
    editBtn.addEventListener("click", function(){
       
-	      
+         
       // 기존span 지우기
       $("#edit-content").empty();//ysy
       $("#enrollDate").empty();//ysy
@@ -279,9 +285,9 @@
    
    editCompleteBtn.addEventListener("click", function(){
       
-	   var ans = confirm("정말 댓글을 수정 하시겠습니까?");
-	   if(!ans) return false;
-	   
+      var ans = confirm("정말 댓글을 수정 하시겠습니까?");
+      if(!ans) return false;
+      
       // 수정하는 댓글의 replyNo 가져오기
       var replyNo = document.getElementById("edit-btn").getAttribute('data-value');
       console.log(replyNo); 

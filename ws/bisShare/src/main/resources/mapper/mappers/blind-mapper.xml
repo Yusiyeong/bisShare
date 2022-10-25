@@ -3,8 +3,103 @@
 
 <mapper namespace="blindMapper">
 
+<!--페이징 처리 -->
+	<select id="selectCountAll" resultType="int">
+		SELECT COUNT(BOARD_NO)
+		FROM BLIND_BOARD
+		WHERE STATUS = 'Y'
+	</select>
 
+	<!-- 게시글 목록 조회 -->
+	<select id="selectList" resultType="bv">
+	SELECT 
+	    ROW_NUMBER() OVER (ORDER BY B.BOARD_NO DESC) AS num,
+	        B.BOARD_NO AS boardNo
+	        ,B.TITLE
+	        ,B.CONTENT
+	        ,B.CNT
+	        ,TO_CHAR(B.ENROLL_DATE, 'YYYY"." MM"." DD') AS enrollDate
+	        ,B.MODIFY_DATE AS modifyDate
+	        ,B.STATUS
+	        ,E.NICK AS WRITER			
+    FROM BLIND_BOARD B JOIN EMPLOYEE E
+    ON B.WRITER = E.EMP_NO
+    WHERE B.STATUS = 'Y'
+    
+    <choose>
+		<when test="condition == 'title'">
+			AND TITLE LIKE 
+		</when>
+		<otherwise>
+			AND CONTENT LIKE 
+		</otherwise>
+	</choose>
+	'%${keyword}%'
+	
+    ORDER BY B.BOARD_NO DESC
+	</select>
 
+	<!--  게시글 상세조회 -->
+	<select id="selectOne" resultType="bv">
+	SELECT
+	    B.BOARD_NO
+	    , B.TITLE
+	    , B.CONTENT
+	    , E.NICK AS writer
+	    , B.CNT
+	    , TO_CHAR(B.ENROLL_DATE, 'YYYY"년" MM"월" DD"일"') AS enrollDate
+	    , TO_CHAR(B.MODIFY_DATE, 'YYYY"년" MM"월" DD"일"') AS modifyDate
+	    , B.STATUS
+	FROM BLIND_BOARD B JOIN EMPLOYEE E
+	ON B.WRITER = E.EMP_NO
+	WHERE B.BOARD_NO = #{boardNo}
+	AND B.STATUS = 'Y'
+	</select>
+	
+	
+	<!-- 조회수 증가 -->
+	<update id="increaseCnt">
+	UPDATE BLIND_BOARD
+			SET CNT = CNT + 1
+	WHERE BOARD_NO = #{boardNo}
+	AND STATUS = 'Y'
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<update id="deleteBoard">
+	UPDATE BLIND_BOARD
+		SET
+			STATUS = 'N'
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<!-- 게시글 작성 -->
+	<insert id="insertBoard">
+	INSERT INTO BLIND_BOARD
+		(
+			BOARD_NO
+			, TITLE
+			, CONTENT
+			, WRITER
+		)
+		VALUES
+		(
+			SEQ_BLIND_BOARD_NO.NEXTVAL
+			, #{title}
+			, #{content}
+			, #{writer}
+		)
+	</insert>
+	
+	<!-- 수정하기 -->
+	<update id="edit">
+	UPDATE BLIND_BOARD
+		SET 
+			TITLE = #{title}
+			, CONTENT = #{content}
+			, MODIFY_DATE = SYSDATE
+		WHERE BOARD_NO = #{boardNo}
+	</update>
 
 
 </mapper>

@@ -1,4 +1,4 @@
-package com.bs.notice.service;
+package com.bs.free.service;
 
 import java.util.List;
 import java.util.Map;
@@ -8,44 +8,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bs.common.PageVo;
-import com.bs.notice.dao.NoticeDao;
-import com.bs.notice.vo.NoticeAttachVo;
+import com.bs.free.dao.FreeDao;
+import com.bs.free.vo.FreeVo;
 import com.bs.notice.vo.NoticeVo;
 
 @Service
-public class NoticeServiceImpl implements NoticeService{
+public class FreeServiceImpl implements FreeService{
 
 	private final SqlSessionTemplate sst;
-	private final NoticeDao nd;
+	private final FreeDao fd;
 	
-	// 생성자
 	@Autowired
-	public NoticeServiceImpl(SqlSessionTemplate sst, NoticeDao nd) {
+	public FreeServiceImpl(SqlSessionTemplate sst, FreeDao fd) {
 		super();
 		this.sst = sst;
-		this.nd = nd;
+		this.fd = fd;
 	}
-	
+
 	// 페이징 처리
 	@Override
 	public int selectTotalCnt() {
-		return nd.selectCountAll(sst);
+		return fd.selectCountAll(sst);
 	}//selectTotalCnt
 
 	// 게시글 목록 조회
 	@Override
-	public List<NoticeVo> selectList(PageVo pv, Map<String, String> map) {
-		return nd.selectList(sst, pv, map);
+	public List<FreeVo> selectList(PageVo pv, Map<String, String> map) {
+		return fd.selectList(sst, pv, map);
 	}//selectList
-
 
 	// 게시글 상세 조회 + 조회수 증가
 	@Override
-	public NoticeVo selectOne(String boardNo) {
+	public FreeVo selectOne(String boardNo) {
 		
-		int result = nd.increaseCnt(sst, boardNo);	// 조회수 증가
+		int result = fd.increaseCnt(sst, boardNo);	// 조회수 증가
 		if(result == 1) {
-			return nd.selectOne(sst, boardNo);	// 상세 조회
+			return fd.selectOne(sst, boardNo);	// 상세 조회
 		}else {
 			return null;
 		}
@@ -55,23 +53,19 @@ public class NoticeServiceImpl implements NoticeService{
 	// 게시글 삭제
 	@Override
 	public int delete(String boardNo) {
-		return nd.delete(sst, boardNo);
+		return fd.delete(sst, boardNo);
 	}//delete
-
 
 	// 게시글 작성
 	@Override
-	public int write(NoticeVo vo) {
-		return nd.insertBoard(sst, vo);
+	public int write(FreeVo vo) {
+		return fd.insertBoard(sst, vo);
 	}//write
 
-
-	// 수정하기
+	// 게시글 수정
 	@Override
-	public int edit(NoticeVo vo) {
-		return nd.edit(sst, vo);
+	public int edit(FreeVo vo) {
+		return fd.edit(sst, vo);
 	}//edit
-
-
-
+	
 }//class

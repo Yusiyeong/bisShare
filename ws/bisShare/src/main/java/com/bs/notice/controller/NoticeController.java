@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
@@ -68,7 +69,8 @@ public class NoticeController {
       int totalCount = ns.selectTotalCnt();
 
       PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
-
+      
+      
       // 게시글 목록 조회 // 서비스 호출
       List<NoticeVo> voList = ns.selectList(pv, map);
       model.addAttribute("voList", voList);
@@ -95,7 +97,7 @@ public class NoticeController {
 
       model.addAttribute("title", "POST");
       model.addAttribute("page", "notice/detail");
-
+      
       return "layout/template";
 
    }// detail
@@ -149,7 +151,6 @@ public class NoticeController {
       } // if
       
       
-
    }// write
 
    
