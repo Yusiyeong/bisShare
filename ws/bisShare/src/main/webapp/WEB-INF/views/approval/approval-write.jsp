@@ -583,14 +583,19 @@
     
     //기안하기 버튼 눌럿을 때
     $('#submit-btn').click(()=>{
+    	//결재 카테고리 가져오
+		const categoryNo = $('select[name=categoryNo]').val();
         // 결재권자 가져오기
     	const aprverEmpNos_ = document.getElementsByClassName('added');
         let aprverEmpNos = "";
+        let aprverStatus = "";
         for(let i = 0; i < aprverEmpNos_.length; ++i){
             if(i==0){
                 aprverEmpNos += $(".added+input[name='empNo']").eq(i).attr("value");
+	            aprverStatus += "N";
             } else{
                 aprverEmpNos += "," + $(".added+input[name='empNo']").eq(i).attr("value");
+                aprverStatus += ",N";
             }
         }
         //결재 상세내용(제목, 컨텐츠) 가져오기
@@ -600,35 +605,43 @@
         //합의자, 참조자 가져오기
         const agree_ = document.getElementsByClassName('agree-added');
         let agreeEmpNos = "";
+        let agreeStatus = "";
         for(let i = 0; i < agree_.length; ++i){
             if(i==0){
                 agreeEmpNos += $(".agree-added+input[name='agree-empNo']").eq(i).attr("value");
+                agreeStatus += "N";
             } else{
                 agreeEmpNos += "," + $(".agree-added+input[name='agree-empNo']").eq(i).attr("value");
+                agreeStatus += ",N";
             }
         }
         const ref_ = document.getElementsByClassName('ref-added');
         let refEmpNos = "";
+        let refStatus = "";
         for(let i = 0; i < ref_.length; ++i){
             if(i==0){
                 refEmpNos += $(".ref-added+input[name='ref-empNo']").eq(i).attr("value");
+                refStatus += "N";
             } else{
                 refEmpNos += "," + $(".ref-added+input[name='ref-empNo']").eq(i).attr("value");
+                refStatus += ",N";
             }
+            
         }
-
     	//결재 TABLE 에 삽입해줄 ajax
     	$.ajax({
     		url : "${root}/approval/write"
     		, type : "post"
     		, data : {
-    				empNo : '1'
-	    			, categoryNo : '1'
+	    			categoryNo : categoryNo
 	    			, adcName : adcName
 	    			, adcContent : adcContent
     				, aprverEmpNo : aprverEmpNos
+    				, aprverStatus : aprverStatus
 		    		, agreeEmpNo : agreeEmpNos
+		    		, agreeStatus : agreeStatus
 		    		, refEmpNo : refEmpNos
+		    		, refStatus : refStatus
     		}
     		, success : (result) => {
 				if(result == 'ok'){

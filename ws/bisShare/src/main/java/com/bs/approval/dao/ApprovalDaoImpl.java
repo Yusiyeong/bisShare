@@ -16,19 +16,6 @@ public class ApprovalDaoImpl implements ApprovalDao{
 	public int insertDocu(SqlSessionTemplate sst, ApprovalVo avo) {
 		return sst.insert("approvalMapper.insertOneIntoDocu", avo);
 	}
-	@Override
-	public int insertAprver(SqlSessionTemplate sst, Map<String, String> aprvMap) {
-		return sst.insert("approvalMapper.insertIntoAprver", aprvMap);
-	}
-	@Override
-	public int insertAgree(SqlSessionTemplate sst, Map<String, String> agreeMap) {
-		return sst.insert("approvalMapper.insertIntoAgree", agreeMap);
-	}
-	@Override
-	public int insertRef(SqlSessionTemplate sst, Map<String, String> refMap) {
-		return sst.insert("approvalMapper.insertIntoRef", refMap);
-	}
-
 	
 	//내가 작성한 기안서
 	@Override

@@ -69,20 +69,22 @@ public class ApprovalController {
 	//결재 작성 진행
 	@PostMapping("write")
 	@ResponseBody
-	public String write(Model model, ApprovalVo avo) {
+	public String write(Model model, ApprovalVo avo, HttpSession session) {
+		
+		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
+		avo.setEmpNo(empVo.getEmpNo());
 		
 		System.out.println(avo);
 		
-//		int result = aprvService.insertOne(avo);
-//		
-//		if(result == 1) {
-//			model.addAttribute("page", "approval/detail");
-//			return"ok";
-//		} else {
-//			//작성실패
-//			return"fail";
-//		}
-		return "ok";
+		int result = aprvService.insertOne(avo);
+		
+		if(result == 1) {
+			model.addAttribute("page", "approval/detail");
+			return"ok";
+		} else {
+			//작성실패
+			return"fail";
+		}
 	}
 	
 	//임시저장 화면

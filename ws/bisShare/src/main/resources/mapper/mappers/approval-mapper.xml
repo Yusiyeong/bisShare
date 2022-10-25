@@ -4,20 +4,33 @@
 
 	<!-- 기안서 작성하기 -->
 	<insert id="insertOneIntoDocu">
-		INSERT INTO APPROVAL_DOCU(ADC_NO, EMP_NO, CATEGORY_NO, ADC_NAME, ADC_CONTENT)
-		VALUES(APRV_DOCU_NO.NEXTVAL,#{empNo},#{categoryNo},#{adcName},#{adcContent})
+		INSERT INTO APPROVAL_DOCU(
+			ADC_NO
+			, EMP_NO
+			, CATEGORY_NO
+			, ADC_NAME
+			, ADC_CONTENT
+			, APRVER_EMP_NO
+			, APRVER_STATUS
+			, AGREE_EMP_NO
+			, AGREE_STATUS
+			, REF_EMP_NO
+			, REF_STATUS
+		)
+		VALUES(
+			APRV_DOCU_NO.NEXTVAL
+			, #{empNo}
+			, #{categoryNo}
+			, #{adcName}
+			, #{adcContent}
+			, #{aprverEmpNo}
+			, #{aprverStatus}
+			, #{agreeEmpNo}
+			, #{agreeStatus}
+			, #{refEmpNo}
+			, #{refStatus}
+		)
 	</insert>
-	<insert id="insertIntoAprver">
-		INSERT INTO APPROVER (ADC_NO, EMP_NO, APRV_NO) VALUES(APRV_DOCU_NO.CURRVAL,#{aprvEmpNo},#{aprvNo})
-	</insert>
-	<insert id="insertIntoAgree">
-		INSERT INTO AGREEMENT (ADC_NO, EMP_NO, AGREE_NO) 
-		VALUES(APRV_DOCU_NO.CURRVAL,#{agreeEmpNo},#{agreeNo})
-	</insert>
-	<insert id="insertIntoRef">
-		INSERT INTO APRV_REF (ADC_NO, EMP_NO, REF_NO) VALUES(APRV_DOCU_NO.CURRVAL,#{refEmpNo},#{refNo})
-	</insert>
-	
 	
 	<!-- 결재 디테일 -->
 	<select id="getListByNo" resultType="aprvVo">
