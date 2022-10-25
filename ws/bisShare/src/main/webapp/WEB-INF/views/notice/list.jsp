@@ -21,6 +21,7 @@ color: gray;}
 a:hover { text-decoration:none !important }
 </style>
 
+
       <!-- Begin Page Content -->
             <div class="container-fluid">
 
@@ -31,15 +32,22 @@ a:hover { text-decoration:none !important }
                    </div>
                    <div class="card-body">
                 <!--start-->
+                
+                <!-- 글쓰기 버튼 start  -->
+                <c:if test="${not empty loginVo}">
+	               <button class="btn btn-outline-primary btn-sm" style="position: absolute;" onclick = "location.href ='${root}/notice/write'">글쓰기</button>            
+                </c:if>
+                <!-- 글쓰기 버튼 end  -->
+                
                 <!--form start-->
                   <form action="${root}/notice/list/1" method="get">
                     <!--검색버튼start-->
                     <div style="height: 50px;">
                         <div style="float: right;">
-                     <select name="condition" style="height:30px;">
-                        <option value="title">제목</option>
-                        <option value="nick">작성자</option>
-                     </select>
+		                     <select name="condition" style="height:30px;">
+		                        <option value="title">제목</option>
+		                        <option value="nick">작성자</option>
+		                     </select>
          
                             <input type="text" name="keyword" value="${keyword}">
                             <input type="submit" value="검색" class="btn-primary" style="border-radius: 3px;" >
@@ -133,12 +141,7 @@ a:hover { text-decoration:none !important }
                         </form>
                        <!--form end-->
                        
-                     <!-- 글쓰기 버튼 start  -->
-                     <c:if test="${not empty loginVo}">
-                        <button class="btn btn-primary btn-sm" onclick = "location.href ='${root}/notice/write'">글쓰기</button>            
-                     </c:if>
-                     <!-- 글쓰기 버튼 end  -->
-                     
+               
                    </div>
                    <!--end-->      
                </div>

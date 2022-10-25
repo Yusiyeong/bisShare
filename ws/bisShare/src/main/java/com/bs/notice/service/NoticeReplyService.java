@@ -18,4 +18,5 @@ public interface NoticeReplyService {
 	// 댓글 수정
 	int edit(NoticeReplyVo vo);
 
+
 }//interface
