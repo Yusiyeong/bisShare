@@ -27,6 +27,30 @@
 		) 
 	</insert>
 	
+	<!-- 모달에서 일정 작성 -->
+	<insert id="insertModalCalendar">
+		INSERT INTO CALENDAR
+		(
+			CAL_NO
+			, CATE_NO
+			, TITLE
+			, CONTENT
+			, WRITER
+			, START_DATE
+			, END_DATE
+		)
+		VALUES
+		(
+			SEQ_CALENDAR_NO.NEXTVAL 
+			, #{cateNo} 
+			, #{title}
+			, #{content}
+			, #{writer} 
+			, #{startDate}
+			, #{endDate}
+		)
+	</insert>
+	
 	
 	<!-- 일정 삭제 -->
 	<update id="deleteCalendar">

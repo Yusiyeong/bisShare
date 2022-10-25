@@ -18,6 +18,12 @@ public class CalendarDaoImpl implements CalendarDao{
 		return sst.insert("calendarMapper.insertCalendar", vo);
 	}
 
+	//모달에서 일정 작성
+	@Override
+	public int insertModalCalendar(SqlSessionTemplate sst, CalendarVo vo) {
+		return sst.insert("calendarMapper.insertModalCalendar", vo);
+	}
+	
 	//일정 삭제
 	@Override
 	public int delete(SqlSessionTemplate sst, String no) {
@@ -51,5 +57,6 @@ public class CalendarDaoImpl implements CalendarDao{
 	public CalendarVo selectOne(SqlSessionTemplate sst, String no) {
 		return sst.selectOne("calendarMapper.selectOne", no);
 	}
+
 
 }
