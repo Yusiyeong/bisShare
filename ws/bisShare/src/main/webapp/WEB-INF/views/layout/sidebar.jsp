@@ -92,7 +92,7 @@
                         <a class="collapse-item" href="${root}/calendar/main">나의 일정</a>
                         <a class="collapse-item" href="${root}/calendar/write">일정 작성</a>
                         <a class="collapse-item" href="${root}/calendar/edit">일정 수정</a>
-                        <a class="collapse-item" href="${root}/calendar/view">일정 조회</a>
+                        <a class="collapse-item" href="${root}/calendar/view/1">일정 조회</a>
                     </div>
                 </div>
             </li>
