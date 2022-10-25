@@ -32,6 +32,10 @@
 		color: gray;
 	}
 	
+	#test1{
+		display: none;
+	}
+	
 </style>
 
 <!-- Begin Page Content -->
@@ -95,27 +99,18 @@
 			</div>
 		</div>
 		
-		<!-- 조직도에서 직원정보가있는 행을 클릭하면 직원 상세정보뜨게 하기 -->
-		<div class="col-xl-6 col-lg-6" id="test1">
+		
+		<div class="col-xl-6 col-lg-6">
 			<div class="card shadow mb-4 border-left-primary">
 				<div class="card-header py-3">
-	        		<h6 class="m-0 font-weight-bold text-primary" >상세정보를 보려면 멤버 목록을 클릭하세요</h6>
-	    		</div>
-			</div>
-		</div>
-		
-		
-		<div class="col-xl-6 col-lg-6" id="test2">
-			<div class="card shadow mb-4 border-left-primary">
-				<div class="card-header py-3">
-	        		<h6 class="m-0 font-weight-bold text-primary" >직원상세정보</h6>
+	        		<h6 class="m-0 font-weight-bold text-primary" >직원 상세정보</h6>
 	    		</div>
 	    		
-	    		<div class="card-body">
+	    		<div class="card-body" id="test1">
 		            <div class="table-responsive">
 		                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 		                	<img id="img" src="${root}/resources/img/guest.png">
-		                	<c:forEach var="addr2" items="${dvoList}" begin="1" end="1">
+		                	<c:forEach var="addr2" items="${dvoList}">
 			                	<tr>
 			                		<td id="t1">이름:&nbsp ${addr2.nick}</td>
 			                	</tr>
@@ -169,13 +164,15 @@
 		});
 </script>
 
+
 <script type="text/javascript"> 
 	var bDisplay = true; function doDisplay(){ 	
-	    var con = document.getElementById("test1"); 	
-	    if(con.style.display=='none'){ 		
-	        con.style.display = 'block'; 	
-	    }else{ 		
+	    var con = document.getElementById("test1"); 
+	    if(con.style.display=='block'){ 		
 	        con.style.display = 'none'; 	
+	    }else{ 		
+	        con.style.display = 'block'; 	
 	    } 
 	} 
+	
 </script> 

@@ -42,7 +42,7 @@ public class AddressController {
 		
 		int totalCount = adds.selectTotalCnt();
 		
-		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
+		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 8);
 		
 		List<AddressVo> voList = adds.selectList(pvo, map);
 		List<AddressVo> dvoList = adds.detailList();

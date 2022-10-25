@@ -20,7 +20,6 @@ public class AddressServiceImpl implements AddressService{
 
 	@Autowired
 	public AddressServiceImpl(SqlSessionTemplate sst, AddressDao dao) {
-		super();
 		this.sst = sst;
 		this.dao = dao;
 	}
