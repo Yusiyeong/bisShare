@@ -52,7 +52,7 @@
 	    		<div class="card-body">
 	    		<form action="${root}/address/list" method="get">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table id="addrList" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
 								<tr>
 									<th><input type="checkbox" id="cbx_chkAll" /></th>
@@ -64,14 +64,17 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="addr" items="${voList}">
+								
+								
+								
+								<c:forEach var="addr" items="${voList}" varStatus="st">
 									<tr>
 										<td><input type="checkbox" name="chk"></td>
-										<td><a href="javascript:doDisplay();">${addr.nick}</a></td>
-										<td><a href="javascript:doDisplay();">${addr.rankName}</a></td>
-										<td><a href="javascript:doDisplay();">${addr.deptName}</a></td>
-										<td><a href="javascript:doDisplay();">${addr.phone}</a></td>
-										<td><a href="javascript:doDisplay();">${addr.email}</a></td>
+										<td><a href="javascript:doDisplay(${st.index});">${addr.nick}</a></td>
+										<td><a href="javascript:doDisplay(${st.index});">${addr.rankName}</a></td>
+										<td><a href="javascript:doDisplay(${st.index});">${addr.deptName}</a></td>
+										<td><a href="javascript:doDisplay(${st.index});">${addr.phone}</a></td>
+										<td><a href="javascript:doDisplay(${st.index});">${addr.email}</a></td>
 									</tr>
 				    			</c:forEach>
 								
@@ -108,32 +111,37 @@
 	    		
 	    		<div class="card-body" id="test1">
 		            <div class="table-responsive">
-		                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+		            	
+		            		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 		                	<img id="img" src="${root}/resources/img/guest.png">
-		                	<c:forEach var="addr2" items="${dvoList}">
-			                	<tr>
-			                		<td id="t1">이름:&nbsp ${addr2.nick}</td>
-			                	</tr>
-			                	<tr>
-			                		<td id="t1">직급:&nbsp ${addr2.rankName}</td>
-			                	</tr>
-								<tr>
-									<td id="t1">부서:&nbsp ${addr2.deptName}</td>
-			                	</tr>
-								<tr>
-									<td id="t1">연락처:&nbsp ${addr2.phone}</td>
-			                	</tr>
-								<tr>
-									<td id="t1">이메일:&nbsp ${addr2.email}</td>
-			                	</tr>
-			                	<tr>
-									<td id="t1">주소:&nbsp ${addr2.address}</td>
-			                	</tr>
-			                	<tr>
-									<td id="t1">입사일:&nbsp ${addr2.hireDate}</td>
-			                	</tr>
+		                		<c:forEach var="addr2" items="${dvoList}" varStatus="st">
+		                		
+				                		<tr class="temp-${st.index}">
+					                		<td id="t1">이름:&nbsp ${addr2.nick}</td>
+					                	</tr>
+					                	<tr class="temp-${st.index}">
+					                		<td id="t1">직급:&nbsp ${addr2.rankName}</td>
+					                	</tr>
+										<tr class="temp-${st.index}">
+											<td id="t1">부서:&nbsp ${addr2.deptName}</td>
+					                	</tr>
+										<tr class="temp-${st.index}">
+											<td id="t1">연락처:&nbsp ${addr2.phone}</td>
+					                	</tr>
+										<tr class="temp-${st.index}">
+											<td id="t1">이메일:&nbsp ${addr2.email}</td>
+					                	</tr>
+					                	<tr class="temp-${st.index}">
+											<td id="t1">주소:&nbsp ${addr2.address}</td>
+					                	</tr>
+					                	<tr class="temp-${st.index}">
+											<td id="t1">입사일:&nbsp ${addr2.hireDate}</td>
+					                	</tr>
+			                	
 		                	</c:forEach>
 		                </table>
+		            	
+		                
 		            </div>
 		        </div>
 	    		</form>
@@ -166,7 +174,13 @@
 
 
 <script type="text/javascript"> 
-	var bDisplay = true; function doDisplay(){ 	
+	var bDisplay = true; 
+	function doDisplay(idx){ 	
+		
+		const arr = document.querySelectorAll(".temp-" + idx);
+		arr[0].style.display == 'block';
+		arr[1].style.display == 'block';
+		
 	    var con = document.getElementById("test1"); 
 	    if(con.style.display=='block'){ 		
 	        con.style.display = 'none'; 	
@@ -176,3 +190,4 @@
 	} 
 	
 </script> 
+
