@@ -1,5 +1,6 @@
 package com.bs.notice.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.bs.common.PageVo;
 import com.bs.notice.dao.NoticeDao;
-import com.bs.notice.vo.NoticeAttachVo;
 import com.bs.notice.vo.NoticeScrapVo;
 import com.bs.notice.vo.NoticeVo;
 
@@ -82,6 +82,7 @@ public class NoticeServiceImpl implements NoticeService{
 	// 스크랩 하기
 	@Override
 	public int scrap(NoticeScrapVo svo) {
+		
 		return nd.scrap(sst, svo);
 	}
 
@@ -102,6 +103,15 @@ public class NoticeServiceImpl implements NoticeService{
 	public List<NoticeScrapVo> selectScrapList(NoticeScrapVo svo) {
 		return nd.selectScrapList(sst, svo);
 	}//selectScrapList
+
+	// 회원 해당 게시글 스크랩 여부
+	@Override
+	public NoticeScrapVo findScrap(String boardNo, String empNo) {
+		Map<String, String> number = new HashMap<String, String>();
+		number.put("boardNo", boardNo);
+		number.put("empNo", empNo);
+		return nd.findScrap(sst, number);		
+	}//findScrap
 
 
 

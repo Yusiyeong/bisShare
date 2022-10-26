@@ -157,5 +157,17 @@
 	WHERE S.EMP_NO = #{empNo}
 	</select>
 
-
+	<!-- 회원 해당 게시글 스크랩 여부 -->
+	<select id="findScrap" parameterType="java.util.HashMap" resultType="svo">
+	SELECT 
+		SCRAP_NO AS scrapNo 
+		, EMP_NO AS empNo
+		, BNO AS boardNo
+		, SCRAP_DATE 
+    FROM NOTICE_SCRAP 
+    WHERE EMP_NO = #{empNo} 
+    AND BNO = #{boardNo}
+	</select>
+	
+	
 </mapper>

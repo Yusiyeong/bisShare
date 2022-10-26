@@ -44,6 +44,9 @@ public interface NoticeDao {
 	// 스크랩 목록 조회
 	List<NoticeScrapVo> selectScrapList(SqlSessionTemplate sst, NoticeScrapVo svo);
 
+	// 회원 해당 게시글 스크랩 여부
+	NoticeScrapVo findScrap(SqlSessionTemplate sst, Map<String, String> number);
+
 
 
 }//interface
