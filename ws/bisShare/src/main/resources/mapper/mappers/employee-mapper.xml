@@ -5,10 +5,30 @@
 
 	<!-- 로그인 -->
 	<select id="selectOneById" resultType="ev">
-		SELECT *
-		FROM EMPLOYEE
+		SELECT 
+		    E.EMP_NO
+		    , E.ID
+		    , E.PWD
+		    , E.NICK
+		    , E.PHONE
+		    , E.ADDRESS
+		    , E.SS_NO
+		    , E.HIRE_DATE
+		    , E.SALARY
+		    , E.STATUS
+		    , E.PROFILE_PATH
+		    , C.COMP_NAME COMPANY_NO
+		    , D.DEPT_NAME DEPT_NO
+		    , R.RANK_NAME RANK_NO
+		FROM EMPLOYEE E
+		JOIN COMPANY C
+		ON C.COMP_NO = E.COMPANY_NO
+		JOIN DEPT D
+		ON D.DEPT_NO = E.DEPT_NO
+		JOIN RANK R
+		ON R.RANK_NO = E.RANK_NO
 		WHERE STATUS='Y'
-		AND ID=#{id}
+		AND E.ID=#{id}
 	</select>
 	
 	<!-- 사원 등록 -->
