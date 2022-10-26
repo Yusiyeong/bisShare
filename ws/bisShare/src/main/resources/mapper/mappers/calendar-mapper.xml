@@ -56,7 +56,7 @@
 	<update id="deleteCalendar">
 		UPDATE CALENDAR
 			SET
-				STATUS = 'X'
+				STATUS = 'N'
 			WHERE CAL_NO = #{calNo}
 	</update>
 	
@@ -78,21 +78,22 @@
 	<!-- 일정 조회 -->
 	<select id="selectList" resultType="calvo">
 		SELECT 
-			C.CAL_NO
-			,C.CATE_NO
-			,C.TITLE
-			,C.CONTENT
-			,C.ENROLL_DATE
-			,C.MODIFY_DATE
-			,C.START_DATE
-			,C.END_DATE
-			,C.STATUS
-			,E.NICK AS WRITER
-		FROM CALENDAR C
-		JOIN EMPLOYEE E
-		ON C.WRITER = E.EMP_NO
-		WHERE C.STATUS = 'O'
-		ORDER BY C.CAL_NO DESC
+		        C.CAL_NO
+		        ,C.CATE_NO
+		        ,C.TITLE
+		        ,C.CONTENT
+		        ,C.ENROLL_DATE
+		        ,C.MODIFY_DATE
+		        ,C.START_DATE
+		        ,C.END_DATE
+		        ,C.STATUS
+		        ,E.NICK AS WRITER
+		    FROM CALENDAR C
+		    JOIN EMPLOYEE E
+		    ON C.WRITER = E.EMP_NO
+		    WHERE C.STATUS = 'Y'
+		    AND C.WRITER = #{writer}
+		    ORDER BY C.CAL_NO DESC
 	</select>
 	
 	
@@ -100,7 +101,7 @@
 	<select id="selectCountAll" resultType="int">
 		SELECT COUNT(CAL_NO)
 		FROM CALENDAR
-		WHERE STATUS = 'O'
+		WHERE STATUS = 'Y'
 	</select>
 	
 	
@@ -121,7 +122,7 @@
 		JOIN EMPLOYEE E
 		ON C.WRITER = E.EMP_NO
 		WHERE C.CAL_NO = #{calNo}
-		AND C.STATUS = 'O'
+		AND C.STATUS = 'Y'
 	</select>
 
 </mapper>

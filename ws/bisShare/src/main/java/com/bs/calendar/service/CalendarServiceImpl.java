@@ -89,8 +89,8 @@ public class CalendarServiceImpl implements CalendarService{
 
 	//일정 목록 조회
 	@Override
-	public List<CalendarVo> selectList(PageVo pv) {
-		return dao.selectList(sst, pv);
+	public List<CalendarVo> selectList(PageVo pv, String no) {
+		return dao.selectList(sst, pv, no);
 	}
 
 	//일정 갯수 조회

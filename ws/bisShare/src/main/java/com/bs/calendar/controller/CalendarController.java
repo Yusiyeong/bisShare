@@ -141,18 +141,23 @@ public class CalendarController {
 	
 	//일정 조회
 	@GetMapping("view/{pno}")
-	public String view(Model model, @PathVariable int pno, HttpServletRequest req) {
+	public String view(Model model, @PathVariable int pno, HttpServletRequest req, HttpSession session) {
 		model.addAttribute("page", "calendar/calendar-view");
 		
 		int totalCount = cs.selectToatalCnt();
 		
 		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
 		
+		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginVo");
+		String no = loginvo.getEmpNo();
+		
 		//데이터 조회
-		List<CalendarVo> cvoList = cs.selectList(pv);
+		List<CalendarVo> cvoList = cs.selectList(pv, no);
+		
 		
 		model.addAttribute("cvoList", cvoList);
 		model.addAttribute("pv", pv);
+		System.out.println(cvoList);
 		
 		return "layout/template"; 
 	}
@@ -166,6 +171,7 @@ public class CalendarController {
 		CalendarVo cvo = cs.selectOne(no);
 		
 		model.addAttribute("cvo", cvo);
+		System.out.println(cvo);
 		
 		return "layout/template";
 	}
