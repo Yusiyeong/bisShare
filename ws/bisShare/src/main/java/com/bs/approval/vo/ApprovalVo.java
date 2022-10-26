@@ -14,16 +14,23 @@ public class ApprovalVo {
 	private String enrollDate;
 	//결재권자
 	private String aprverEmpNo;
+	private String[] aprverEmpNos;
 	private String aprverStatus;
+	private String[] aprverStatuses;
 	private String[] aprverNicks;
 	private String[] aprverRanks;
+	private String[] aprverDepts;
 	//합의자
 	private String agreeEmpNo;
 	private String agreeStatus;
+	private String[] agreeEmpNos;
+	private String[] agreeStatuses;
 	private String[] agreeNicks;
 	//참조자
 	private String refEmpNo;
 	private String refStatus;
+	private String[] refEmpNos;
+	private String[] refStatuses;
 	private String[] refNicks;
 	//취소여부
 	private String cancel;

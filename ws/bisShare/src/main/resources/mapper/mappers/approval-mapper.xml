@@ -52,8 +52,28 @@
 		ORDER BY ENROLL_DATE DESC
 	</select>
 	
-	<select id="getOneByNo">
-		
+	<select id="getOneByNo" resultType="aprvVo">
+		SELECT 
+		    A.ADC_NO
+		    , E.NICK            EMP_NO
+		    , C.CATEGORY_NAME   CATEGORY_NO
+		    , A.ADC_NAME
+		    , A.ADC_CONTENT
+		    , A.ENROLL_DATE
+		    , APRVER_EMP_NO
+		    , APRVER_STATUS
+		    , AGREE_EMP_NO
+		    , AGREE_STATUS
+		    , REF_EMP_NO
+		    , REF_STATUS
+		    , CANCEL
+		FROM APPROVAL_DOCU A
+		JOIN EMPLOYEE E
+		ON (A.EMP_NO = E.EMP_NO)
+		JOIN APRV_CATEGORY C
+		ON (A.CATEGORY_NO = C.CATEGORY_NO)
+		WHERE A.CANCEL = 'N'
+		AND A.ADC_NO = #{adcNo}
 	</select>
 
 </mapper>

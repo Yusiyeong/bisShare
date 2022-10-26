@@ -1,21 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="root" value="${pageContext.request.contextPath}" />   
-
-<h1>결재 디테일</h1>
-<!-- 써머노트 관련 js -->
-<script>
-    $(document).ready(function() {
-        $('#summernote').summernote({
-               placeholder: 'content',
-               minHeight: 500,
-               maxHeight: 500,
-               focus: true, 
-               lang : 'ko-KR'
-        }); 
-    });
-</script>
 
 <style>
     #approve-submit-area>button:last-child{margin-left: 10px;}
@@ -65,13 +53,17 @@
         text-align: center;
     }
     
+    #aprv-content-area{
+    	width: 100%;
+    	height: 500px;
+    }
+    
 </style>
 
 <div class="card shadow mb-4" id="apprve-write-outer">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary" id="approve-submit-area">
-            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#submitModal">기안하기</a>
-            <button class="btn btn-sm btn-primary" id="submit-temp">임시저장</a>
+            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#submitModal">기안취소</a>
         </h6>
     </div>
     <div class="card-body">
@@ -85,16 +77,11 @@
                 <tr>
                     <td class="bg-gray-200 text-gray-900">문서 종류</td>
                     <td>
-                        <select name="categoryNo">
-                            <option value="1">휴가원</option>
-                            <option value="2">품의서</option>
-                            <option value="3">출장</option>
-                            <option value="4">연장근무</option>
-                        </select>
+                        ${ avo.categoryNo }
                     </td>
                     <td class="bg-gray-200 text-gray-900">작성자</td>
                     <!-- loginMember에서 가져온 값으로 대체 -->
-                    <td>IT개발팀 주임 박한솔</td> 
+                    <td>${ loginVo.deptNo } ${ loginVo.rankNo } ${ loginVo.nick }</td> 
                 </tr>
             </table>
             <div class="py-3">
@@ -110,110 +97,66 @@
                     <div id="approve-line-name-area">결재</div>
                     <div></div>
                 </div>
-                <div>
-                    <div class="approve-rank-area bg-gray-200"></div>
-                    <div class="approve-stamp-area"></div>
-                    <div class="approve-name-area"></div>
-                </div>
-                <div>
-                    <div class="approve-rank-area bg-gray-200"></div>
-                    <div class="approve-stamp-area"></div>
-                    <div class="approve-name-area"></div>
-                </div>
-                <div>
-                    <div class="approve-rank-area bg-gray-200"></div>
-                    <div class="approve-stamp-area"></div>
-                    <div class="approve-name-area"></div>
-                </div>
-                <div>
-                    <div class="approve-rank-area bg-gray-200"></div>
-                    <div class="approve-stamp-area"></div>
-                    <div class="approve-name-area"></div>
-                </div>
-                <div>
-                    <div class="approve-rank-area bg-gray-200"></div>
-                    <div class="approve-stamp-area"></div>
-                    <div class="approve-name-area"></div>
-                </div>
-                <div>
-                    <div class="approve-rank-area bg-gray-200"></div>
-                    <div class="approve-stamp-area"></div>
-                    <div class="approve-name-area"></div>
-                </div>
-                <div>
-                    <div class="approve-rank-area bg-gray-200"></div>
-                    <div class="approve-stamp-area"></div>
-                    <div class="approve-name-area"></div>
-                </div>
+                <c:forEach var="i" begin="0" end="${ fn:length(avo.aprverEmpNos) - 1 }">
+                	<div>
+	                    <div class="approve-rank-area bg-gray-200">${ avo.aprverRanks[i]}</div>
+	                    <div class="approve-stamp-area">${ avo.aprverStatuses[i] }</div>
+	                    <div class="approve-name-area">${ avo.aprverNicks[i] }</div>
+                	</div>
+                </c:forEach>
+                <c:forEach begin="0" end="${6-fn:length(avo.aprverEmpNos)}">
+                	<div>
+	                    <div class="approve-rank-area bg-gray-200"></div>
+	                    <div class="approve-stamp-area"></div>
+	                    <div class="approve-name-area"></div>
+                	</div>
+                </c:forEach>
             </div>
             <!-- 합의 라인 -->
             <div id="agree-line-area">
                 <div id="" class="bg-gray-200">
                     <div id="">합의</div>
                 </div>
-                <div>
-                    <div class=""></div>
-                </div>
-                <div>
-                    <div class=""></div>
-                </div>
-                <div>
-                    <div class=""></div>
-                </div>
-                <div>
-                    <div class=""></div>
-                </div>
-                <div>
-                    <div class=""></div>
-                </div>
-                <div>
-                    <div class=""></div>
-                </div>
-                <div>
-                    <div class=""></div>
-                </div>
+                <c:forEach var="i" begin="0" end="${ fn:length(avo.agreeEmpNos) - 1 }">
+                	<div>
+	                    <div class="agree-name-area">${ avo.agreeNicks[i]}</div>
+                	</div>
+                </c:forEach>
+                <c:forEach begin="0" end="${6-fn:length(avo.agreeEmpNos)}">
+                	<div>
+	                    <div class="agree-name-area"></div>
+                	</div>
+                </c:forEach>
             </div>
             <!-- 참조 라인 -->
             <div id="ref-line-area">
                 <div id="" class="bg-gray-200">
                     <div id="">참조</div>
                 </div>
-                <div>
-                    <div class=""></div>
-                </div>
-                <div>
-                    <div class=""></div>
-                </div>
-                <div>
-                    <div class=""></div>
-                </div>
-                <div>
-                    <div class=""></div>
-                </div>
-                <div>
-                    <div class=""></div>
-                </div>
-                <div>
-                    <div class=""></div>
-                </div>
-                <div>
-                    <div class=""></div>
-                </div>
+                <c:forEach var="i" begin="0" end="${ fn:length(avo.refEmpNos) - 1 }">
+                	<div>
+	                    <div class="ref-name-area">${ avo.refNicks[i]}</div>
+                	</div>
+                </c:forEach>
+                <c:forEach begin="0" end="${6-fn:length(avo.refEmpNos)}">
+                	<div>
+	                    <div class="ref-name-area"></div>
+                	</div>
+                </c:forEach>
             </div>
             
             <div class="py-3">
                 <h6 class="m-0 font-weight-bold text-primary">
-                    상세 입력
+                    상세내용
                 </h6>
             </div>
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <tr>
-                    <td class="bg-gray-200 text-gray-900">제목</td>
-                    <td><input name="adcName" type="text"></td>
+                    <td class="bg-gray-200 text-gray-900">${ avo.adcName }</td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <div id="aprv-content-area"></div>
+                        <div id="aprv-content-area">${ avo.adcContent }</div>
                     </td>
                 </tr>
             </table>
