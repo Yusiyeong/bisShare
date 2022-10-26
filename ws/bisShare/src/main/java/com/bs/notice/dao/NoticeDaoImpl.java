@@ -92,6 +92,12 @@ public class NoticeDaoImpl implements NoticeDao{
 		return sst.selectList("noticeMapper.selectScrapList", svo);
 	}//selectScrapList
 
+	// 회원 해당 게시글 스크랩 여부
+	@Override
+	public NoticeScrapVo findScrap(SqlSessionTemplate sst, Map<String, String> number) {
+		return sst.selectOne("noticeMapper.findScrap", number);
+	}//findScrap
+
 
 	
 }//class

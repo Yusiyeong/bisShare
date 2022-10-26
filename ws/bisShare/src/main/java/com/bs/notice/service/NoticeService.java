@@ -1,5 +1,6 @@
 package com.bs.notice.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +42,9 @@ public interface NoticeService {
 
 	// 스크랩 목록 조회
 	List<NoticeScrapVo> selectScrapList(NoticeScrapVo vo);
+
+	// 회원 해당 게시글 스크랩 여부
+	NoticeScrapVo findScrap(String boardNo, String empNo);
 
 
 

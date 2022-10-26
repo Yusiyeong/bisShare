@@ -64,13 +64,16 @@
                      <div for="exampleFormControlInput1" class="form-label"> 작성자: ${vo.writer}</d>
                      <div for="exampleFormControlInput1" class="form-label"> 작성일: ${vo.enrollDate}</div>
                      <div for="exampleFormControlInput1" class="form-label"> 조회수: ${vo.cnt}</div> 
-                     <td > <i class="fas fa-check-double mr-1"></i>스크랩 수 : ${scrap}</td>
+                     <td > <i class="fas fa-check-double mr-1"></i>스크랩 수 : ${scrapCount}</td>
                      
                      <!-- 스크랩start -->
                      <c:if test="${not empty loginVo}">  
-	                     <div for="exampleFormControlInput1" class="form-label" style="float:right; margin-top:-30px;"> 
-	                     	<input type="button" id="scrap" class="btn btn-success btn-sm" onclick="scrap(); return false;" value="스크랩">
-	                     </div>
+                         <div>
+		                    <a class="text-dark scrap" style="text-decoration-line: none; float:right; margin-top:-30px;">
+		                       <img id="scrap" src="${root}/resources/img/scrap.svg">
+		                        스크랩
+		                    </a>
+		                  </div>
                      </c:if>
                      <!-- 스크랩end --> 
                      
@@ -373,36 +376,60 @@
    
    </script>
    
+    <c:if test="${! empty scrap.scrapNo }">
+	    <script>
+	   	 // 스크랩이 되어있는지 확인한 값을 scrapval에 저장
+	   	 var scrapval = ${scrap.scrapNo};
+	      
+	      if(scrapval>0) {
+	           console.log(scrapval);
+	           $("#scrap").prop("src", "${root}/resources/img/scrap-fill.svg");
+	           $(".scrap").prop('name',scrapval)
+	       }
+	       else {
+	           console.log(scrapval);
+	           $("#scrap").prop("src", "${root}/resources/img/scrap.svg");
+	           $(".scrap").prop('name',scrapval)
+	       } 
+	      </script>  
+      </c:if>
+      
    <script>
    //스크랩
-   function scrap(){ 
-	   
-    	 const boardNo = ${vo.boardNo};      
-         const empNo = '${sessionScope.loginVo.nick}';   
+      // 스크랩 버튼을 클릭 시 실행되는 코드
+       $(".scrap").on("click", function () {
+            var that = $(".scrap");
          
-	     $.ajax({
-	            type : "POST",  
-	            url : "${root}/notice/scrap",       
-	            dataType : "json",   
-	            data : {'boardNo' : boardNo, 'empNo' : empNo},
-	            error : function(){
-	               alert("통신 에러");
-	            },
-	            success : function(scrap) {
-		                     if(scrap == 0){
-		                    	alert("스크랩 완료");
-		                    	
-		                    	// 버튼 글씨 바꾸기
-		                    	//location.reload();
-		                    	$("#scrap").val('스크랩 완료');
-		                    	
-		                     }else if(scrap == 1){
-		                    	 alert("스크랩 취소");
-		                    	 location.reload();
-		                     }
+            const boardNo = ${vo.boardNo};      
+            const empNo = '${sessionScope.loginVo.nick}';   
+            
+           $.ajax({
+                  type : "POST",  
+                  url : "${root}/notice/scrap",       
+                  dataType : "json",   
+                  data : {'boardNo' : boardNo, 'empNo' : empNo},
+                  error : function(){
+                     alert("통신 에러");
+                  },
+                  success : function(scrap) {
+                            that.prop('name',scrap);
+                            console.log("=====");
+                            console.log(that);
+                            console.log(scrap);
+                            
+                              if(scrap == 0){
+                                alert("스크랩 완료");
+                                 $('#scrap').prop("${root}/resources/img/scrap-fill.svg");
+                                 location.reload();
+                              }else if(scrap == 1){
+                                 alert("스크랩 취소");
+                                 $('#scrap').prop("src","${root}/resources/img/scrap.svg");
+                                 location.reload();
+                              }
 
-	            }//success
-	        });//ajax
-		 }//function
+                  }//success
+              });//ajax
+          })//function
+          
    
    </script>

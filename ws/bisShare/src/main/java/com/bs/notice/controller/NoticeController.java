@@ -78,8 +78,11 @@ public class NoticeController {
 
    // 게시글 상세조회(화면+진행) + 댓글 조회 + 게시글의 스크랩 수 표시
    @GetMapping("detail/{boardNo}")
-   public String detail(@PathVariable String boardNo, Model model) {
+   public String detail(@PathVariable String boardNo, Model model, NoticeScrapVo svo, HttpSession session) {
 
+      EmployeeVo loginVo = (EmployeeVo)session.getAttribute("loginVo");
+      svo.setEmpNo(loginVo.getEmpNo());
+      
       NoticeVo vo = ns.selectOne(boardNo);
 
       // 댓글 조회
@@ -89,8 +92,14 @@ public class NoticeController {
       model.addAttribute("replyList", replyList);
       
       // 게시글의 스크랩 수 표시 // 서비스 호출
-	  int scrap = ns.scrapCount(boardNo);
-	  model.addAttribute("scrap", scrap);
+     int scrapCount = ns.scrapCount(boardNo);
+     model.addAttribute("scrapCount", scrapCount);
+      
+     // 회원 해당 게시글 스크랩 여부
+     NoticeScrapVo scrap = ns.findScrap(boardNo, svo.getEmpNo()); 
+     System.out.println(" 회원 해당 게시글 스크랩 여부 scrap:: " + scrap);//ysy
+     
+     model.addAttribute("scrap", scrap);
       
       model.addAttribute("title", "POST");
       model.addAttribute("page", "notice/detail");
@@ -187,39 +196,39 @@ public class NoticeController {
    // 수정하기(화면)
    @GetMapping("edit/{boardNo}")
    public String edit(@PathVariable String boardNo, Model model) {
-	   
-	// 서비스 호출
-	NoticeVo vo = ns.selectOne(boardNo);	// 상세조회 재사용
-	
-	model.addAttribute("vo", vo);
+      
+   // 서비스 호출
+   NoticeVo vo = ns.selectOne(boardNo);   // 상세조회 재사용
+   
+   model.addAttribute("vo", vo);
 
     model.addAttribute("title", "EDIT");
     model.addAttribute("page", "notice/edit");
 
     return "layout/template";
-	   
+      
    }//edit
    
    
    // 수정하기(진행)
    @PostMapping("edit/{boardNo}")
    public String edit(@PathVariable String boardNo, NoticeVo vo, HttpSession session, Model model) {
-	   
-	   vo.setBoardNo(boardNo);
-	   
-	   // 서비스 호출
-	   int result = ns.edit(vo);
-	   
-	   if (result == 1) {
-	         // 성공
-	         session.setAttribute("alertMsg", "게시글 수정 성공!");
-	         return "redirect:/notice/detail/" + boardNo;
-	      } else {
-	         // 실패
-	         session.setAttribute("alertMsg", "게시글 수정 실패!");
-	         return "redirect:/notice/detail/" + boardNo;
-	      } // if
-	   
+      
+      vo.setBoardNo(boardNo);
+      
+      // 서비스 호출
+      int result = ns.edit(vo);
+      
+      if (result == 1) {
+            // 성공
+            session.setAttribute("alertMsg", "게시글 수정 성공!");
+            return "redirect:/notice/detail/" + boardNo;
+         } else {
+            // 실패
+            session.setAttribute("alertMsg", "게시글 수정 실패!");
+            return "redirect:/notice/detail/" + boardNo;
+         } // if
+      
    }//edit
    
    // 스크랩
@@ -227,35 +236,35 @@ public class NoticeController {
    @ResponseBody
    public int scrap(NoticeScrapVo svo, HttpSession session) {
 
-	   EmployeeVo loginVo = (EmployeeVo)session.getAttribute("loginVo");
-	   svo.setEmpNo(loginVo.getEmpNo());
-		
-	   // 서비스 호출 // 스크랩 중복방지(했는지 안했는지 체크)
-	   int scrap = ns.scrapCheck(svo);
-	   
-		if (scrap == 0) {
-			// 스크랩 하기
-			 ns.scrap(svo);
-		}else if(scrap == 1) {
-			//스크랩 취소
-			 ns.scrapCancel(svo);
-		}
-		
-		return scrap;
-		
+      EmployeeVo loginVo = (EmployeeVo)session.getAttribute("loginVo");
+      svo.setEmpNo(loginVo.getEmpNo());
+      
+      // 서비스 호출 // 스크랩 중복방지(했는지 안했는지 체크)
+      int scrap = ns.scrapCheck(svo);
+      
+      if (scrap == 0) {
+         // 스크랩 하기
+          ns.scrap(svo);
+      }else if(scrap == 1) {
+         //스크랩 취소
+          ns.scrapCancel(svo);
+      }
+      
+      return scrap;
+      
    }//scrap
    
    // 스크랩 목록 조회 (화면+진행) 
    @GetMapping("scrapList")
    public String list(NoticeScrapVo svo, Model model, HttpSession session) {
 
-	   EmployeeVo loginVo = (EmployeeVo) session.getAttribute("loginVo");
-	   svo.setEmpNo(loginVo.getEmpNo());
-	      
-	  // 게시글 목록 조회 // 서비스 호출
-	  List<NoticeScrapVo> voList = ns.selectScrapList(svo);
+      EmployeeVo loginVo = (EmployeeVo) session.getAttribute("loginVo");
+      svo.setEmpNo(loginVo.getEmpNo());
+         
+     // 게시글 목록 조회 // 서비스 호출
+     List<NoticeScrapVo> voList = ns.selectScrapList(svo);
       model.addAttribute("voList", voList);
-	   
+      
       System.out.println("스크랩목록voList::: " + voList);//ysy
       
       model.addAttribute("title", "SCRAP");
