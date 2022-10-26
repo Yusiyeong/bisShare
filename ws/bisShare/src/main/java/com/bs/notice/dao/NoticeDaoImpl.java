@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bs.common.PageVo;
 import com.bs.notice.vo.NoticeAttachVo;
+import com.bs.notice.vo.NoticeScrapVo;
 import com.bs.notice.vo.NoticeVo;
 
 @Repository
@@ -61,6 +62,36 @@ public class NoticeDaoImpl implements NoticeDao{
 	}//updateBoard
 
 
+	//중복방지 
+	@Override
+	public int scrapCheck(SqlSessionTemplate sst, NoticeScrapVo svo) {
+		return sst.selectOne("noticeMapper.scrapCheck", svo);
+	}
+
+	//스크랩 기능
+	@Override
+	public int scrap(SqlSessionTemplate sst, NoticeScrapVo svo) {
+		return sst.insert("noticeMapper.scrap", svo);
+	}
+
+	//스크랩 취소
+	@Override
+	public int scrapCancel(SqlSessionTemplate sst, NoticeScrapVo svo) {
+		return sst.delete("noticeMapper.scrapCancel", svo);
+	}
+
+	// 게시글의 스크랩 수
+	@Override
+	public int scrapCount(SqlSessionTemplate sst, String boardNo) {
+		return sst.selectOne("noticeMapper.scrapCount", boardNo);
+	}
+
+	// 스크랩 목록 조회
+	@Override
+	public List<NoticeScrapVo> selectScrapList(SqlSessionTemplate sst, NoticeScrapVo svo) {
+		return sst.selectList("noticeMapper.selectScrapList", svo);
+	}//selectScrapList
 
 
+	
 }//class

@@ -64,6 +64,16 @@
                      <div for="exampleFormControlInput1" class="form-label"> 작성자: ${vo.writer}</d>
                      <div for="exampleFormControlInput1" class="form-label"> 작성일: ${vo.enrollDate}</div>
                      <div for="exampleFormControlInput1" class="form-label"> 조회수: ${vo.cnt}</div> 
+                     <td > <i class="fas fa-check-double mr-1"></i>스크랩 수 : ${scrap}</td>
+                     
+                     <!-- 스크랩start -->
+                     <c:if test="${not empty loginVo}">  
+	                     <div for="exampleFormControlInput1" class="form-label" style="float:right; margin-top:-30px;"> 
+	                     	<input type="button" id="scrap" class="btn btn-success btn-sm" onclick="scrap(); return false;" value="스크랩">
+	                     </div>
+                     </c:if>
+                     <!-- 스크랩end --> 
+                     
                   </div>
                 </div>
                <!--end-->
@@ -363,3 +373,36 @@
    
    </script>
    
+   <script>
+   //스크랩
+   function scrap(){ 
+	   
+    	 const boardNo = ${vo.boardNo};      
+         const empNo = '${sessionScope.loginVo.nick}';   
+         
+	     $.ajax({
+	            type : "POST",  
+	            url : "${root}/notice/scrap",       
+	            dataType : "json",   
+	            data : {'boardNo' : boardNo, 'empNo' : empNo},
+	            error : function(){
+	               alert("통신 에러");
+	            },
+	            success : function(scrap) {
+		                     if(scrap == 0){
+		                    	alert("스크랩 완료");
+		                    	
+		                    	// 버튼 글씨 바꾸기
+		                    	//location.reload();
+		                    	$("#scrap").val('스크랩 완료');
+		                    	
+		                     }else if(scrap == 1){
+		                    	 alert("스크랩 취소");
+		                    	 location.reload();
+		                     }
+
+	            }//success
+	        });//ajax
+		 }//function
+   
+   </script>
