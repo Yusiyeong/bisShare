@@ -95,7 +95,7 @@ public class ApprovalController {
 		return "layout/template";
 	}
 	
-	//결재함 화면
+	//결재함 화면 (내가 결재권자 || 합의 || 참조)
 	@GetMapping("document")
 	public String document(Model model) {
 		model.addAttribute("title", "나의 결재함");
@@ -109,6 +109,7 @@ public class ApprovalController {
 		
 		ApprovalVo vo = aprvService.getOneByNo(adcNo);
 		
+		model.addAttribute("avo", vo);
 		model.addAttribute("title", "결재 서류");
 		model.addAttribute("page", "approval/detail");
 		return "layout/template";
