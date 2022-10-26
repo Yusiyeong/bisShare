@@ -35,7 +35,6 @@
         width: 100px;
         height: 23px;
         font-size: 13px;
-
         border: none;
     }
 

@@ -22,7 +22,7 @@ public interface CalendarDao {
 	int updateOne(SqlSessionTemplate sst, CalendarVo vo);
 
 	//일정 목록 조회
-	List<CalendarVo> selectList(SqlSessionTemplate sst, PageVo pv);
+	List<CalendarVo> selectList(SqlSessionTemplate sst, PageVo pv, String no);
 
 	//일정 갯수 조회
 	int selectCountAll(SqlSessionTemplate sst);

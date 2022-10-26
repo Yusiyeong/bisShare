@@ -38,12 +38,12 @@ public class CalendarDaoImpl implements CalendarDao{
 
 	//일정 목록 조회
 	@Override
-	public List<CalendarVo> selectList(SqlSessionTemplate sst, PageVo pv) {
+	public List<CalendarVo> selectList(SqlSessionTemplate sst, PageVo pv, String no) {
 		
 		int offset = (pv.getCurrentPage()-1 * pv.getBoardLimit());
 		RowBounds rb = new RowBounds(offset, pv.getBoardLimit());
 		
-		return sst.selectList("calendarMapper.selectList", null, rb);
+		return sst.selectList("calendarMapper.selectList", no, rb);
 	}
 
 	//일정 갯수 조회

@@ -20,14 +20,13 @@ public interface CalendarService {
 	int edit(CalendarVo vo);
 
 	//일정 목록 조회
-	List<CalendarVo> selectList(PageVo pv);
+	List<CalendarVo> selectList(PageVo pv, String no);
 	
 	//전체 일정 갯수 조회
 	int selectToatalCnt();
 
 	//일정 상세조회 (번호)
 	CalendarVo selectOne(String no);
-
 
 
 }

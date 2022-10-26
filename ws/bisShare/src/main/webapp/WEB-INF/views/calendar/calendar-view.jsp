@@ -14,7 +14,7 @@
 	.card{
 		margin-top: 20px;
 	}
-	
+
 	
 
 </style>
@@ -51,62 +51,77 @@
 									</ul>
 									
 									<div class="tab-content" id="myTabContent">
-									  <div class="tab-pane fade show active" id="one-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-									  
-									  	<div class="card" style="width: 18rem; height: 10rem;">
-										  <div class="card-body">
-										    <h5 class="card-title">회의 제목</h5>
-										    <h6 class="card-subtitle mb-2 text-muted">작성자</h6>
-										    <p class="card-text">어쩌구저쩌구 내일 회의 있음 다들 모이셈</p>
-										  </div>
+									
+								<div class ="d-flex flex-wrap w-100">
+									<c:forEach items="${cvoList}" var="x">
+
+										<div class="row">
+											<div class="col-md-4">
+												<div class="tab-pane fade show active cate${x.cateNo}" id="one-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+													<div class="card" style="width: 21rem; height: 10rem; margin: 20px;" onclick="location.href='${root}/calendar/detail/${x.calNo}'">
+													<div class="card-body">
+													  <h5 class="card-title">${x.title}</h5>
+													  <h5 class="card-title">${x.startDate}</h5>
+													  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
+													  <p class="card-text">${x.content}</p>
+													</div>
+												  </div>
+												</div>
+											</div>
 										</div>
-										
-									  </div>
-									  <div class="tab-pane fade" id="two-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+
+									</c:forEach>
+								</div>
 									  
+									  
+									  <div class="tab-pane fade" id="two-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 									  	<div class="card" style="width: 18rem; height: 10rem;">
 										  <div class="card-body">
-										    <h5 class="card-title">2022.10.25 휴가</h5>
+										    <h5 class="card-title">휴가</h5>
+										    <h5 class="card-title">2022.10.25 ~ 2022.10.25</h5>
 										    <h6 class="card-subtitle mb-2 text-muted">박서영</h6>
 										    <p class="card-text">속세를 떠납니다</p>
 										  </div>
 										</div>
-										
 									  </div>
 									  
-									  <div class="tab-pane fade" id="three-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
 									  
+									  <div class="tab-pane fade" id="three-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
 									  	<div class="card" style="width: 18rem; height: 10rem;">
 										  <div class="card-body">
-										    <h5 class="card-title">2022.10.12 오후 반차</h5>
+										    <h5 class="card-title">오후 반차</h5>
+										    <h5 class="card-title">2022.10.25</h5>
 										    <h6 class="card-subtitle mb-2 text-muted">박한솔</h6>
 										    <p class="card-text">오후 업무는 다음날 확인 가능합니다</p>
 										  </div>
 										</div>
-									  
 									  </div>
-									  <div class="tab-pane fade" id="four-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
 									  
+									  
+									  <div class="tab-pane fade" id="four-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
 									  	<div class="card" style="width: 18rem; height: 10rem;">
 										  <div class="card-body">
 										    <h5 class="card-title">외근</h5>
+										    <h5 class="card-title">2022.10.25</h5>
 										    <h6 class="card-subtitle mb-2 text-muted">유시영</h6>
 										    <p class="card-text">외근 나갑니다</p>
 										  </div>
 										</div>
-									  
 									  </div>
-									  <div class="tab-pane fade" id="five-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
 									  
+									  
+									  <div class="tab-pane fade" id="five-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
 									  	<div class="card" style="width: 18rem; height: 10rem;">
 										  <div class="card-body">
 										    <h5 class="card-title">가을 체육대회</h5>
+										    <h5 class="card-title">2022.10.25</h5>
 										    <h6 class="card-subtitle mb-2 text-muted">인사팀</h6>
 										    <p class="card-text">회사 가을 체육대회 있습니다.</p>
 										  </div>
 										</div>
+									  </div>
 									  
-									  </div>	  
+									  	  
 									</div>
 									
 								</div>

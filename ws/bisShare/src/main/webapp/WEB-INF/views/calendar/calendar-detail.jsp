@@ -32,9 +32,8 @@
 
     #select{
         width: 100px;
-        height: 20px;
+        height: 23px;
         font-size: 13px;
-        margin-left: 50px;
         border: none;
     }
 
@@ -42,7 +41,7 @@
         margin-left: 50px;
     }
 
-    #create, #start, #end, .cate, #file{
+    #create, #start, #end, #cate, #file, #line{
         margin-left: 10%;
         margin-top: 10px;
         font-size: 15px;
@@ -105,49 +104,28 @@
 							    <form action="" method="post">
 							        <div id="page">
 							            <div>
-							                <textarea id="title" placeholder="제목 없음"></textarea>
+                                            <div id="title">${vo.title}</div>
 							            </div>
 							            <div id="create">
-							                작성일 <input id="write" type="textarea">
+							                작성일 <div id="write">${vo.modifyDate}</div>
 							            </div>
-							            <div class="cate">
-							                카테고리  <select id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
-													  <option value="1" selected>기타</option>
-													  <option value="2">회의</option>
-													  <option value="3">휴가</option>
-													  <option value="4">반차</option>
-													  <option value="5">외근</option>
-													</select>
+							            <div id="cate">
+							                카테고리  <div id="select">${vo.cateNo}</div>
 							            </div>
 							            <div id="start">
-							                시작일 <input class="datepicker-start">
-							                <script>
-							                  $(function(){
-							                    $( ".datepicker-start" ).datepicker({ minDate: 0});
-							                    $('.datepicker-start').datepicker('setDate', 'today');
-							                  })
-							                </script>
+							                시작일 <div class="datepicker-start">${vo.startDate}</div>
 							            </div>
 							            <div id="end">
-							                종료일 <input class="datepicker-end">
-							                <script>
-							                  $(function(){
-							                    $('.datepicker-end').datepicker({ minDate: 0});
-							                    $('.datepicker-end').datepicker('setDate', 'today');
-							                  })
-							                </script>
-							            </div>
-							            <div id="file">
-							                첨부파일 <input type="file" id="file-name">
+							                종료일 <div class="datepicker-start">${vo.endDate}</div>
 							            </div>
 							            <hr id="line">
 							            <div>
-							                <textarea id="con" placeholder="내용을 입력하세요"></textarea>
+							                <div id="con">${vo.content}</div>
 							            </div>
-							            <c:if test="${ vo.writer eq loginVo.nick }">
+							            <c:if test="${ calvo.writer eq loginVo.nick }">
 											<div id="center-bot">
-												<a href="${root}/calendar/edit/${vo.no}">수정하기</a>
-												<a href="${root}/calendar/delete/${vo.no}">삭제하기</a>
+												<a href="${root}/calendar/edit/${vo.calNo}">수정하기</a>
+												<a href="${root}/calendar/delete/${vo.calNo}">삭제하기</a>
 											</div>
 										</c:if>
 							        </div>
