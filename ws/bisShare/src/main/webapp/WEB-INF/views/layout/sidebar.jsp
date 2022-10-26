@@ -30,6 +30,7 @@
                         <a class="collapse-item" href="${root}/free/list/1">자유게시판</a>
                         <a class="collapse-item" href="${root}/blind/list/1">블라인드게시판</a>
                         <a class="collapse-item" href="${root}/cloud/list/1">자료실</a>
+                        <a class="collapse-item" href="${root}/notice/scrapList">스크랩 목록</a>
                     </div>
                 </div>
             </li>

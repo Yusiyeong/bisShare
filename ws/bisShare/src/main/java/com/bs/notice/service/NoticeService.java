@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.bs.common.PageVo;
 import com.bs.notice.vo.NoticeAttachVo;
+import com.bs.notice.vo.NoticeScrapVo;
 import com.bs.notice.vo.NoticeVo;
 
 public interface NoticeService {
@@ -28,6 +29,21 @@ public interface NoticeService {
 
 	// 수정하기
 	int edit(NoticeVo vo);
+
+	// 중복방지
+	int scrapCheck(NoticeScrapVo svo);
+
+	int scrap(NoticeScrapVo svo);
+
+	int scrapCancel(NoticeScrapVo svo);
+
+	int scrapCount(String boardNo);
+
+	// 스크랩 목록 조회
+	List<NoticeScrapVo> selectScrapList(NoticeScrapVo vo);
+
+
+
 
 
 

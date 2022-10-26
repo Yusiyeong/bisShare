@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.bs.common.PageVo;
 import com.bs.notice.dao.NoticeDao;
 import com.bs.notice.vo.NoticeAttachVo;
+import com.bs.notice.vo.NoticeScrapVo;
 import com.bs.notice.vo.NoticeVo;
 
 @Service
@@ -71,6 +72,37 @@ public class NoticeServiceImpl implements NoticeService{
 	public int edit(NoticeVo vo) {
 		return nd.edit(sst, vo);
 	}//edit
+
+	// 스크랩 중복방지//했는지 안했는지 체크
+	@Override
+	public int scrapCheck(NoticeScrapVo svo) {
+		return nd.scrapCheck(sst, svo);
+	}
+
+	// 스크랩 하기
+	@Override
+	public int scrap(NoticeScrapVo svo) {
+		return nd.scrap(sst, svo);
+	}
+
+	// 스크랩 취소 
+	@Override
+	public int scrapCancel(NoticeScrapVo svo) {
+		return nd.scrapCancel(sst, svo);
+	}
+
+	//게시글의 스크랩 수 
+	@Override
+	public int scrapCount(String boardNo) {
+		return nd.scrapCount(sst, boardNo);
+	}
+
+	// 스크랩 목록 조회
+	@Override
+	public List<NoticeScrapVo> selectScrapList(NoticeScrapVo svo) {
+		return nd.selectScrapList(sst, svo);
+	}//selectScrapList
+
 
 
 

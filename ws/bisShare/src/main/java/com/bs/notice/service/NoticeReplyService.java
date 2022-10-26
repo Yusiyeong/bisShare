@@ -19,4 +19,5 @@ public interface NoticeReplyService {
 	int edit(NoticeReplyVo vo);
 
 
+
 }//interface

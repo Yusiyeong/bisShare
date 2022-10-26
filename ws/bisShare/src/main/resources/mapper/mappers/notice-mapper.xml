@@ -101,4 +101,61 @@
 		WHERE BOARD_NO = #{boardNo}
 	</update>
 	
+	
+	<!-- 중복방지//했는지 안했는지 체크 -->
+	<select id="scrapCheck" resultType="int">
+	SELECT COUNT(*) 
+		FROM NOTICE_SCRAP 
+	WHERE BNO = #{boardNo} 
+	AND 
+	EMP_NO = #{empNo}
+	</select>
+	
+	<!-- 스크랩 하기 -->
+	<insert id="scrap">
+	INSERT INTO NOTICE_SCRAP
+	(
+	SCRAP_NO,
+	EMP_NO, 
+	BNO
+	) 
+	VALUES (
+	(SELECT NVL(MAX(SCRAP_NO), 0) + 1 
+	FROM NOTICE_SCRAP),#{empNo},#{boardNo})
+	</insert>
+	
+	<!-- 스크랩 취소 -->
+	<delete id="scrapCancel">
+	DELETE FROM NOTICE_SCRAP 
+	WHERE BNO = #{boardNo} 
+	AND 
+	EMP_NO = #{empNo}
+	</delete>
+	
+	<!-- 게시글의 스크랩 수 -->
+	<select id="scrapCount" resultType="int">
+	SELECT 
+		COUNT(*) 
+	FROM NOTICE_SCRAP 
+	WHERE BNO = #{boardNo} 
+	</select>
+
+	<!-- 스크랩 목록 조회 -->
+	<select id="selectScrapList" resultType="svo">
+	SELECT 
+        ROW_NUMBER() OVER (ORDER BY S.SCRAP_DATE DESC) AS num,
+        S.EMP_NO AS EmpNo,
+        S.BNO AS boardNo,
+        TO_CHAR(S.SCRAP_DATE, 'YYYY"년" MM"월" DD"일"') AS scrapDate,
+        B.TITLE,
+        E.NICK AS writer
+	FROM NOTICE_SCRAP S 
+    JOIN NOTICE_BOARD B
+    ON S.BNO = B.BOARD_NO
+    JOIN EMPLOYEE E
+    ON S.EMP_NO = E.EMP_NO
+	WHERE S.EMP_NO = #{empNo}
+	</select>
+
+
 </mapper>

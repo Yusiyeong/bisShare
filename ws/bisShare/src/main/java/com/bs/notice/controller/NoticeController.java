@@ -2,21 +2,16 @@ package com.bs.notice.controller;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,18 +19,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.bs.common.PageVo;
 import com.bs.common.Pagination;
 import com.bs.employee.vo.EmployeeVo;
+import com.bs.free.vo.FreeVo;
 import com.bs.notice.service.NoticeReplyService;
 import com.bs.notice.service.NoticeService;
 import com.bs.notice.vo.NoticeReplyVo;
+import com.bs.notice.vo.NoticeScrapVo;
 import com.bs.notice.vo.NoticeVo;
-import com.google.gson.JsonObject;
 
 @Controller
 @RequestMapping("notice")
@@ -70,7 +64,6 @@ public class NoticeController {
 
       PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
       
-      
       // 게시글 목록 조회 // 서비스 호출
       List<NoticeVo> voList = ns.selectList(pv, map);
       model.addAttribute("voList", voList);
@@ -83,7 +76,7 @@ public class NoticeController {
 
    }// list
 
-   // 게시글 상세조회(화면+진행) + 댓글 조회
+   // 게시글 상세조회(화면+진행) + 댓글 조회 + 게시글의 스크랩 수 표시
    @GetMapping("detail/{boardNo}")
    public String detail(@PathVariable String boardNo, Model model) {
 
@@ -94,7 +87,11 @@ public class NoticeController {
 
       model.addAttribute("vo", vo);
       model.addAttribute("replyList", replyList);
-
+      
+      // 게시글의 스크랩 수 표시 // 서비스 호출
+	  int scrap = ns.scrapCount(boardNo);
+	  model.addAttribute("scrap", scrap);
+      
       model.addAttribute("title", "POST");
       model.addAttribute("page", "notice/detail");
       
@@ -225,5 +222,47 @@ public class NoticeController {
 	   
    }//edit
    
+   // 스크랩
+   @PostMapping("scrap")
+   @ResponseBody
+   public int scrap(NoticeScrapVo svo, HttpSession session) {
+
+	   EmployeeVo loginVo = (EmployeeVo)session.getAttribute("loginVo");
+	   svo.setEmpNo(loginVo.getEmpNo());
+		
+	   // 서비스 호출 // 스크랩 중복방지(했는지 안했는지 체크)
+	   int scrap = ns.scrapCheck(svo);
+	   
+		if (scrap == 0) {
+			// 스크랩 하기
+			 ns.scrap(svo);
+		}else if(scrap == 1) {
+			//스크랩 취소
+			 ns.scrapCancel(svo);
+		}
+		
+		return scrap;
+		
+   }//scrap
+   
+   // 스크랩 목록 조회 (화면+진행) 
+   @GetMapping("scrapList")
+   public String list(NoticeScrapVo svo, Model model, HttpSession session) {
+
+	   EmployeeVo loginVo = (EmployeeVo) session.getAttribute("loginVo");
+	   svo.setEmpNo(loginVo.getEmpNo());
+	      
+	  // 게시글 목록 조회 // 서비스 호출
+	  List<NoticeScrapVo> voList = ns.selectScrapList(svo);
+      model.addAttribute("voList", voList);
+	   
+      System.out.println("스크랩목록voList::: " + voList);//ysy
+      
+      model.addAttribute("title", "SCRAP");
+      model.addAttribute("page", "notice/scrapList");
+      
+      return "layout/template";
+
+   }// detail
    
 }// class

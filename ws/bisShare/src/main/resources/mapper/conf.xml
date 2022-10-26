@@ -26,5 +26,8 @@
 		<typeAlias type="com.bs.notice.vo.NoticeReplyVo" alias="nrv"/>
 		<typeAlias type="com.bs.free.vo.FreeReplyVo" alias="frv"/>
 		<typeAlias type="com.bs.blind.vo.BlindReplyVo" alias="brv"/>
+		<!-- 게시판 스크랩 -->
+		<typeAlias type="com.bs.notice.vo.NoticeScrapVo" alias="svo"/>
+		
 	</typeAliases>
 </configuration>
