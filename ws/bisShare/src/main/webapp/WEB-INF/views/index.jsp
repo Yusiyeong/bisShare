@@ -100,9 +100,6 @@
     <!-- Custom scripts for all pages-->
     <script src="${root}/resources/js/sb-admin-2.min.js"></script>
 
-    <!-- js -->
-    <script src="${root}/resources/js/login/loginPage.js"></script>
-
     <c:if test="${not empty cookie.sid}">
         <!-- rememberCheck -->
         <script src="${root}/resources/js/login/remember.js"></script>

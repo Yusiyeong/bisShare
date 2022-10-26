@@ -1,6 +1,5 @@
 package com.bs.mail.service;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
