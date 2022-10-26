@@ -107,7 +107,7 @@ public class ApprovalController {
 	@GetMapping("detail/{adcNo}")
 	public String Detail(Model model, @PathVariable String adcNo) {
 		
-//		ApprovalVo vo = aprvService.getOneByNo(adcNo);
+		ApprovalVo vo = aprvService.getOneByNo(adcNo);
 		
 		model.addAttribute("title", "결재 서류");
 		model.addAttribute("page", "approval/detail");

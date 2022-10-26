@@ -99,7 +99,7 @@
             </table>
             <div class="py-3">
                 <h6 class="m-0 font-weight-bold text-primary">
-                    결재선 <button id="aprv-line-select" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#aprv-line-Modal">+</button>
+                    결재선
                 </h6>
             </div>
             <div id="approve-line-area" class="table-bordered">
@@ -149,7 +149,7 @@
             <!-- 합의 라인 -->
             <div id="agree-line-area">
                 <div id="" class="bg-gray-200">
-                    <div id="">합의<button id="agree-line-select" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#agree-line-Modal">+</button></div>
+                    <div id="">합의</div>
                 </div>
                 <div>
                     <div class=""></div>
@@ -176,7 +176,7 @@
             <!-- 참조 라인 -->
             <div id="ref-line-area">
                 <div id="" class="bg-gray-200">
-                    <div id="">참조<button id="ref-line-select" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#ref-line-Modal">+</button></div>
+                    <div id="">참조</div>
                 </div>
                 <div>
                     <div class=""></div>
@@ -213,10 +213,40 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <textarea id="summernote" name="adcContent"></textarea>
+                        <div id="aprv-content-area"></div>
                     </td>
                 </tr>
             </table>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
