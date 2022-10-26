@@ -15,12 +15,16 @@ public class ApprovalVo {
 	//결재권자
 	private String aprverEmpNo;
 	private String aprverStatus;
+	private String[] aprverNicks;
+	private String[] aprverRanks;
 	//합의자
 	private String agreeEmpNo;
 	private String agreeStatus;
+	private String[] agreeNicks;
 	//참조자
 	private String refEmpNo;
 	private String refStatus;
+	private String[] refNicks;
 	//취소여부
 	private String cancel;
 	
