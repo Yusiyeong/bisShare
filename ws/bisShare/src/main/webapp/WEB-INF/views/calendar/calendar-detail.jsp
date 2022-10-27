@@ -31,24 +31,37 @@
     }
 
     #select{
-        width: 100px;
-        height: 23px;
-        font-size: 13px;
-        border: none;
+        margin-left: 6%;
+        margin-top: 10px;
+        font-size: 15px;
     }
 
     #file-name{
         margin-left: 50px;
     }
 
-    #create, #start, #end, #cate, #file, #line{
+    #create, #start, #end, #cate, #file, #line  {
         margin-left: 10%;
         margin-top: 10px;
         font-size: 15px;
     }
 
-    .datepicker-start, .datepicker-end, #write{
+    #now_date{
+        margin-left: 8%;
+        margin-top: 10px;
+        font-size: 15px;
+    }
+
+    .datepicker-start, #write{
+        text-decoration: none;
         margin-left: 67px;
+        height: 20px;
+        border: none;
+    }
+
+    .datepicker-end{
+        text-decoration: none;
+        margin-left: 70px;
         height: 20px;
         border: none;
     }
@@ -104,28 +117,31 @@
 							    <form action="" method="post">
 							        <div id="page">
 							            <div>
-                                            <div id="title">${vo.title}</div>
+                                            <a id="title">${cvo.title}</a>
 							            </div>
 							            <div id="create">
-							                작성일 <div id="write">${vo.modifyDate}</div>
+							                작성일 <a id="now_date">${cvo.modifyDate}</a>
+							            </div>
+                                        <div id="create">
+							                작성자 <a id="now_date">${cvo.writer}</a>
 							            </div>
 							            <div id="cate">
-							                카테고리  <div id="select">${vo.cateNo}</div>
+							                카테고리  <ia id="select">${cvo.cateNo}</ia>
 							            </div>
 							            <div id="start">
-							                시작일 <div class="datepicker-start">${vo.startDate}</div>
+							                시작일 <a class="datepicker-start" name="startDate">${cvo.startDate}</a>
 							            </div>
 							            <div id="end">
-							                종료일 <div class="datepicker-start">${vo.endDate}</div>
+							                종료일<a class="datepicker-end" name="endDate">${cvo.endDate}</a>
 							            </div>
 							            <hr id="line">
 							            <div>
-							                <div id="con">${vo.content}</div>
+							                <div id="con">${cvo.content}</div>
 							            </div>
-							            <c:if test="${ calvo.writer eq loginVo.nick }">
+							            <c:if test="${ cvo.writer eq loginVo.nick }">
 											<div id="center-bot">
-												<a href="${root}/calendar/edit/${vo.calNo}">수정하기</a>
-												<a href="${root}/calendar/delete/${vo.calNo}">삭제하기</a>
+												<a href="${root}/calendar/edit/${cvo.calNo}">수정하기</a>
+												<a href="${root}/calendar/delete/${cvo.calNo}">삭제하기</a>
 											</div>
 										</c:if>
 							        </div>
