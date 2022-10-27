@@ -36,6 +36,9 @@
 		display: none;
 	}
 	
+	.addrList{
+		display: none;
+	}
 </style>
 
 <!-- Begin Page Content -->
@@ -115,26 +118,25 @@
 		            		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 		                	<img id="img" src="${root}/resources/img/guest.png">
 		                		<c:forEach var="addr2" items="${dvoList}" varStatus="st">
-		                		
-				                		<tr class="temp-${st.index}">
+				                		<tr class="temp-${st.index} addrList">
 					                		<td id="t1">이름:&nbsp ${addr2.nick}</td>
 					                	</tr>
-					                	<tr class="temp-${st.index}">
+					                	<tr class="temp-${st.index} addrList">
 					                		<td id="t1">직급:&nbsp ${addr2.rankName}</td>
 					                	</tr>
-										<tr class="temp-${st.index}">
+										<tr class="temp-${st.index} addrList">
 											<td id="t1">부서:&nbsp ${addr2.deptName}</td>
 					                	</tr>
-										<tr class="temp-${st.index}">
+										<tr class="temp-${st.index} addrList">
 											<td id="t1">연락처:&nbsp ${addr2.phone}</td>
 					                	</tr>
-										<tr class="temp-${st.index}">
+										<tr class="temp-${st.index} addrList">
 											<td id="t1">이메일:&nbsp ${addr2.email}</td>
 					                	</tr>
-					                	<tr class="temp-${st.index}">
+					                	<tr class="temp-${st.index} addrList">
 											<td id="t1">주소:&nbsp ${addr2.address}</td>
 					                	</tr>
-					                	<tr class="temp-${st.index}">
+					                	<tr class="temp-${st.index} addrList">
 											<td id="t1">입사일:&nbsp ${addr2.hireDate}</td>
 					                	</tr>
 			                	
@@ -178,10 +180,13 @@
 	function doDisplay(idx){ 	
 		
 		const arr = document.querySelectorAll(".temp-" + idx);
-		arr[0].style.display == 'block';
-		arr[1].style.display == 'block';
+		console.log(arr);
+		for(let i = 0; i < arr.length; i++)  {
+			arr[i].classList.toggle('addrList');
+		}
 		
 	    var con = document.getElementById("test1"); 
+	    
 	    if(con.style.display=='block'){ 		
 	        con.style.display = 'none'; 	
 	    }else{ 		
