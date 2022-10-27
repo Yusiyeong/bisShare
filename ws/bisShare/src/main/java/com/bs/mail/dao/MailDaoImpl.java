@@ -108,18 +108,28 @@ public class MailDaoImpl implements MailDao{
 	}
 
 	@Override
-	public MailVo selectTrashOne(SqlSessionTemplate sst, MailVo mv) {
-		return sst.selectOne("mailMapper.selectTrashOne", mv);
+	public List<MailVo> selectTrashOne(SqlSessionTemplate sst, MailVo mv) {
+		return sst.selectList("mailMapper.selectTrashOne", mv);
 	}
 
 	@Override
-	public String selectTrashReferences(SqlSessionTemplate sst, MailVo mv) {
-		return sst.selectOne("mailMapper.selectTrashRef", mv);
+	public List<MailVo> selectTrashReferences(SqlSessionTemplate sst, MailVo mv) {
+		return sst.selectList("mailMapper.selectTrashRef", mv);
 	}
 
 	@Override
 	public String selectRefForRef(SqlSessionTemplate sst, MailVo mv) {
 		return sst.selectOne("mailMapper.selectRefForRef", mv);
+	}
+
+	@Override
+	public List<MailVo> selectDraft(SqlSessionTemplate sst, String empNo) {
+		return sst.selectList("mailMapper.selectDraft",empNo);
+	}
+
+	@Override
+	public int insertDraft(SqlSessionTemplate sst, MailVo mv) {
+		return sst.insert("mailMapper.insertDraft",mv);
 	}
 
 

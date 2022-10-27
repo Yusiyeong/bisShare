@@ -45,10 +45,8 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="${root}/mail/write">메일작성</a>
-                        <a class="collapse-item" href="${root}/mail/receive">받은메일</a>
-                        <a class="collapse-item" href="${root}/mail/send">보낸메일</a>
-                        <a class="collapse-item" href="${root}/mail/important">중요메일</a>
+                        <a class="collapse-item" href="${root}/mail/receive">받은 메일</a>
+                        <a class="collapse-item" href="${root}/mail/draft">임시 보관함</a>
                     </div>
                 </div>
             </li>

@@ -11,7 +11,7 @@
 		)
 		VALUES (
 			SEQ_MAIL_NO.NEXTVAL
-			, ${send}
+			, #{send}
 			, #{title}
 			, #{content}
 		)
@@ -29,9 +29,9 @@
 		VALUES (
 			SEQ_MAIL_RECEIVE_NO.NEXTVAL
 			, SEQ_MAIL_NO.CURRVAL
-			, ${receive}
+			, #{receive}
 			<if test="reference != null">
-				, ${reference}
+				, #{reference}
 			</if>
 		)
 	</insert>
@@ -81,7 +81,7 @@
 		            JOIN EMPLOYEE EE
 		            ON R.RECEIVE = EE.EMP_NO
 				WHERE R.STATUS=0
-		        AND R.RECEIVE=${receive}
+		        AND R.RECEIVE=#{receive}
 		        AND R.REFERENCE IS NULL
 		        ) 
 		GROUP BY MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, READ_YN, SEND 
@@ -89,14 +89,14 @@
 	
 	<update id="updateStar">
 		UPDATE MAIL_RECEIVE
-		SET STAR = ${star}
-		WHERE MAIL_NO=${mailNo}
+		SET STAR = #{star}
+		WHERE MAIL_NO=#{mailNo}
 		<if test="receive != null">
-			AND RECEIVE=${receive}
+			AND RECEIVE=#{receive}
 			AND REFERENCE IS NULL
 		</if>
 		<if test="reference != null">
-			AND REFERENCE=${reference}
+			AND REFERENCE=#{reference}
 		</if>
 	</update>
 	
@@ -115,8 +115,8 @@
 		JOIN EMPLOYEE EE
 			ON EE.EMP_NO = R.RECEIVE
 		WHERE R.STATUS = 0
-			AND M.MAIL_NO = ${mailNo}
-			AND R.RECEIVE = ${receive}
+			AND M.MAIL_NO = #{mailNo}
+			AND R.RECEIVE = #{receive}
 			AND R.REFERENCE IS NULL
 	</select>
 	
@@ -127,8 +127,8 @@
 			ON E.EMP_NO = R.REFERENCE
 		JOIN MAIL M
 			ON M.MAIL_NO = R.MAIL_NO
-		WHERE R.MAIL_NO = ${mailNo}
-			AND R.RECEIVE=${receive}
+		WHERE R.MAIL_NO = #{mailNo}
+			AND R.RECEIVE=#{receive}
 			AND R.STATUS=0
 	</select>
 	
@@ -144,8 +144,8 @@
 			ON E.EMP_NO = R.REFERENCE
 		JOIN MAIL M
 			ON M.MAIL_NO = R.MAIL_NO
-		WHERE R.MAIL_NO =${mailNo}
-			AND R.REFERENCE=${reference}
+		WHERE R.MAIL_NO =#{mailNo}
+			AND R.REFERENCE=#{reference}
 			AND R.STATUS=0
 	</select>
 	
@@ -172,9 +172,9 @@
 					INNER JOIN EMPLOYEE E
 					ON M.SEND = E.EMP_NO
 				WHERE R.STATUS=0
-                AND R.REFERENCE=${reference}
+                AND R.REFERENCE=#{reference}
 		        ) 
-		WHERE MAIL_NO = ${mailNo}
+		WHERE MAIL_NO = #{mailNo}
 		group by MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, 
 		READ_YN, SEND
 	</select>
@@ -182,26 +182,26 @@
 	<select id="selectStar" resultType="String">
 		SELECT STAR
 		FROM MAIL_RECEIVE
-		WHERE MAIL_NO=${mailNo}
+		WHERE MAIL_NO=#{mailNo}
 		<if test="receive != null">
-			AND RECEIVE=${receive}
+			AND RECEIVE=#{receive}
 			AND REFERENCE IS NULL
 		</if>
 		<if test="reference != null">
-			AND REFERENCE=${reference}
+			AND REFERENCE=#{reference}
 		</if>
 	</select>
 	
 	<update id="updateReadYn">
 		UPDATE MAIL_RECEIVE
 		SET READ_YN = 'Y'
-		WHERE MAIL_NO=${mailNo}
+		WHERE MAIL_NO=#{mailNo}
 		<if test="receive != null">
-			AND RECEIVE=${receive}
+			AND RECEIVE=#{receive}
 			AND REFERENCE IS NULL
 		</if>
 		<if test="reference != null">
-			AND REFERENCE=${reference}
+			AND REFERENCE=#{reference}
 		</if>
 	</update>
 	
@@ -221,9 +221,9 @@
 			INNER JOIN EMPLOYEE E
 			ON R.RECEIVE = E.EMP_NO
 		WHERE R.STATUS=0
-		AND R.RECEIVE=${empNo}
+		AND R.RECEIVE=#{empNo}
         AND R.STAR = 'Y'
-		OR R.REFERENCE=${empNo}
+		OR R.REFERENCE=#{empNo}
 		AND R.STAR = 'Y'
 	</select>
 	
@@ -232,7 +232,7 @@
 			COUNT(READ_YN)
 		FROM MAIL_RECEIVE
 		WHERE STATUS=0
-		AND RECEIVE=${receive}
+		AND RECEIVE=#{receive}
         AND REFERENCE IS NULL
 		AND READ_YN = 'N'
 	</select>
@@ -245,19 +245,19 @@
 			, ORIGIN_NAME
 			, ENROLL_DATE
 		FROM MAIL_ATT
-		WHERE MAIL_NO = ${mailNo}
+		WHERE MAIL_NO = #{mailNo}
 	</select>
 	
 	<update id="updateCheckStatus">
 		UPDATE MAIL_RECEIVE
-		SET STATUS = ${status}
-		WHERE MAIL_NO = ${mailNo}
+		SET STATUS = #{status}
+		WHERE MAIL_NO = #{mailNo}
 		<if test="reference == null">
-			AND RECEIVE = ${receive}
+			AND RECEIVE = #{receive}
 			AND REFERENCE IS NULL
 		</if>
 		<if test="reference != null">
-			AND REFERENCE = ${reference}
+			AND REFERENCE = #{reference}
 		</if>
 	</update>
 	
@@ -290,7 +290,7 @@
 		            JOIN EMPLOYEE EE
 		            ON R.RECEIVE = EE.EMP_NO
 				WHERE R.STATUS=0
-		        AND R.REFERENCE=${reference}
+		        AND R.REFERENCE=#{reference}
 		        ) 
 		GROUP BY MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, 
                 READ_YN, SEND
@@ -323,7 +323,7 @@
 		            JOIN EMPLOYEE EE
 		            ON R.RECEIVE = EE.EMP_NO
 				WHERE R.STATUS=0
-		        AND M.SEND=${send}
+		        AND M.SEND=#{send}
 		        AND R.REFERENCE IS NULL
 		        ) 
 		GROUP BY MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR
@@ -344,8 +344,8 @@
 		JOIN EMPLOYEE EE
 			ON EE.EMP_NO = R.RECEIVE
 		WHERE R.STATUS = 0
-			AND M.MAIL_NO = ${mailNo}
-			AND M.SEND = ${send}
+			AND M.MAIL_NO = #{mailNo}
+			AND M.SEND = #{send}
 			AND R.REFERENCE IS NULL 
         group by M.MAIL_NO, E.NICK, M.TITLE, M.CONTENT
 	</select>
@@ -362,8 +362,8 @@
 			ON E.EMP_NO = R.REFERENCE
 		JOIN MAIL M
 			ON M.MAIL_NO = R.MAIL_NO
-		WHERE R.MAIL_NO = ${mailNo}
-			AND M.SEND=${send}
+		WHERE R.MAIL_NO = #{mailNo}
+			AND M.SEND=#{send}
 			AND R.STATUS=0
 	</select>
 	
@@ -395,8 +395,8 @@
 					ON M.SEND = E.EMP_NO
 		            JOIN EMPLOYEE EE
 		            ON R.RECEIVE = EE.EMP_NO
-				WHERE R.RECEIVE=${receive}
-                OR R.REFERENCE=${reference}
+				WHERE R.RECEIVE=#{receive}
+                OR R.REFERENCE=#{reference}
 		        ) 
         WHERE STATUS = 1
 		GROUP BY MAIL_NO, TITLE, CONTENT, ENROLL_DATE, STAR, READ_YN, SEND , STATUS
@@ -417,21 +417,50 @@
 		JOIN EMPLOYEE EE
 			ON EE.EMP_NO = R.RECEIVE
 		WHERE R.STATUS = 1
-			AND M.MAIL_NO = ${mailNo}
-			AND R.RECEIVE = ${receive}
+			AND M.MAIL_NO = #{mailNo}
 			
 	</select>
 	
-	<select id="selectTrashRef" resultType="String">
-		SELECT LISTAGG(E.NICK,',') WITHIN GROUP(ORDER BY R.REFERENCE) AS REFERENCE
+	<select id="selectTrashRef" resultType="mv">
+		SELECT E.NICK REFERENCE
 		FROM MAIL_RECEIVE R
 		JOIN EMPLOYEE E
 			ON E.EMP_NO = R.REFERENCE
 		JOIN MAIL M
 			ON M.MAIL_NO = R.MAIL_NO
-		WHERE R.MAIL_NO = ${mailNo}
-			AND R.RECEIVE=${receive}
+		WHERE R.MAIL_NO = #{mailNo}
 			AND R.STATUS=1
 	</select>
+	
+	<!-- 임시보관함 -->
+	<select id="selectDraft" resultType="mv">
+		SELECT *
+		FROM DRAFT
+		WHERE STATUS=0
+		AND SEND=#{empNo}
+	</select>
+	
+	<!-- 임시 보관하기 -->
+	<insert id="insertDraft">
+		INSERT INTO DRAFT(
+			DRAFT_NO
+			, SEND
+			, RECEIVE
+			<if test="reference != null">
+				, REFERENCE
+			</if>
+			, TITLE
+			, CONTENT
+		) VALUES (
+			SEQ_DRAFT_NO.NEXTVAL
+			, #{send}
+			, #{receive}
+			<if test="reference != null">
+				, #{reference}
+			</if>
+			, #{title}
+			, #{content}
+		)
+	</insert>
 	
 </mapper>

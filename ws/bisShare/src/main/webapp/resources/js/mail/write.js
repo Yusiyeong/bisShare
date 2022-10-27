@@ -38,5 +38,9 @@ $('#mail-content').summernote({
     }
 });
 
+if(refCheck == 4) {
+    $('#mail-write').attr('action', `${root}/mail/draft`);
+}
+
 
 

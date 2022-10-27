@@ -1,5 +1,6 @@
 package com.bs.mail.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -149,7 +150,7 @@ public class MailServiceImpl implements MailService{
 			} else if (filter == 1) {
 //				참조된 메일 삭제는 휴지통 X 바로 삭제
 				mv.setReference(loginVo.getEmpNo());
-				mv.setStatus("2");
+				mv.setStatus("1");
 			} else if (filter == 2) {
 				mv.setStatus("1");
 			} else if (filter == 3) {
@@ -226,24 +227,61 @@ public class MailServiceImpl implements MailService{
 
 
 	@Override
-	public MailVo detailTrash(MailVo mv) {
+	public List<MailVo> detailTrash(MailVo mv) {
 		
-//		읽음표시하기
-		md.updateReadYn(sst,mv);
 		
-		MailVo vo = md.selectTrashOne(sst,mv);
-		String references = md.selectTrashReferences(sst,mv);
-		vo.setReference(references);
+		List<MailVo> vo = md.selectTrashOne(sst,mv);
+
+		List<MailVo> references = md.selectTrashReferences(sst,mv);
+		if (references.size() > 0) vo.get(0).setReference(references.get(0).getReference());
 		List<MailAttVo> mavList = md.selectFilePath(sst,mv);
 		
 		if(mavList.size() == 0) {
 			mavList = null;
 		}
 		if (mavList != null) {
-			vo.setMavList(mavList);
+			vo.get(0).setMavList(mavList);
 		}
 		
 		return vo;
+	}
+
+
+	@Override
+	public List<MailVo> draft(String empNo) {
+		return md.selectDraft(sst,empNo);
+	}
+
+
+	@Override
+	public int draftWrite(MailVo mv, List<EmployeeVo> recList, List<EmployeeVo> refList) {
+		
+		int result = 0;
+		
+		String recStr = "";
+		String refStr = "";
+		
+		for(EmployeeVo e : recList) {
+			recStr += e.getValue() + ",";
+		}
+		String recStr1 = "\'"+recStr.substring(0,recStr.length()-1)+"\'";
+		
+		mv.setReceive(recStr1);
+		
+		if(refList != null) {
+			for(EmployeeVo e : refList) {
+				refStr += e.getValue() + ",";
+			}
+			String refStr1 = "\'"+refStr.substring(0,refStr.length()-1)+"\'";
+			
+			mv.setReference(refStr1);
+		} else {
+			mv.setReference(null);
+		}
+		
+		result = md.insertDraft(sst,mv);
+		
+		return result;
 	}
 
 }
