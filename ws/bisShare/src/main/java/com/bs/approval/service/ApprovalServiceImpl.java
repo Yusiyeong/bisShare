@@ -127,7 +127,12 @@ public class ApprovalServiceImpl implements ApprovalService{
 	}
 
 	
-	
+	//기안서 진행도 체크
+	public static void checkProgress(List<ApprovalVo> voList) {
+		
+		
+		
+	}
 	
 	
 }//class
