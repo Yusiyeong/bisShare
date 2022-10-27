@@ -20,6 +20,9 @@ public interface ApprovalDao {
 	
 	//기안서 하나 조회
 	ApprovalVo getOneByNo(SqlSessionTemplate sst, String adcNo);
+
+	//기안서 전체 조회
+	List<ApprovalVo> getListAll(SqlSessionTemplate sst);
 	
 	//임시저장한 기안서
 	

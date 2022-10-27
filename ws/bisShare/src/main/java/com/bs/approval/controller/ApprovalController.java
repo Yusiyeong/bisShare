@@ -66,24 +66,22 @@ public class ApprovalController {
 		return "layout/template";
 	}
 	
-	//결재 작성 진행
+	//결재 작성 진행 (ajax)
 	@PostMapping("write")
 	@ResponseBody
 	public String write(Model model, ApprovalVo avo, HttpSession session) {
-		
+		//회원번호 담아주기
 		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
 		avo.setEmpNo(empVo.getEmpNo());
-		
-		System.out.println(avo);
 		
 		int result = aprvService.insertOne(avo);
 		
 		if(result == 1) {
 			model.addAttribute("page", "approval/detail");
-			return"ok";
+			return avo.getAdcNo();
 		} else {
 			//작성실패
-			return"fail";
+			return null;
 		}
 	}
 	
@@ -97,7 +95,15 @@ public class ApprovalController {
 	
 	//결재함 화면 (내가 결재권자 || 합의 || 참조)
 	@GetMapping("document")
-	public String document(Model model) {
+	public String document(Model model, HttpSession session) {
+		
+		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
+		
+		List<ApprovalVo> myAuthoAprvList = aprvService.getListAuthorMy(empVo.getEmpNo());
+		
+		System.out.println(myAuthoAprvList.toString());
+		
+		model.addAttribute("aprvList", myAuthoAprvList);
 		model.addAttribute("title", "나의 결재함");
 		model.addAttribute("page", "approval/document");
 		return "layout/template";

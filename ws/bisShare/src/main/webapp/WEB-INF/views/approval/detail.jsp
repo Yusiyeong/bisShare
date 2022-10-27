@@ -61,16 +61,18 @@
 </style>
 
 <div class="card shadow mb-4" id="apprve-write-outer">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary" id="approve-submit-area">
-            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#submitModal">기안취소</a>
-        </h6>
-    </div>
+   	<c:if test="${ loginVo.empNo eq avo.empNo }">
+	    <div class="card-header py-3">
+	        <h6 class="m-0 font-weight-bold text-primary" id="approve-submit-area">
+		            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#submitModal">기안취소</a>
+	        </h6>
+	    </div>
+   	</c:if>
     <div class="card-body">
         <div class="table-responsive">
             <div class="py-3">
                 <h6 class="m-0 font-weight-bold text-primary">
-                    기본 설정
+                    결재 정보
                 </h6>
             </div>
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -100,8 +102,16 @@
                 <c:forEach var="i" begin="0" end="${ fn:length(avo.aprverEmpNos) - 1 }">
                 	<div>
 	                    <div class="approve-rank-area bg-gray-200">${ avo.aprverRanks[i]}</div>
-	                    <div class="approve-stamp-area">${ avo.aprverStatuses[i] }</div>
-	                    <div class="approve-name-area">${ avo.aprverNicks[i] }</div>
+		                    <div class="approve-stamp-area">
+		                    	<div></div>
+			                    <c:if test="${ loginVo.empNo eq avo.aprverEmpNos[i] }">
+			                    	<div>
+			                    		<button id="approve-btn" class="btn btn-outline-primary">결재</button>
+			                    	</div>
+			                    </c:if>
+			                    <div></div>
+		                    </div>
+		                    <div class="approve-name-area">${ avo.aprverNicks[i] }</div>
                 	</div>
                 </c:forEach>
                 <c:forEach begin="0" end="${6-fn:length(avo.aprverEmpNos)}">
@@ -119,7 +129,12 @@
                 </div>
                 <c:forEach var="i" begin="0" end="${ fn:length(avo.agreeEmpNos) - 1 }">
                 	<div>
-	                    <div class="agree-name-area">${ avo.agreeNicks[i]}</div>
+	                    <div class="agree-name-area">
+	                    	${ avo.agreeNicks[i]}
+	                    	<c:if test="${ loginVo.empNo eq avo.agreeEmpNos[i] }">
+	                    		<button class="btn btn-sm btn-outline-primary">확인</button>
+		                    </c:if>
+	                    </div>
                 	</div>
                 </c:forEach>
                 <c:forEach begin="0" end="${6-fn:length(avo.agreeEmpNos)}">
@@ -135,7 +150,12 @@
                 </div>
                 <c:forEach var="i" begin="0" end="${ fn:length(avo.refEmpNos) - 1 }">
                 	<div>
-	                    <div class="ref-name-area">${ avo.refNicks[i]}</div>
+	                    <div class="ref-name-area">
+	                    	${ avo.refNicks[i]}
+	                    	<c:if test="${ loginVo.empNo eq avo.refEmpNos[i] }">
+	                    		<button class="btn btn-sm btn-outline-primary">확인</button>
+		                    </c:if>
+	                    </div>
                 	</div>
                 </c:forEach>
                 <c:forEach begin="0" end="${6-fn:length(avo.refEmpNos)}">
@@ -144,6 +164,8 @@
                 	</div>
                 </c:forEach>
             </div>
+            
+            <br>
             
             <div class="py-3">
                 <h6 class="m-0 font-weight-bold text-primary">
@@ -167,7 +189,13 @@
 
 
 
-
+<<script type="text/javascript">
+	
+	$('#approve-btn').click(()=>{
+		confirm('무야호~');
+	})
+	
+</script>
 
 
 

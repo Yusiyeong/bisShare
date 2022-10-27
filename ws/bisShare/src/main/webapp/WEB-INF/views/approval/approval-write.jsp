@@ -644,9 +644,9 @@
 		    		, refStatus : refStatus
     		}
     		, success : (result) => {
-				if(result == 'ok'){
+				if(result != null){
 					alert('결재 작성 성공');
-					location.href = '${root}/main';
+					location.href = '${root}/approval/detail/'+result;
 				} else{
 					alert('결재 작성 실패')
 				}
