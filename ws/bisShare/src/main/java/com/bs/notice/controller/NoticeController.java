@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bs.common.PageVo;
 import com.bs.common.Pagination;
 import com.bs.employee.vo.EmployeeVo;
-import com.bs.free.vo.FreeVo;
 import com.bs.notice.service.NoticeReplyService;
 import com.bs.notice.service.NoticeService;
 import com.bs.notice.vo.NoticeReplyVo;
@@ -98,7 +97,6 @@ public class NoticeController {
      // 회원 해당 게시글 스크랩 여부
      NoticeScrapVo scrap = ns.findScrap(boardNo, svo.getEmpNo()); 
      System.out.println(" 회원 해당 게시글 스크랩 여부 scrap:: " + scrap);//ysy
-     
      model.addAttribute("scrap", scrap);
       
       model.addAttribute("title", "POST");
@@ -140,7 +138,7 @@ public class NoticeController {
 
    // 게시글 작성(진행)
    @PostMapping("write")
-   public String write(NoticeVo vo, Model model, HttpSession session, HttpServletRequest req) {
+   public String write(NoticeVo vo, Model model, HttpSession session, HttpServletRequest req) {		// req 빼도 되지 않나?
 
       EmployeeVo loginVo = (EmployeeVo) session.getAttribute("loginVo");
       vo.setWriter(loginVo.getEmpNo());
@@ -273,5 +271,31 @@ public class NoticeController {
       return "layout/template";
 
    }// detail
+   
+   // 스크랩 목록 삭제
+   @PostMapping("scrapDelete")
+   @ResponseBody
+   public String scrapDelete(NoticeScrapVo svo, HttpServletRequest req, HttpSession session) {
+	   
+//	   EmployeeVo loginVo = (EmployeeVo) session.getAttribute("loginVo");
+//	   svo.setEmpNo(loginVo.getEmpNo());
+
+	   String[] ajaxMsg = req.getParameterValues("valueArr");
+	   
+	   for(int i=0; i<ajaxMsg.length; i++) {
+		   
+		   svo.setScrapNo(ajaxMsg[i]);
+		   
+		   // 서비스 호출
+		   ns.scrapDelete(svo.getScrapNo());
+		   
+		   System.out.println("스크랩 목록 삭제 svo ::: " +  svo);
+		   
+	   }
+
+	   return "layout/template";
+		   
+   }//scrapDelete
+   
    
 }// class

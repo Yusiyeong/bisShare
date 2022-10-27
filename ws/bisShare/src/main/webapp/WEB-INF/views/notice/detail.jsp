@@ -27,6 +27,7 @@
     a { text-decoration:none !important ;color: blue;}
 
     a:hover { text-decoration:none !important }
+    
   
 </style>
     
@@ -69,7 +70,7 @@
                      <!-- 스크랩start -->
                      <c:if test="${not empty loginVo}">  
                          <div>
-		                    <a class="text-dark scrap" style="text-decoration-line: none; float:right; margin-top:-30px;">
+		                    <a class="text-dark scrap" style="cursor: pointer; text-decoration-line: none; float:right; margin-top:-30px;">
 		                       <img id="scrap" src="${root}/resources/img/scrap.svg">
 		                        스크랩
 		                    </a>
@@ -378,27 +379,13 @@
    
     <c:if test="${! empty scrap.scrapNo }">
 	    <script>
-	   	 // 스크랩이 되어있는지 확인한 값을 scrapval에 저장
-	   	 var scrapval = ${scrap.scrapNo};
-	      
-	      if(scrapval>0) {
-	           console.log(scrapval);
-	           $("#scrap").prop("src", "${root}/resources/img/scrap-fill.svg");
-	           $(".scrap").prop('name',scrapval)
-	       }
-	       else {
-	           console.log(scrapval);
-	           $("#scrap").prop("src", "${root}/resources/img/scrap.svg");
-	           $(".scrap").prop('name',scrapval)
-	       } 
+           $("#scrap").prop("src", "${root}/resources/img/scrap-fill.svg");
 	      </script>  
       </c:if>
       
    <script>
    //스크랩
-      // 스크랩 버튼을 클릭 시 실행되는 코드
        $(".scrap").on("click", function () {
-            var that = $(".scrap");
          
             const boardNo = ${vo.boardNo};      
             const empNo = '${sessionScope.loginVo.nick}';   
@@ -412,13 +399,9 @@
                      alert("통신 에러");
                   },
                   success : function(scrap) {
-                            that.prop('name',scrap);
-                            console.log("=====");
-                            console.log(that);
-                            console.log(scrap);
-                            
-                              if(scrap == 0){
-                                alert("스크랩 완료");
+
+                	  		  if(scrap == 0){
+                                 alert("스크랩 완료");
                                  $('#scrap').prop("${root}/resources/img/scrap-fill.svg");
                                  location.reload();
                               }else if(scrap == 1){
