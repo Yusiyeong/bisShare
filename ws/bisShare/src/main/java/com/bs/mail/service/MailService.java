@@ -35,4 +35,8 @@ public interface MailService {
 	List<MailVo> trashcan(String empNo);
 
 	List<MailVo> detailTrash(MailVo vo);
+
+	List<MailVo> draft(String empNo);
+
+	int draftWrite(MailVo mv, List<EmployeeVo> recList, List<EmployeeVo> refList);
 }

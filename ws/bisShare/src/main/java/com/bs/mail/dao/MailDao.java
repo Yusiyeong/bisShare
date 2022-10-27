@@ -53,6 +53,10 @@ public interface MailDao {
 
 	String selectRefForRef(SqlSessionTemplate sst, MailVo mv);
 
+	List<MailVo> selectDraft(SqlSessionTemplate sst, String empNo);
+
+	int insertDraft(SqlSessionTemplate sst, MailVo mv);
+
 
 
 }

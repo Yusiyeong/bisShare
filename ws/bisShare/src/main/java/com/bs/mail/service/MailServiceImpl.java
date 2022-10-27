@@ -1,5 +1,6 @@
 package com.bs.mail.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -243,6 +244,44 @@ public class MailServiceImpl implements MailService{
 		}
 		
 		return vo;
+	}
+
+
+	@Override
+	public List<MailVo> draft(String empNo) {
+		return md.selectDraft(sst,empNo);
+	}
+
+
+	@Override
+	public int draftWrite(MailVo mv, List<EmployeeVo> recList, List<EmployeeVo> refList) {
+		
+		int result = 0;
+		
+		String recStr = "";
+		String refStr = "";
+		
+		for(EmployeeVo e : recList) {
+			recStr += e.getValue() + ",";
+		}
+		String recStr1 = "\'"+recStr.substring(0,recStr.length()-1)+"\'";
+		
+		mv.setReceive(recStr1);
+		
+		if(refList != null) {
+			for(EmployeeVo e : refList) {
+				refStr += e.getValue() + ",";
+			}
+			String refStr1 = "\'"+refStr.substring(0,refStr.length()-1)+"\'";
+			
+			mv.setReference(refStr1);
+		} else {
+			mv.setReference(null);
+		}
+		
+		result = md.insertDraft(sst,mv);
+		
+		return result;
 	}
 
 }

@@ -25,7 +25,7 @@
 					<table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
 						<thead>
 							<tr>
-								<th></th>
+								<th>${receiveMail}</th>
 								<th>중요</th>
 								<th>메일명</th>
 								<th id="nick">발신</th>

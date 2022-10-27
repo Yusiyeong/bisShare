@@ -346,4 +346,54 @@ public class MailController {
 
 		return "layout/template";
 	}
+	
+	/**
+	 * 임시 보관함
+	 */
+	@GetMapping("draft")
+	public String draft(Model model, HttpSession session) {
+		
+		EmployeeVo ev = (EmployeeVo) session.getAttribute("loginVo");
+
+		List<MailVo> list = ms.draft(ev.getEmpNo());
+		String notReadCnt = ms.notRead(ev.getEmpNo());
+
+		model.addAttribute("notReadCnt", notReadCnt);
+		model.addAttribute("receiveMail", list);
+
+		model.addAttribute("title", "REFERENCE MAIL");
+		model.addAttribute("page", "mail/received");
+
+		return "layout/template";
+	}
+	
+	/**
+	 * 임시 보관하기
+	 */
+	@PostMapping("draft")
+	public String draftWrite(MailVo mv, HttpSession session, MultipartHttpServletRequest mhreq, HttpServletRequest req) {
+		
+		Gson gson = new Gson();
+		
+		EmployeeVo loginVo = (EmployeeVo) session.getAttribute("loginVo");
+		mv.setSend(loginVo.getEmpNo());
+		
+		
+		String receive = mv.getReceive();
+		String reference = mv.getReference();
+		List<EmployeeVo> recList = gson.fromJson(receive, new TypeToken<List<EmployeeVo>>() {
+		}.getType());
+		List<EmployeeVo> refList = gson.fromJson(reference, new TypeToken<List<EmployeeVo>>() {
+		}.getType());
+
+		int result = ms.draftWrite(mv, recList, refList);
+		
+		if (result == 1) {
+			return "redirect:/mail/draft";
+		} else {
+			session.setAttribute("errorMsg", "발송 실패!");
+			return "redirect:/";
+		}
+
+	}
 }

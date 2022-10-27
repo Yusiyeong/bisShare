@@ -13,7 +13,10 @@ if (location.href.includes('reference')) {
 } else if (location.href.includes('trashcan')) {
   refCheck = 3;
   document.querySelector('#nick').innerHTML = '발신';
-}
+} else if (location.href.includes('draft')) {
+  refCheck = 4;
+  document.querySelector('#nick').innerHTML = '';
+} 
 
 if(refCheck == 2) {
   document.querySelector('#navTrash').style.display = 'none';
