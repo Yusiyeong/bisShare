@@ -93,7 +93,7 @@
 		    ON C.WRITER = E.EMP_NO
 		    WHERE C.STATUS = 'Y'
 		    AND C.WRITER = #{writer}
-		    ORDER BY C.CAL_NO DESC
+		    ORDER BY C.START_DATE ASC
 	</select>
 	
 	

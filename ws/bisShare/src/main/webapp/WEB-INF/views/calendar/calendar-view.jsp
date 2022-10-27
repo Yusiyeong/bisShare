@@ -15,6 +15,7 @@
 		margin-top: 20px;
 	}
 
+
 	
 
 </style>
@@ -32,97 +33,157 @@
 								<!-- Page Heading -->
 								<div id="tab">
 								
-									<ul class="nav nav-tabs" id="myTab" role="tablist">
-									  <li class="nav-item" role="presentation">
-									    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#one-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">회의</button>
-									  </li>
-									  <li class="nav-item" role="presentation">
-									    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#two-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">휴가</button>
-									  </li>
-									  <li class="nav-item" role="presentation">
-									    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#three-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">반차</button>
-									  </li>
-									  <li class="nav-item" role="presentation">
-									    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#four-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">외근</button>
-									  </li>
-									  <li class="nav-item" role="presentation">
-									    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#five-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">기타</button>
-									  </li>
-									</ul>
-									
-									<div class="tab-content" id="myTabContent">
-									
-								<div class ="d-flex flex-wrap w-100">
-									<c:forEach items="${cvoList}" var="x">
-
-										<div class="row">
-											<div class="col-md-4">
-												<div class="tab-pane fade show active cate${x.cateNo}" id="one-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+								<nav>
+								  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+								    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">회의</button>
+								    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">휴가</button>
+								    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">반차</button>
+								    <button class="nav-link" id="nav-out-tab" data-bs-toggle="tab" data-bs-target="#nav-out" type="button" role="tab" aria-controls="nav-out" aria-selected="false">외근</button>								    
+								    <button class="nav-link" id="nav-ect-tab" data-bs-toggle="tab" data-bs-target="#nav-ect" type="button" role="tab" aria-controls="nav-ect" aria-selected="false">기타</button>
+								  </div>
+								</nav>
+								<div class="tab-content" id="nav-tabContent">
+								
+								  <!-- 회의 -->
+								  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+								  
+									  <div class ="d-flex flex-wrap w-100">
+										<c:forEach items="${cvoList}" var="x">
+											<c:if test="${x.cateNo eq 2}">
+											
+											<div class="row">
+												<div class="col-md-4">
 													<div class="card" style="width: 21rem; height: 10rem; margin: 20px;" onclick="location.href='${root}/calendar/detail/${x.calNo}'">
-													<div class="card-body">
-													  <h5 class="card-title">${x.title}</h5>
-													  <h5 class="card-title">${x.startDate}</h5>
-													  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
-													  <p class="card-text">${x.content}</p>
-													</div>
-												  </div>
+														<div class="card-body">
+														  <h5 class="card-title">${x.title}</h5>
+														  <h5 class="card-title">${x.startDate}</h5>
+														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
+														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
+														</div>
+													 </div>
 												</div>
 											</div>
-										</div>
-
-									</c:forEach>
-								</div>
-									  
-									  
-									  <div class="tab-pane fade" id="two-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-									  	<div class="card" style="width: 18rem; height: 10rem;">
-										  <div class="card-body">
-										    <h5 class="card-title">휴가</h5>
-										    <h5 class="card-title">2022.10.25 ~ 2022.10.25</h5>
-										    <h6 class="card-subtitle mb-2 text-muted">박서영</h6>
-										    <p class="card-text">속세를 떠납니다</p>
-										  </div>
-										</div>
-									  </div>
-									  
-									  
-									  <div class="tab-pane fade" id="three-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-									  	<div class="card" style="width: 18rem; height: 10rem;">
-										  <div class="card-body">
-										    <h5 class="card-title">오후 반차</h5>
-										    <h5 class="card-title">2022.10.25</h5>
-										    <h6 class="card-subtitle mb-2 text-muted">박한솔</h6>
-										    <p class="card-text">오후 업무는 다음날 확인 가능합니다</p>
-										  </div>
-										</div>
-									  </div>
-									  
-									  
-									  <div class="tab-pane fade" id="four-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-									  	<div class="card" style="width: 18rem; height: 10rem;">
-										  <div class="card-body">
-										    <h5 class="card-title">외근</h5>
-										    <h5 class="card-title">2022.10.25</h5>
-										    <h6 class="card-subtitle mb-2 text-muted">유시영</h6>
-										    <p class="card-text">외근 나갑니다</p>
-										  </div>
-										</div>
-									  </div>
-									  
-									  
-									  <div class="tab-pane fade" id="five-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-									  	<div class="card" style="width: 18rem; height: 10rem;">
-										  <div class="card-body">
-										    <h5 class="card-title">가을 체육대회</h5>
-										    <h5 class="card-title">2022.10.25</h5>
-										    <h6 class="card-subtitle mb-2 text-muted">인사팀</h6>
-										    <p class="card-text">회사 가을 체육대회 있습니다.</p>
-										  </div>
-										</div>
-									  </div>
-									  
-									  	  
+	
+											</c:if>
+										</c:forEach>
 									</div>
+									
+								</div>
+								<!-- 회의 끝 -->
+								 
+								  <!-- 휴가 -->
+								  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+								  
+									  <div class ="d-flex flex-wrap w-100">
+										<c:forEach items="${cvoList}" var="x">
+											<c:if test="${x.cateNo eq 3}">
+											
+											<div class="row">
+												<div class="col-md-4">
+													<div class="card" style="width: 21rem; height: 10rem; margin: 20px;" onclick="location.href='${root}/calendar/detail/${x.calNo}'">
+														<div class="card-body">
+														  <h5 class="card-title">${x.title}</h5>
+														  <h5 class="card-title">${x.startDate} ~ ${x.endDate}</h5>
+														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
+														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
+														</div>
+													 </div>
+												</div>
+											</div>
+	
+											</c:if>
+										</c:forEach>
+									</div>
+
+								  </div>
+								  <!-- 휴가 끝 -->
+								  
+								  <!-- 반차 -->
+								  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+								  
+									  <div class ="d-flex flex-wrap w-100">
+										<c:forEach items="${cvoList}" var="x">
+											<c:if test="${x.cateNo eq 4}">
+											
+											<div class="row">
+												<div class="col-md-4">
+													<div class="card" style="width: 21rem; height: 10rem; margin: 20px;" onclick="location.href='${root}/calendar/detail/${x.calNo}'">
+														<div class="card-body">
+														  <h5 class="card-title">${x.title}</h5>
+														  <h5 class="card-title">${x.startDate}</h5>
+														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
+														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
+														</div>
+													 </div>
+												</div>
+											</div>
+	
+											</c:if>
+										</c:forEach>
+									</div>
+
+								  </div>
+								  <!-- 반차 끝-->
+								  
+								  <!-- 외근 -->
+								  <div class="tab-pane fade" id="nav-out" role="tabpanel" aria-labelledby="nav-out-tab" tabindex="0">
+								  
+									  <div class ="d-flex flex-wrap w-100">
+										<c:forEach items="${cvoList}" var="x">
+											<c:if test="${x.cateNo eq 5}">
+											
+											<div class="row">
+												<div class="col-md-4">
+													<div class="card" style="width: 21rem; height: 10rem; margin: 20px;" onclick="location.href='${root}/calendar/detail/${x.calNo}'">
+														<div class="card-body">
+														  <h5 class="card-title">${x.title}</h5>
+														  <h5 class="card-title">${x.startDate}</h5>
+														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
+														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
+														</div>
+													 </div>
+												</div>
+											</div>
+	
+											</c:if>
+										</c:forEach>
+									</div>
+
+								  </div>
+								  <!-- 외근 끝-->
+								  
+								  <!-- 기타 -->
+								  <div class="tab-pane fade" id="nav-ect" role="tabpanel" aria-labelledby="nav-ect-tab" tabindex="0">
+								  
+									  <div class ="d-flex flex-wrap w-100">
+										<c:forEach items="${cvoList}" var="x">
+											<c:if test="${x.cateNo eq 1}">
+											
+											<div class="row">
+												<div class="col-md-4">
+													<div class="card" style="width: 21rem; height: 10rem; margin: 20px;" onclick="location.href='${root}/calendar/detail/${x.calNo}'">
+														<div class="card-body">
+														  <h5 class="card-title">${x.title}</h5>
+														  <h5 class="card-title">${x.startDate}</h5>
+														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
+														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
+														</div>
+													 </div>
+												</div>
+											</div>
+	
+											</c:if>
+										</c:forEach>
+									</div>
+
+								  </div>
+								  <!-- 기타 끝-->
+								  
+								</div><!-- tab content -->
+								
+								</div><!-- tab -->
+						  	  
+ 								</div> 
 									
 								</div>
 								<!--end-->
