@@ -50,6 +50,12 @@ public interface NoticeDao {
 	// 스크랩 목록 삭제
 	int scrapDelete(SqlSessionTemplate sst, String scrapNo);
 
+	// 다음글, 이전글 
+	NoticeVo movePage(SqlSessionTemplate sst, String boardNo);
+
+	// 댓글 수 업데이트(제목 옆 댓글 수 표시)
+	int updateReplyCount(SqlSessionTemplate sst, String boardNo);
+
 
 
 

@@ -75,15 +75,24 @@ public class NoticeController {
 
    }// list
 
-   // 게시글 상세조회(화면+진행) + 댓글 조회 + 게시글의 스크랩 수 표시
+   // 게시글 상세조회(화면+진행) + 댓글 조회 + 게시글의 스크랩 수 표시 + 다음글/이전글 + 댓글 수 
    @GetMapping("detail/{boardNo}")
    public String detail(@PathVariable String boardNo, Model model, NoticeScrapVo svo, HttpSession session) {
 
       EmployeeVo loginVo = (EmployeeVo)session.getAttribute("loginVo");
       svo.setEmpNo(loginVo.getEmpNo());
       
+      // 게시글 상세조회
       NoticeVo vo = ns.selectOne(boardNo);
 
+      // 댓글 수 업데이트(제목 옆 댓글 수 표시)
+      int updateReplyCount = ns.updateReplyCount(boardNo);
+      
+      //updateReplyCount를 NoticeVo의 replyCount에 set하기
+      vo.setReplyCount(updateReplyCount);
+      
+      System.out.println("NoticeVo vo::: " + vo);
+      
       // 댓글 조회
       List<NoticeReplyVo> replyList = nrs.selectList(boardNo);
 
@@ -98,11 +107,18 @@ public class NoticeController {
      NoticeScrapVo scrap = ns.findScrap(boardNo, svo.getEmpNo()); 
      System.out.println(" 회원 해당 게시글 스크랩 여부 scrap:: " + scrap);//ysy
      model.addAttribute("scrap", scrap);
+
+     // 다음글, 이전글 
+     NoticeVo move = ns.movePage(boardNo);
+     model.addAttribute("move", move);
       
-      model.addAttribute("title", "POST");
-      model.addAttribute("page", "notice/detail");
-      
-      return "layout/template";
+     
+     //----------------------------------------
+     
+     model.addAttribute("title", "POST");
+     model.addAttribute("page", "notice/detail");
+  
+     return "layout/template";
 
    }// detail
 

@@ -18,5 +18,12 @@ public class NoticeVo {
 	private String enrollDate;
 	private String modifyDate;
 	private String status;
+	private int replyCount;	
+	
+	// 이전글, 다음글
+	private String next;
+	private String last;
+	private String nextTitle;
+	private String lastTitle;
 	
 }//class

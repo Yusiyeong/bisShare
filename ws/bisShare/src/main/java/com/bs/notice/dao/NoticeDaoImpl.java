@@ -104,6 +104,18 @@ public class NoticeDaoImpl implements NoticeDao{
 		return sst.delete("noticeMapper.scrapDelete", scrapNo);
 	}//scrapDelete
 
+	// 다음글, 이전글 
+	@Override
+	public NoticeVo movePage(SqlSessionTemplate sst, String boardNo) {
+		return sst.selectOne("noticeMapper.movePage", boardNo);
+	}//movePage
+
+	// 댓글 수 업데이트(제목 옆 댓글 수 표시)
+	@Override
+	public int updateReplyCount(SqlSessionTemplate sst, String boardNo) {
+		return sst.update("noticeMapper.updateReplyCount", boardNo);
+	}//updateReplyCount
+
 
 
 

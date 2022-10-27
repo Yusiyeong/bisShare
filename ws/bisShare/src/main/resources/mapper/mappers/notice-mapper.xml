@@ -21,6 +21,7 @@
 	        ,TO_CHAR(N.ENROLL_DATE, 'YYYY"." MM"." DD') AS enrollDate
 	        ,N.MODIFY_DATE AS modifyDate
 	        ,N.STATUS
+	        , N.REPLY_COUNT AS replyCount
 	        ,E.NICK AS WRITER			
     FROM NOTICE_BOARD N JOIN EMPLOYEE E
     ON N.WRITER = E.EMP_NO
@@ -156,6 +157,7 @@
     JOIN EMPLOYEE E
     ON S.EMP_NO = E.EMP_NO
 	WHERE S.EMP_NO = #{empNo}
+	AND B.STATUS = 'Y'
 	</select>
 
 	<!-- 회원 해당 게시글 스크랩 여부 -->
@@ -175,5 +177,34 @@
 	DELETE FROM NOTICE_SCRAP 
 	WHERE SCRAP_NO = #{scrapNo}
 	</delete>
+	
+	<!-- 다음글, 이전글 -->
+   <select id="movePage" resultType="nv">
+    select * from(SELECT 
+         BOARD_NO,
+            LEAD(BOARD_NO,1,9999) OVER(ORDER BY BOARD_NO) AS next,
+            LAG(BOARD_NO,1,9999) OVER(ORDER BY BOARD_NO) AS last,
+            TITLE,
+            LEAD(TITLE,1,9999) OVER(ORDER BY BOARD_NO) AS nextTitle,
+            LAG(TITLE,1,9999) OVER(ORDER BY BOARD_NO) AS lastTitle,
+            STATUS
+    FROM NOTICE_BOARD
+    WHERE STATUS = 'Y'
+    ORDER BY BOARD_NO DESC) 
+    WHERE BOARD_NO = #{boardNo}
+   </select>
+
+	
+	<!-- 댓글 수 업데이트(제목 옆 댓글 수 표시) -->
+    <update id="updateReplyCount">
+	update NOTICE_BOARD N
+		SET N.REPLY_COUNT = (
+	        SELECT COUNT(REPLY_NO) 
+	        FROM NOTICE_REPLY 
+	        WHERE BNO = #{boardNo}
+	        )
+	WHERE N.BOARD_NO = #{boardNo}
+	</update>
+	
 	
 </mapper>

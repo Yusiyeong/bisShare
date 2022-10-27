@@ -54,7 +54,7 @@
                      <a href="${root}/notice/delete/${vo.boardNo}" class="btn btn-outline-danger btn-sm">삭제</a>
                </c:if>
                      <!-- 목록으로 -->
-                     <a onclick="history.go(-1)" style="float: right; margin-left: 3px;" class="btn btn-outline-primary btn-sm">목록으로</a>
+                     <a href="${root}/notice/list/1"  style="float: right; margin-left: 3px;" class="btn btn-outline-primary btn-sm">목록으로</a>
                   </div>
                <!--글 수정, 삭제 버튼end-->
                     
@@ -77,6 +77,35 @@
 		                  </div>
                      </c:if>
                      <!-- 스크랩end --> 
+                     
+                     <!-- 이전글/다음글start -->
+                     <div class="my-3 p-3 bg-white rounded shadow-sm">
+						<c:choose >
+							<c:when test="${move.next != 9999}">
+								<button type="button" class="btn btn-warning mr-3 mb-3 btn-sm" onclick="location.href='${root}/notice/detail/${move.next}'"> <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>다음글</button>
+								<a href="${root}/notice/detail/${move.next}" style="color: black"> ${move.nextTitle} </a>
+							</c:when>
+						
+							<c:when test="${move.next == 9999}">
+								<button type="button" class="btn btn-warning mr-3 mb-3 btn-sm" disabled>다음글이 없습니다</button>
+							</c:when>
+						</c:choose>
+						
+						<br/>
+						
+						<c:choose>
+							<c:when test="${move.last != 9999}">
+								<button type="button" class="btn btn-info mr-3 btn-sm" onclick="location.href='${root}/notice/detail/${move.last}'"> <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>이전글</button>
+								<a href="${root}/notice/detail/${move.last}" style="color: black"> ${move.lastTitle} </a>
+							</c:when>
+						
+							<c:when test="${move.last == 9999}">
+								<button type="button" class="btn btn-info mr-3 btn-sm" disabled>이전글이 없습니다</button>
+							</c:when>
+						</c:choose>
+					
+					</div>
+                    <!-- 이전글/다음글end -->
                      
                   </div>
                 </div>
