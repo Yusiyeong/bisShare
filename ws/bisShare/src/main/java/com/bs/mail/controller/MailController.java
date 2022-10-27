@@ -61,7 +61,8 @@ public class MailController {
 		
 		EmployeeVo loginVo = (EmployeeVo) session.getAttribute("loginVo");
 		mv.setSend(loginVo.getEmpNo());
-
+		
+		
 		String receive = mv.getReceive();
 		String reference = mv.getReference();
 		List<EmployeeVo> recList = gson.fromJson(receive, new TypeToken<List<EmployeeVo>>() {
@@ -215,9 +216,11 @@ public class MailController {
 //			휴지통
 			vo.setReceive(empNo);
 			vo.setMailNo(mailInfo.getMailNo());
-			mv = ms.detailTrash(vo);
+			List<MailVo> list = ms.detailTrash(vo);
+			String listStr = gson.toJson(list);
+			return listStr;
 		}
-
+		
 		String mvStr = gson.toJson(mv);
 
 		return mvStr;

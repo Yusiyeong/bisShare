@@ -149,7 +149,7 @@ public class MailServiceImpl implements MailService{
 			} else if (filter == 1) {
 //				참조된 메일 삭제는 휴지통 X 바로 삭제
 				mv.setReference(loginVo.getEmpNo());
-				mv.setStatus("2");
+				mv.setStatus("1");
 			} else if (filter == 2) {
 				mv.setStatus("1");
 			} else if (filter == 3) {
@@ -226,21 +226,20 @@ public class MailServiceImpl implements MailService{
 
 
 	@Override
-	public MailVo detailTrash(MailVo mv) {
+	public List<MailVo> detailTrash(MailVo mv) {
 		
-//		읽음표시하기
-		md.updateReadYn(sst,mv);
 		
-		MailVo vo = md.selectTrashOne(sst,mv);
-		String references = md.selectTrashReferences(sst,mv);
-		vo.setReference(references);
+		List<MailVo> vo = md.selectTrashOne(sst,mv);
+
+		List<MailVo> references = md.selectTrashReferences(sst,mv);
+		if (references.size() > 0) vo.get(0).setReference(references.get(0).getReference());
 		List<MailAttVo> mavList = md.selectFilePath(sst,mv);
 		
 		if(mavList.size() == 0) {
 			mavList = null;
 		}
 		if (mavList != null) {
-			vo.setMavList(mavList);
+			vo.get(0).setMavList(mavList);
 		}
 		
 		return vo;

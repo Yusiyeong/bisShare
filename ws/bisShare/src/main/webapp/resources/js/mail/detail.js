@@ -22,7 +22,13 @@
         mailNo : data[0].replace(numFilter,"")
       },
       dataType : "json",
-      success: function (mailVo) {
+      success: function (list) {
+        let mailVo;
+        if (refCheck == 3) {
+          mailVo = list[0];
+        } else {
+          mailVo = list;
+        }
         // 상세보기 삭제를 위한 mailNo 넘겨주기
         oneNo = mailVo.mailNo;
         // 데이터 넣어주기

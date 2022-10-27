@@ -47,9 +47,9 @@ public interface MailDao {
 
 	List<MailVo> selectStatusOne(SqlSessionTemplate sst, String empNo);
 
-	MailVo selectTrashOne(SqlSessionTemplate sst, MailVo mv);
+	List<MailVo> selectTrashOne(SqlSessionTemplate sst, MailVo mv);
 
-	String selectTrashReferences(SqlSessionTemplate sst, MailVo mv);
+	List<MailVo> selectTrashReferences(SqlSessionTemplate sst, MailVo mv);
 
 	String selectRefForRef(SqlSessionTemplate sst, MailVo mv);
 

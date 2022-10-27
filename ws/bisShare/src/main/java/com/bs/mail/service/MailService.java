@@ -34,5 +34,5 @@ public interface MailService {
 
 	List<MailVo> trashcan(String empNo);
 
-	MailVo detailTrash(MailVo vo);
+	List<MailVo> detailTrash(MailVo vo);
 }

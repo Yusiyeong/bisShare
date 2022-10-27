@@ -418,19 +418,17 @@
 			ON EE.EMP_NO = R.RECEIVE
 		WHERE R.STATUS = 1
 			AND M.MAIL_NO = ${mailNo}
-			AND R.RECEIVE = ${receive}
 			
 	</select>
 	
-	<select id="selectTrashRef" resultType="String">
-		SELECT LISTAGG(E.NICK,',') WITHIN GROUP(ORDER BY R.REFERENCE) AS REFERENCE
+	<select id="selectTrashRef" resultType="mv">
+		SELECT E.NICK REFERENCE
 		FROM MAIL_RECEIVE R
 		JOIN EMPLOYEE E
 			ON E.EMP_NO = R.REFERENCE
 		JOIN MAIL M
 			ON M.MAIL_NO = R.MAIL_NO
 		WHERE R.MAIL_NO = ${mailNo}
-			AND R.RECEIVE=${receive}
 			AND R.STATUS=1
 	</select>
 	
