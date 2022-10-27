@@ -113,6 +113,16 @@ public class NoticeServiceImpl implements NoticeService{
 		return nd.findScrap(sst, number);		
 	}//findScrap
 
+	// 스크랩 목록 삭제
+	@Override
+	public int scrapDelete(String scrapNo) {
+		return nd.scrapDelete(sst, scrapNo);		
+	}//scrapDelete
+
+
+
+
+
 
 
 

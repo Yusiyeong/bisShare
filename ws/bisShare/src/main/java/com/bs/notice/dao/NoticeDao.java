@@ -47,6 +47,12 @@ public interface NoticeDao {
 	// 회원 해당 게시글 스크랩 여부
 	NoticeScrapVo findScrap(SqlSessionTemplate sst, Map<String, String> number);
 
+	// 스크랩 목록 삭제
+	int scrapDelete(SqlSessionTemplate sst, String scrapNo);
+
+
+
+
 
 
 }//interface

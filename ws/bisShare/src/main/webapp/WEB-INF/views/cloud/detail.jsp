@@ -77,12 +77,16 @@
              
              <!-- 내용start  -->
             <div class="form-floating">
-               <textarea style="height: 350px;" class="form-control" placeholder="Leave a comment here" id="floatingTextarea">${vo.content}</textarea>
+               <div style="height: 350px; overflow: auto;" class="form-control" placeholder="Leave a comment here" id="floatingTextarea">${vo.content}</div>
             </div>
             <!-- 내용end -->
            
             <br>
-
+ 			
+ 			<script>
+               document.querySelector('#floatingTextarea').innerHtml = ${vo.content};
+            </script>
+            
            </div>
         </div>
       <!-- DataTales Example End-->

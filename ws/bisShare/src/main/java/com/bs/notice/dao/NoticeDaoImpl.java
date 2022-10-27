@@ -98,6 +98,14 @@ public class NoticeDaoImpl implements NoticeDao{
 		return sst.selectOne("noticeMapper.findScrap", number);
 	}//findScrap
 
+	// 스크랩 목록 삭제
+	@Override
+	public int scrapDelete(SqlSessionTemplate sst, String scrapNo) {
+		return sst.delete("noticeMapper.scrapDelete", scrapNo);
+	}//scrapDelete
+
+
+
 
 	
 }//class

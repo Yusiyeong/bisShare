@@ -46,6 +46,15 @@ public interface NoticeService {
 	// 회원 해당 게시글 스크랩 여부
 	NoticeScrapVo findScrap(String boardNo, String empNo);
 
+	// 스크랩 목록 삭제
+	int scrapDelete(String scrapNo);
+
+
+
+
+
+
+
 
 
 

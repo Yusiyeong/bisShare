@@ -144,6 +144,7 @@
 	<select id="selectScrapList" resultType="svo">
 	SELECT 
         ROW_NUMBER() OVER (ORDER BY S.SCRAP_DATE DESC) AS num,
+        S.SCRAP_NO AS scrapNo,
         S.EMP_NO AS EmpNo,
         S.BNO AS boardNo,
         TO_CHAR(S.SCRAP_DATE, 'YYYY"년" MM"월" DD"일"') AS scrapDate,
@@ -169,5 +170,10 @@
     AND BNO = #{boardNo}
 	</select>
 	
+	<!-- 스크랩 목록 삭제 -->
+	<delete id="scrapDelete">
+	DELETE FROM NOTICE_SCRAP 
+	WHERE SCRAP_NO = #{scrapNo}
+	</delete>
 	
 </mapper>
