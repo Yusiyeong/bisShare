@@ -31,7 +31,7 @@
     }
 
     #select{
-        margin-left: 6%;
+        margin-left: 55px;
         margin-top: 10px;
         font-size: 15px;
     }
@@ -47,7 +47,7 @@
     }
 
     #now_date{
-        margin-left: 8%;
+        margin-left: 70px;
         margin-top: 10px;
         font-size: 15px;
     }
@@ -95,6 +95,11 @@
         justify-content: center;
     }
 
+    #edit, #delete{
+        margin: auto;
+        width: 100px;
+    }
+
 
 </style>
 
@@ -116,7 +121,7 @@
 								<!-- Page Heading -->
 							    <form action="" method="post">
 							        <div id="page">
-							            <div>
+							            <div calss="title" style="margin-top: 45px;">
                                             <a id="title">${cvo.title}</a>
 							            </div>
 							            <div id="create">
@@ -129,7 +134,7 @@
 							                카테고리  <ia id="select">${cvo.cateNo}</ia>
 							            </div>
 							            <div id="start">
-							                시작일 <a class="datepicker-start" name="startDate">${cvo.startDate}</a>
+							                시작일 <a class="datepicker-start"  name="startDate">${cvo.startDate}</a>
 							            </div>
 							            <div id="end">
 							                종료일<a class="datepicker-end" name="endDate">${cvo.endDate}</a>
@@ -139,9 +144,9 @@
 							                <div id="con">${cvo.content}</div>
 							            </div>
 							            <c:if test="${ cvo.writer eq loginVo.nick }">
-											<div id="center-bot">
-												<a href="${root}/calendar/edit/${cvo.calNo}">수정하기</a>
-												<a href="${root}/calendar/delete/${cvo.calNo}">삭제하기</a>
+											<div class="row" id="center-bot">
+												<a class="btn btn-primary btn-user btn-block" id="edit" href="${root}/calendar/edit/${cvo.calNo}">수정하기</a>
+												<a class="btn btn-danger btn-user btn-block" id="delete" href="${root}/calendar/delete/${cvo.calNo}">삭제하기</a>
 											</div>
 										</c:if>
 							        </div>

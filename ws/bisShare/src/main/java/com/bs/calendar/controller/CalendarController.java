@@ -81,21 +81,17 @@ public class CalendarController {
 		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginVo");
 		String no = loginvo.getEmpNo();
 		
-		System.out.println(vo.getStartDate());
-		System.out.println(vo.getEndDate());
 		vo.setWriter(no);
 		int result = cs.write(vo);
 		
-		System.out.println(result);
 		
 		//화면 선택
 		if(result == 1) {
 			session.setAttribute("alertMsg", "일정 등록 완료");
-			model.addAttribute("page", "calendar/calendar-view");
-			return "layout/template";
+			return "redirect:/calendar/view/1";
 		}else {
-			session.setAttribute("msg" , "일정 등록 실패");
-			return "error/errorPage";
+			session.setAttribute("alertMsg" , "일정 등록 실패");
+			return "redirect:/calendar/view/1";
 		}
 		
 	}
@@ -110,8 +106,10 @@ public class CalendarController {
 		
 		int result = cs.edit(vo);
 		
+		System.out.println(result);
+		
 		if(result == 1) {
-			model.addAttribute("alertMsg", "일정수정 성공");
+			model.addAttribute("alertMsg", "일정 수정 성공");
 			return "layout/template";
 		}else {
 			model.addAttribute("alertMsg", "일정 수정 실패");
@@ -128,8 +126,11 @@ public class CalendarController {
 		
 		int result = cs.delete(no);
 		
+		System.out.println(result);
+		
 		if(result == 1) {
 			session.setAttribute("alertMsg", "일정이 삭제되었습니다.");
+			model.addAttribute("page", "calendar/calendar-view");
 			return "layout/template";
 		}else {
 			model.addAttribute("msg", "일정 삭제 실패");
@@ -157,7 +158,6 @@ public class CalendarController {
 		
 		model.addAttribute("cvoList", cvoList);
 		model.addAttribute("pv", pv);
-		System.out.println(cvoList);
 		
 		return "layout/template"; 
 	}
