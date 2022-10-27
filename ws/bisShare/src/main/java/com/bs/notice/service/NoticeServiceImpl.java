@@ -82,7 +82,6 @@ public class NoticeServiceImpl implements NoticeService{
 	// 스크랩 하기
 	@Override
 	public int scrap(NoticeScrapVo svo) {
-		
 		return nd.scrap(sst, svo);
 	}
 
@@ -118,6 +117,18 @@ public class NoticeServiceImpl implements NoticeService{
 	public int scrapDelete(String scrapNo) {
 		return nd.scrapDelete(sst, scrapNo);		
 	}//scrapDelete
+
+	// 다음글, 이전글 
+	@Override
+	public NoticeVo movePage(String boardNo) {
+		return nd.movePage(sst, boardNo);		
+	}//movePage
+
+	// 댓글 수 업데이트(제목 옆 댓글 수 표시)
+	@Override
+	public int updateReplyCount(String boardNo) {
+		return nd.updateReplyCount(sst, boardNo);
+	}//updateReplyCount
 
 
 

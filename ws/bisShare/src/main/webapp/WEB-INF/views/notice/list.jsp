@@ -85,7 +85,13 @@ a:hover { text-decoration:none !important }
                                <c:forEach items="${voList}" var="x">
                                    <tr>
                                        <td class="text-center">${x.num}</td>
-                                       <td><a href="${root}/notice/detail/${x.boardNo}">${x.title}</a></td>
+                                       <td>
+	                                       <a href="${root}/notice/detail/${x.boardNo}">${x.title}
+		                                       	<c:if test="${x.replyCount ne 0}">
+													<small><b>[&nbsp;<c:out value="${x.replyCount}"/>&nbsp;]</b></small>
+												</c:if>
+	                                       </a>
+                                       </td>
                                        <td class="text-center">${x.writer}</td>
                                        <td class="text-center">${x.enrollDate}</td>
                                        <td class="text-center">${x.cnt}</td>
