@@ -17,6 +17,9 @@ public interface ApprovalService {
 
 	//기안서 하나 조회
 	ApprovalVo getOneByNo(String adcNo);
+
+	//내가 권한있는 기안서 조회(리스트)
+	List<ApprovalVo> getListAuthorMy(String empNo);
 	
 	//임시저장한 기안서
 	

@@ -1,5 +1,7 @@
 package com.bs.approval.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,6 +99,32 @@ public class ApprovalServiceImpl implements ApprovalService{
 		
 		return vo;
 	}//기안서 1개 조회 - END
+
+	//나에게 권한있는 기안서 조회
+	@Override
+	public List<ApprovalVo> getListAuthorMy(String empNo) {
+		
+		//기안서 전체 조회
+		List<ApprovalVo> allAprvList = dao.getListAll(sst);
+		
+		List<ApprovalVo> myAuthoList = new ArrayList<ApprovalVo>();
+		
+		for(ApprovalVo vo : allAprvList) {
+			// DB에서 꺼내온 데이터 배열로 변환
+			vo.setAprverEmpNos(vo.getAprverEmpNo().split(","));;
+			vo.setAgreeEmpNos(vo.getAgreeEmpNo().split(","));
+			vo.setRefEmpNos(vo.getRefEmpNo().split(","));
+			//변수 생성 (로그인한 emp의 권한이 들어가있는지 확인)
+			boolean isAprver = Arrays.asList(vo.getAprverEmpNos()).contains(empNo);
+			boolean isAgree = Arrays.asList(vo.getAgreeEmpNos()).contains(empNo);
+			boolean isRef = Arrays.asList(vo.getRefEmpNos()).contains(empNo);
+			//결과에 따라 list에 담아줌
+			if(isAprver) { myAuthoList.add(vo); vo.setMyAutho("결재권자");}
+			else if(isAgree) { myAuthoList.add(vo); vo.setMyAutho("합의");}
+			else if(isRef) { myAuthoList.add(vo); vo.setMyAutho("참조");}
+		}
+		return myAuthoList;
+	}
 
 	
 	

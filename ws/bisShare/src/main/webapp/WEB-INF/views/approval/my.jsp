@@ -52,7 +52,6 @@
    	$('tbody>tr').click(()=>{
         let dv = event.currentTarget;
    		const adcNo = $(dv).children().first().val();
-        console.log(adcNo);
    		location.href = "${root}/approval/detail/" + adcNo;
    	});
    

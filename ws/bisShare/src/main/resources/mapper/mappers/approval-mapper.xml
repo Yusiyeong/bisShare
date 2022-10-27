@@ -3,7 +3,7 @@
 <mapper namespace="approvalMapper">
 
 	<!-- 기안서 작성하기 -->
-	<insert id="insertOneIntoDocu">
+	<insert id="insertOneIntoDocu" useGeneratedKeys="true" keyColumn="ADC_NO" keyProperty="adcNo">
 		INSERT INTO APPROVAL_DOCU(
 			ADC_NO
 			, EMP_NO
@@ -32,7 +32,7 @@
 		)
 	</insert>
 	
-	<!-- 결재 디테일 -->
+	<!-- 내가 쓴 기안서 목록 조회 -->
 	<select id="getListByNo" resultType="aprvVo">
 		SELECT 
 		    A.ADC_NO
@@ -52,6 +52,7 @@
 		ORDER BY ENROLL_DATE DESC
 	</select>
 	
+	<!-- 결재번호로 하나에 대한 정보 조회 -->
 	<select id="getOneByNo" resultType="aprvVo">
 		SELECT 
 		    A.ADC_NO
@@ -74,6 +75,29 @@
 		ON (A.CATEGORY_NO = C.CATEGORY_NO)
 		WHERE A.CANCEL = 'N'
 		AND A.ADC_NO = #{adcNo}
+	</select>
+	
+	<select id="getAllList" resultType="aprvVo">
+		SELECT 
+		    A.ADC_NO
+		    , E.NICK            EMP_NO
+		    , C.CATEGORY_NAME   CATEGORY_NO
+		    , A.ADC_NAME
+		    , A.ADC_CONTENT
+		    , A.ENROLL_DATE
+		    , APRVER_EMP_NO
+		    , APRVER_STATUS
+		    , AGREE_EMP_NO
+		    , AGREE_STATUS
+		    , REF_EMP_NO
+		    , REF_STATUS
+		    , CANCEL
+		FROM APPROVAL_DOCU A
+		JOIN EMPLOYEE E
+		ON (A.EMP_NO = E.EMP_NO)
+		JOIN APRV_CATEGORY C
+		ON (A.CATEGORY_NO = C.CATEGORY_NO)
+		WHERE A.CANCEL = 'N'
 	</select>
 
 </mapper>

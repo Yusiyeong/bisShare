@@ -35,6 +35,7 @@ public class ApprovalVo {
 	//취소여부
 	private String cancel;
 	
-	
+	//나의 권한
+	private String myAutho;
 	
 }
