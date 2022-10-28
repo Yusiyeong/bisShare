@@ -37,7 +37,7 @@
       .modal-title{
         font-size: 30px;
       }
-      #center-bot1, #center-bot2{
+      #saveBtn, #center-bot2{
       	margin: 10px;
       	width: 100px;
       }
@@ -75,7 +75,7 @@
                 <input type="text" class="form-control" id="detail" name="content">
             </div>
             <div class="modal-footer">
-			<div id="center-bot1" ><input class="btn btn-primary btn-user btn-block" type="submit" value="작성하기"></div>
+			<div id="saveBtn" ><input class="btn btn-primary btn-user btn-block" type="submit" value="작성하기"></div>
 			<div id="center-bot2" ><input class="btn btn-primary btn-user btn-block" type="" value="취소하기"></div>
             </div>
         </form>
@@ -113,7 +113,7 @@
                         console.log(end_date); //end_date strat_date+1 되는 현상 고쳐야함
 
                         $.ajax({
-                            url:"${root}/calendar/controller/CalendarController.java", //여기는 spring oracle에 맞게 url 변경 필요
+                            url:"${root}/calendar/controller/CalendarController.modalWrite", //여기는 spring oracle에 맞게 url 변경 필요
                             type:"POST", 
                             dataType:'json', 
                             data:{title, select, detail, start_date, end_date}, 
@@ -141,6 +141,7 @@
                     })
                 }      
             })
+            calendar.unselect()
             calendar.render();
         });
 
