@@ -56,11 +56,10 @@ public class CalendarController {
 		//화면 선택
 		if(result == 1) {
 			session.setAttribute("alertMsg", "일정 등록 완료");
-			model.addAttribute("page", "calendar/calendar-view");
-			return "layout/template";
+			return "redirect:/calendar/view/1";
 		}else {
 			session.setAttribute("msg" , "일정 등록 실패");
-			return "error/errorPage";
+			return "redirect:/calendar/view/1";
 		}
 		
 	}
@@ -97,9 +96,15 @@ public class CalendarController {
 	}
 	
 	
-	 
+	//일정 수정 (화면)
+	@GetMapping("edit/{no}")
+	public String edit(Model model) {
+		model.addAttribute("page", "calendar/calendar-edit");
+		return "layout/template";
+	}
+	
 	//일정 수정
-	@GetMapping("edit{no}")
+	@PostMapping("edit/{no}")
 	public String edit(@PathVariable String no, Model model, CalendarVo vo, HttpSession session) {
 		
 		vo.setCalNo(no);
@@ -109,11 +114,11 @@ public class CalendarController {
 		System.out.println(result);
 		
 		if(result == 1) {
-			model.addAttribute("alertMsg", "일정 수정 성공");
-			return "layout/template";
+			session.setAttribute("alertMsg", "일정 수정 완료");
+			return "redirect:/calendar/view/1";
 		}else {
-			model.addAttribute("alertMsg", "일정 수정 실패");
-			return "layout/template";
+			session.setAttribute("alertMsg", "일정 수정 실패");
+			return "redirect:/calendar/view/1";
 		}
 		
 	}
@@ -130,11 +135,10 @@ public class CalendarController {
 		
 		if(result == 1) {
 			session.setAttribute("alertMsg", "일정이 삭제되었습니다.");
-			model.addAttribute("page", "calendar/calendar-view");
-			return "layout/template";
+			return "redirect:/calendar/view/1";
 		}else {
 			model.addAttribute("msg", "일정 삭제 실패");
-			return "layout/template";
+			return "redirect:/calendar/view/1";
 		}
 	}
 	

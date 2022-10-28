@@ -84,7 +84,24 @@ public class CalendarServiceImpl implements CalendarService{
 	//일정 수정
 	@Override
 	public int edit(CalendarVo vo) {
-		return dao.updateOne(sst, vo);
+		int result = 0;
+		
+		try {
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy"); 
+		    Date parsedSDate = dateFormat.parse(vo.getStartDate());
+		    Date parsedEDate = dateFormat.parse(vo.getEndDate());
+		    Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
+		    Timestamp timestamp2 = new java.sql.Timestamp(parsedEDate.getTime());
+		    vo.setStartDate(timestamp.toString());
+		    vo.setEndDate(timestamp2.toString());
+		    
+		    
+		    result = dao.updateOne(sst, vo);
+		} catch(Exception e) { 
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	//일정 목록 조회
