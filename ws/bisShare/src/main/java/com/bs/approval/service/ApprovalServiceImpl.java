@@ -39,8 +39,8 @@ public class ApprovalServiceImpl implements ApprovalService{
 
 	//내가 작성한 기안서 목록
 	@Override
-	public List<String> getListByEmpNo(String empNo) {
-		return dao.getListByNo(sst, empNo);
+	public List<ApprovalVo> getListByEmpNo(String empNo) {
+		return checkProgress(dao.getListByNo(sst, empNo));
 	}
 
 	//기안서 1개 조회
@@ -112,8 +112,8 @@ public class ApprovalServiceImpl implements ApprovalService{
 		for(ApprovalVo vo : allAprvList) {
 			// DB에서 꺼내온 데이터 배열로 변환
 			vo.setAprverEmpNos(vo.getAprverEmpNo().split(","));;
-			vo.setAgreeEmpNos(vo.getAgreeEmpNo().split(","));
-			vo.setRefEmpNos(vo.getRefEmpNo().split(","));
+			if(vo.getAgreeEmpNo()!=null)vo.setAgreeEmpNos(vo.getAgreeEmpNo().split(","));
+			if(vo.getRefEmpNo()!=null)vo.setRefEmpNos(vo.getRefEmpNo().split(","));
 			//변수 생성 (로그인한 emp의 권한이 들어가있는지 확인)
 			boolean isAprver = Arrays.asList(vo.getAprverEmpNos()).contains(empNo);
 			boolean isAgree = Arrays.asList(vo.getAgreeEmpNos()).contains(empNo);
@@ -123,15 +123,70 @@ public class ApprovalServiceImpl implements ApprovalService{
 			else if(isAgree) { myAuthoList.add(vo); vo.setMyAutho("합의");}
 			else if(isRef) { myAuthoList.add(vo); vo.setMyAutho("참조");}
 		}
-		return myAuthoList;
+		return checkProgress(myAuthoList);
 	}
 
 	
 	//기안서 진행도 체크
-	public static void checkProgress(List<ApprovalVo> voList) {
+	public static List<ApprovalVo> checkProgress(List<ApprovalVo> voList) {
 		
 		
+		for(ApprovalVo vo : voList) {
+						
+			//합의자 수
+			int agreeCnt = 0;
+			
+			//결재, 합의 Y인 수
+			int approveYesCnt = 0;
+			int agreeYesCnt = 0;
+			
+			//결재권자, 합의자 배열로 담아주기 -> Y인 수 카운팅
+			vo.setAprverStatuses(vo.getAprverStatus().split(","));;
+			if(vo.getAgreeEmpNo()!=null) {
+				vo.setAgreeStatuses(vo.getAgreeEmpNo().split(","));
+				agreeCnt = vo.getAgreeStatuses().length;
+				for(int i = 0; i < agreeCnt; ++i) {
+					if(vo.getAgreeStatuses().equals("Y")) {
+						++agreeYesCnt;
+						System.out.println("ok");
+					}
+				}
+			}
+			int aprverCnt = vo.getAprverStatuses().length;
+			for(int i = 0; i < aprverCnt; ++i) {
+				if(vo.getAprverStatuses()[i].equals("Y")) {
+					++approveYesCnt;
+				}
+			}
+			
+			// 총 Y로 나와야 하는 수 = 결재권자 + 합의자
+			int entireNum = aprverCnt + agreeCnt;
+			// 백분율로 계산 -> 버림
+			double progressNum = (((double)approveYesCnt+(double)agreeYesCnt)/(double)entireNum)*100;
+			String progress = Integer.toString((int)progressNum);
+			vo.setProgress(progress);
+		}
 		
+		return voList;
+		
+	}
+
+	@Override
+	public int updateAprvStatus(ApprovalVo avo, String loginEmpNo) {
+
+		avo.setAprverStatuses(avo.getAprverStatus().split(","));
+		avo.setAprverEmpNos(avo.getAprverEmpNo().split(","));
+		
+		String updateAprverStatus = "";
+		
+		for(int i = 0; i < avo.getAprverStatuses().length; ++i) {
+			if(i>0) updateAprverStatus += ",";
+			if(loginEmpNo.equals(avo.getAprverEmpNos()[i])) updateAprverStatus += "Y";
+			else updateAprverStatus += "N";
+		}
+		avo.setAprverStatus(updateAprverStatus);
+		
+		return dao.updateAprvStatus(sst, avo);
 	}
 	
 	

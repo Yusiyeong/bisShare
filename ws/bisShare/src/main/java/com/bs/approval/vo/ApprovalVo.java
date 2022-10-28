@@ -38,4 +38,6 @@ public class ApprovalVo {
 	//나의 권한
 	private String myAutho;
 	
+	//진행도
+	private String progress;
 }

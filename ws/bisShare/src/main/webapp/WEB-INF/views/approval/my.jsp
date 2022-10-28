@@ -36,9 +36,9 @@
                         	<input type="hidden" value="${ l.adcNo }"/>
                             <td>${ l.categoryNo }</td>
                             <td>${ l.adcName }</td>
-                            <td>진행중</td>
+                            <td>${ l.progress }%</td>
                             <td>${ l.enrollDate }</td>
-                            <td>${ l.empNo }</td> <!-- 이거아님 바꿔줘야함 -->
+                            <td>${ l.empNo }</td> 
                         </tr>
                    	</c:forEach>
                    </tbody>

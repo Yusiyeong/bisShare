@@ -57,6 +57,14 @@
     	width: 100%;
     	height: 500px;
     }
+    #approve-btn{
+    	margin-top: 30px;
+    }
+    #approve-btn-area{
+    	width : 100%;
+    	height : 100%;
+    	margin: 0 auto;
+    }
     
 </style>
 
@@ -82,7 +90,6 @@
                         ${ avo.categoryNo }
                     </td>
                     <td class="bg-gray-200 text-gray-900">작성자</td>
-                    <!-- loginMember에서 가져온 값으로 대체 -->
                     <td>${ loginVo.deptNo } ${ loginVo.rankNo } ${ loginVo.nick }</td> 
                 </tr>
             </table>
@@ -101,17 +108,15 @@
                 </div>
                 <c:forEach var="i" begin="0" end="${ fn:length(avo.aprverEmpNos) - 1 }">
                 	<div>
-	                    <div class="approve-rank-area bg-gray-200">${ avo.aprverRanks[i]}</div>
+	                    <div class="approve-rank-area bg-gray-200">${ avo.aprverRanks[i] }</div>
 		                    <div class="approve-stamp-area">
-		                    	<div></div>
 			                    <c:if test="${ loginVo.empNo eq avo.aprverEmpNos[i] }">
-			                    	<div>
+			                    	<div id="approve-btn-area">
 			                    		<button id="approve-btn" class="btn btn-outline-primary">결재</button>
 			                    	</div>
 			                    </c:if>
-			                    <div></div>
 		                    </div>
-		                    <div class="approve-name-area">${ avo.aprverNicks[i] }</div>
+	                    <div class="approve-name-area">${ avo.aprverNicks[i] }</div>
                 	</div>
                 </c:forEach>
                 <c:forEach begin="0" end="${6-fn:length(avo.aprverEmpNos)}">
@@ -192,7 +197,28 @@
 <<script type="text/javascript">
 	
 	$('#approve-btn').click(()=>{
-		confirm('무야호~');
+		if(confirm('결재 하시겠습니까?')){
+            $.ajax({
+                url : "${root}/approval/approve"
+                , type : "post"
+                , data : {
+                        adcNo : ${ avo.adcNo }
+                		, aprverStatus : '${ avo.aprverStatus }'
+               			, aprverEmpNo : '${ avo.aprverEmpNo }' 
+                }
+                , success : (result) => {
+                    if(result == 'ok'){
+                        alert('결재 성공');
+                        location.reload();
+                    } else{
+                        alert('결재 실패')
+                    }
+                }
+                , error : ()=>{
+                    alert('연결실패');
+                }
+            })
+        }
 	})
 	
 </script>
