@@ -38,7 +38,7 @@
                          <td>${ l.categoryNo }</td>
                          <th>${ l.empNo }</th>
                          <td>${ l.adcName }</td>
-                         <td>진행중</td>
+                         <td>${ l.progress }%</td>
                          <td>${ l.enrollDate }</td>
                          <th>${ l.myAutho }</th>
                      </tr>

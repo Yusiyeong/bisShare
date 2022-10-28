@@ -41,6 +41,12 @@
 		    , A.ADC_NAME
 		    , A.ADC_CONTENT
 		    , A.ENROLL_DATE
+			, APRVER_EMP_NO
+		    , APRVER_STATUS
+		    , AGREE_EMP_NO
+		    , AGREE_STATUS
+		    , REF_EMP_NO
+		    , REF_STATUS
 		    , A.CANCEL
 		FROM APPROVAL_DOCU A
 		JOIN EMPLOYEE E
@@ -99,5 +105,11 @@
 		ON (A.CATEGORY_NO = C.CATEGORY_NO)
 		WHERE A.CANCEL = 'N'
 	</select>
+	
+	<update id="updateAprvStatus">
+		UPDATE APPROVAL_DOCU
+			SET APRVER_STATUS = #{aprverStatus}
+		WHERE ADC_NO = #{adcNo}
+	</update>
 
 </mapper>

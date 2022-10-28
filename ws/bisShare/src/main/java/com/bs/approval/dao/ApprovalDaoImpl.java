@@ -19,7 +19,7 @@ public class ApprovalDaoImpl implements ApprovalDao{
 	
 	//내가 작성한 기안서
 	@Override
-	public List<String> getListByNo(SqlSessionTemplate sst, String empNo) {
+	public List<ApprovalVo> getListByNo(SqlSessionTemplate sst, String empNo) {
 		return sst.selectList("approvalMapper.getListByNo", empNo);
 	}
 	
@@ -33,6 +33,11 @@ public class ApprovalDaoImpl implements ApprovalDao{
 	@Override
 	public List<ApprovalVo> getListAll(SqlSessionTemplate sst) {
 		return sst.selectList("approvalMapper.getAllList");
+	}
+
+	@Override
+	public int updateAprvStatus(SqlSessionTemplate sst, ApprovalVo avo) {
+		return sst.update("updateAprvStatus", avo);
 	}
 	
 	

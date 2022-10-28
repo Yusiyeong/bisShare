@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,7 +41,7 @@ public class ApprovalController {
 	public String my(Model model, HttpSession session) {
 		//로그인한 멤버의 정보 (empNo 필요)
 		EmployeeVo vo = (EmployeeVo) session.getAttribute("loginVo");
-		List<String> aprvList = aprvService.getListByEmpNo(vo.getEmpNo());
+		List<ApprovalVo> aprvList = aprvService.getListByEmpNo(vo.getEmpNo());
 		
 		if(aprvList != null) {
 			model.addAttribute("aprvList", aprvList);
@@ -101,8 +102,6 @@ public class ApprovalController {
 		
 		List<ApprovalVo> myAuthoAprvList = aprvService.getListAuthorMy(empVo.getEmpNo());
 		
-		System.out.println(myAuthoAprvList.toString());
-		
 		model.addAttribute("aprvList", myAuthoAprvList);
 		model.addAttribute("title", "나의 결재함");
 		model.addAttribute("page", "approval/document");
@@ -114,14 +113,27 @@ public class ApprovalController {
 	public String Detail(Model model, @PathVariable String adcNo) {
 		
 		ApprovalVo vo = aprvService.getOneByNo(adcNo);
-		
 		model.addAttribute("avo", vo);
 		model.addAttribute("title", "결재 서류");
 		model.addAttribute("page", "approval/detail");
 		return "layout/template";
 	}
 
-	
+	//결재 버튼 눌렀을때 ajax
+	@PostMapping("approve")
+	@ResponseBody
+	public String approve(ApprovalVo avo, HttpSession session) {
+		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
+		
+		String loginEmpNo = empVo.getEmpNo();
+		int result = aprvService.updateAprvStatus(avo, loginEmpNo);
+		
+		if(result==1) {
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
 	
 	
 	
