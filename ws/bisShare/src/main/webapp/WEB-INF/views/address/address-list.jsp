@@ -15,6 +15,12 @@
 		margin: auto auto 10px;
 	}
 
+	#img2{
+		width: 20px;
+		height: 20px;
+		margin-bottom: 3px;
+	}
+
 	#t1{
 		text-align: center;
 	}
@@ -38,6 +44,60 @@
 	
 	.addrList{
 		display: none;
+	}
+	
+	.tree{
+	  margin-top: 5px;  
+	}
+	.tree, .tree ul{
+	  list-style: none;  /* 기본 리스트 스타일 제거 */
+	  padding-left:10px;
+	}
+	.tree *:before{
+	  width:15px;
+	  height:15px;
+	  display:inline-block;
+	}
+	.tree label{
+	  cursor: pointer;
+	  font-family: NotoSansKrMedium, sans-serif !important;
+	  font-size: 16px;
+	  color: #0055CC;
+	}	
+
+	.tree label:hover{
+	  color: #00AACC;
+	}
+	.tree label:before{
+	  content: '+'
+	}
+	.tree label.lastTree:before{
+	  content:'*';
+	}
+	.tree label:hover:before{
+	  content: '+'
+	}
+	.tree label.lastTree:hover:before{
+	  content:'*';
+	}
+	.tree input[type="checkbox"] {
+	  display: none;
+	}
+	.tree input[type="checkbox"]:checked~ul {
+	  display: none;
+	}
+	.tree input[type="checkbox"]:checked+label:before{
+	  content: '-'
+	}
+	.tree input[type="checkbox"]:checked+label:hover:before{
+	  content: '-'
+	}
+	
+	.tree input[type="checkbox"]:checked+label.lastTree:before{
+	  content: '*';
+	}
+	.tree input[type="checkbox"]:checked+label.lastTree:hover:before{
+	  content: '*';
 	}
 </style>
 
@@ -84,23 +144,61 @@
 							</tbody>
                         </table>
                         
+                        
+                        <!-- 테스트용 -->
+                        <ul class="tree">
+						  <li>
+						    <input type="checkbox" id="root">
+						    <label for="root">비즈쉐어 (테스트용)</label>
+						    <ul>
+						      
+						      <li>
+					            <input type="checkbox" id="node0">
+					            <label for="node0" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"> 대표</label>
+					          </li> 
+						      
+						      <li>
+						        <input type="checkbox" id="node1">
+						        <label for="node1">인사부</label>
+						        <ul>
+						          <li>
+						            <input type="checkbox" id="node11">
+						            <label for="node11" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"> 사원</label>
+						          </li> 
+						        </ul>
+						       
+						      <li>
+						        <input type="checkbox" id="node2">
+						        <label for="node2">개발부</label>
+						        <ul>
+						          <li>
+						            <input type="checkbox" id="node21">
+						            <label for="node21" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"> 주임</label>
+						          </li> 
+						        </ul> <!-- node 2x -->
+						      <li>
+						        <input type="checkbox" id="node3">
+						        <label for="node3">영업부</label>
+						        <ul>
+						          <li>
+						            <input type="checkbox" id="node31">
+						            <label for="node31" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"> 대리</label>
+						          </li>
+						          <li>
+						            <input type="checkbox" id="node32">
+						            <label for="node32" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"> 과장</label>
+						          <li>
+						            <input type="checkbox" id="node33">
+						            <label for="node33" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"> 차장</label>
+						          </li>
+						        </ul> <!-- node 3x -->
+						      </li>
+						    </ul> <!-- node1,2,3 -->
+						  </li> <!-- tree -->
+						</ul> <!-- tree -->
+                        
                     </div>
                 </div> <!-- card body -->
-                
-                <!-- page -->
-    				<div id="page">
-		          		<c:if test="${pvo.startPage ne 1}">
-							<a href="${root}/address/list/${pvo.startPage -1}" class="btn btn-outline-primary">이전</a>	
-						</c:if>
-					
-						<c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
-							<a href="${root}/address/list/${i}" class="btn btn-primary">${i}</a>
-						</c:forEach>
-					
-						<c:if test="${pvo.endPage ne pvo.maxPage}">
-							<a href="${root}/address/list/${pvo.endPage +1}" class="btn btn-outline-primary">다음</a>
-						</c:if>
-    				</div>
                 
 			</div>
 		</div>

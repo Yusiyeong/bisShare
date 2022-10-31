@@ -16,12 +16,18 @@ public class AddressDaoImpl implements AddressDao{
 
 	//주소록 조회
 	@Override
-	public List<AddressVo> selectList(SqlSessionTemplate sst, PageVo pvo, Map<String, String> map) {
+	public List<AddressVo> selectSearch(SqlSessionTemplate sst, PageVo pvo, Map<String, String> map) {
 		int offset = (pvo.getCurrentPage()-1) * pvo.getBoardLimit();
 		
 		RowBounds rb = new RowBounds(offset , pvo.getBoardLimit());
 		
-		return sst.selectList("addressMapper.selectList", map, rb);
+		return sst.selectList("addressMapper.selectSearch", map, rb);
+	}
+	
+	//조직도 조회
+	@Override
+	public List<AddressVo> selectList(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.selectList("addressMapper.selectList", map);
 	}
 
 	//직원상세조회
@@ -32,9 +38,8 @@ public class AddressDaoImpl implements AddressDao{
 
 	//목록 갯수 조회
 	@Override
-	public int selectCountAll(SqlSessionTemplate sst) {
-		return sst.selectOne("addressMapper.selectCountAll");
+	public int selectCountAll(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.selectOne("addressMapper.selectCountAll", map);
 	}
-
 
 }

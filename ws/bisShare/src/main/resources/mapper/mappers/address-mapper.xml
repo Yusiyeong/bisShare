@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="addressMapper">
-
+	
 	<select id="selectList" resultType="addressvo">
+		SELECT 
+		    E.EMP_NO
+		    ,E.NICK
+		    ,R.RANK_NAME
+		    ,D.DEPT_NAME
+		    ,E.STATUS
+		FROM EMPLOYEE E
+		INNER JOIN RANK R
+		ON E.RANK_NO = R.RANK_NO
+		INNER JOIN DEPT D
+		ON E.DEPT_NO = D.DEPT_NO
+		WHERE E.STATUS = 'Y'
+		ORDER BY EMP_NO ASC
+	</select>
+	
+	<select id="selectSearch" resultType="addressvo">
 		SELECT 
 		    E.EMP_NO
 		    ,E.NICK
@@ -58,11 +74,32 @@
 		INNER JOIN DEPT D
 		ON E.DEPT_NO = D.DEPT_NO
 		WHERE E.STATUS = 'Y'
+		ORDER BY EMP_NO ASC
 	</select>
 	
 	<select id="selectCountAll" resultType="int">
-		SELECT COUNT(EMP_NO)
- 		FROM EMPLOYEE
+		SELECT COUNT(E.EMP_NO)
+ 		FROM EMPLOYEE E
+ 		INNER JOIN RANK R
+		ON E.RANK_NO = R.RANK_NO
+		INNER JOIN DEPT D
+		ON E.DEPT_NO = D.DEPT_NO
  		WHERE STATUS = 'Y'
+ 		
+ 		<if test="field == 'nick'">
+	 		AND NICK LIKE '%' || #{keyword} || '%'
+ 		</if>
+ 		<if test="field == 'rankName'">
+	 		AND RANK_NAME LIKE '%' || #{keyword} || '%'
+ 		</if>
+ 		<if test="field == 'deptName'">
+	 		AND DEPT_NAME LIKE '%' || #{keyword} || '%'
+ 		</if>
+ 		<if test="field == 'phone'">
+	 		AND PHONE LIKE '%' || #{keyword} || '%'
+ 		</if>
+ 		<if test="field == 'email'">
+	 		AND EMAIL LIKE '%' || #{keyword} || '%'
+ 		</if>
 	</select>
 </mapper>
