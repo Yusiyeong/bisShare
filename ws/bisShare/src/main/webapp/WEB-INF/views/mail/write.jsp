@@ -147,7 +147,7 @@
 		<textarea id="mail-content" name="content"></textarea>
 	</div>
 
-
-	<button class="btn btn-primary btn-user btn-block">
-		전송 </button>
+    
+	<button type="submit" class="btn btn-primary btn-user btn-block">전송</button>
+    <button type="button" class="btn btn-primary btn-user btn-block" onclick="saveDraft(this.form);">임시저장</button>
 </form>

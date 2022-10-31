@@ -18,7 +18,7 @@
 		<button class="btn btn-primary mx-2" onclick="passBtn()" id="navPass">전달하기</button>
 	</nav>
 	<div class="my-1 border border-secondary border-5 rounded-2 p-1">
-		<span class="font-weight-bolder mx-5">발신</span>
+		<span class="font-weight-bolder mx-5" id="detail-name">발신</span>
 		<span id="detail-send"></span>
 	</div>
 	<div class="my-1 border border-secondary border-5 rounded-2 p-1">

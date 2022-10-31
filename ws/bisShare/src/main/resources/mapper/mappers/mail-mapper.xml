@@ -89,7 +89,7 @@
 	
 	<update id="updateStar">
 		UPDATE MAIL_RECEIVE
-		SET STAR = #{star}
+		SET STAR = ${star}
 		WHERE MAIL_NO=#{mailNo}
 		<if test="receive != null">
 			AND RECEIVE=#{receive}
@@ -434,9 +434,14 @@
 	
 	<!-- 임시보관함 -->
 	<select id="selectDraft" resultType="mv">
-		SELECT *
-		FROM DRAFT
-		WHERE STATUS=0
+		SELECT 
+			DRAFT_NO AS MAIL_NO
+			, SEND
+			, RECEIVE
+			, TITLE
+			, ENROLL_DATE
+		FROM DRAFT D
+		WHERE D.STATUS=0
 		AND SEND=#{empNo}
 	</select>
 	
@@ -462,5 +467,18 @@
 			, #{content}
 		)
 	</insert>
+	
+	<select id="selectDraftDetail" resultType="mv">
+		SELECT *
+		FROM DRAFT
+		WHERE STATUS = 0
+		AND DRAFT_NO = #{mailNo}
+	</select>
+	
+	<update id="updateCheckStatusDraft">
+		UPDATE DRAFT
+		SET STATUS = 1
+		WHERE DRAFT_NO = #{mailNo}
+	</update>
 	
 </mapper>

@@ -341,7 +341,7 @@ public class MailController {
 		model.addAttribute("notReadCnt", notReadCnt);
 		model.addAttribute("receiveMail", list);
 
-		model.addAttribute("title", "REFERENCE MAIL");
+		model.addAttribute("title", "TRASHCAN");
 		model.addAttribute("page", "mail/received");
 
 		return "layout/template";
@@ -361,9 +361,11 @@ public class MailController {
 		model.addAttribute("notReadCnt", notReadCnt);
 		model.addAttribute("receiveMail", list);
 
-		model.addAttribute("title", "REFERENCE MAIL");
+		model.addAttribute("title", "DRAFT MAIL");
 		model.addAttribute("page", "mail/received");
-
+		
+		model.addAttribute("checkLoc", "draft");
+		
 		return "layout/template";
 	}
 	
@@ -394,6 +396,35 @@ public class MailController {
 			session.setAttribute("errorMsg", "발송 실패!");
 			return "redirect:/";
 		}
-
 	}
+	
+	/**
+	 * 임시 보관 상세 보기
+	 */
+	@PostMapping("draftDetail")
+	@ResponseBody
+	public String draftDetail(MailVo mailInfo, HttpSession session) {
+		Gson gson = new Gson();
+
+		MailVo mv = ms.draftDetail(mailInfo.getMailNo());
+		
+		String mvStr = gson.toJson(mv);
+
+		return mvStr;
+	}
+	
+	/*
+	 * 체크된 메일 삭제
+	 */
+	@GetMapping("delCheckedDraft")
+	@ResponseBody
+	public int delCheckedDraft(@RequestParam(value="checkArr[]") List<String> checkArr, HttpSession session) {
+		
+		EmployeeVo loginVo = (EmployeeVo) session.getAttribute("loginVo");
+		int result = ms.delCheckedDraft(checkArr, loginVo);
+		
+		return result;
+	}
+	
+	
 }

@@ -38,9 +38,10 @@ $('#mail-content').summernote({
     }
 });
 
-if(refCheck == 4) {
-    $('#mail-write').attr('action', `${root}/mail/draft`);
+function saveDraft(form) {
+    form.action = `${root}/mail/draft`;
+    form.submit();
+    return true;
 }
-
 
 

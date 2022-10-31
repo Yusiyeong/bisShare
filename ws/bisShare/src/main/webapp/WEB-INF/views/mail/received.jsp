@@ -17,52 +17,18 @@
 	<div class=" col-xl-6 col-lg-6">
 		<div class="card shadow border-left-primary mb-4">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">받은 메일</h6>
+				<h6 class="m-0 font-weight-bold text-primary" id="pageTitle">받은 메일</h6>
 			</div>
 			<div class="card-body">
+				<!-- 메일 네비게이션 -->
 				<jsp:include page="mail-nav.jsp"></jsp:include>
-				<div class="table-responsive">
-					<table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
-						<thead>
-							<tr>
-								<th>${receiveMail}</th>
-								<th>중요</th>
-								<th>메일명</th>
-								<th id="nick">발신</th>
-								<th>시간</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${receiveMail}" var="r">
-								<tr>
-									<td><input type="checkbox" value="${r.mailNo}"></td>
-									<c:if test="${ r.star eq 'N'}">
-										<td>☆</td>
-									</c:if>
-									<c:if test="${ r.star eq 'Y'}">
-										<td>★</td>
-									</c:if>
-									<c:if test="${r.readYn eq 'N'}">
-										<td class="font-weight-bolder">${r.title}</td>
-									</c:if>
-									<c:if test="${r.readYn eq 'Y'}">
-										<td>${r.title}</td>
-									</c:if>
-									<c:if test="${empty r.readYn}">
-										<td>${r.title}</td>
-									</c:if>
-									<c:if test="${!empty r.send }">
-										<td>${r.send}</td>
-									</c:if>
-									<c:if test="${empty r.send }">
-										<td>${r.receive}</td>
-									</c:if>
-									<td>${r.enrollDate}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
+				<!-- 메일 테이블 -->
+				<c:if test="${empty requestScope.checkLoc}">
+					<jsp:include page="mail-table.jsp"></jsp:include>
+				</c:if>
+				<c:if test="${!empty requestScope.checkLoc}">
+					<jsp:include page="draft-table.jsp"></jsp:include>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -84,16 +50,20 @@
 </div>
 
 
-
-
-
 <!-- Page level plugins -->
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
-<script src="../resources/js/mail/datatables.js"></script>
-<script src="../resources/js/mail/mail-nav.js"></script>
+<script src="${root}/resources/js/mail/checkLocation.js"></script>
+<script src="${root}/resources/js/mail/datatables.js"></script>
+<script src="${root}/resources/js/mail/mail-nav.js"></script>
 <script src="https://unpkg.com/@yaireo/tagify"></script>
 <script src="${root}/resources/js/mail/write.js"></script>
 <script src="${root}/resources/js/mail/tagify.js"></script>
-<script src="${root}/resources/js/mail/detail.js"></script>
+<c:if test="${empty requestScope.checkLoc}">
+	<script src="${root}/resources/js/mail/detail.js"></script>
+</c:if>
+<c:if test="${!empty requestScope.checkLoc}">
+	<script src="${root}/resources/js/mail/draft_detail.js"></script>
+</c:if>
+<script src="${root}/resources/js/mail/star.js"></script>

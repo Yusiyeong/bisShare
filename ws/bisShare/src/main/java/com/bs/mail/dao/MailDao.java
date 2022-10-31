@@ -57,6 +57,10 @@ public interface MailDao {
 
 	int insertDraft(SqlSessionTemplate sst, MailVo mv);
 
+	MailVo selectDraftDetail(SqlSessionTemplate sst, String mailNo);
+
+	int updateCheckStatusDraft(SqlSessionTemplate sst, MailVo mv);
+
 
 
 }

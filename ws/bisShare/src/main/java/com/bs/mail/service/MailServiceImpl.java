@@ -262,17 +262,17 @@ public class MailServiceImpl implements MailService{
 		String refStr = "";
 		
 		for(EmployeeVo e : recList) {
-			recStr += e.getValue() + ",";
+			recStr += e.getNick() + ",";
 		}
-		String recStr1 = "\'"+recStr.substring(0,recStr.length()-1)+"\'";
+		String recStr1 = recStr.substring(0,recStr.length()-1);
 		
 		mv.setReceive(recStr1);
 		
 		if(refList != null) {
 			for(EmployeeVo e : refList) {
-				refStr += e.getValue() + ",";
+				refStr += e.getNick() + ",";
 			}
-			String refStr1 = "\'"+refStr.substring(0,refStr.length()-1)+"\'";
+			String refStr1 = refStr.substring(0,refStr.length()-1);
 			
 			mv.setReference(refStr1);
 		} else {
@@ -280,6 +280,29 @@ public class MailServiceImpl implements MailService{
 		}
 		
 		result = md.insertDraft(sst,mv);
+		
+		return result;
+	}
+
+
+	@Override
+	public MailVo draftDetail(String mailNo) {
+		return md.selectDraftDetail(sst,mailNo);
+	}
+
+
+	@Override
+	public int delCheckedDraft(List<String> checkArr, EmployeeVo loginVo) {
+		
+		int result = 1;
+		
+		for(int i=0 ; i < checkArr.size() ; i++) {
+			
+			MailVo mv = new MailVo();
+			mv.setMailNo(checkArr.get(i));
+			int x = md.updateCheckStatusDraft(sst, mv);
+			result = result * x;
+		}
 		
 		return result;
 	}
