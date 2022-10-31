@@ -69,13 +69,14 @@
 	  color: #00AACC;
 	}
 	.tree label:before{
-	  content: '+'
+	  color: forestgreen;
+	  content: '-'
 	}
 	.tree label.lastTree:before{
 	  content:'*';
 	}
 	.tree label:hover:before{
-	  content: '+'
+	  content: '-'
 	}
 	.tree label.lastTree:hover:before{
 	  content:'*';
@@ -87,10 +88,10 @@
 	  display: none;
 	}
 	.tree input[type="checkbox"]:checked+label:before{
-	  content: '-'
+	  content: '+'
 	}
 	.tree input[type="checkbox"]:checked+label:hover:before{
-	  content: '-'
+	  content: '+'
 	}
 	
 	.tree input[type="checkbox"]:checked+label.lastTree:before{
@@ -98,6 +99,10 @@
 	}
 	.tree input[type="checkbox"]:checked+label.lastTree:hover:before{
 	  content: '*';
+	}	
+
+	#label{
+		flex-direction: column;
 	}
 </style>
 
@@ -116,21 +121,9 @@
 	    		<form action="${root}/address/list" method="get">
                     <div class="table-responsive">
                         <table id="addrList" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-								<tr>
-									<th><input type="checkbox" id="cbx_chkAll" /></th>
-									<th>이름</th>
-									<th>직급</th>
-									<th>부서</th>
-									<th>연락처</th>
-									<th>이메일</th>
-								</tr>
-							</thead>
 							<tbody>
 								
-								
-								
-								<c:forEach var="addr" items="${voList}" varStatus="st">
+								<%-- <c:forEach var="addr" items="${voList}" varStatus="st">
 									<tr>
 										<td><input type="checkbox" name="chk"></td>
 										<td><a href="javascript:doDisplay(${st.index});">${addr.nick}</a></td>
@@ -139,63 +132,65 @@
 										<td><a href="javascript:doDisplay(${st.index});">${addr.phone}</a></td>
 										<td><a href="javascript:doDisplay(${st.index});">${addr.email}</a></td>
 									</tr>
-				    			</c:forEach>
-								
+				    			</c:forEach> --%>
+				    			
+								<ul class="tree">
+								  <li>
+								    <input type="checkbox" id="root">
+								    <label for="root">비즈쉐어 (테스트용)</label>
+								    <ul>
+								      <li>
+							          	<input type="checkbox" id="node0">
+								      	<label for="node0" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png">대표</label>
+							          </li> 
+								      
+								      <li>
+								        <input type="checkbox" id="node1">
+								        <label for="node1">인사부</label>
+								        <ul>
+								          <li>
+								          	<c:forEach var="addr" items="${voList}" varStatus="st">
+								           	 <input type="checkbox" id="node11">
+											 <div id="label">
+												 <label for="node11" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a>
+												 </label>
+											 </div>
+				    						</c:forEach>
+								          </li> 
+								        </ul>
+								       
+								      <li>
+								        <input type="checkbox" id="node2">
+								        <label for="node2">개발부</label>
+								        <ul>
+								          <li>
+								          	<c:forEach var="addr" items="${voList}" varStatus="st">
+								           	 <input type="checkbox" id="node21">
+											 <div id="label">
+												 <label for="node21" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
+											 </div>
+				    						</c:forEach>
+								          </li> 
+								        </ul> <!-- node 2x -->
+								      <li>
+								        <input type="checkbox" id="node3">
+								        <label for="node3">영업부</label>
+								        <ul>
+								          <li>
+								          	<c:forEach var="addr" items="${voList}" varStatus="st">
+									            <input type="checkbox" id="node31">
+												<div id="label">
+													<label for="node31" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
+												</div>
+				    						</c:forEach>
+								          </li>
+								        </ul> <!-- node 3x -->
+								      </li>
+								    </ul> <!-- node1,2,3 -->
+								  </li> <!-- tree -->
+								</ul> <!-- tree -->
 							</tbody>
                         </table>
-                        
-                        
-                        <!-- 테스트용 -->
-                        <ul class="tree">
-						  <li>
-						    <input type="checkbox" id="root">
-						    <label for="root">비즈쉐어 (테스트용)</label>
-						    <ul>
-						      
-						      <li>
-					            <input type="checkbox" id="node0">
-					            <label for="node0" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"> 대표</label>
-					          </li> 
-						      
-						      <li>
-						        <input type="checkbox" id="node1">
-						        <label for="node1">인사부</label>
-						        <ul>
-						          <li>
-						            <input type="checkbox" id="node11">
-						            <label for="node11" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"> 사원</label>
-						          </li> 
-						        </ul>
-						       
-						      <li>
-						        <input type="checkbox" id="node2">
-						        <label for="node2">개발부</label>
-						        <ul>
-						          <li>
-						            <input type="checkbox" id="node21">
-						            <label for="node21" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"> 주임</label>
-						          </li> 
-						        </ul> <!-- node 2x -->
-						      <li>
-						        <input type="checkbox" id="node3">
-						        <label for="node3">영업부</label>
-						        <ul>
-						          <li>
-						            <input type="checkbox" id="node31">
-						            <label for="node31" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"> 대리</label>
-						          </li>
-						          <li>
-						            <input type="checkbox" id="node32">
-						            <label for="node32" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"> 과장</label>
-						          <li>
-						            <input type="checkbox" id="node33">
-						            <label for="node33" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"> 차장</label>
-						          </li>
-						        </ul> <!-- node 3x -->
-						      </li>
-						    </ul> <!-- node1,2,3 -->
-						  </li> <!-- tree -->
-						</ul> <!-- tree -->
                         
                     </div>
                 </div> <!-- card body -->
@@ -253,24 +248,6 @@
 	</div> <!-- row -->
 	  
 </div>
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#cbx_chkAll").click(function() {
-				if($("#cbx_chkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
-				else $("input[name=chk]").prop("checked", false);
-			});
-			
-			$("input[name=chk]").click(function() {
-				var total = $("input[name=chk]").length;
-				var checked = $("input[name=chk]:checked").length;
-				
-				if(total != checked) $("#cbx_chkAll").prop("checked", false);
-				else $("#cbx_chkAll").prop("checked", true); 
-			});
-		});
-</script>
 
 
 <script type="text/javascript"> 
