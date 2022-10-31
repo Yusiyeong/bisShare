@@ -27,8 +27,14 @@ public class AddressServiceImpl implements AddressService{
 	
 	//주소록 조회
 	@Override
-	public List<AddressVo> selectList(PageVo pvo, Map<String, String> map) {
-		return dao.selectList(sst, pvo, map);
+	public List<AddressVo> selectSearch(PageVo pvo, Map<String, String> map) {
+		return dao.selectSearch(sst, pvo, map);
+	}
+	
+	//조직도 조회
+	@Override
+	public List<AddressVo> selectList(Map<String, String> map) {
+		return dao.selectList(sst, map);
 	}
 
 	//조직도 상세조회
@@ -39,11 +45,9 @@ public class AddressServiceImpl implements AddressService{
 
 	//목록 갯수 조회
 	@Override
-	public int selectTotalCnt() {
-		return dao.selectCountAll(sst);
+	public int selectTotalCnt(Map<String, String> map) {
+		return dao.selectCountAll(sst, map);
 	}
 
-	
-	
 
 }

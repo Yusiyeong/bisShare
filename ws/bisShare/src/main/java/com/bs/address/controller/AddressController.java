@@ -40,15 +40,11 @@ public class AddressController {
 		map.put("keyword", keyword);
 		map.put("field", field);
 		
-		int totalCount = adds.selectTotalCnt();
 		
-		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 8);
-		
-		List<AddressVo> voList = adds.selectList(pvo, map);
+		List<AddressVo> voList = adds.selectList(map);
 		List<AddressVo> dvoList = adds.detailList();
 		model.addAttribute("voList", voList);
 		model.addAttribute("dvoList", dvoList);
-		model.addAttribute("pvo", pvo);
 		model.addAttribute("page", "address/address-list");
 		return "layout/template";
 	}
@@ -69,13 +65,14 @@ public class AddressController {
 		map.put("keyword", keyword);
 		map.put("field", field);
 		
-		int totalCount = adds.selectTotalCnt();
+		int totalCount = adds.selectTotalCnt(map);
 		
 		PageVo pvo = Pagination.getPageVo(totalCount, pno, 5, 10);
 		
-		List<AddressVo> voList = adds.selectList(pvo, map);
+		List<AddressVo> voList = adds.selectSearch(pvo, map);
 		model.addAttribute("voList", voList);
 		model.addAttribute("pvo", pvo);
+		model.addAttribute("keyword", keyword);
 		model.addAttribute("page", "address/address-search");
 		return "layout/template";
 	}
