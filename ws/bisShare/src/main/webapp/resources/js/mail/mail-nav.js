@@ -57,9 +57,13 @@ function removeOneBtn() {
 }
 
 function removeAjax(checkArr) {
+  let delUrl = `${root}/mail/delChecked/${refCheck}`;
+  if (refCheck == 4) {
+    delUrl = `${root}/mail/delCheckedDraft`
+  }
   $.ajax({
     type: "get",
-    url: `${root}/mail/delChecked/${refCheck}`,
+    url: delUrl,
     data: {
       checkArr : checkArr
     },
@@ -91,3 +95,4 @@ function passBtn() {
 
   $('#mail-content').summernote('editor.insertText', contentInfo);
 }
+

@@ -39,4 +39,8 @@ public interface MailService {
 	List<MailVo> draft(String empNo);
 
 	int draftWrite(MailVo mv, List<EmployeeVo> recList, List<EmployeeVo> refList);
+
+	MailVo draftDetail(String mailNo);
+
+	int delCheckedDraft(List<String> checkArr, EmployeeVo loginVo);
 }
