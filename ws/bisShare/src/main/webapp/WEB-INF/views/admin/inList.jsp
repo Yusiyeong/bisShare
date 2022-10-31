@@ -124,8 +124,13 @@
 				                                   <tr>
 				                                       <td class="text-center">
 				                                          <div id="profile-img-area">
-				                                      <img src="${root}/resources/profile/${x.profilePath}">
-				                                   </div>
+					                                          <c:if test="${not empty x.profilePath}">
+					                                      		<img src="${root}/resources/profile/${x.profilePath}">
+					                                      	  </c:if>
+					                                      	  <c:if test="${empty x.profilePath}">
+					                                      	  	<img src="${root}/resources/img/guest.png">
+					                                      	  </c:if>
+				                                   		  </div>
 				                                       </td>
 				                                       
 				                                       <td class="text-center">${x.empNo}</td>

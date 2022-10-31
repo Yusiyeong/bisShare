@@ -195,13 +195,14 @@
    </select>
 
 	
-	<!-- 댓글 수 업데이트(제목 옆 댓글 수 표시) -->
+	<!-- 댓글 수 업데이트(제목 옆 댓글 수 표시 하기 위함) -->
     <update id="updateReplyCount">
 	update NOTICE_BOARD N
 		SET N.REPLY_COUNT = (
 	        SELECT COUNT(REPLY_NO) 
 	        FROM NOTICE_REPLY 
 	        WHERE BNO = #{boardNo}
+	        AND STATUS = 'Y'
 	        )
 	WHERE N.BOARD_NO = #{boardNo}
 	</update>
