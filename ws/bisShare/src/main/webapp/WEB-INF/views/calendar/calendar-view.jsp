@@ -55,7 +55,12 @@
 												<div class="col-md-4">
 													<div class="card" style="width: 21rem; height: 10rem; margin: 20px;" onclick="location.href='${root}/calendar/detail/${x.calNo}'">
 														<div class="card-body">
-														<h5 style="float: right;">☆</h5>
+														<c:if test="${x.star eq 'N'}">
+														<h5 style="float: right;" onclick="location.href=">☆</h5>
+														</c:if>
+														<c:if test="${x.star eq 'Y'}">
+														<h5 style="float: right;">★</h5>
+														</c:if>
 														  <h5 class="card-title">${x.title}</h5>
 														  <h5 class="card-title">${x.startDate}</h5>
 														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
