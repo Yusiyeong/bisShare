@@ -25,7 +25,7 @@
 					<table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
 						<thead>
 							<tr>
-								<th>${receiveMail}</th>
+								<th></th>
 								<th>중요</th>
 								<th>메일명</th>
 								<th id="nick">발신</th>
@@ -41,6 +41,9 @@
 									</c:if>
 									<c:if test="${ r.star eq 'Y'}">
 										<td>★</td>
+									</c:if>
+									<c:if test="${empty r.star}">
+										<td>임시</td>
 									</c:if>
 									<c:if test="${r.readYn eq 'N'}">
 										<td class="font-weight-bolder">${r.title}</td>

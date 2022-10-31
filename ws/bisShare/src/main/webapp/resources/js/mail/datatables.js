@@ -15,7 +15,7 @@ if (location.href.includes('reference')) {
   document.querySelector('#nick').innerHTML = '발신';
 } else if (location.href.includes('draft')) {
   refCheck = 4;
-  document.querySelector('#nick').innerHTML = '';
+  document.querySelector('#nick').innerHTML = '임시';
 } 
 
 if(refCheck == 2) {

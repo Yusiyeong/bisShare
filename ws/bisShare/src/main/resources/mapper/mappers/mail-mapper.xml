@@ -89,7 +89,7 @@
 	
 	<update id="updateStar">
 		UPDATE MAIL_RECEIVE
-		SET STAR = #{star}
+		SET STAR = ${star}
 		WHERE MAIL_NO=#{mailNo}
 		<if test="receive != null">
 			AND RECEIVE=#{receive}
