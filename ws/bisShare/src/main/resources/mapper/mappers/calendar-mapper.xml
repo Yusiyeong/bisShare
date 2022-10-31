@@ -124,6 +124,41 @@
 		WHERE C.CAL_NO = #{calNo}
 		AND C.STATUS = 'Y'
 	</select>
+	
+	
+	<!-- 캘린더에 일정 출력 -->
+	<select id="calendarList" resultType="calvo">
+		SELECT
+			C.CAL_NO
+			,C.CATE_NO
+			,C.TITLE
+			,C.CONTENT
+			,C.ENROLL_DATE
+			,C.MODIFY_DATE
+			,C.START_DATE
+			,C.END_DATE
+			,C.STATUS
+			,E.NICK AS WRITER
+		FROM CALENDAR C
+		JOIN EMPLOYEE E
+		ON C.WRITER = E.EMP_NO
+		WHERE C.STATUS = 'Y'
+	</select>
+	
+	
+	<!-- 중요 일정 등록 -->
+	<select id="selectStar" resultType="String">
+		SELECT STAR
+		FROM CALENDAR
+		WHERE CAL_NO = #{calNo}
+	</select>
+	
+	<!-- 중요 일정 수정 -->
+	<update id="updateStar">
+		UPDATE CALEDNAR
+		SET STAR = #{star}
+		WHERE CAL_NO = #{calNO}
+	</update>
 
 </mapper>
 

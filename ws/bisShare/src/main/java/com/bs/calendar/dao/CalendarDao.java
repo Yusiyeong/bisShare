@@ -30,5 +30,16 @@ public interface CalendarDao {
 	//일정 상세 조회 (번호)
 	CalendarVo selectOne(SqlSessionTemplate sst, String no);
 
+	//캘린더에서 일정 조회
+	List<CalendarVo> getCalendar(SqlSessionTemplate sst);
+
+	//중요 일정 등록
+	String selectStar(SqlSessionTemplate sst, CalendarVo cv);
+
+	//중요 일정 수정
+	void updateStar(SqlSessionTemplate sst, CalendarVo cv);
+
+
+
 
 }

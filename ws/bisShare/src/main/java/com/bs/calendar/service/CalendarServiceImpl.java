@@ -122,5 +122,31 @@ public class CalendarServiceImpl implements CalendarService{
 		return dao.selectOne(sst, no);
 	}
 
+	//캘린더에서 일정보기
+	@Override
+	public List<CalendarVo> getCalendar() {
+		return dao.getCalendar(sst);
+	}
+
+	//중요 일정 등록
+	@Override
+	public String star(CalendarVo cv) {
+		
+		String star = dao.selectStar(sst, cv);
+		String changeStar = "";
+		
+		if(star.equals("Y")) {
+			changeStar = "'N'";
+		}else {
+			changeStar = "'Y'";
+		}
+		cv.setStar(changeStar);
+		
+		dao.updateStar(sst, cv);
+		
+		return changeStar;
+	}
+
+
 
 }
