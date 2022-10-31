@@ -7,6 +7,7 @@ public class CalendarVo {
 	
 	private String calNo;
 	private String cateNo;
+	private String star;
 	private String writer;
 	private String title;
 	private String content;

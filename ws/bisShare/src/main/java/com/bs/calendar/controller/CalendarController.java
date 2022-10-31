@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bs.calendar.service.CalendarService;
 import com.bs.calendar.vo.CalendarVo;
@@ -31,15 +33,31 @@ public class CalendarController {
 	}
 	
 	
-	
 	//일정 메인
 	@GetMapping("main")
-	public String main(Model model) {
+	public String main(ModelAndView mv, HttpServletRequest request, Model model) {
 		model.addAttribute("page", "calendar/calendar-main");
+
+		List<CalendarVo> calendar = cs.getCalendar();
+		request.setAttribute("calendarList", calendar);
+		System.out.println(calendar);
+		
+//		try {
+//			calendar = cs.getCalendar();
+//			request.setAttribute("page", "calendar/calendar-main");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		
 		return "layout/template";
 	}
 	
-	//일정 캘린더에서 드래그로 작성
+
+	//일정 메인에서 상세정보 조회
+	
+	
+	
+	//일정 캘린더에서 모달로 작성
 	@PostMapping("modalWrite")
 	public String modalWrite(CalendarVo vo, Model model, HttpSession session) {
 		
@@ -180,6 +198,31 @@ public class CalendarController {
 		return "layout/template";
 	}
 	
+	
+	//중요 일정 등록하기
+	@GetMapping("star/{filter}")
+	@ResponseBody
+	public String star(String calNo, HttpSession session, @PathVariable int filter) {
+		
+		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginVo");
+		CalendarVo cv = new CalendarVo();
+		
+		if(filter == 0) {
+			cv.setCalNo(calNo);
+			cs.star(cv);
+		}else if(filter == 1) {
+			cv.setCalNo(calNo);
+			cs.star(cv);
+		}
+		
+		return null;
+	}
+	
+	
+	//중요 일정 조회하기
+	
+	
+	//중요 표시 해제
 	
 	
 	

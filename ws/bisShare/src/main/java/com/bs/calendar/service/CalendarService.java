@@ -28,5 +28,13 @@ public interface CalendarService {
 	//일정 상세조회 (번호)
 	CalendarVo selectOne(String no);
 
+	//캘린더에서 일정 보기
+	List<CalendarVo> getCalendar();
+
+	//중요 일정 등록
+	String star(CalendarVo cv);
+
+
+
 
 }

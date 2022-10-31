@@ -12,6 +12,8 @@ import com.bs.common.PageVo;
 @Repository
 public class CalendarDaoImpl implements CalendarDao{
 
+
+
 	//일정 작성
 	@Override
 	public int insertCalendar(SqlSessionTemplate sst, CalendarVo vo) {
@@ -57,6 +59,26 @@ public class CalendarDaoImpl implements CalendarDao{
 	public CalendarVo selectOne(SqlSessionTemplate sst, String no) {
 		return sst.selectOne("calendarMapper.selectOne", no);
 	}
+
+	//캘린더 일정조회
+	@Override
+	public List<CalendarVo> getCalendar(SqlSessionTemplate sst) {
+		return sst.selectList("calendarMapper.calendarList");
+	}
+
+	//중요 일정 등록
+	@Override
+	public String selectStar(SqlSessionTemplate sst, CalendarVo cv) {
+		return sst.selectOne("calendarMapper.selectStar", cv);
+	}
+
+	//중요 일정 수정
+	@Override
+	public void updateStar(SqlSessionTemplate sst, CalendarVo cv) {
+		sst.update("calendarMapper.updateStar", cv);
+	}
+
+
 
 
 }
