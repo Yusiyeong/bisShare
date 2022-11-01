@@ -59,29 +59,27 @@
                     <!--검색버튼start-->
                     <div style="height: 50px;">
                         <div style="float: right;">
-
-							<select name="condition" style="height:30px;">
+							<select id="condition" name="condition" style="height:30px;">
 								<option value="nick">닉네임</option>
 								<option value="email">메일</option>
 								<option value="phone">연락처</option>
 							</select>
 			
                             <input type="text" name="keyword" value="${keyword}">
-                            <input type="submit" value="검색" class="btn-primary" style="border-radius: 3px;" >
+                            <input type="submit" value="검색" class="btn-primary" style="border-radius: 3px;">
                         </div>
                     </div>
                     <!--검색버튼end-->
                     
                   <!-- ------------------------------------------------------------------------->		
-                    
-					<c:if test="${not empty condition}">
-						<script>
-							window.onload = function(){
-								document.querySelector('option[value=${condition}]').selected = true;
-							}
-						</script>
-					</c:if>
-					
+                     <c:if test="${not empty condition}">
+		                  <script>
+		                     window.onload = function(){
+		                        document.querySelector('option[value=${condition}]').selected = true;
+		                     }
+		                  </script>
+		             </c:if>
+
 	             <!-- ------------------------------------------------------------------------->		
 	
                     
