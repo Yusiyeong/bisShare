@@ -34,6 +34,9 @@ public interface CalendarService {
 	//중요 일정 등록
 	String star(CalendarVo cv);
 
+	//중요 일정 목록 조회
+	List<CalendarVo> selectStarList(PageVo pv, String no);
+
 
 
 

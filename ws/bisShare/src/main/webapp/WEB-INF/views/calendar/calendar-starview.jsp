@@ -35,7 +35,8 @@
 								
 								<nav>
 								  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-								    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">회의</button>
+								    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">전체</button>
+								    <button class="nav-link" id="nav-meeting-tab" data-bs-toggle="tab" data-bs-target="#nav-meeting" type="button" role="tab" aria-controls="nav-meeting" aria-selected="false">회의</button>
 								    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">휴가</button>
 								    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">반차</button>
 								    <button class="nav-link" id="nav-out-tab" data-bs-toggle="tab" data-bs-target="#nav-out" type="button" role="tab" aria-controls="nav-out" aria-selected="false">외근</button>								    
@@ -44,13 +45,62 @@
 								</nav>
 								<div class="tab-content" id="nav-tabContent">
 								
-								  <!-- 회의 -->
+								<!-- 전체 -->
 								  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
 								  
 									  <div class ="d-flex flex-wrap w-100">
 										<c:forEach items="${cvoList}" var="x">
+											<div class="row">
+												<div class="col-md-4">
+													<div class="card" style="width: 21rem; height: 10rem; margin: 20px;">
+														<div class="card-body">
+															<c:if test="${x.star eq 'N'}">
+																<h5 id="star${x.calNo}"  style="float: right;">☆</h5>
+																</c:if>
+																<c:if test="${x.star eq 'Y'}">
+																<h5 id="star${x.calNo}" style="float: right;">★</h5>
+																</c:if>
+																<script>
+																		$('#star${x.calNo}').on('click', function() {
+																			console.log('${x.calNo}');
+																			$.ajax({
+																			type: "get",
+																			url: `${root}/calendar/star`,
+																			data: {
+																				calNo : '${x.calNo}'
+																			},
+																			success: function (check) {
+																				if(check == 'Y'){
+																					document.querySelector('#star${x.calNo}').innerHTML='★';
+																				}else if(check =='N'){
+																					document.querySelector('#star${x.calNo}').innerHTML='☆';
+																				}
+																				
+																			}
+																			});
+																		});
+																</script>
+														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'">${x.title}</h5>
+														  <h5 class="card-title">${x.startDate}</h5>
+														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
+														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
+														</div>
+													 </div>
+												</div>
+											</div>
+	
+										</c:forEach>
+									</div>
+									
+								</div>
+								<!-- 전체 끝 -->
+								
+								  <!-- 회의 -->
+								  <div class="tab-pane fade" id="nav-meeting" role="tabpanel" aria-labelledby="nav-meeting-tab" tabindex="0">
+								  
+									  <div class ="d-flex flex-wrap w-100">
+										<c:forEach items="${cvoList}" var="x">
 											<c:if test="${x.cateNo eq 2}">
-											
 											<div class="row">
 												<div class="col-md-4">
 													<div class="card" style="width: 21rem; height: 10rem; margin: 20px;">
@@ -80,7 +130,7 @@
 																			});
 																		});
 																</script>
-														  <h5 class="card-title" onclick="location.href='${root}/calendar/detail/${x.calNo}'">${x.title}</h5>
+														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'">${x.title}</h5>
 														  <h5 class="card-title">${x.startDate}</h5>
 														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
 														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
@@ -132,7 +182,7 @@
 																			});
 																		});
 																</script>
-														  <h5 class="card-title" onclick="location.href='${root}/calendar/detail/${x.calNo}'">${x.title}</h5>
+														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'">${x.title}</h5>
 														  <h5 class="card-title">${x.startDate} ~ ${x.endDate}</h5>
 														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
 														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
@@ -184,7 +234,7 @@
 																			});
 																		});
 																</script>
-														  <h5 class="card-title" onclick="location.href='${root}/calendar/detail/${x.calNo}'">${x.title}</h5>
+														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'">${x.title}</h5>
 														  <h5 class="card-title">${x.startDate}</h5>
 														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
 														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
@@ -236,7 +286,7 @@
 																			});
 																		});
 																</script>
-														  <h5 class="card-title" onclick="location.href='${root}/calendar/detail/${x.calNo}'">${x.title}</h5>
+														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'">${x.title}</h5>
 														  <h5 class="card-title">${x.startDate}</h5>
 														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
 														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>

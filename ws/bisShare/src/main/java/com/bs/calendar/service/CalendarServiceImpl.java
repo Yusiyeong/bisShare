@@ -136,15 +136,21 @@ public class CalendarServiceImpl implements CalendarService{
 		String changeStar = "";
 		
 		if(star.equals("Y")) {
-			changeStar = "'N'";
+			changeStar = "N";
 		}else {
-			changeStar = "'Y'";
+			changeStar = "Y";
 		}
 		cv.setStar(changeStar);
 		
 		dao.updateStar(sst, cv);
 		
 		return changeStar;
+	}
+
+	//중요 일정 목록 조회
+	@Override
+	public List<CalendarVo> selectStarList(PageVo pv, String no) {
+		return dao.selectStarList(sst, pv, no);
 	}
 
 

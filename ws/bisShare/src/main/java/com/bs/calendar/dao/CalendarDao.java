@@ -39,6 +39,9 @@ public interface CalendarDao {
 	//중요 일정 수정
 	void updateStar(SqlSessionTemplate sst, CalendarVo cv);
 
+	//중요 일정 목록 조회
+	List<CalendarVo> selectStarList(SqlSessionTemplate sst, PageVo pv, String no);
+
 
 
 

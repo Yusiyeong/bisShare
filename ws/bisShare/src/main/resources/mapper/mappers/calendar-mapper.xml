@@ -88,6 +88,7 @@
 		        ,C.END_DATE
 		        ,C.STATUS
 		        ,E.NICK AS WRITER
+		        ,C.STAR
 		    FROM CALENDAR C
 		    JOIN EMPLOYEE E
 		    ON C.WRITER = E.EMP_NO
@@ -153,12 +154,38 @@
 		WHERE CAL_NO = #{calNo}
 	</select>
 	
+	
 	<!-- 중요 일정 수정 -->
 	<update id="updateStar">
-		UPDATE CALEDNAR
+		UPDATE CALENDAR
 		SET STAR = #{star}
-		WHERE CAL_NO = #{calNO}
+		WHERE CAL_NO = #{calNo}
 	</update>
+	
+	
+	<!-- 중요 일정 목록 조회 -->
+	<select id="selectStarList" resultType="calvo">
+		SELECT 
+		        C.CAL_NO
+		        ,C.CATE_NO
+		        ,C.TITLE
+		        ,C.CONTENT
+		        ,C.ENROLL_DATE
+		        ,C.MODIFY_DATE
+		        ,C.START_DATE
+		        ,C.END_DATE
+		        ,C.STAR
+		        ,C.STATUS
+		        ,E.NICK AS WRITER
+		    FROM CALENDAR C
+		    JOIN EMPLOYEE E
+		    ON C.WRITER = E.EMP_NO
+		    WHERE C.STATUS = 'Y'
+		    AND C.STAR = 'Y'
+		    AND C.WRITER = #{writer}
+		    ORDER BY C.START_DATE ASC		
+	</select>
+	
 
 </mapper>
 
