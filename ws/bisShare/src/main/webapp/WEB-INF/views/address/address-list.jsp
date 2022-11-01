@@ -103,8 +103,18 @@
 
 	#label{
 		flex-direction: column;
+		margin-left: 20px;
+	}
+	
+	#boss{
+		margin-left: 10px;
+	}
+	
+	#n1,#n2,#n3{
+		margin-left: 10px;
 	}
 </style>
+
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -140,48 +150,62 @@
 								    <label for="root">비즈쉐어 (테스트용)</label>
 								    <ul>
 								      <li>
+								      	<c:forEach var="addr" items="${voList}" varStatus="st">
 							          	<input type="checkbox" id="node0">
-								      	<label for="node0" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png">대표</label>
+								      	<c:if test="${addr.rankName eq '대표'}">
+								      
+								          	<div id="boss">
+									      		<label for="node0" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
+								          	</div>
+								          	
+							          	</c:if>
+							          	</c:forEach>
 							          </li> 
 								      
 								      <li>
 								        <input type="checkbox" id="node1">
-								        <label for="node1">인사부</label>
+								        <label id="n1" for="node1">인사부</label>
 								        <ul>
 								          <li>
 								          	<c:forEach var="addr" items="${voList}" varStatus="st">
-								           	 <input type="checkbox" id="node11">
-											 <div id="label">
-												 <label for="node11" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a>
-												 </label>
-											 </div>
+								           	 <c:if test="${addr.deptName eq '인사'}">
+									           	 <input type="checkbox" id="node11">
+												 <div id="label">
+													 <label for="node11" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
+												 </div>
+								           	</c:if>
+								           	 
 				    						</c:forEach>
 								          </li> 
 								        </ul>
-								       
+								       </li>
 								      <li>
 								        <input type="checkbox" id="node2">
-								        <label for="node2">개발부</label>
+								        <label id="n2" for="node2">개발부</label>
 								        <ul>
 								          <li>
 								          	<c:forEach var="addr" items="${voList}" varStatus="st">
+								          	 <c:if test="${addr.deptName eq '개발'}">
 								           	 <input type="checkbox" id="node21">
 											 <div id="label">
 												 <label for="node21" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
 											 </div>
+											 </c:if>
 				    						</c:forEach>
 								          </li> 
 								        </ul> <!-- node 2x -->
 								      <li>
 								        <input type="checkbox" id="node3">
-								        <label for="node3">영업부</label>
+								        <label id="n3" for="node3">영업부</label>
 								        <ul>
 								          <li>
 								          	<c:forEach var="addr" items="${voList}" varStatus="st">
+								          	 <c:if test="${addr.deptName eq '영업' and addr.rankName ne '대표'}" >
 									            <input type="checkbox" id="node31">
 												<div id="label">
 													<label for="node31" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
 												</div>
+											 </c:if>
 				    						</c:forEach>
 								          </li>
 								        </ul> <!-- node 3x -->
