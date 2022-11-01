@@ -45,13 +45,13 @@ public class ApprovalServiceImpl implements ApprovalService{
 
 	//기안서 1개 조회
 	@Override
-	public ApprovalVo getOneByNo(String adcNo) {
+	public ApprovalVo getOneByNo(String adcNo, String empNo) {
 		//기본 저장된 정보 DB에서 조회
 		ApprovalVo vo = dao.getOneByNo(sst, adcNo);
 		//일단 결재 진행정보 다시 배열로 담아주기
 		vo.setAprverStatuses(vo.getAprverStatus().split(","));
 		vo.setAgreeStatuses(vo.getAgreeStatus().split(","));
-		vo.setRefStatuses(vo.getRefStatus().split(","));
+		String[] refStatusesArr = vo.getRefStatus().split(",");
 		
 		//결재권자, 합의자, 참조자 정보들 조회 해오기
 		//결재권자
@@ -93,7 +93,10 @@ public class ApprovalServiceImpl implements ApprovalService{
 			for(int i = 0; i < vo.getRefEmpNos().length; ++i) {
 				EmployeeVo evo = adminDao.selectOne(sst, vo.getRefEmpNos()[i]);
 				refEmpNicks[i] = evo.getNick();
+				//로그인한 유저가 참조자일경우 참조 상태를 Y로 변경
+				if(empNo.equals(vo.getRefEmpNos()[i])&&refStatusesArr[i].equals("N")) refStatusesArr[i] = "Y";
 			}
+			vo.setRefStatuses(refStatusesArr);
 			vo.setRefNicks(refEmpNicks);
 		}
 		
@@ -171,9 +174,12 @@ public class ApprovalServiceImpl implements ApprovalService{
 		
 	}
 
+	//결재권자가 결재 눌렀을때
 	@Override
 	public int updateAprvStatus(ApprovalVo avo, String loginEmpNo) {
 
+		Map updateInfo = new HashMap<String, String>();
+		
 		avo.setAprverStatuses(avo.getAprverStatus().split(","));
 		avo.setAprverEmpNos(avo.getAprverEmpNo().split(","));
 		
@@ -184,9 +190,34 @@ public class ApprovalServiceImpl implements ApprovalService{
 			if(loginEmpNo.equals(avo.getAprverEmpNos()[i])) updateAprverStatus += "Y";
 			else updateAprverStatus += "N";
 		}
-		avo.setAprverStatus(updateAprverStatus);
+		updateInfo.put("key", "aprv");
+		updateInfo.put("value", updateAprverStatus);
+		updateInfo.put("adcNo", avo.getAdcNo());
 		
-		return dao.updateAprvStatus(sst, avo);
+		return dao.updateStatus(sst, updateInfo);
+	}
+	
+	//합의자가 결재 눌렀을때
+	@Override
+	public int updateAgreeStatus(ApprovalVo avo, String loginEmpNo) {
+
+		Map updateInfo = new HashMap<String, String>();
+		
+		avo.setAgreeStatuses(avo.getAgreeStatus().split(","));
+		avo.setAgreeEmpNos(avo.getAgreeEmpNo().split(","));
+		
+		String updateAgreeStatus = "";
+		
+		for(int i = 0; i < avo.getAgreeStatuses().length; ++i) {
+			if(i>0) updateAgreeStatus += ",";
+			if(loginEmpNo.equals(avo.getAgreeEmpNos()[i])) updateAgreeStatus += "Y";
+			else updateAgreeStatus += "N";
+		}
+		updateInfo.put("key", "agree");
+		updateInfo.put("value", updateAgreeStatus);
+		updateInfo.put("adcNo", avo.getAdcNo());
+		
+		return dao.updateStatus(sst, updateInfo);
 	}
 	
 	

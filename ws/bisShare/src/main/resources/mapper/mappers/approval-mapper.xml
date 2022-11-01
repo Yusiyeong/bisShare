@@ -106,10 +106,42 @@
 		WHERE A.CANCEL = 'N'
 	</select>
 	
-	<update id="updateAprvStatus">
+	<!-- 결재/합의/참조 상태 업데이트 -->
+	<update id="updateStatus">
 		UPDATE APPROVAL_DOCU
-			SET APRVER_STATUS = #{aprverStatus}
+			SET
+			<choose>
+				<when test="key == 'aprv'">
+					APRVER_STATUS = #{value}
+				</when>
+				<when test="key == 'agree'">
+					AGREE_STATUS = #{value}
+				</when>
+				<otherwise>
+					REF_STATUS = #{value} 
+				</otherwise>
+			</choose>
 		WHERE ADC_NO = #{adcNo}
 	</update>
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

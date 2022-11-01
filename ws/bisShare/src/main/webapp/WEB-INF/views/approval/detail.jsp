@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <c:set var="root" value="${pageContext.request.contextPath}" />   
 
 <style>
@@ -40,17 +41,22 @@
     /* 참조라인 css */
     #agree-line-area, #ref-line-area{
         width: 100%;
-        height: 30px;
+        height: 50px;
         /* border: 1px solid black; */
         box-sizing: border-box;
         display: grid;
         grid-template-columns: repeat(8, 1fr);
+        line-height: 45px;
     }
     #agree-line-area>div, #ref-line-area>div{
         border: 1px solid grey;
         border-top: 0;
         box-sizing: border-box;
         text-align: center;
+    }
+    .agree-name-area,.ref-name-area{
+    	width: 100%;
+    	height: 100%;
     }
     
     #aprv-content-area{
@@ -65,7 +71,10 @@
     	height : 100%;
     	margin: 0 auto;
     }
-    
+    #approve-stamp{
+    	width: 100%;
+    	height: 100%;'
+    }
 </style>
 
 <div class="card shadow mb-4" id="apprve-write-outer">
@@ -110,11 +119,16 @@
                 	<div>
 	                    <div class="approve-rank-area bg-gray-200">${ avo.aprverRanks[i] }</div>
 		                    <div class="approve-stamp-area">
-			                    <c:if test="${ loginVo.empNo eq avo.aprverEmpNos[i] }">
-			                    	<div id="approve-btn-area">
-			                    		<button id="approve-btn" class="btn btn-outline-primary">결재</button>
-			                    	</div>
-			                    </c:if>
+		                    	<c:if test="${ avo.aprverStatuses[i] eq 'N' }">
+				                    <c:if test="${ loginVo.empNo eq avo.aprverEmpNos[i] }">
+				                    	<div id="approve-btn-area">
+				                    		<button id="approve-btn" class="btn btn-outline-primary">결재</button>
+				                    	</div>
+				                    </c:if>
+		                    	</c:if>
+		                    	<c:if test="${ avo.aprverStatuses[i] eq 'Y' }">
+		                    		<img id="approve-stamp" alt="승인도장" src="${root}/resources/img/approveStamp.png"> 
+		                    	</c:if>
 		                    </div>
 	                    <div class="approve-name-area">${ avo.aprverNicks[i] }</div>
                 	</div>
@@ -135,10 +149,18 @@
                 <c:forEach var="i" begin="0" end="${ fn:length(avo.agreeEmpNos) - 1 }">
                 	<div>
 	                    <div class="agree-name-area">
-	                    	${ avo.agreeNicks[i]}
-	                    	<c:if test="${ loginVo.empNo eq avo.agreeEmpNos[i] }">
-	                    		<button class="btn btn-sm btn-outline-primary">확인</button>
-		                    </c:if>
+		                    <c:if test="${ avo.agreeStatuses[i] eq 'N' }">
+			                    <c:if test="${ loginVo.empNo eq avo.agreeEmpNos[i] }">
+		                    		<button id="agree-btn" class="btn btn-sm btn-outline-primary">확인</button>
+			                    </c:if>
+			                    <c:if test="${ loginVo.empNo ne avo.agreeEmpNos[i] }">
+		                    		${ avo.agreeNicks[i]}
+			                    </c:if>
+	                    	</c:if>
+	                    	<c:if test="${ avo.agreeStatuses[i] eq 'Y' }">
+	                    		${ avo.agreeNicks[i]}
+	                    		<i class="bi bi-check-lg"></i>
+	                    	</c:if>
 	                    </div>
                 	</div>
                 </c:forEach>
@@ -157,8 +179,8 @@
                 	<div>
 	                    <div class="ref-name-area">
 	                    	${ avo.refNicks[i]}
-	                    	<c:if test="${ loginVo.empNo eq avo.refEmpNos[i] }">
-	                    		<button class="btn btn-sm btn-outline-primary">확인</button>
+		                    <c:if test="${ avo.refStatuses[i] eq 'Y' }">
+		                    	<i class="bi bi-check-lg"></i>
 		                    </c:if>
 	                    </div>
                 	</div>
@@ -196,10 +218,37 @@
 
 <<script type="text/javascript">
 	
+	/* 결재하기 버튼 클릭 시 */
 	$('#approve-btn').click(()=>{
 		if(confirm('결재 하시겠습니까?')){
             $.ajax({
                 url : "${root}/approval/approve"
+                , type : "post"
+                , data : {
+                        adcNo : ${ avo.adcNo }
+                		, aprverStatus : '${ avo.aprverStatus }'
+               			, aprverEmpNo : '${ avo.aprverEmpNo }' 
+                }
+                , success : (result) => {
+                    if(result == 'ok'){
+                        alert('결재 성공');
+                        location.reload();
+                    } else{
+                        alert('결재 실패')
+                    }
+                }
+                , error : ()=>{
+                    alert('연결실패');
+                }
+            })
+        }
+	})
+	
+	/* 합의하기 버튼 클릭 시 */
+	$('#agree-btn').click(()=>{
+		if(confirm('합의 하시겠습니까?')){
+            $.ajax({
+                url : "${root}/approval/agree"
                 , type : "post"
                 , data : {
                         adcNo : ${ avo.adcNo }
