@@ -78,6 +78,15 @@ public class CalendarDaoImpl implements CalendarDao{
 		sst.update("calendarMapper.updateStar", cv);
 	}
 
+	//중요 일정 목록 조회
+	@Override
+	public List<CalendarVo> selectStarList(SqlSessionTemplate sst, PageVo pv, String no) {
+		int offset = (pv.getCurrentPage()-1 * pv.getBoardLimit());
+		RowBounds rb = new RowBounds(offset, pv.getBoardLimit());
+		
+		return sst.selectList("calendarMapper.selectStarList", no, rb);
+	}
+
 
 
 

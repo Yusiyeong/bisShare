@@ -64,12 +64,8 @@ public class CalendarController {
 		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginVo");
 		String no = loginvo.getEmpNo();
 		
-		System.out.println(vo.getStartDate());
-		System.out.println(vo.getEndDate());
 		vo.setWriter(no);
 		int result = cs.modalwrite(vo);
-		
-		System.out.println(result);
 		
 		//화면 선택
 		if(result == 1) {
@@ -149,8 +145,6 @@ public class CalendarController {
 		
 		int result = cs.delete(no);
 		
-		System.out.println(result);
-		
 		if(result == 1) {
 			session.setAttribute("alertMsg", "일정이 삭제되었습니다.");
 			return "redirect:/calendar/view/1";
@@ -199,30 +193,44 @@ public class CalendarController {
 	}
 	
 	
-	//중요 일정 등록하기
-	@GetMapping("star/{filter}")
+	//중요 일정 등록하기, 해제하기
+	@GetMapping("star")
 	@ResponseBody
-	public String star(String calNo, HttpSession session, @PathVariable int filter) {
+	public String star(String calNo, HttpSession session) {
 		
 		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginVo");
 		CalendarVo cv = new CalendarVo();
 		
-		if(filter == 0) {
-			cv.setCalNo(calNo);
-			cs.star(cv);
-		}else if(filter == 1) {
-			cv.setCalNo(calNo);
-			cs.star(cv);
-		}
+		cv.setCalNo(calNo);
 		
-		return null;
+		return cs.star(cv);
 	}
 	
 	
-	//중요 일정 조회하기
+	//중요 일정만 조회하기
+	@GetMapping("starview/{pno}")
+	public String starview (Model model, @PathVariable int pno, HttpServletRequest req, HttpSession session) {
+		model.addAttribute("page", "calendar/calendar-starview");
+		
+		int totalCount = cs.selectToatalCnt();
+		
+		PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
+		
+		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginVo");
+		String no = loginvo.getEmpNo();
+		
+		//데이터 조회
+		List<CalendarVo> cvoList = cs.selectStarList(pv, no);
+		
+		 
+		model.addAttribute("cvoList", cvoList);
+		model.addAttribute("pv", pv);
+		
+		return "layout/template"; 
+	}
 	
 	
-	//중요 표시 해제
+
 	
 	
 	
