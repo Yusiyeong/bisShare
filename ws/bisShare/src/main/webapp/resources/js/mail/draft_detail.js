@@ -36,6 +36,7 @@
         document.querySelector('#detail-title').innerHTML = mailVo.title;
         document.querySelector('#detail-content').innerHTML = mailVo.content;
         // 파일이 하나 이상일때 표시
+        console.log(mailVo);
         if( mailVo.mavList != null) {
           document.querySelector('#receivedFiles').style.display = 'block';
           for(let x of mailVo.mavList) {

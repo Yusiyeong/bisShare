@@ -61,6 +61,10 @@ public interface MailDao {
 
 	int updateCheckStatusDraft(SqlSessionTemplate sst, MailVo mv);
 
+	void insertDraftAtt(SqlSessionTemplate sst, MailAttVo mav);
+
+	List<MailAttVo> selectDraftFilePath(SqlSessionTemplate sst, String mailNo);
+
 
 
 }

@@ -286,7 +286,18 @@ public class MailServiceImpl implements MailService{
 
 	@Override
 	public MailVo draftDetail(String mailNo) {
-		return md.selectDraftDetail(sst,mailNo);
+		
+		MailVo mv = md.selectDraftDetail(sst,mailNo);
+		List<MailAttVo> mavList = md.selectDraftFilePath(sst,mailNo);
+		
+		if(mavList.size() == 0) {
+			mavList = null;
+		}
+		if (mavList != null) {
+			mv.setMavList(mavList);
+		}
+		
+		return mv;
 	}
 
 
@@ -304,6 +315,12 @@ public class MailServiceImpl implements MailService{
 		}
 		
 		return result;
+	}
+
+
+	@Override
+	public void insertDraftAtt(MailAttVo mav) {
+		md.insertDraftAtt(sst,mav);
 	}
 
 }

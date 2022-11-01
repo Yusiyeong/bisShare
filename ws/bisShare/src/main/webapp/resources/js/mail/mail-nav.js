@@ -86,13 +86,14 @@ function passBtn() {
   const refInfo = document.querySelector('#detail-ref').innerHTML;
   const titleInfo = document.querySelector('#detail-title').innerHTML;
   const contentInfo = document.querySelector('#detail-content').innerText;
-  const fileInfo = document.querySelector('#receivedFiles');
+  const fileInfo = document.querySelector('#receivedFiles').innerHTML;
 
   mailDetail.style.display = 'none';
   mailWrite.style.display = 'block';
   document.querySelector('input[name=receive]').value = sendInfo;
   document.querySelector('input[name=reference]').value = refInfo;
   document.querySelector('input[name=title]').value = titleInfo;
+  document.querySelector('#upload-files').innerHTML = fileInfo;
 
   $('#mail-content').summernote('editor.insertText', contentInfo);
 }

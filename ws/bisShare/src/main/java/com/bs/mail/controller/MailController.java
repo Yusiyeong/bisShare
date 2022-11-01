@@ -81,10 +81,6 @@ public class MailController {
 			MailAttVo mav = new MailAttVo();
 			String[] arr = x.split("-");
 			
-			for(String y : arr) {
-				System.out.println(y);
-			}
-			
 			mav.setName(arr[0]);
 			mav.setOriginName(arr[1]);
 			
@@ -414,7 +410,7 @@ public class MailController {
 	 * 임시 보관하기
 	 */
 	@PostMapping("draft")
-	public String draftWrite(MailVo mv, HttpSession session, MultipartHttpServletRequest mhreq, HttpServletRequest req) {
+	public String draftWrite(MailVo mv, HttpSession session, String[] fileNames) {
 		
 		Gson gson = new Gson();
 		
@@ -430,6 +426,17 @@ public class MailController {
 		}.getType());
 
 		int result = ms.draftWrite(mv, recList, refList);
+		
+		
+		for(String x : fileNames) {
+			MailAttVo mav = new MailAttVo();
+			String[] arr = x.split("-");
+			
+			mav.setName(arr[0]);
+			mav.setOriginName(arr[1]);
+			
+			ms.insertDraftAtt(mav);
+		}
 		
 		if (result == 1) {
 			return "redirect:/mail/draft";
