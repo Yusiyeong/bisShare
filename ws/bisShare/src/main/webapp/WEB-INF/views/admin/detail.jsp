@@ -90,6 +90,7 @@
                            <div class="col">
                               <label class="visually" for="autoSizingSelect">직급</label>
                               <select class="form-select form-control" id="rank" name="rankNo">
+                              	 <option value="${vo.rankNo}">${vo.rankNo}</option>
                                  <option value="1">사원</option>
                                  <option value="2">주임</option>
                                  <option value="3">대리</option>
@@ -104,6 +105,7 @@
                            <div class="col">
                               <label class="visually" for="autoSizingSelect">부서</label>
                               <select class="form-select form-control" id="dept" name="deptNo">
+                              	 <option value="${vo.deptNo}">${vo.deptNo}</option>
                                  <option value="1">인사</option>
                                  <option value="2">개발</option>
                                  <option value="3">영업</option>

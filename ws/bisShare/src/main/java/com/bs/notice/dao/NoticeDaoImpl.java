@@ -17,8 +17,8 @@ public class NoticeDaoImpl implements NoticeDao{
 
 	// 페이징 처리
 	@Override
-	public int selectCountAll(SqlSessionTemplate sst) {
-		return sst.selectOne("noticeMapper.selectCountAll");
+	public int selectCountAll(SqlSessionTemplate sst, Map<String, String> map) {
+		return sst.selectOne("noticeMapper.selectCountAll", map);
 	}//selectCountAll
 
 	// 게시글 목록 조회
@@ -115,6 +115,7 @@ public class NoticeDaoImpl implements NoticeDao{
 	public int updateReplyCount(SqlSessionTemplate sst, String boardNo) {
 		return sst.update("noticeMapper.updateReplyCount", boardNo);
 	}//updateReplyCount
+
 
 
 

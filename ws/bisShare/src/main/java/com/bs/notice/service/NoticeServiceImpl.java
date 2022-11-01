@@ -29,8 +29,8 @@ public class NoticeServiceImpl implements NoticeService{
 	
 	// 페이징 처리
 	@Override
-	public int selectTotalCnt() {
-		return nd.selectCountAll(sst);
+	public int selectTotalCnt(Map<String, String> map) {
+		return nd.selectCountAll(sst, map);
 	}//selectTotalCnt
 
 	// 게시글 목록 조회
@@ -129,6 +129,7 @@ public class NoticeServiceImpl implements NoticeService{
 	public int updateReplyCount(String boardNo) {
 		return nd.updateReplyCount(sst, boardNo);
 	}//updateReplyCount
+
 
 
 

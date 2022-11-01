@@ -59,7 +59,7 @@ public class NoticeController {
       map.put("condition", condition);
 
       // 페이징 처리 //서비스 호출
-      int totalCount = ns.selectTotalCnt();
+      int totalCount = ns.selectTotalCnt(map);
 
       PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
       
