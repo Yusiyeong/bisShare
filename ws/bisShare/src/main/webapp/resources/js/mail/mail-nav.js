@@ -14,7 +14,8 @@ sendBtn.addEventListener('click',() => {
     document.querySelector('input[name=receive]').value = "";
     document.querySelector('input[name=reference]').value = "";
     document.querySelector('input[name=title]').value = "";
-  
+    document.querySelector('#upload-files').innerHTML = "";
+
     $('#mail-content').summernote('reset');
 })
 
