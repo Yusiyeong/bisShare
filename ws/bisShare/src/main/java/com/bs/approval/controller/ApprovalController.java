@@ -110,9 +110,13 @@ public class ApprovalController {
 	
 	//결재 디테일 화면
 	@GetMapping("detail/{adcNo}")
-	public String Detail(Model model, @PathVariable String adcNo) {
+	public String Detail(Model model, @PathVariable String adcNo, HttpSession session) {
 		
-		ApprovalVo vo = aprvService.getOneByNo(adcNo);
+		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
+		
+		ApprovalVo vo = aprvService.getOneByNo(adcNo, empVo.getEmpNo());
+		
+		System.out.println(vo);
 		model.addAttribute("avo", vo);
 		model.addAttribute("title", "결재 서류");
 		model.addAttribute("page", "approval/detail");
@@ -127,6 +131,22 @@ public class ApprovalController {
 		
 		String loginEmpNo = empVo.getEmpNo();
 		int result = aprvService.updateAprvStatus(avo, loginEmpNo);
+		
+		if(result==1) {
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+	
+	//합의 버튼 눌렀을때 ajax
+	@PostMapping("agree")
+	@ResponseBody
+	public String agree(ApprovalVo avo, HttpSession session) {
+		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
+		
+		String loginEmpNo = empVo.getEmpNo();
+		int result = aprvService.updateAgreeStatus(avo, loginEmpNo);
 		
 		if(result==1) {
 			return "ok";

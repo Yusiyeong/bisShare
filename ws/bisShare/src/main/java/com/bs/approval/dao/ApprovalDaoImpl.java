@@ -35,10 +35,12 @@ public class ApprovalDaoImpl implements ApprovalDao{
 		return sst.selectList("approvalMapper.getAllList");
 	}
 
+	//결재테이블 결재/합의/참조 업데이트
 	@Override
-	public int updateAprvStatus(SqlSessionTemplate sst, ApprovalVo avo) {
-		return sst.update("updateAprvStatus", avo);
+	public int updateStatus(SqlSessionTemplate sst, Map updateInfo) {
+		return sst.update("updateStatus", updateInfo);
 	}
+
 	
 	
 

@@ -24,9 +24,9 @@ public interface ApprovalDao {
 	//기안서 전체 조회
 	List<ApprovalVo> getListAll(SqlSessionTemplate sst);
 
-	//결재권자가 입력한 결재 업데이트 하기
-	int updateAprvStatus(SqlSessionTemplate sst, ApprovalVo avo);
-	
+	//결재/합의/참조 상태 업데이트 하기
+	int updateStatus(SqlSessionTemplate sst, Map updateInfo);
+
 	//임시저장한 기안서
 	
 }
