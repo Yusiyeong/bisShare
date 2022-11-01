@@ -51,6 +51,21 @@
 		)
 	</insert>
 	
+		<insert id="insertDraftAtt">
+		INSERT INTO DRAFT_ATT(
+			DRAFT_ATT_NO
+			, DRAFT_NO
+			, ORIGIN_NAME
+			, NAME
+		)
+		VALUES (
+			SEQ_DRAFT_ATT_NO.NEXTVAL
+			, SEQ_DRAFT_NO.CURRVAL
+			, #{originName}
+			, #{name}
+		)
+	</insert>
+	
 	<select id="selectAll" resultType="mv">
 		SELECT 
 		    MAIL_NO,
@@ -246,6 +261,17 @@
 			, ENROLL_DATE
 		FROM MAIL_ATT
 		WHERE MAIL_NO = #{mailNo}
+	</select>
+	
+	<select id="selectDraftFilePath" resultType="com.bs.mail.vo.MailAttVo">
+		SELECT 
+			DRAFT_ATT_NO MAIL_ATT_NO
+			, DRAFT_NO MAIL_NO
+			, NAME
+			, ORIGIN_NAME
+			, ENROLL_DATE
+		FROM DRAFT_ATT
+		WHERE DRAFT_NO = #{mailNo}
 	</select>
 	
 	<update id="updateCheckStatus">

@@ -139,15 +139,17 @@
 		<input class="form-control" placeholder="제목" name="title" required>
 	</div>
 	<div class="form-group custom-file mb-3">
-		<input type="file" class="form-control custom-file-input" id="customFile" name="file" multiple>
+		<input type="file" class="form-control custom-file-input" id="customFile" name="file" multiple onchange="fileUpload(this);">
 		<label class="custom-file-label" for="customFile">파일선택</label>
 	</div>
-	
+	<div class="form-group mb-3" id="upload-files">
+        
+    </div>
 	<div class="form-group">
 		<textarea id="mail-content" name="content"></textarea>
 	</div>
 
-    
+
 	<button type="submit" class="btn btn-primary btn-user btn-block">전송</button>
     <button type="button" class="btn btn-primary btn-user btn-block" onclick="saveDraft(this.form);">임시저장</button>
 </form>

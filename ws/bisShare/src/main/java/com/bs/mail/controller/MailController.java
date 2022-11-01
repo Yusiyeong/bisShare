@@ -8,8 +8,12 @@ import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +59,7 @@ public class MailController {
 	 * 메일 발송
 	 */
 	@PostMapping("write")
-	public String write(MailVo mv, HttpSession session, MultipartHttpServletRequest mhreq, HttpServletRequest req) {
+	public String write(MailVo mv, HttpSession session, String[] fileNames) {
 		
 		Gson gson = new Gson();
 		
@@ -71,27 +75,18 @@ public class MailController {
 		}.getType());
 
 		int result = ms.write(mv, recList, refList);
-
-		List<MultipartFile> fileList = mhreq.getFiles("file");
-		MailAttVo mav = new MailAttVo();
-		for (MultipartFile f : fileList) {
-			if (!f.isEmpty()) {
-
-				String origin = f.getOriginalFilename();
-				String path = req.getServletContext().getRealPath("/resources/upload/mail/");
-				String change = FileUploader.fileUpload(f, path);
-
-				try {
-					f.transferTo(new File(path + change));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				mav.setOriginName(origin);
-				mav.setName(change);
-				
-				ms.insertMailAtt(mav);
-			}
+		
+		
+		for(String x : fileNames) {
+			MailAttVo mav = new MailAttVo();
+			String[] arr = x.split("-");
+			
+			mav.setName(arr[0]);
+			mav.setOriginName(arr[1]);
+			
+			ms.insertMailAtt(mav);
 		}
+		
 		
 		if (result == 1) {
 			return "redirect:/mail/receive";
@@ -100,6 +95,48 @@ public class MailController {
 			return "redirect:/";
 		}
 
+	}
+	
+	/**
+	 *	파일 업로드 
+	 */
+	@PostMapping(value = "fileUpload", produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String fileUpload(@RequestParam(value = "files", required = false) MultipartFile[] files, HttpServletRequest req) {
+		Gson gson = new Gson();
+		String savePath = req.getServletContext().getRealPath("/resources/upload/mail/");
+		List<Map<String, String>> nameList = new ArrayList<Map<String,String>>();
+		
+		if(files != null) {	
+			for(MultipartFile f : files) {
+				String originName = f.getOriginalFilename();
+				String name = FileUploader.fileUploadWithChangName(f, savePath);
+				Map<String, String> fileNames = new HashMap<String, String>();
+				fileNames.put("originName", originName);
+				fileNames.put("name", name);
+				nameList.add(fileNames);
+			}
+		}
+		
+		return gson.toJson(nameList);
+	}
+	
+	/**
+	 *	파일 삭제 
+	 */
+	@PostMapping(value = "delFile", produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String mailWriteFileDelete(String fileName, HttpServletRequest req) {
+		String savePath = req.getServletContext().getRealPath("/resources/upload/mail/");
+		File file = new File(savePath+fileName);
+		
+		boolean result = file.delete();
+		if(result) {			
+			return "성공";
+		}else {
+			return "실패";
+		}
+		
 	}
 
 	/**
@@ -373,7 +410,7 @@ public class MailController {
 	 * 임시 보관하기
 	 */
 	@PostMapping("draft")
-	public String draftWrite(MailVo mv, HttpSession session, MultipartHttpServletRequest mhreq, HttpServletRequest req) {
+	public String draftWrite(MailVo mv, HttpSession session, String[] fileNames) {
 		
 		Gson gson = new Gson();
 		
@@ -389,6 +426,17 @@ public class MailController {
 		}.getType());
 
 		int result = ms.draftWrite(mv, recList, refList);
+		
+		
+		for(String x : fileNames) {
+			MailAttVo mav = new MailAttVo();
+			String[] arr = x.split("-");
+			
+			mav.setName(arr[0]);
+			mav.setOriginName(arr[1]);
+			
+			ms.insertDraftAtt(mav);
+		}
 		
 		if (result == 1) {
 			return "redirect:/mail/draft";

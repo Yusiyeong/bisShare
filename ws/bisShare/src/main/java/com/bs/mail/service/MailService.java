@@ -43,4 +43,6 @@ public interface MailService {
 	MailVo draftDetail(String mailNo);
 
 	int delCheckedDraft(List<String> checkArr, EmployeeVo loginVo);
+
+	void insertDraftAtt(MailAttVo mav);
 }

@@ -142,5 +142,15 @@ public class MailDaoImpl implements MailDao{
 		return sst.update("mailMapper.updateCheckStatusDraft",mv);
 	}
 
+	@Override
+	public void insertDraftAtt(SqlSessionTemplate sst, MailAttVo mav) {
+		sst.insert("mailMapper.insertDraftAtt", mav);
+	}
+
+	@Override
+	public List<MailAttVo> selectDraftFilePath(SqlSessionTemplate sst, String mailNo) {
+		return sst.selectList("mailMapper.selectDraftFilePath",mailNo);
+	}
+
 
 }
