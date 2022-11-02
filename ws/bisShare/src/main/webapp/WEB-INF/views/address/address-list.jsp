@@ -103,16 +103,21 @@
 
 	#label{
 		flex-direction: column;
-		margin-left: 20px;
+		margin-left: 40px;
 	}
 	
 	#boss{
-		margin-left: 10px;
+		margin-left: 20px;
 	}
 	
-	#n1,#n2,#n3{
+	#n0{
 		margin-left: 10px;
 	}
+
+	#n1,#n2,#n3{
+		margin-left: 30px;
+	}
+
 </style>
 
 
@@ -145,22 +150,29 @@
 				    			</c:forEach> --%>
 				    			
 								<ul class="tree">
-								  <li>
-								    <input type="checkbox" id="root">
-								    <label for="root">비즈쉐어 (테스트용)</label>
+									<li>
+										<input type="checkbox" id="root">
+								    	<label for="root">비즈쉐어</label>
 								    <ul>
-								      <li>
-								      	<c:forEach var="addr" items="${voList}" varStatus="st">
-							          	<input type="checkbox" id="node0">
-								      	<c:if test="${addr.rankName eq '대표'}">
-								      
-								          	<div id="boss">
-									      		<label for="node0" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
-								          	</div>
-								          	
-							          	</c:if>
-							          	</c:forEach>
-							          </li> 
+										<li>
+											<input type="checkbox" id="node0">
+								        	<label id="n0" for="node0">임원</label>
+											<ul>
+												<li>
+													<c:forEach var="addr" items="${voList}" varStatus="st">
+													<input type="checkbox" id="node0">
+													<c:if test="${addr.rankName eq '대표이사' || addr.rankName eq '이사'}">
+											
+														<div id="boss">
+															<label for="node00" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
+														</div>
+													
+													</c:if>
+													</c:forEach>
+											  </li> 
+											</ul>
+										</li>
+								    	
 								      
 								      <li>
 								        <input type="checkbox" id="node1">
@@ -168,7 +180,7 @@
 								        <ul>
 								          <li>
 								          	<c:forEach var="addr" items="${voList}" varStatus="st">
-								           	 <c:if test="${addr.deptName eq '인사'}">
+								           	 <c:if test="${addr.deptName eq '인사' && addr.rankName ne '대표이사' and addr.rankName ne '이사'}">
 									           	 <input type="checkbox" id="node11">
 												 <div id="label">
 													 <label for="node11" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
@@ -178,40 +190,60 @@
 				    						</c:forEach>
 								          </li> 
 								        </ul>
-								       </li>
-								      <li>
+								    	</li>
+
+								    	<li>
 								        <input type="checkbox" id="node2">
 								        <label id="n2" for="node2">개발부</label>
 								        <ul>
-								          <li>
-								          	<c:forEach var="addr" items="${voList}" varStatus="st">
-								          	 <c:if test="${addr.deptName eq '개발'}">
-								           	 <input type="checkbox" id="node21">
-											 <div id="label">
-												 <label for="node21" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
-											 </div>
-											 </c:if>
-				    						</c:forEach>
-								          </li> 
-								        </ul> <!-- node 2x -->
-								      <li>
-								        <input type="checkbox" id="node3">
-								        <label id="n3" for="node3">영업부</label>
-								        <ul>
-								          <li>
-								          	<c:forEach var="addr" items="${voList}" varStatus="st">
-								          	 <c:if test="${addr.deptName eq '영업' and addr.rankName ne '대표'}" >
-									            <input type="checkbox" id="node31">
+								        	<li>
+								          		<c:forEach var="addr" items="${voList}" varStatus="st">
+								          		<c:if test="${addr.deptName eq '개발' && addr.rankName ne '대표이사' and addr.rankName ne '이사'}">
+								           		<input type="checkbox" id="node21">
 												<div id="label">
-													<label for="node31" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
+													<label for="node21" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
 												</div>
-											 </c:if>
-				    						</c:forEach>
-								          </li>
+												</c:if>
+				    							</c:forEach>
+								        	</li> 
+								        </ul> <!-- node 2x -->
+										</li>
+								    	<li>
+								    		<input type="checkbox" id="node3">
+								    		<label id="n3" for="node3">영업부</label>
+								        <ul>
+								        	<li>
+								          		<c:forEach var="addr" items="${voList}" varStatus="st">
+								          		<c:if test="${addr.deptName eq '영업' && addr.rankName ne '대표이사' and addr.rankName ne '이사'}" >
+									            	<input type="checkbox" id="node31">
+													<div id="label">
+														<label for="node31" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
+													</div>
+												</c:if>
+				    							</c:forEach>
+								        	</li>
 								        </ul> <!-- node 3x -->
-								      </li>
-								    </ul> <!-- node1,2,3 -->
-								  </li> <!-- tree -->
+								    	</li>
+
+										<li>
+								    		<input type="checkbox" id="node4">
+								    		<label id="n3" for="node4">경영부</label>
+								        <ul>
+								        	<li>
+								          		<c:forEach var="addr" items="${voList}" varStatus="st">
+								          		<c:if test="${addr.deptName eq '경영' && addr.rankName ne '대표이사' and addr.rankName ne '이사'}" >
+									            	<input type="checkbox" id="node41">
+													<div id="label">
+														<label for="node41" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
+													</div>
+												</c:if>
+				    							</c:forEach>
+								        	</li>
+								        </ul> <!-- node 4x -->
+								    	</li>
+
+								    </ul> <!-- node1,2,3,4 -->
+									</li> <!-- tree -->
 								</ul> <!-- tree -->
 							</tbody>
                         </table>
