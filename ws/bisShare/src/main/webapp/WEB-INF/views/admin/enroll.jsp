@@ -100,7 +100,7 @@
       
       <div class="card-body">
          <!--form start-->
-         <form action="${root}/employee/enroll" method="post" enctype="multipart/form-data">
+         <form action="${root}/employee/enroll" method="post" enctype="multipart/form-data" onsubmit="return check()";>
          <!--start-->
          <div class="">
             <div class="row row-cols-2">
@@ -140,19 +140,15 @@
                         <div class="row">
                            <div class="col">
                               <label class="visually" for="autoSizingSelect">회사명</label>
-                              <select name="companyNo" class="form-select form-control" id="autoSizingSelect" >
-                                 <option value="1" selected>체크마인</option>
-                                 <option value="2">마카데미아</option>
-                                 <option value="3">에브리웨어</option>
-                              </select>
-                              
+                              <input type="text" value="비즈쉐어" class="form-control" readonly>
+                              <input type="hidden" name="companyNo" value="1" class="form-control" readonly>
                            </div>
                         </div>
 
 						<div class="row" style="margin-top: 15px;">
 							<div class="col">
 							   <label class="visually" for="autoSizingSelect">회사 주소</label>
-							   <input type="text" name="compAddress" class="form-control" placeholder="서울">
+							   <input type="text" value="서울" class="form-control" readonly>
 							</div>
 						</div>
 
@@ -160,14 +156,15 @@
                            <div class="col">
                               <label class="visually" for="autoSizingSelect">직급</label>
                               <select name="rankNo" class="form-select form-control" id="autoSizingSelect">
-                                 <option value="1" selected>사원</option>
+                                 <option value="0" selected>임원</option>
+                                 <option value="1">사원</option>
                                  <option value="2">주임</option>
                                  <option value="3">대리</option>
                                  <option value="4">과장</option>
                                  <option value="5">차장</option>
                                  <option value="6">부장</option>
                                  <option value="7">이사</option>
-                                 <option value="8">대표</option>
+                                 <option value="8">대표이사</option>
                               </select>
                            </div>
       
@@ -206,20 +203,26 @@
                                  <label class="visually" for="autoSizingSelect">아이디</label>
                                  <input type="text" name="id" class="form-control" placeholder="아이디를 입력하세요.">
                               </div>
+                              
+                              <div class="col" style="margin-top: 35px;">
+								<input type="button" class="btn btn-outline-primary btn-sm" onclick="checkId();" value="중복확인">
+								<input type="hidden" value="o" id="idDup">      
+                              </div>
 
                               <div class="col">
                                  <label class="visually" for="autoSizingSelect">닉네임</label>
                                  <input type="text" name="nick" class="form-control" placeholder="닉네임 입력하세요.">
                               </div>
 
-							  <div class="col">
-                                 <label class="visually" for="autoSizingSelect">임시 비밀번호</label>
-                                 <input type="text" name="pwd" class="form-control" placeholder="비밀번호를 입력하세요.">
+                              <div class="col" style="margin-top: 35px;">
+								<input type="button" class="btn btn-outline-primary btn-sm" onclick="checkNick();" value="중복확인">
+								<input type="hidden" value="o" id="nickDup">      
                               </div>
                               
                            </div>
                         
                         <!--사원정보 내부end-->
+                              
                         <!--사원정보 내부start-->
                            
                            <div class="row" style="margin-top: 15px;">
@@ -235,6 +238,11 @@
                                  <input type="tel" name="phone" class="form-control" placeholder="숫자만 입력하세요.">
                               </div>
 
+ 							  <div class="col">
+		                            <label class="visually" for="autoSizingSelect">임시 비밀번호</label>
+		                            <input type="text" name="pwd" class="form-control" placeholder="비밀번호를 입력하세요.">
+	                          </div>
+	                        
                            </div>
                         
                         <!--사원정보 내부end-->
@@ -340,4 +348,92 @@
       }
 
    }
+</script>
+
+<script>
+function check(){
+	
+	// 아이디 중복확인 체크
+    if(document.querySelector('#idDup').value == 'o'){
+        alert('아이디 중복확인을 진행해주세요.');
+        return false;
+    }
+	
+	// 닉네임 중복확인 체크
+    if(document.querySelector('#nickDup').value == 'o'){
+        alert('닉네임 중복확인을 진행해주세요.');
+        return false;
+    }
+    
+    return true;
+    
+}
+</script>
+
+<script>
+// 아이디 중복확인
+function checkId(){
+	
+	 const idDup = document.querySelector('#idDup');
+     const userId  = document.querySelector('input[name=id]').value;
+     
+
+     $.ajax({
+         url : "${root}/employee/idDup",
+         method : 'POST',
+         data : {memberId : userId} ,	
+         success : function(data){		
+             
+             if(data == 0){
+                 // 중복X - 아이디 사용 가능
+                 idDup.value = 'x';    
+                 alert('사용 가능 한 아이디 입니다.');
+             }else{
+            	// 중복O - 아이디 사용 불가
+                idDup.value = 'o';    
+                alert('사용 불가 한 아이디 입니다.');
+             }
+             
+         },
+         error : function(){
+             alert('ajax 통신 실패');
+         },
+     });
+     
+	
+}
+</script>
+
+<script>
+// 닉네임 중복확인
+function checkNick(){
+	
+	 const nickDup = document.querySelector('#nickDup');
+     const userNick  = document.querySelector('input[name=nick]').value;
+     
+
+     $.ajax({
+         url : "${root}/employee/nickDup",
+         method : 'POST',
+         data : {memberNick : userNick} ,	
+         success : function(data){		
+             
+             if(data == 0){
+                 // 중복X - 닉네임 사용 가능
+                 nickDup.value = 'x';    
+                 alert('사용 가능 한 닉네임 입니다.');
+             }else{
+            	// 중복O - 닉네임 사용 불가
+                nickDup.value = 'o';    
+                alert('사용 불가 한 닉네임 입니다.');
+             }
+             
+         },
+         error : function(){
+             alert('ajax 통신 실패');
+         },
+     });
+     
+	
+}
 </script>

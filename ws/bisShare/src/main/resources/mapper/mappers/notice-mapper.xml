@@ -5,7 +5,7 @@
 
 	<!--페이징 처리 -->
 	<select id="selectCountAll" resultType="int">
-		SELECT COUNT(BOARD_NO)
+	 SELECT COUNT(BOARD_NO)
 		FROM NOTICE_BOARD
 		WHERE STATUS = 'Y'
 	</select>

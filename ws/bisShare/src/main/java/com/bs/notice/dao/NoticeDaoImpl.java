@@ -17,8 +17,8 @@ public class NoticeDaoImpl implements NoticeDao{
 
 	// 페이징 처리
 	@Override
-	public int selectCountAll(SqlSessionTemplate sst, Map<String, String> map) {
-		return sst.selectOne("noticeMapper.selectCountAll", map);
+	public int selectCountAll(SqlSessionTemplate sst) {
+		return sst.selectOne("noticeMapper.selectCountAll");
 	}//selectCountAll
 
 	// 게시글 목록 조회

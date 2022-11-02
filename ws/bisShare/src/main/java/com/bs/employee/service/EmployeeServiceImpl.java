@@ -55,6 +55,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return md.getList(sst);
 	}
 
+	// 아이디 중복체크
+	@Override
+	public int idDup(String memberId) {
+		return md.idDup(sst, memberId);
+	}//idDup
+
+	// 닉네임 중복
+	@Override
+	public int nickDup(String memberNick) {
+		return md.nickDup(sst, memberNick);
+	}//nickDup
+
 
 	
 }//class

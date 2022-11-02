@@ -106,6 +106,7 @@
                               <label class="visually" for="autoSizingSelect">부서</label>
                               <select class="form-select form-control" id="dept" name="deptNo">
                               	 <option value="${vo.deptNo}">${vo.deptNo}</option>
+                              	 <option value="0">임원</option>
                                  <option value="1">인사</option>
                                  <option value="2">개발</option>
                                  <option value="3">영업</option>

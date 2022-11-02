@@ -9,9 +9,9 @@
 <c:remove var="alertMsg" scope="session"/>
 
 <c:if test="${not empty alertMsg}">
-	 <script>
-	 	alert('${alertMsg}');
-	 </script>
+    <script>
+       alert('${alertMsg}');
+    </script>
 </c:if>
   
 <style>
@@ -35,7 +35,7 @@ a:hover { text-decoration:none !important }
                 
                 <!-- 글쓰기 버튼 start  -->
                 <c:if test="${not empty loginVo}">
-	               <button class="btn btn-outline-primary btn-sm" style="position: absolute;" onclick = "location.href ='${root}/notice/write'">글쓰기</button>            
+                  <button class="btn btn-outline-primary btn-sm" style="position: absolute;" onclick = "location.href ='${root}/notice/write'">글쓰기</button>            
                 </c:if>
                 <!-- 글쓰기 버튼 end  -->
                 
@@ -44,10 +44,10 @@ a:hover { text-decoration:none !important }
                     <!--검색버튼start-->
                     <div style="height: 50px;">
                         <div style="float: right;">
-		                     <select name="condition" style="height:30px;">
-		                        <option value="title">제목</option>
-		                        <option value="nick">작성자</option>
-		                     </select>
+                           <select name="condition" style="height:30px;">
+                              <option value="title">제목</option>
+                              <option value="nick">작성자</option>
+                           </select>
          
                             <input type="text" name="keyword" value="${keyword}">
                             <input type="submit" value="검색" class="btn-primary" style="border-radius: 3px;" >
@@ -86,11 +86,11 @@ a:hover { text-decoration:none !important }
                                    <tr>
                                        <td class="text-center">${x.num}</td>
                                        <td>
-	                                       <a href="${root}/notice/detail/${x.boardNo}">${x.title}
-		                                       	<c:if test="${x.replyCount ne 0}">
-													<small><b>[&nbsp;<c:out value="${x.replyCount}"/>&nbsp;]</b></small>
-												</c:if>
-	                                       </a>
+                                          <a href="${root}/notice/detail/${x.boardNo}">${x.title}
+                                                <c:if test="${x.replyCount ne 0}">
+                                       <small><b>[&nbsp;<c:out value="${x.replyCount}"/>&nbsp;]</b></small>
+                                    </c:if>
+                                          </a>
                                        </td>
                                        <td class="text-center">${x.writer}</td>
                                        <td class="text-center">${x.enrollDate}</td>
@@ -136,7 +136,7 @@ a:hover { text-decoration:none !important }
        
                                <c:if test="${pv.currentPage ne pv.maxPage}"> 
                                  <li class="page-item">
-                          			<a href="${root}/notice/list/${pv.currentPage+1}" class="page-link">Next</a>
+                                   <a href="${root}/notice/list/${pv.currentPage+1}" class="page-link">Next</a>
                                  </li>
                               </c:if>
        

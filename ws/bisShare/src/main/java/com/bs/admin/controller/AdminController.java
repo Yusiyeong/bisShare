@@ -40,6 +40,9 @@ public class AdminController {
 		String keyword = req.getParameter("keyword");
 		String condition = req.getParameter("condition");
 		
+		model.addAttribute("keyword", keyword);	// 검색
+		model.addAttribute("condition", condition);	// 검색
+		
 		// 데이터 뭉치기(검색)
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("keyword", keyword);
@@ -52,7 +55,7 @@ public class AdminController {
 				
 		model.addAttribute("title", "MEMBER LIST");
 		model.addAttribute("page", "admin/list");
-
+		 
 		return "layout/template";
 		
 	}//list
@@ -70,6 +73,9 @@ public class AdminController {
 		map.put("keyword", keyword);
 		map.put("condition", condition);
 				
+		model.addAttribute("keyword", keyword);	// 검색
+		model.addAttribute("condition", condition);	// 검색
+		
 		// 서비스 호출
 		List<EmployeeVo> voList = as.inList(map);
 		model.addAttribute("voList", voList);
@@ -77,6 +83,7 @@ public class AdminController {
 		model.addAttribute("title", "MEMBER LIST");
 		model.addAttribute("page", "admin/inList");
 		
+	    
 		return "layout/template";
 		
 	}//list
@@ -93,14 +100,16 @@ public class AdminController {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("keyword", keyword);
 		map.put("condition", condition);
-				
+		
+		model.addAttribute("keyword", keyword);	// 검색
+		model.addAttribute("condition", condition);	// 검색
+		
 		// 서비스 호출
 		List<EmployeeVo> voList = as.outList(map);
 		model.addAttribute("voList", voList);
 				
 		model.addAttribute("title", "MEMBER LIST");
 		model.addAttribute("page", "admin/outList");
-
 		
 		return "layout/template";
 		

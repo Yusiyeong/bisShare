@@ -57,6 +57,9 @@ public class FreeController {
 	      map.put("keyword", keyword);
 	      map.put("condition", condition);
 	      
+	      model.addAttribute("keyword", keyword);	// 검색
+		  model.addAttribute("condition", condition);	// 검색
+			
 	      // 페이징 처리 //서비스 호출
 	      int totalCount = fs.selectTotalCnt();
 

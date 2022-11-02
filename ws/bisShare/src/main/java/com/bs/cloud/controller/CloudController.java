@@ -64,6 +64,9 @@ public class CloudController {
 	      map.put("keyword", keyword);
 	      map.put("condition", condition);
 	      
+	      model.addAttribute("keyword", keyword);	// 검색
+		  model.addAttribute("condition", condition);	// 검색
+			
 	      // 페이징 처리 //서비스 호출
 	      int totalCount = cs.selectTotalCnt();
 	      PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
