@@ -76,17 +76,17 @@ public class MailController {
 
 		int result = ms.write(mv, recList, refList);
 		
-		
-		for(String x : fileNames) {
-			MailAttVo mav = new MailAttVo();
-			String[] arr = x.split("-");
-			
-			mav.setName(arr[0]);
-			mav.setOriginName(arr[1]);
-			
-			ms.insertMailAtt(mav);
+		if(fileNames != null) {
+			for(String x : fileNames) {
+				MailAttVo mav = new MailAttVo();
+				String[] arr = x.split("-");
+				
+				mav.setName(arr[0]);
+				mav.setOriginName(arr[1]);
+				
+				ms.insertMailAtt(mav);
+			}
 		}
-		
 		
 		if (result == 1) {
 			return "redirect:/mail/receive";
