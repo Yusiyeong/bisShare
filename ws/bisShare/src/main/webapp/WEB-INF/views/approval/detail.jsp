@@ -252,15 +252,15 @@
                 , type : "post"
                 , data : {
                         adcNo : ${ avo.adcNo }
-                		, aprverStatus : '${ avo.aprverStatus }'
-               			, aprverEmpNo : '${ avo.aprverEmpNo }' 
+                		, agreeStatus : '${ avo.agreeStatus }'
+               			, agreeEmpNo : '${ avo.agreeEmpNo }' 
                 }
                 , success : (result) => {
                     if(result == 'ok'){
-                        alert('결재 성공');
+                        alert('합의 성공');
                         location.reload();
                     } else{
-                        alert('결재 실패')
+                        alert('합의 실패')
                     }
                 }
                 , error : ()=>{

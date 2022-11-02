@@ -51,11 +51,12 @@
     /* 참조라인 css */
     #agree-line-area, #ref-line-area{
         width: 100%;
-        height: 30px;
+        height: 50px;
         /* border: 1px solid black; */
         box-sizing: border-box;
         display: grid;
         grid-template-columns: repeat(8, 1fr);
+        line-height: 40px;
     }
     #agree-line-area>div, #ref-line-area>div{
         border: 1px solid grey;
@@ -148,7 +149,7 @@
             <!-- 합의 라인 -->
             <div id="agree-line-area">
                 <div id="" class="bg-gray-200">
-                    <div id="">합의<button id="agree-line-select" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#agree-line-Modal">+</button></div>
+                    <div id="">합의    <button id="agree-line-select" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#agree-line-Modal">+</button></div>
                 </div>
                 <div>
                     <div class=""></div>
@@ -175,7 +176,7 @@
             <!-- 참조 라인 -->
             <div id="ref-line-area">
                 <div id="" class="bg-gray-200">
-                    <div id="">참조<button id="ref-line-select" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#ref-line-Modal">+</button></div>
+                    <div id="">참조    <button id="ref-line-select" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#ref-line-Modal">+</button></div>
                 </div>
                 <div>
                     <div class=""></div>
@@ -240,6 +241,8 @@
     }
     .select-dept-list-area{
         border: 1px solid green;
+        overflow: scroll;
+        height: 450px;
     }
     .select-dept-list-area>div{
         display: grid;
