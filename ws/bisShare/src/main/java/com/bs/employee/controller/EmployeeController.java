@@ -42,7 +42,7 @@ public class EmployeeController {
 		}
 		
 		EmployeeVo loginVo = ms.login(ev);
-		
+		System.out.println(loginVo);
 		if (loginVo != null) {
 			session.setAttribute("loginVo", loginVo);
 			return "redirect:/main";
@@ -52,6 +52,14 @@ public class EmployeeController {
 		}
 		
 	}//login
+	
+	//로그아웃
+	@GetMapping("logout")
+	public String logout(Model model, HttpSession session) {
+		session.removeAttribute("loginVo");
+		session.setAttribute("alertMsg","로그아웃성공");
+		return "redirect:/";
+	}//logout
 	
 	// 사원등록(진행)
 	@PostMapping("enroll")

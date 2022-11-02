@@ -20,7 +20,7 @@
     #approve-submit-area>button:last-child{margin-left: 10px;}
     #apprve-write-outer{width: 80vw;height: 100%;}
     #stamp-area>td{height: 150px;}
-    input[name=title]{width: 100%;}
+    input[name=adcName]{width: 100%;}
     td{text-align: center;}
     /* 결재라인 css */
     #approve-line-area{
@@ -93,8 +93,7 @@
                         </select>
                     </td>
                     <td class="bg-gray-200 text-gray-900">작성자</td>
-                    <!-- loginMember에서 가져온 값으로 대체 -->
-                    <td>IT개발팀 주임 박한솔</td> 
+                    <td>${loginVo.deptName}  ${loginVo.rankName}  ${loginVo.nick}</td> 
                 </tr>
             </table>
             <div class="py-3">
@@ -233,14 +232,14 @@
         grid-template-columns: 4.5fr 1fr 4.5fr;
     }
     .non-select-emp-area, .select-emp-area{
-        border: 0.5px dotted red;
+        border: 0.5px solid darkgrey;
         box-sizing: border-box;
         height: 100%;
         display: grid;
-        grid-template-rows: 1fr 9fr;
+        grid-template-rows: 0.5fr 9.5fr;
     }
     .select-dept-list-area{
-        border: 1px solid green;
+        border: 0.5px solid darkgrey;
         overflow: scroll;
         height: 450px;
     }
@@ -286,9 +285,10 @@
                         <div>
                             <label for="select-dept">부서 선택</label>
                             <select name="selectDept" id="select-dept">
-                                <option value="1">인사</option>
-                                <option value="2">개발</option>
-                                <option value="3">영업</option>
+                            	<option value="all">전체</option>
+                            	<c:forEach items="${ deptList }" var="dl">
+	                                <option value="${ dl.deptNo }">${ dl.deptName }</option>
+                            	</c:forEach>
                             </select>
                         </div>
                         <div id="select-dept-list-area" class="select-dept-list-area">
@@ -299,14 +299,17 @@
                                 <div>이름</div>
                             </div>
                             <c:forEach items="${empList}" var="l">
-	                            <div class="table table-bordered">
-	                                <div>
-                                        <input class="non-added" name="move-check" type="checkbox">
-                                        <input type="hidden" name="empNo" value="${l.value}">
-                                    </div>
-	                                <div>${l.deptNo}</div>
-	                                <div>${l.rankNo}</div>
-	                                <div>${l.nick}</div>
+	                            <div class="table table-bordered aprver-selection">
+	                            	<c:if test="${ loginVo.empNo ne l.value }"> <!-- 작성자는 뜰필요 없음 -->
+		                                <div>
+	                                        <input class="non-added" name="move-check" type="checkbox">
+	                                        <input type="hidden" name="empNo" value="${l.value}">
+	                                        <input type="hidden" class="aprv-deptNo" name="deptNo" value="${l.deptNo}">
+	                                    </div>
+		                                <div>${l.deptName}</div>
+		                                <div>${l.rankName}</div>
+		                                <div>${l.nick}</div>
+	                            	</c:if>
 	                            </div>
                             </c:forEach>
                         </div>
@@ -324,6 +327,7 @@
                     </div>
                     <div id="select-emp-area" class="select-emp-area">
                         <div>
+                        	<span>선택된 결재권자</span>
                         </div>
                         <div id="select-dept-list-area" class="select-dept-list-area">
                             <div class="table table-bordered">
@@ -363,9 +367,10 @@
                         <div>
                             <label for="select-dept">부서 선택</label>
                             <select name="selectDept" id="select-dept">
-                                <option value="1">인사</option>
-                                <option value="2">개발</option>
-                                <option value="3">영업</option>
+                                <option value="all">전체</option>
+                            	<c:forEach items="${ deptList }" var="dl">
+	                                <option value="${ dl.deptNo }">${ dl.deptName }</option>
+                            	</c:forEach>
                             </select>
                         </div>
                         <div id="agree-select-dept-list-area" class="select-dept-list-area">
@@ -380,6 +385,7 @@
 	                                <div>
                                         <input class="agree-non-added" name="move-check" type="checkbox">
                                         <input type="hidden" name="agree-empNo" value="${l.value}">
+                                        <input type="hidden" class="agree-deptNo" name="deptNo" value="${l.deptNo}">
                                     </div>
 	                                <div>${l.deptNo}</div>
 	                                <div>${l.rankNo}</div>
@@ -401,6 +407,7 @@
                     </div>
                     <div id="agree-select-emp-area" class="select-emp-area">
                         <div>
+                        	<span>선택된 합의자</span>
                         </div>
                         <div id="agree-select-dept-list-area" class="select-dept-list-area">
                             <div class="table table-bordered">
@@ -440,9 +447,10 @@
                         <div>
                             <label for="select-dept">부서 선택</label>
                             <select name="selectDept" id="select-dept">
-                                <option value="1">인사</option>
-                                <option value="2">개발</option>
-                                <option value="3">영업</option>
+                                <option value="all">전체</option>
+                            	<c:forEach items="${ deptList }" var="dl">
+	                                <option value="${ dl.deptNo }">${ dl.deptName }</option>
+                            	</c:forEach>
                             </select>
                         </div>
                         <div id="ref-select-dept-list-area" class="select-dept-list-area">
@@ -457,6 +465,7 @@
 	                                <div>
                                         <input class="ref-non-added" name="move-check" type="checkbox">
                                         <input type="hidden" name="ref-empNo" value="${l.value}">
+                                        <input type="hidden" class="ref-deptNo" name="deptNo" value="${l.deptNo}">
                                     </div>
 	                                <div>${l.deptNo}</div>
 	                                <div>${l.rankNo}</div>
@@ -478,6 +487,7 @@
                     </div>
                     <div id="ref-select-emp-area" class="select-emp-area">
                         <div>
+                        	<span>선택된 참조자</span>
                         </div>
                         <div id="ref-select-dept-list-area" class="select-dept-list-area">
                             <div class="table table-bordered">
@@ -520,6 +530,8 @@
     </div>
 </div>      
 
+
+<!-- JS start -->
 <script type="text/javascript">
 	const pbtn = document.querySelector('#select-plus-btn');
     const mbtn = document.querySelector('#select-minus-btn');
@@ -535,6 +547,7 @@
         // 체크된 만큼 값 넘겨줄거
         for(let i = 0; i < checkbox.length; i++){
             if(checkbox[i].checked==true){
+                checkbox[i].checked = false;
                 //옮겨질것 클래스 명 미리 변경 non-added -> added
                 $(NSEA).children().eq(i+1).children().first().children().first().attr('class','added');
                 //select-area로 넘겨버리기
@@ -551,6 +564,7 @@
         // 체크된 만큼 값 넘겨줄거
         for(let i = 0; i < checkbox.length; i++){
             if(checkbox[i].checked==true){
+                checkbox[i].checked = false;
                 //옮겨질것 클래스 명 미리 변경 added -> non-added
                 $(SEA).children().eq(i+1).children().first().children().first().attr('class','non-added');
                 //non-select-area로 넘기기
@@ -565,11 +579,16 @@
     //선택 다 하고 선택 완료 눌렀을 때
     $(cbtn).click(()=>{
         //넘겨줄 배열
-        const eNos = [];
-        const eDepts = [];
-        const eNames = [];
-        const eRanks = [];
+        let eNos = [];
+        let eDepts = [];
+        let eNames = [];
+        let eRanks = [];
         //반복문 사용 -> 선택된 input에서 사원 번호만 가져옴
+        for(let i = 0; i < 8; ++i){
+            $('#approve-line-area').children().eq(i+1).children().remove('input');
+            $('#approve-line-area').children().eq(i+1).children().eq(0).text('');
+            $('#approve-line-area').children().eq(i+1).children().eq(2).text('');
+        }
         $(".added+input[name='empNo']").each(function(i){
             eNos.push($(".added+input[name='empNo']").eq(i).attr("value"));
             eDepts.push($(".added+input[name='empNo']").eq(i).parent().parent().children().eq(1).text());
@@ -579,6 +598,21 @@
             $('#approve-line-area').children().eq(i+1).children().eq(0).text(eRanks[i]);
             $('#approve-line-area').children().eq(i+1).children().eq(2).text(eNames[i]);
         });
+
+        // 합의자랑 참조자에서 가려버리기
+        
+        let result = $('#ref-select-area #select-dept').val();
+        let div = document.getElementsByClassName('ref-deptNo');
+        for(let i = 0; i < div.length; ++i){
+            if($(div[i]).val() != result){
+                $(div[i]).parent().parent().hide();
+                if(result=='all'){
+                    $(div[i]).parent().parent().show();    
+                }
+            } else{
+                $(div[i]).parent().parent().show();
+            }
+        }
         
     })
     
@@ -681,6 +715,7 @@
         // 체크된 만큼 값 넘겨줄거
         for(let i = 0; i < checkbox.length; i++){
             if(checkbox[i].checked==true){
+                checkbox[i].checked = false;
                 //옮겨질것 클래스 명 미리 변경 non-added -> added
                 $(agree_NSEA).children().eq(i+1).children().first().children().first().attr('class','agree-added');
                 //select-area로 넘겨버리기
@@ -697,6 +732,7 @@
         // 체크된 만큼 값 넘겨줄거
         for(let i = 0; i < checkbox.length; i++){
             if(checkbox[i].checked==true){
+                checkbox[i].checked = false;
                 //옮겨질것 클래스 명 미리 변경 added -> non-added
                 $(agree_SEA).children().eq(i+1).children().first().children().first().attr('class','agree-non-added');
                 //non-select-area로 넘기기
@@ -714,12 +750,17 @@
         const eNos = [];
         const eNames = [];
         //반복문 사용 -> 선택된 input에서 사원 번호만 가져옴
+        for(let i = 0; i < 8; ++i){
+            $('#agree-line-area').children().eq(i+1).children().remove('input');
+            $('#agree-line-area').children().eq(i+1).children().eq(0).text('');
+        }
         $(".agree-added+input[name='agree-empNo']").each(function(i){
             eNos.push($(".agree-added+input[name='agree-empNo']").eq(i).attr("value"));
             eNames.push($(".agree-added+input[name='agree-empNo']").eq(i).parent().parent().children().eq(3).text());
             $('#agree-line-area').children().eq(i+1).append("<input type='hidden' name='agree-empNo' value='"+ eNos[i] +"'>");
             $('#agree-line-area').children().eq(i+1).children().eq(0).text(eNames[i]);
         });
+
         
     })
 </script>
@@ -745,6 +786,7 @@
         // 체크된 만큼 값 넘겨줄거
         for(let i = 0; i < checkbox.length; i++){
             if(checkbox[i].checked==true){
+                checkbox[i].checked = false;
                 //옮겨질것 클래스 명 미리 변경 non-added -> added
                 $(ref_NSEA).children().eq(i+1).children().first().children().first().attr('class','ref-added');
                 //select-area로 넘겨버리기
@@ -761,6 +803,7 @@
         // 체크된 만큼 값 넘겨줄거
         for(let i = 0; i < checkbox.length; i++){
             if(checkbox[i].checked==true){
+                checkbox[i].checked = false;
                 //옮겨질것 클래스 명 미리 변경 added -> non-added
                 $(ref_SEA).children().eq(i+1).children().first().children().first().attr('class','ref-non-added');
                 //non-select-area로 넘기기
@@ -778,13 +821,68 @@
         const eNos = [];
         const eNames = [];
         //반복문 사용 -> 선택된 input에서 사원 번호만 가져옴
+        for(let i = 0; i < 8; ++i){
+            $('#ref-line-area').children().eq(i+1).children().remove('input');
+            $('#ref-line-area').children().eq(i+1).children().eq(0).text('');
+        }
         $(".ref-added+input[name='ref-empNo']").each(function(i){
             eNos.push($(".ref-added+input[name='ref-empNo']").eq(i).attr("value"));
             eNames.push($(".ref-added+input[name='ref-empNo']").eq(i).parent().parent().children().eq(3).text());
             $('#ref-line-area').children().eq(i+1).append("<input type='hidden' name='ref-empNo' value='"+ eNos[i] +"'>");
             $('#ref-line-area').children().eq(i+1).children().eq(0).text(eNames[i]);
         });
-        
     })
+
 </script>
+
+<!-- 부서별로(셀렉트 박스 조정) modal 창에 목록 나오게 하는 js -->
+<script>
+    // 결재
+    $('#aprv-select-area #select-dept').change(()=>{
+        let result = $('#aprv-select-area #select-dept').val();
+        let div = document.getElementsByClassName('aprv-deptNo');
+        for(let i = 0; i < div.length; ++i){
+            if($(div[i]).val() != result){
+                $(div[i]).parent().parent().hide();
+                if(result=='all'){
+                    $(div[i]).parent().parent().show();    
+                }
+            } else{
+                $(div[i]).parent().parent().show();
+            }
+        }
+    });
+    //합의
+    $('#agree-select-area #select-dept').change(()=>{
+        let result = $('#agree-select-area #select-dept').val();
+        let div = document.getElementsByClassName('agree-deptNo');
+        for(let i = 0; i < div.length; ++i){
+            if($(div[i]).val() != result){
+                $(div[i]).parent().parent().hide();
+                if(result=='all'){
+                    $(div[i]).parent().parent().show();    
+                }
+            } else{
+                $(div[i]).parent().parent().show();
+            }
+        }
+    });
+    //참조
+    $('#ref-select-area #select-dept').change(()=>{
+        let result = $('#ref-select-area #select-dept').val();
+        let div = document.getElementsByClassName('ref-deptNo');
+        for(let i = 0; i < div.length; ++i){
+            if($(div[i]).val() != result){
+                $(div[i]).parent().parent().hide();
+                if(result=='all'){
+                    $(div[i]).parent().parent().show();    
+                }
+            } else{
+                $(div[i]).parent().parent().show();
+            }
+        }
+    });
+
+</script>
+
 

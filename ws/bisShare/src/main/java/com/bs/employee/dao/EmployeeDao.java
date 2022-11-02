@@ -22,4 +22,7 @@ public interface EmployeeDao {
 	// 닉네임 중복
 	int nickDup(SqlSessionTemplate sst, String memberNick);
 
+	//속해있는 회사의 모든 부서 조회
+	List<EmployeeVo> getDeptList(SqlSessionTemplate sst, String compNo);
+
 }//interface
