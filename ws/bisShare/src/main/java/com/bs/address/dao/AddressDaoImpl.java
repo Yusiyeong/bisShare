@@ -14,7 +14,7 @@ import com.bs.common.PageVo;
 @Repository
 public class AddressDaoImpl implements AddressDao{
 
-	//주소록 조회
+	//주소록 검색 조회
 	@Override
 	public List<AddressVo> selectSearch(SqlSessionTemplate sst, PageVo pvo, Map<String, String> map) {
 		int offset = (pvo.getCurrentPage()-1) * pvo.getBoardLimit();

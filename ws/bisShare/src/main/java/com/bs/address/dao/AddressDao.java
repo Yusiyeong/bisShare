@@ -10,7 +10,7 @@ import com.bs.common.PageVo;
 
 public interface AddressDao {
 
-	//주소록 조회
+	//주소록 검색 조회
 	List<AddressVo> selectSearch(SqlSessionTemplate sst, PageVo pvo, Map<String, String> map);
 
 	//조직도 조회

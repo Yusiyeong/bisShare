@@ -25,7 +25,7 @@ public class AddressServiceImpl implements AddressService{
 	}
 
 	
-	//주소록 조회
+	//주소록 검색 조회
 	@Override
 	public List<AddressVo> selectSearch(PageVo pvo, Map<String, String> map) {
 		return dao.selectSearch(sst, pvo, map);
