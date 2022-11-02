@@ -15,7 +15,7 @@
 		INNER JOIN DEPT D
 		ON E.DEPT_NO = D.DEPT_NO
 		WHERE E.STATUS = 'Y'
-		ORDER BY EMP_NO ASC
+		ORDER BY R.RANK_NO DESC
 	</select>
 	
 	<select id="selectSearch" resultType="addressvo">
@@ -74,7 +74,7 @@
 		INNER JOIN DEPT D
 		ON E.DEPT_NO = D.DEPT_NO
 		WHERE E.STATUS = 'Y'
-		ORDER BY EMP_NO ASC
+		ORDER BY R.RANK_NO DESC
 	</select>
 	
 	<select id="selectCountAll" resultType="int">

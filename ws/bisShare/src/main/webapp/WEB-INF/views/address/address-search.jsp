@@ -58,6 +58,9 @@
 				</script>
 			</c:if>
 			
+			<c:if test="${not empty field}">
+				
+			</c:if>
 	    	
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">  
@@ -95,14 +98,18 @@
 						<c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
 							<a href="${root}/address/search/${i}" class="btn btn-primary">${i}</a>
 						</c:forEach>
-					
+						
+						<%-- <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
+							<a href="${root}/address/search/${i}&field=${field}&keyword=${keyword}" class="btn btn-primary">${i}</a>
+						</c:forEach> --%>
+				
 						<c:if test="${pvo.endPage ne pvo.maxPage}">
 							<a href="${root}/address/search/${pvo.endPage +1}" class="btn btn-outline-primary">다음</a>
 						</c:if>
     				</div>
     			
     			</div>
+ 	   			</form>
     		</div>
-    	</form>
     </div>               
 </div>

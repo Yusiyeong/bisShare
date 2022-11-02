@@ -72,6 +72,7 @@ public class AddressController {
 		List<AddressVo> voList = adds.selectSearch(pvo, map);
 		model.addAttribute("voList", voList);
 		model.addAttribute("pvo", pvo);
+		model.addAttribute("field", field);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("page", "address/address-search");
 		return "layout/template";
