@@ -19,6 +19,10 @@ public interface EmployeeService {
 
 	// 닉네임 중복
 	int nickDup(String memberNick);
+	
+	// 회원이 속해있는 회사의 모든 부서 조회
+	List<EmployeeVo> deptList(String compNo);
+	
 
 	
 }//interface

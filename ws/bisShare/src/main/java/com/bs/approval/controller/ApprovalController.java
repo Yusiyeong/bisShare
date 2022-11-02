@@ -57,10 +57,15 @@ public class ApprovalController {
 
 	//결재 작성 화면
 	@GetMapping("write")
-	public String write(Model model) {
+	public String write(Model model, HttpSession session) {
+		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
 		
+		//회사 모든 직원 리스트
 		List<EmployeeVo> empList = empService.getList();
+		//회사 모든 부서 조회
+		List<EmployeeVo> deptList = empService.deptList(empVo.getCompanyNo());
 		
+		model.addAttribute("deptList", deptList);
 		model.addAttribute("empList", empList);
 		model.addAttribute("title", "기안서 작성");
 		model.addAttribute("page", "approval/approval-write");

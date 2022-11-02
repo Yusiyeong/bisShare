@@ -39,5 +39,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return sst.selectOne("employeeMapper.nickDup", memberNick);
 	}//nickDup
 
+	//속해있는 회사의 모든 부서 조회
+	@Override
+	public List<EmployeeVo> getDeptList(SqlSessionTemplate sst, String compNo) {
+		return sst.selectList("employeeMapper.getDeptList", compNo);
+	}
+
 
 }//class

@@ -152,7 +152,7 @@
             <div class="modal-body">로그아웃 하시겠습니까?</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                <a class="btn btn-danger" href="${root}/member/logout">로그아웃</a>
+                <a class="btn btn-danger" href="${root}/employee/logout">로그아웃</a>
             </div>
         </div>
     </div>

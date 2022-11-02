@@ -17,9 +17,13 @@
 		    , E.SALARY
 		    , E.STATUS
 		    , E.PROFILE_PATH
-		    , C.COMP_NAME COMPANY_NO
-		    , D.DEPT_NAME DEPT_NO
-		    , R.RANK_NAME RANK_NO
+		    , C.COMP_NAME COMPANY_NAME
+		    , D.DEPT_NAME DEPT_NAME
+		    , R.RANK_NAME RANK_NAME
+		    , E.COMPANY_NO
+		    , E.DEPT_NO
+		    , E.RANK_NO
+		    , C.COMP_ADDRESS COMPANY_ADR
 		FROM EMPLOYEE E
 		JOIN COMPANY C
 		ON C.COMP_NO = E.COMPANY_NO
@@ -75,8 +79,11 @@
 			E.EMP_NO VALUE,
 			E.NICK,
 			E.EMAIL,
-			D.DEPT_NAME DEPT_NO,
-			R.RANK_NAME RANK_NO
+			D.DEPT_NAME,
+			R.RANK_NAME
+			, E.COMPANY_NO
+		    , E.DEPT_NO
+		    , E.RANK_NO
 		FROM EMPLOYEE E
 		JOIN RANK R
 			ON R.RANK_NO = E.RANK_NO
@@ -99,5 +106,37 @@
 	WHERE NICK = #{memberNick}
 	</select>
 	
+	<!-- 속해있는 회사의 모든 부서 조회 -->
+	<select id="getDeptList" resultType="ev">
+		SELECT 
+			DEPT_NO
+			, DEPT_NAME 
+		FROM DEPT 
+		WHERE COMPANY_NO = #{compNo}
+	</select>
+	
+	
+	
+	
+	
 	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

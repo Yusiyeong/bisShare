@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}" />  
+
 <!DOCTYPE html>
 <html>
 
@@ -104,6 +105,14 @@
         <!-- rememberCheck -->
         <script src="${root}/resources/js/login/remember.js"></script>
     </c:if>
+    <!-- 로그아웃 알림창 -->
+    <c:if test="${ alertMsg eq '로그아웃성공' }">
+	    <script type="text/javascript">
+	    	alert('로그아웃 되었습니다.');
+	    </script>
+    </c:if>
+    <!-- 로그아웃 메시지 세션 삭제 -->
+	<% session.removeAttribute("alertMsg"); %>
 </body>
 
 </html>

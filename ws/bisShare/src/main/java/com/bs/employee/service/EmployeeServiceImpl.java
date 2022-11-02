@@ -67,6 +67,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return md.nickDup(sst, memberNick);
 	}//nickDup
 
+	//한 회사의 모든 부서 조회
+	@Override
+	public List<EmployeeVo> deptList(String compNo) {
+		return md.getDeptList(sst, compNo);
+	}
+
 
 	
 }//class

@@ -1,5 +1,7 @@
 package com.bs.approval.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -41,3 +43,21 @@ public class ApprovalVo {
 	//진행도
 	private String progress;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

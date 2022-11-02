@@ -1,5 +1,7 @@
 package com.bs.employee.vo;
 
+import java.util.List;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,6 +28,10 @@ public class EmployeeVo {
 	private String companyAdr;	// 추가 함
 	private String deptNo;		// 부서
 	private String rankNo;		// 직급
+	
+	private String companyName;
+	private String deptName;		// 부서
+	private String rankName;		// 직급
 	
 	
 	// 암호화
