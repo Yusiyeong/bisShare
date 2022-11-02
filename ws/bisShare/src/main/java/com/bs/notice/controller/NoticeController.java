@@ -59,7 +59,7 @@ public class NoticeController {
       map.put("condition", condition);
 
       // 페이징 처리 //서비스 호출
-      int totalCount = ns.selectTotalCnt(map);
+      int totalCount = ns.selectTotalCnt();
 
       PageVo pv = Pagination.getPageVo(totalCount, pno, 5, 10);
       
@@ -70,6 +70,10 @@ public class NoticeController {
 
       model.addAttribute("title", "NOTICE");
       model.addAttribute("page", "notice/list");
+      
+      model.addAttribute("keyword", keyword);	// 검색
+      model.addAttribute("condition", condition);	// 검색
+
 
       return "layout/template";
 

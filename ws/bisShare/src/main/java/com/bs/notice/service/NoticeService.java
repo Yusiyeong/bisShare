@@ -14,7 +14,7 @@ import com.bs.notice.vo.NoticeVo;
 public interface NoticeService {
 
 	// 페이징 처리
-	int selectTotalCnt(Map<String, String> map);
+	int selectTotalCnt();
 
 	// 게시글 목록 조회
 	List<NoticeVo> selectList(PageVo pv, Map<String, String> map);

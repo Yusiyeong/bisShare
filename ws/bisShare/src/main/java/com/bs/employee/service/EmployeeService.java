@@ -14,5 +14,11 @@ public interface EmployeeService {
 
 	List<EmployeeVo> getList();
 
+	// 아이디 중복체크
+	int idDup(String memberId);
+
+	// 닉네임 중복
+	int nickDup(String memberNick);
+
 	
 }//interface

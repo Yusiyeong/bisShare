@@ -16,4 +16,10 @@ public interface EmployeeDao {
 
 	List<EmployeeVo> getList(SqlSessionTemplate sst);
 
+	// 아이디 중복체크
+	int idDup(SqlSessionTemplate sst, String memberId);
+
+	// 닉네임 중복
+	int nickDup(SqlSessionTemplate sst, String memberNick);
+
 }//interface

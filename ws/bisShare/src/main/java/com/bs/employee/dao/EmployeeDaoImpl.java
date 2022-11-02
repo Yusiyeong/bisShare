@@ -27,5 +27,17 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return sst.selectList("employeeMapper.getList");
 	}
 
+	// 아이디 중복체크
+	@Override
+	public int idDup(SqlSessionTemplate sst, String memberId) {
+		return sst.selectOne("employeeMapper.idDup", memberId);
+	}//idDup
+
+	// 닉네임 중복
+	@Override
+	public int nickDup(SqlSessionTemplate sst, String memberNick) {
+		return sst.selectOne("employeeMapper.nickDup", memberNick);
+	}//nickDup
+
 
 }//class

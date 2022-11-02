@@ -93,6 +93,27 @@ public class EmployeeController {
 		return listStr;
 	}
 	
+	// 아이디 중복
+	@PostMapping("idDup")
+	@ResponseBody
+	public String idDup(String memberId) {		
+		
+		// 서비스 호출
+		int result = ms.idDup(memberId);
+		return "" + result;		
+		
+	}//idDup
+	
+	// 닉네임 중복
+	@PostMapping("nickDup")
+	@ResponseBody
+	public String nickDup(String memberNick) {
+		
+		// 서비스 호출
+		int result = ms.nickDup(memberNick);
+		return "" + result;		
+				
+	}//nickDup
 	
 	
 }//class
