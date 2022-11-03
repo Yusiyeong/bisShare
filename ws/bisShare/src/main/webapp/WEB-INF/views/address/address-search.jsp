@@ -95,13 +95,13 @@
 							<a href="${root}/address/search/${pvo.startPage -1}" class="btn btn-outline-primary">이전</a>	
 						</c:if>
 					
-						<c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
-							<a href="${root}/address/search/${i}" class="btn btn-primary">${i}</a>
-						</c:forEach>
-						
 						<%-- <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
-							<a href="${root}/address/search/${i}&field=${field}&keyword=${keyword}" class="btn btn-primary">${i}</a>
+							<a href="${root}/address/search/${i}" class="btn btn-primary">${i}</a>
 						</c:forEach> --%>
+						
+						<c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
+							<a href="${root}/address/search/${i}?&field=${field}&keyword=${keyword}" class="btn btn-primary">${i}</a>
+						</c:forEach>
 				
 						<c:if test="${pvo.endPage ne pvo.maxPage}">
 							<a href="${root}/address/search/${pvo.endPage +1}" class="btn btn-outline-primary">다음</a>

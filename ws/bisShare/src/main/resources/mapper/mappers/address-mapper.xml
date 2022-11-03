@@ -16,6 +16,7 @@
 		ON E.DEPT_NO = D.DEPT_NO
 		WHERE E.STATUS = 'Y'
 		ORDER BY R.RANK_NO DESC
+		, D.DEPT_NO ASC
 	</select>
 	
 	<select id="selectSearch" resultType="addressvo">
@@ -75,6 +76,7 @@
 		ON E.DEPT_NO = D.DEPT_NO
 		WHERE E.STATUS = 'Y'
 		ORDER BY R.RANK_NO DESC
+		, D.DEPT_NO ASC
 	</select>
 	
 	<select id="selectCountAll" resultType="int">
