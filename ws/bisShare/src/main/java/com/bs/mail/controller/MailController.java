@@ -142,9 +142,13 @@ public class MailController {
 	/**
 	 * 받은 메일함 이동
 	 */
-	@GetMapping("receive")
-	public String received(Model model, HttpSession session) {
-
+	@GetMapping(value={"/receive","/receive/{mailNo}"})
+	public String received(Model model, HttpSession session, @PathVariable(required = false) String mailNo) {
+		
+		if(mailNo != null) {
+			model.addAttribute("dropDetail", mailNo);
+		}
+		
 		model.addAttribute("title", "RECEIVED MAIL");
 		model.addAttribute("page", "mail/received");
 
@@ -474,5 +478,23 @@ public class MailController {
 		return result;
 	}
 	
+	/**
+	 * 안읽은 메일 리스트
+	 */
+	@PostMapping("unreadMailList")
+	@ResponseBody
+	public String unreadMailList(HttpSession session) {
+		
+		Gson gson = new Gson();
+		
+		EmployeeVo loginVo = (EmployeeVo)session.getAttribute("loginVo");
+		
+		List<MailVo> list = ms.unreadMailList(loginVo.getEmpNo());
+		
+		String listStr = gson.toJson(list);
+		
+		return listStr;
+	}
+
 	
 }

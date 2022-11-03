@@ -507,4 +507,23 @@
 		WHERE DRAFT_NO = #{mailNo}
 	</update>
 	
+	<select id="selectUnreadMailList" resultType="mv">
+		SELECT 
+			M.MAIL_NO,
+			R.MAIL_REC_NO,
+			M.TITLE,
+			E.NICK AS SEND,
+			M.ENROLL_DATE
+		FROM MAIL M
+		JOIN MAIL_RECEIVE R
+			ON M.MAIL_NO = R.MAIL_NO
+		JOIN EMPLOYEE E
+			ON E.EMP_NO = M.SEND
+		WHERE R.STATUS=0
+			AND R.RECEIVE=#{receive}
+			AND R.REFERENCE IS NULL
+			AND R.READ_YN = 'N'
+		ORDER BY M.ENROLL_DATE DESC
+	</select>
+	
 </mapper>

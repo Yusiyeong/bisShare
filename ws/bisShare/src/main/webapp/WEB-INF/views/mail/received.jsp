@@ -3,9 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="root" value="${pageContext.request.contextPath}" />
-<script>
-	const root = "${root}";
-</script>
+
 <style>
 	.hover {
 		cursor: pointer;
@@ -60,6 +58,19 @@
 <script src="https://unpkg.com/@yaireo/tagify"></script>
 <script src="${root}/resources/js/mail/write.js"></script>
 <script src="${root}/resources/js/mail/tagify.js"></script>
+<script>
+	let dropDetail;
+</script>
+<c:if test="${!empty dropDetail}">
+	<script>
+		dropDetail = 1;
+	</script>
+</c:if>
+<c:if test="${empty dropDetail}">
+	<script>
+		dropDetail = 0;
+	</script>
+</c:if>
 <c:if test="${empty requestScope.checkLoc}">
 	<script src="${root}/resources/js/mail/detail.js"></script>
 </c:if>
@@ -67,3 +78,12 @@
 	<script src="${root}/resources/js/mail/draft_detail.js"></script>
 </c:if>
 <script src="${root}/resources/js/mail/star.js"></script>
+
+
+<c:if test="${!empty dropDetail}">
+	<script>
+		let dropMailNo = '${dropDetail}';
+		detailView();
+	</script>
+</c:if>
+

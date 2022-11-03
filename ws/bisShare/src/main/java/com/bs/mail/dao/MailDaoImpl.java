@@ -152,5 +152,10 @@ public class MailDaoImpl implements MailDao{
 		return sst.selectList("mailMapper.selectDraftFilePath",mailNo);
 	}
 
+	@Override
+	public List<MailVo> selectUnreadMailList(SqlSessionTemplate sst, String empNo) {
+		return sst.selectList("mailMapper.selectUnreadMailList",empNo);
+	}
+
 
 }

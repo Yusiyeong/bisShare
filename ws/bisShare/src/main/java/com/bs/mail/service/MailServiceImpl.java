@@ -323,4 +323,10 @@ public class MailServiceImpl implements MailService{
 		md.insertDraftAtt(sst,mav);
 	}
 
+
+	@Override
+	public List<MailVo> unreadMailList(String empNo) {
+		return md.selectUnreadMailList(sst,empNo);
+	}
+
 }

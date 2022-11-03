@@ -8,6 +8,7 @@ import lombok.Data;
 public class MailVo {
 	
 	private String mailNo;
+	private String mailRecNo;
 	private String send;
 	private String receive;
 	private String title;
