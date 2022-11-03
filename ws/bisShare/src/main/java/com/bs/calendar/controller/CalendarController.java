@@ -1,16 +1,22 @@
 package com.bs.calendar.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,7 +39,7 @@ public class CalendarController {
 	}
 	
 	
-	//일정 메인
+	//일정 메인 (캘린더에서 데이터 조회)
 	@GetMapping("main")
 	public String main(ModelAndView mv, HttpServletRequest request, Model model) {
 		model.addAttribute("page", "calendar/calendar-main");
@@ -42,12 +48,6 @@ public class CalendarController {
 		request.setAttribute("calendarList", calendar);
 		System.out.println(calendar);
 		
-//		try {
-//			calendar = cs.getCalendar();
-//			request.setAttribute("page", "calendar/calendar-main");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
 		
 		return "layout/template";
 	}
@@ -58,25 +58,22 @@ public class CalendarController {
 	
 	
 	//일정 캘린더에서 모달로 작성
-	@PostMapping("modalWrite")
-	public String modalWrite(CalendarVo vo, Model model, HttpSession session) {
-		
-		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginVo");
-		String no = loginvo.getEmpNo();
-		
-		vo.setWriter(no);
-		int result = cs.modalwrite(vo);
-		
-		//화면 선택
-		if(result == 1) {
-			session.setAttribute("alertMsg", "일정 등록 완료");
-			return "redirect:/calendar/view/1";
-		}else {
-			session.setAttribute("msg" , "일정 등록 실패");
-			return "redirect:/calendar/view/1";
-		}
-		
-	}
+//	@GetMapping("modalWrite")
+//	public String createAction(@RequestBody String filterJSON, HttpServletRequest request, HttpServletResponse res, HttpSession session, ModelMap model) throws IOException {
+//		
+//		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginVo");
+//		String no = loginvo.getEmpNo();
+//		
+//		//JSONObject obj = new JSONObject(); <<정체가 뭐임 왜있는거임
+//		
+//		res.setContentType("text/html; charset = UTF-8");
+//		PrintWriter out = res.getWriter();
+//		
+//		ObjectMapper mapper = new ObjectMapper();
+//		
+//		return "layout/template";
+//	}
+
 	
 	
 	//일정 작성 (화면)
