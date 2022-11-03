@@ -98,8 +98,15 @@
                     <td>
                         ${ avo.categoryNo }
                     </td>
+                    <td class="bg-gray-200 text-gray-900">진행도</td>
+                    <c:if test="${ avo.progress eq '100' }">
+                    	<td>결재 완료</td>
+                    </c:if>
+                    <c:if test="${ avo.progress ne '100' }">
+                    	<td>${ avo.progress }%</td>
+                    </c:if>
                     <td class="bg-gray-200 text-gray-900">작성자</td>
-                    <td>${ loginVo.deptNo } ${ loginVo.rankNo } ${ loginVo.nick }</td> 
+                    <td>${ loginVo.deptName }팀  ${ loginVo.rankName }  ${ loginVo.nick }</td> 
                 </tr>
             </table>
             <div class="py-3">
@@ -154,7 +161,7 @@
 		                    		<button id="agree-btn" class="btn btn-sm btn-outline-primary">확인</button>
 			                    </c:if>
 			                    <c:if test="${ loginVo.empNo ne avo.agreeEmpNos[i] }">
-		                    		${ avo.agreeNicks[i]}
+		                    		${ avo.agreeNicks[i] }
 			                    </c:if>
 	                    	</c:if>
 	                    	<c:if test="${ avo.agreeStatuses[i] eq 'Y' }">
