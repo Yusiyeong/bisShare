@@ -174,6 +174,7 @@
                                  <option value="1" selected>인사</option>
                                  <option value="2">개발</option>
                                  <option value="3">영업</option>
+                                 <option value="4">경영</option>
                               </select>
                            </div>
                         </div>

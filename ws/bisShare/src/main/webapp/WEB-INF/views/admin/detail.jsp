@@ -98,7 +98,7 @@
                                  <option value="5">차장</option>
                                  <option value="6">부장</option>
                                  <option value="7">이사</option>
-                                 <option value="8">대표</option>
+                                 <option value="8">대표이사</option>
                               </select>
                            </div>
       
@@ -110,6 +110,7 @@
                                  <option value="1">인사</option>
                                  <option value="2">개발</option>
                                  <option value="3">영업</option>
+                                 <option value="4">경영</option>
                               </select>
                            </div>
                         </div>
