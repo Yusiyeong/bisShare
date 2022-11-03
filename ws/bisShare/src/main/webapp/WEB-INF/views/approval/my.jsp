@@ -36,7 +36,12 @@
                         	<input type="hidden" value="${ l.adcNo }"/>
                             <td>${ l.categoryNo }</td>
                             <td>${ l.adcName }</td>
-                            <td>${ l.progress }%</td>
+                            <c:if test="${ l.progress eq '100' }">
+		                    	<td>결재 완료</td>
+		                    </c:if>
+		                    <c:if test="${ l.progress ne '100' }">
+		                    	<td>${ avo.progress }%</td>
+		                    </c:if>
                             <td>${ l.enrollDate }</td>
                             <td>${ l.empNo }</td> 
                         </tr>

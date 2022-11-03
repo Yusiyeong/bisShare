@@ -299,8 +299,8 @@
                                 <div>이름</div>
                             </div>
                             <c:forEach items="${empList}" var="l">
-	                            <div class="table table-bordered aprver-selection">
-	                            	<c:if test="${ loginVo.empNo ne l.value }"> <!-- 작성자는 뜰필요 없음 -->
+                                <c:if test="${ loginVo.empNo ne l.value }"> <%-- 작성자는 뜰필요 없음 --%>
+	                                <div class="table table-bordered aprver-selection">
 		                                <div>
 	                                        <input class="non-added" name="move-check" type="checkbox">
 	                                        <input type="hidden" name="empNo" value="${l.value}">
@@ -309,8 +309,8 @@
 		                                <div>${l.deptName}</div>
 		                                <div>${l.rankName}</div>
 		                                <div>${l.nick}</div>
-	                            	</c:if>
-	                            </div>
+                                    </div>
+                                </c:if>
                             </c:forEach>
                         </div>
                     </div>
@@ -381,16 +381,18 @@
                                 <div>이름</div>
                             </div>
                             <c:forEach items="${empList}" var="l">
-	                            <div class="table table-bordered">
-	                                <div>
-                                        <input class="agree-non-added" name="move-check" type="checkbox">
-                                        <input type="hidden" name="agree-empNo" value="${l.value}">
-                                        <input type="hidden" class="agree-deptNo" name="deptNo" value="${l.deptNo}">
+                                <c:if test="${ loginVo.empNo ne l.value }"> <%-- 작성자는 뜰필요 없음 --%>
+                                    <div class="table table-bordered">
+                                        <div>
+                                            <input class="agree-non-added" name="move-check" type="checkbox">
+                                            <input type="hidden" name="agree-empNo" value="${l.value}">
+                                            <input type="hidden" class="agree-deptNo" name="deptNo" value="${l.deptNo}">
+                                        </div>
+                                        <div>${l.deptName}</div>
+                                        <div>${l.rankName}</div>
+                                        <div>${l.nick}</div>
                                     </div>
-	                                <div>${l.deptNo}</div>
-	                                <div>${l.rankNo}</div>
-	                                <div>${l.nick}</div>
-	                            </div>
+                                </c:if>
                             </c:forEach>
                         </div>
                     </div>
@@ -461,16 +463,18 @@
                                 <div>이름</div>
                             </div>
                             <c:forEach items="${empList}" var="l">
-	                            <div class="table table-bordered">
-	                                <div>
-                                        <input class="ref-non-added" name="move-check" type="checkbox">
-                                        <input type="hidden" name="ref-empNo" value="${l.value}">
-                                        <input type="hidden" class="ref-deptNo" name="deptNo" value="${l.deptNo}">
+                                <c:if test="${ loginVo.empNo ne l.value }"> <%-- 작성자는 뜰필요 없음 --%>
+                                    <div class="table table-bordered">
+                                        <div>
+                                            <input class="ref-non-added" name="move-check" type="checkbox">
+                                            <input type="hidden" name="ref-empNo" value="${l.value}">
+                                            <input type="hidden" class="ref-deptNo" name="deptNo" value="${l.deptNo}">
+                                        </div>
+                                        <div>${l.deptName}</div>
+                                        <div>${l.rankName}</div>
+                                        <div>${l.nick}</div>
                                     </div>
-	                                <div>${l.deptNo}</div>
-	                                <div>${l.rankNo}</div>
-	                                <div>${l.nick}</div>
-	                            </div>
+                                </c:if>
                             </c:forEach>
                         </div>
                     </div>
@@ -543,15 +547,15 @@
     // 추가 버튼 클릭 했을 때 이벤트
     pbtn.addEventListener('click',()=>{
         // 리스트에서 체크박스 변수 생성
-        const checkbox = document.getElementsByClassName('non-added');
+        let checkbox = document.getElementsByClassName('non-added');
         // 체크된 만큼 값 넘겨줄거
         for(let i = 0; i < checkbox.length; i++){
             if(checkbox[i].checked==true){
+                let addCont = $(checkbox[i]).parent().parent();
                 checkbox[i].checked = false;
-                //옮겨질것 클래스 명 미리 변경 non-added -> added
-                $(NSEA).children().eq(i+1).children().first().children().first().attr('class','added');
+                //옮겨질것 클래스 명 변경 non-added -> added
+                $(checkbox[i]).attr('class','added');
                 //select-area로 넘겨버리기
-                const addCont = $(NSEA).children().eq(i+1);
                 $(SEA).append(addCont);
             }
         }
@@ -560,15 +564,15 @@
     // 삭제 버튼 클릭 했을 때 이벤트
     mbtn.addEventListener('click',()=>{
         // 리스트에서 체크박스 변수 생성
-        const checkbox = document.getElementsByClassName('added');
+        let checkbox = document.getElementsByClassName('added');
         // 체크된 만큼 값 넘겨줄거
         for(let i = 0; i < checkbox.length; i++){
             if(checkbox[i].checked==true){
+                let addCont = $(checkbox[i]).parent().parent();
                 checkbox[i].checked = false;
                 //옮겨질것 클래스 명 미리 변경 added -> non-added
-                $(SEA).children().eq(i+1).children().first().children().first().attr('class','non-added');
+                $(checkbox[i]).attr('class','non-added')
                 //non-select-area로 넘기기
-                const addCont = $(SEA).children().eq(i+1);
                 $(NSEA).append(addCont);
             }
         }
@@ -715,16 +719,16 @@
         // 체크된 만큼 값 넘겨줄거
         for(let i = 0; i < checkbox.length; i++){
             if(checkbox[i].checked==true){
+                const addCont = $(checkbox[i]).parent().parent();
                 checkbox[i].checked = false;
                 //옮겨질것 클래스 명 미리 변경 non-added -> added
-                $(agree_NSEA).children().eq(i+1).children().first().children().first().attr('class','agree-added');
+                $(checkbox[i]).attr('class','agree-added');
                 //select-area로 넘겨버리기
-                const addCont = $(agree_NSEA).children().eq(i+1);
                 $(agree_SEA).append(addCont);
             }
         }
     })
-
+    
     // 삭제 버튼 클릭 했을 때 이벤트
     agree_mbtn.addEventListener('click',()=>{
         // 리스트에서 체크박스 변수 생성
@@ -732,11 +736,11 @@
         // 체크된 만큼 값 넘겨줄거
         for(let i = 0; i < checkbox.length; i++){
             if(checkbox[i].checked==true){
+                const addCont = $(checkbox[i]).parent().parent();
                 checkbox[i].checked = false;
                 //옮겨질것 클래스 명 미리 변경 added -> non-added
-                $(agree_SEA).children().eq(i+1).children().first().children().first().attr('class','agree-non-added');
+                $(checkbox[i]).attr('class','agree-non-added');
                 //non-select-area로 넘기기
-                const addCont = $(agree_SEA).children().eq(i+1);
                 $(agree_NSEA).append(addCont);
             }
         }
@@ -786,11 +790,11 @@
         // 체크된 만큼 값 넘겨줄거
         for(let i = 0; i < checkbox.length; i++){
             if(checkbox[i].checked==true){
+                const addCont = $(checkbox[i]).parent().parent();
                 checkbox[i].checked = false;
                 //옮겨질것 클래스 명 미리 변경 non-added -> added
-                $(ref_NSEA).children().eq(i+1).children().first().children().first().attr('class','ref-added');
+                $(checkbox[i]).attr('class','ref-added');
                 //select-area로 넘겨버리기
-                const addCont = $(ref_NSEA).children().eq(i+1);
                 $(ref_SEA).append(addCont);
             }
         }
@@ -803,11 +807,11 @@
         // 체크된 만큼 값 넘겨줄거
         for(let i = 0; i < checkbox.length; i++){
             if(checkbox[i].checked==true){
+                let addCont = $(checkbox[i]).parent().parent();
                 checkbox[i].checked = false;
                 //옮겨질것 클래스 명 미리 변경 added -> non-added
-                $(ref_SEA).children().eq(i+1).children().first().children().first().attr('class','ref-non-added');
+                $(checkbox[i]).attr('class','ref-non-added');
                 //non-select-area로 넘기기
-                const addCont = $(ref_SEA).children().eq(i+1);
                 $(ref_NSEA).append(addCont);
             }
         }
@@ -842,7 +846,7 @@
         let result = $('#aprv-select-area #select-dept').val();
         let div = document.getElementsByClassName('aprv-deptNo');
         for(let i = 0; i < div.length; ++i){
-            if($(div[i]).val() != result){
+            if($(div[i]).val() != result && $(div[i]).parent().children().first().attr('class')=='non-added'){
                 $(div[i]).parent().parent().hide();
                 if(result=='all'){
                     $(div[i]).parent().parent().show();    

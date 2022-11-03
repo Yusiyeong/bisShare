@@ -120,8 +120,6 @@ public class ApprovalController {
 		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
 		
 		ApprovalVo vo = aprvService.getOneByNo(adcNo, empVo.getEmpNo());
-		
-		System.out.println(vo);
 		model.addAttribute("avo", vo);
 		model.addAttribute("title", "결재 서류");
 		model.addAttribute("page", "approval/detail");

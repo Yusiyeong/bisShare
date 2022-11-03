@@ -36,11 +36,16 @@
                      <tr>
                      	 <input type="hidden" value="${ l.adcNo }"/>
                          <td>${ l.categoryNo }</td>
-                         <th>${ l.empNo }</th>
+                         <td>${ l.empNo }</th>
                          <td>${ l.adcName }</td>
-                         <td>${ l.progress }%</td>
+                         <c:if test="${ l.progress eq '100' }">
+	                    	<td class="complete-progress">결재완료</td>
+	                    </c:if>
+	                    <c:if test="${ l.progress ne '100' }">
+	                    	<td>${ avo.progress }%</td>
+	                    </c:if>
                          <td>${ l.enrollDate }</td>
-                         <th>${ l.myAutho }</th>
+                         <td>${ l.myAutho }</th>
                      </tr>
                 	</c:forEach>
                 </tbody>
@@ -51,15 +56,22 @@
 
 <script type="text/javascript">
 
+	//목록 클릭하면 이동
 	$('tbody>tr').click(()=>{
 	    let dv = event.currentTarget;
 		const adcNo = $(dv).children().first().val();
 		location.href = "${root}/approval/detail/" + adcNo;
 	});
-
+	
+</script>
+<!-- //완료된 문서는 글씨체 다르게 처리 -->
+<script type="text/javascript">
+	
+	$('.complete-progress')
+	
 </script>
     
-    <!-- 데이터 테이블 js -->
+<!-- 데이터 테이블 js -->
 <script src="${root}/resources/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="${root}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 

@@ -40,7 +40,15 @@ public class ApprovalServiceImpl implements ApprovalService{
 	//내가 작성한 기안서 목록
 	@Override
 	public List<ApprovalVo> getListByEmpNo(String empNo) {
-		return checkProgress(dao.getListByNo(sst, empNo));
+		List<ApprovalVo> list = dao.getListByNo(sst, empNo);
+		if(list != null) {
+			for(int i = 0; i < list.size(); ++i) {
+				list.set(i, checkProgress(list.get(i)));
+			}
+			return list;
+		} else {
+			return null;
+		}
 	}
 
 	//기안서 1개 조회
@@ -52,7 +60,6 @@ public class ApprovalServiceImpl implements ApprovalService{
 		vo.setAprverStatuses(vo.getAprverStatus().split(","));
 		vo.setAgreeStatuses(vo.getAgreeStatus().split(","));
 		String[] refStatusesArr = vo.getRefStatus().split(",");
-		
 		//결재권자, 합의자, 참조자 정보들 조회 해오기
 		//결재권자
 		// 저장된 EmpNo 배열로 전환
@@ -94,13 +101,28 @@ public class ApprovalServiceImpl implements ApprovalService{
 				EmployeeVo evo = adminDao.selectOne(sst, vo.getRefEmpNos()[i]);
 				refEmpNicks[i] = evo.getNick();
 				//로그인한 유저가 참조자일경우 참조 상태를 Y로 변경
-				if(empNo.equals(vo.getRefEmpNos()[i])&&refStatusesArr[i].equals("N")) refStatusesArr[i] = "Y";
+				if(empNo.equals(vo.getRefEmpNos()[i])&&refStatusesArr[i].equals("N")) {refStatusesArr[i] = "Y";};
 			}
 			vo.setRefStatuses(refStatusesArr);
 			vo.setRefNicks(refEmpNicks);
+			
+			//참조 현황 업데이트
+			Map updateInfo = new HashMap<String, String>();
+			
+			String updateRefStatus = "";
+			
+			for(int i = 0; i < vo.getRefStatuses().length; ++i) {
+				if(i>0) updateRefStatus += ",";
+				updateRefStatus += vo.getRefStatuses()[i];
+			}
+			updateInfo.put("key", "ref");
+			updateInfo.put("value", updateRefStatus);
+			updateInfo.put("adcNo", vo.getAdcNo());
+			
+			dao.updateStatus(sst, updateInfo);
 		}
 		
-		return vo;
+		return checkProgress(vo);
 	}//기안서 1개 조회 - END
 
 	//나에게 권한있는 기안서 조회
@@ -126,16 +148,16 @@ public class ApprovalServiceImpl implements ApprovalService{
 			else if(isAgree) { myAuthoList.add(vo); vo.setMyAutho("합의");}
 			else if(isRef) { myAuthoList.add(vo); vo.setMyAutho("참조");}
 		}
-		return checkProgress(myAuthoList);
+		for(int i = 0; i < myAuthoList.size(); ++i) {
+			myAuthoList.set(i, checkProgress(myAuthoList.get(i)));
+		}
+		return myAuthoList;
 	}
 
 	
 	//기안서 진행도 체크
-	public static List<ApprovalVo> checkProgress(List<ApprovalVo> voList) {
+	public static ApprovalVo checkProgress(ApprovalVo vo) {
 		
-		
-		for(ApprovalVo vo : voList) {
-						
 			//합의자 수
 			int agreeCnt = 0;
 			
@@ -146,12 +168,11 @@ public class ApprovalServiceImpl implements ApprovalService{
 			//결재권자, 합의자 배열로 담아주기 -> Y인 수 카운팅
 			vo.setAprverStatuses(vo.getAprverStatus().split(","));;
 			if(vo.getAgreeEmpNo()!=null) {
-				vo.setAgreeStatuses(vo.getAgreeEmpNo().split(","));
+				vo.setAgreeStatuses(vo.getAgreeStatus().split(","));
 				agreeCnt = vo.getAgreeStatuses().length;
 				for(int i = 0; i < agreeCnt; ++i) {
-					if(vo.getAgreeStatuses().equals("Y")) {
+					if(vo.getAgreeStatuses()[i].equals("Y")) {
 						++agreeYesCnt;
-						System.out.println("ok");
 					}
 				}
 			}
@@ -168,10 +189,8 @@ public class ApprovalServiceImpl implements ApprovalService{
 			double progressNum = (((double)approveYesCnt+(double)agreeYesCnt)/(double)entireNum)*100;
 			String progress = Integer.toString((int)progressNum);
 			vo.setProgress(progress);
-		}
-		
-		return voList;
-		
+			
+		return vo;
 	}
 
 	//결재권자가 결재 눌렀을때
@@ -188,7 +207,7 @@ public class ApprovalServiceImpl implements ApprovalService{
 		for(int i = 0; i < avo.getAprverStatuses().length; ++i) {
 			if(i>0) updateAprverStatus += ",";
 			if(loginEmpNo.equals(avo.getAprverEmpNos()[i])) updateAprverStatus += "Y";
-			else updateAprverStatus += "N";
+			else updateAprverStatus += avo.getAprverStatuses()[i];
 		}
 		updateInfo.put("key", "aprv");
 		updateInfo.put("value", updateAprverStatus);
@@ -211,7 +230,7 @@ public class ApprovalServiceImpl implements ApprovalService{
 		for(int i = 0; i < avo.getAgreeStatuses().length; ++i) {
 			if(i>0) updateAgreeStatus += ",";
 			if(loginEmpNo.equals(avo.getAgreeEmpNos()[i])) updateAgreeStatus += "Y";
-			else updateAgreeStatus += "N";
+			else updateAgreeStatus += avo.getAgreeStatuses()[i];
 		}
 		updateInfo.put("key", "agree");
 		updateInfo.put("value", updateAgreeStatus);
