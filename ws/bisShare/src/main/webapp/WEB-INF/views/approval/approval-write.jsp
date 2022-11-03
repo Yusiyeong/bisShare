@@ -212,7 +212,9 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <textarea id="summernote" name="adcContent"></textarea>
+                        <textarea id="summernote" name="adcContent">
+                            <p><br></p><p>&lt; 휴가원 &gt;</p><table class="table table-bordered"><tbody><tr><td><b>휴가기간</b></td><td>0000년 00월 00일 00시 00분 ~ 0000년 00월 00일 00시 00분</td></tr><tr><td><span style="font-weight: bolder;">휴가종류</span><br></td><td>(반차,연차,병가,경조)<br></td></tr><tr><td><b>휴가사유</b></td><td><p>( 휴가 1일 전 까지 결재를 득하여 제출 하여 주시기 바랍니다.)</p></td></tr></tbody></table><p>위와 같이 휴가를 신청 하오니 재가 하여 주시기 바랍니다.</p>
+                        </textarea>
                     </td>
                 </tr>
             </table>
@@ -884,6 +886,29 @@
             } else{
                 $(div[i]).parent().parent().show();
             }
+        }
+    });
+
+</script>
+
+
+<!-- 결재 양식 따른 기본 서식 설정 -->
+<script>
+
+    $('select[name=categoryNo]').change(()=>{
+        let result = $('select[name=categoryNo]').val();
+        let content = $('#summernote');
+        if(result==1){
+            $('#summernote').summernote('code', '<p><br></p><p>&lt; 휴가원 &gt;</p><table class="table table-bordered"><tbody><tr><td><b>휴가기간</b></td><td>0000년 00월 00일 00시 00분 ~ 0000년 00월 00일 00시 00분</td></tr><tr><td><span style="font-weight: bolder;">휴가종류</span><br></td><td>(반차,연차,병가,경조)<br></td></tr><tr><td><b>휴가사유</b></td><td><p>( 휴가 1일 전 까지 결재를 득하여 제출 하여 주시기 바랍니다.)</p></td></tr></tbody></table><p>위와 같이 휴가를 신청 하오니 재가 하여 주시기 바랍니다.</p>'); 
+        }
+        if(result==2){
+            $('#summernote').summernote('code', '<p><br></p><p>&lt; 품의서 &gt;</p><table class="table table-bordered"><tbody><tr><td><p><b>품의 사유</b></p><p><b>및</b></p><p><b>상세 내역</b></p></td><td><p><br></p><p>(내용 상세히 작성 바랍니다.)</p></td></tr><tr><td><b>예상 비용</b></td><td>0000원</td></tr><tr><td><b>비고</b></td><td><p><br></p></td></tr></tbody></table><p>위와 같이 품의를 신청 하오니 재가 하여 주시기 바랍니다.</p>'); 
+        }
+        if(result==3){
+            $('#summernote').summernote('code', '<p><br></p><p>&lt; 출장신청서 &gt;</p><table class="table table-bordered"><tbody><tr><td><b>출장기간</b></td><td>0000년 00월 00일 00시 00분 ~ 0000년 00월 00일 00시 00분</td></tr><tr><td><span style="font-weight: bolder;">출장지</span><br></td><td>경기도 00시 00동 00컴퍼니</td></tr><tr><td><b>출장자</b></td><td><p>00팀 000, 00팀 000</p></td></tr><tr><td><b>출장목적</b></td><td>(상세히 작성 할 것)</td></tr></tbody></table><p>위와 같이 출장을 신청 하오니 재가 하여 주시기 바랍니다.</p>');
+        }
+        if(result==4){
+            $('#summernote').summernote('code', '<p><br></p><p>&lt; 연장근무 신청서 &gt;</p><table class="table table-bordered"><tbody><tr><td><b>근무 일시</b></td><td><p>0000년 00월 00일 00시 00분 ~ 0000년 00월 00일 00시 00분 </p><p>(총 0시간 0분)</p></td></tr><tr><td><b>근무 목적</b></td><td>(상세히 작성 할 것)</td></tr><tr><td><b>비고</b></td><td><br></td></tr></tbody></table><p>위와 같이 연장근무를 신청 하오니 재가 하여 주시기 바랍니다.</p>');
         }
     });
 
