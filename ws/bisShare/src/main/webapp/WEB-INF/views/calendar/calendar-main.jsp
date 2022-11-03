@@ -106,11 +106,34 @@
 							calendar.render();
 						});
 
-						$('.fc-event-title-container').on('click', function(){
+/* 						$('.fc-event-title-container').on('click', function(){
 							$('#calendarModal').modal('toggle');
-						})
+						}) */
 					</script>
-
+					
+				    <script>
+			        window.onload = function () {
+			            var calendarEl = document.getElementById('calendar');
+			            var calendar = new FullCalendar.Calendar(calendarEl, {
+			            initialView: 'dayGridMonth' ,
+			            selectable: true,
+			            select: function(arg) { 
+			                var title = prompt('일정의 제목을 입력하세요:');
+			                if (title) { 
+			                    calendar.addEvent({
+			                        title: title,
+			                        start: arg.start,
+			                        end: arg.end,
+			                        allDay: arg.allDay
+			                    })
+			                }
+			                calendar.unselect()
+			            }
+			            });
+			            calendar.render();
+			        }
+			
+			    </script>
 
 				<!--end-->
 				</div>
