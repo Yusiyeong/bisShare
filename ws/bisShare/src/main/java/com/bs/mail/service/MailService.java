@@ -45,4 +45,6 @@ public interface MailService {
 	int delCheckedDraft(List<String> checkArr, EmployeeVo loginVo);
 
 	void insertDraftAtt(MailAttVo mav);
+
+	List<MailVo> unreadMailList(String empNo);
 }

@@ -34,7 +34,7 @@ function suggestionItemTemplate(tagData){
             role="option">
             <strong>${tagData.nick}</strong>
             <div>
-            ${tagData.rankNo}
+            ${tagData.rankName}
             </div>
             <span>${tagData.email}</span>
         </div>
@@ -61,6 +61,7 @@ function createTag(mailList) {
         // enforceWhitelist: true,
         skipInvalid: true, // do not remporarily add invalid tags
         dropdown: {
+            maxItems : 999,
             closeOnSelect: false,
             enabled: 0,
             classname: 'users-list',
@@ -97,7 +98,7 @@ function createTag(mailList) {
     // (since each user also has a 'team' property)
     tagify1.dropdown.createListHTML = sugegstionsList  => {
         const teamsOfUsers = sugegstionsList.reduce((acc, suggestion) => {
-            const team = suggestion.deptNo || 'Not Assigned';
+            const team = suggestion.deptName || 'Not Assigned';
             if( !acc[team] )
                 acc[team] = [suggestion]
             else
@@ -149,6 +150,7 @@ function createTag(mailList) {
     // enforceWhitelist: true,
     skipInvalid: true, // do not remporarily add invalid tags
     dropdown: {
+        maxItems : 999,
         closeOnSelect: false,
         enabled: 0,
         classname: 'users-list',
@@ -185,7 +187,7 @@ function createTag(mailList) {
     // (since each user also has a 'team' property)
     tagify2.dropdown.createListHTML = sugegstionsList  => {
         const teamsOfUsers = sugegstionsList.reduce((acc, suggestion) => {
-            const team = suggestion.deptNo || 'Not Assigned';
+            const team = suggestion.deptName || 'Not Assigned';
             if( !acc[team] )
                 acc[team] = [suggestion]
             else

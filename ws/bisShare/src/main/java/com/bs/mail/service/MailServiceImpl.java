@@ -200,9 +200,6 @@ public class MailServiceImpl implements MailService{
 	@Override
 	public MailVo detailSend(MailVo mv) {
 		
-//		읽음표시하기
-		md.updateReadYn(sst,mv);
-		
 		MailVo vo = md.selectSendOne(sst,mv);
 		String references = md.selectSendReferences(sst,mv);
 		vo.setReference(references);
@@ -321,6 +318,12 @@ public class MailServiceImpl implements MailService{
 	@Override
 	public void insertDraftAtt(MailAttVo mav) {
 		md.insertDraftAtt(sst,mav);
+	}
+
+
+	@Override
+	public List<MailVo> unreadMailList(String empNo) {
+		return md.selectUnreadMailList(sst,empNo);
 	}
 
 }

@@ -65,6 +65,8 @@ public interface MailDao {
 
 	List<MailAttVo> selectDraftFilePath(SqlSessionTemplate sst, String mailNo);
 
+	List<MailVo> selectUnreadMailList(SqlSessionTemplate sst, String empNo);
+
 
 
 }

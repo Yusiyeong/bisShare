@@ -31,6 +31,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		EmployeeVo dbMember = md.selectOneById(sst, ev.getId());
 		
+		if(dbMember == null) {
+			return null;
+		}
+		
 		if(enc.matches(ev.getPwd(), dbMember.getPwd())) {
 			return dbMember;
 		} else {

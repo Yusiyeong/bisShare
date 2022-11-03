@@ -1,6 +1,14 @@
   // 상세보기
-  $('#dataTable tbody').on('click','tr td:nth-child(3)', function() {
-    const data = table.row(this).data();
+  $('#dataTable tbody').on('click','tr td:nth-child(3)', detailView);
+
+  function detailView() {
+    let dataInfo ; 
+    if (dropDetail == 1) {
+      dataInfo = dropMailNo;
+    } else {
+      dataInfo = table.row(this).data();
+      dataInfo = dataInfo[0].replace(numFilter,"");
+    }
     // 읽으면 글씨체 얇게
     $(this).removeClass("font-weight-bolder");
     // 파일 중복해서 추가되는거 방지
@@ -15,7 +23,7 @@
       url: `${root}/mail/detail/${refCheck}`,
       data: {
         // input태그 가져와서 value만 추출
-        mailNo : data[0].replace(numFilter,"")
+        mailNo : dataInfo
       },
       dataType : "json",
       success: function (list) {
@@ -28,8 +36,13 @@
         // 상세보기 삭제를 위한 mailNo 넘겨주기
         oneNo = mailVo.mailNo;
         // 데이터 넣어주기
-        document.querySelector('#detail-name').innerHTML = '수신';
-        document.querySelector('#detail-send').innerHTML = mailVo.send;
+        if(refCheck != 2) {
+          document.querySelector('#detail-name').innerHTML = '발신';
+          document.querySelector('#detail-send').innerHTML = mailVo.send;
+        } else {
+          document.querySelector('#detail-name').innerHTML = '수신';
+          document.querySelector('#detail-send').innerHTML = mailVo.receive;
+        }
         if (mailVo.reference != null) {
           document.querySelector('#detail-ref').innerHTML = mailVo.reference;
         }
@@ -61,6 +74,8 @@
           // 아니면 보이지 않기
           document.querySelector('#receivedFiles').style.display = 'none';
         }
+
+        document.querySelector(`#dropMailNo${mailVo.mailNo}`).remove();
       }
     });
 
@@ -69,10 +84,10 @@
     mailWrite.style.display = 'none';
     mailDetail.style.display = 'block';
 
-
+    dropDetail = 0;
     // 안읽은 메일 수 업데이트
     setTimeout(updateCnt,100);
-  });
+  }
 
   function updateCnt() {
     $.ajax({
@@ -80,6 +95,7 @@
       url: `${root}/mail/updateCnt`,
       success: function (response) {
         document.querySelector('#notReadCnt').innerHTML = response;
+        document.querySelector('#mail-dropdown-cnt').innerHTML = response;
       }
     });
   }
