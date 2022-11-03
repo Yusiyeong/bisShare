@@ -6,7 +6,8 @@ $.ajax({
         let mailDropdown = document.querySelector('#mail-dropdown');
         for(let i in unreadList) {
             mailDropdown.innerHTML += `
-            <a class="dropdown-item d-flex align-items-center" href="${root}/mail/receive/${unreadList[i].mailNo}">
+            <a class="dropdown-item d-flex align-items-center" href="${root}/mail/receive/${unreadList[i].mailNo}"
+                id="dropMailNo${unreadList[i].mailNo}">
                 <div class="dropdown-list-image mr-3">
                     <img class="rounded-circle" src="${root}/resources/img/undraw_profile_1.svg"
                         alt="...">

@@ -7,7 +7,7 @@
       dataInfo = dropMailNo;
     } else {
       dataInfo = table.row(this).data();
-      dataInfo = data[0].replace(numFilter,"");
+      dataInfo = dataInfo[0].replace(numFilter,"");
     }
     // 읽으면 글씨체 얇게
     $(this).removeClass("font-weight-bolder");
@@ -36,8 +36,13 @@
         // 상세보기 삭제를 위한 mailNo 넘겨주기
         oneNo = mailVo.mailNo;
         // 데이터 넣어주기
-        document.querySelector('#detail-name').innerHTML = '수신';
-        document.querySelector('#detail-send').innerHTML = mailVo.send;
+        if(refCheck != 2) {
+          document.querySelector('#detail-name').innerHTML = '발신';
+          document.querySelector('#detail-send').innerHTML = mailVo.send;
+        } else {
+          document.querySelector('#detail-name').innerHTML = '수신';
+          document.querySelector('#detail-send').innerHTML = mailVo.receive;
+        }
         if (mailVo.reference != null) {
           document.querySelector('#detail-ref').innerHTML = mailVo.reference;
         }
@@ -69,6 +74,8 @@
           // 아니면 보이지 않기
           document.querySelector('#receivedFiles').style.display = 'none';
         }
+
+        document.querySelector(`#dropMailNo${mailVo.mailNo}`).remove();
       }
     });
 

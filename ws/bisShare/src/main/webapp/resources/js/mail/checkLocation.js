@@ -28,6 +28,7 @@ if (location.href.includes('receive')) {
 
 if(refCheck == 2) {
     document.querySelector('#navTrash').style.display = 'none';
+    document.querySelector('#navReply').style.display = 'none';
 }
 if(refCheck == 3) {
     document.querySelector('#navReply').style.display = 'none';

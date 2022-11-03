@@ -320,7 +320,7 @@ public class MailController {
 				.ok()
 				.contentType(MediaType.APPLICATION_OCTET_STREAM)
 				.contentLength(Files.size(filePath))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + origin)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + URLEncoder.encode(origin, "UTF-8"))
 				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
 				.body(res);
 	}
