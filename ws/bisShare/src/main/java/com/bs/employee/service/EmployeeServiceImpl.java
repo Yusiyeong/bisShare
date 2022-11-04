@@ -77,6 +77,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return md.getDeptList(sst, compNo);
 	}
 
+	// 퇴직처리
+	@Override
+	public int quit(String memberId) {
+		return md.quit(sst, memberId);
+	}//quit
+
 
 	
 }//class

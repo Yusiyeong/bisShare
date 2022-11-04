@@ -113,6 +113,7 @@
 				                                       <th width="7%" class="text-center">직급</th>
 				                                       <th width="20%" class="text-center">메일</th>
 				                                       <th width="20%" class="text-center">연락처</th>
+				                                       <th width="10%" class="text-center">상태</th>
 				                                       <th width="10%" class="text-center" style="font-size:14px;">보기/편집</th>
 				                                   </tr>
 				                               </thead>
@@ -137,6 +138,7 @@
 				                                       <td class="text-center">${x.deptNo}</td>
 				                                       <td class="text-center">${x.email}</td>
 				                                       <td class="text-center">${x.phone}</td>
+				                                       <td class="text-center">${x.status}</td>
 				                                       <td class="text-center"><a href="${root}/admin/detail/${x.empNo}" class="far fa-eye" style="font-size:17px;"></a></td>
 				                                   </tr>  
 			                                  </c:forEach>
