@@ -103,9 +103,7 @@
             </div>
             <div id="approve-line-area" class="table-bordered">
                 <div class="bg-gray-200">
-                    <div id="approve-line-button-area">
-                        
-                    </div>
+                    <div id="approve-line-button-area"></div>
                     <div id="approve-line-name-area">결재</div>
                     <div></div>
                 </div>
@@ -148,7 +146,7 @@
             <!-- 합의 라인 -->
             <div id="agree-line-area">
                 <div id="" class="bg-gray-200">
-                    <div id="">합의    <button id="agree-line-select" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#agree-line-Modal">+</button></div>
+                    <div id="">합의<button id="agree-line-select" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#agree-line-Modal">+</button></div>
                 </div>
                 <div>
                     <div class=""></div>

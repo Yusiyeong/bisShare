@@ -14,6 +14,14 @@
 
     <title>${title}</title>
     
+    <!-- 로그인 안한 사람 접근 금지 -->
+	<c:if test="${ loginVo eq null }">
+		<script>
+			alert('로그인을 해주십시오.');
+			location.href = '${root}/';
+		</script>
+	</c:if>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Custom fonts for this template-->

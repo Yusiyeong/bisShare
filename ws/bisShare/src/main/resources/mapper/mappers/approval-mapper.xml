@@ -40,7 +40,7 @@
 		    , C.CATEGORY_NAME   CATEGORY_NO
 		    , A.ADC_NAME
 		    , A.ADC_CONTENT
-		    , A.ENROLL_DATE
+		    , TO_CHAR(A.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE 
 			, APRVER_EMP_NO
 		    , APRVER_STATUS
 		    , AGREE_EMP_NO
@@ -55,7 +55,7 @@
 		ON (A.CATEGORY_NO = C.CATEGORY_NO)
 		WHERE A.CANCEL = 'N'
 		AND A.EMP_NO = #{empNo}
-		ORDER BY ENROLL_DATE DESC
+		ORDER BY ADC_NO DESC
 	</select>
 	
 	<!-- 결재번호로 하나에 대한 정보 조회 -->
@@ -66,7 +66,7 @@
 		    , C.CATEGORY_NAME   CATEGORY_NO
 		    , A.ADC_NAME
 		    , A.ADC_CONTENT
-		    , A.ENROLL_DATE
+		    , TO_CHAR(A.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE 
 		    , APRVER_EMP_NO
 		    , APRVER_STATUS
 		    , AGREE_EMP_NO
@@ -90,7 +90,7 @@
 		    , C.CATEGORY_NAME   CATEGORY_NO
 		    , A.ADC_NAME
 		    , A.ADC_CONTENT
-		    , A.ENROLL_DATE
+		    , TO_CHAR(A.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE 
 		    , APRVER_EMP_NO
 		    , APRVER_STATUS
 		    , AGREE_EMP_NO
@@ -104,9 +104,10 @@
 		JOIN APRV_CATEGORY C
 		ON (A.CATEGORY_NO = C.CATEGORY_NO)
 		WHERE A.CANCEL = 'N'
+		ORDER BY ADC_NO DESC
 	</select>
 	
-	<!-- 결재/합의/참조 상태 업데이트 -->
+	<!-- 결재/합의/참조/기안취소 상태 업데이트 -->
 	<update id="updateStatus">
 		UPDATE APPROVAL_DOCU
 			SET
@@ -117,8 +118,11 @@
 				<when test="key == 'agree'">
 					AGREE_STATUS = #{value}
 				</when>
-				<otherwise>
+				<when test="key == 'ref'">
 					REF_STATUS = #{value} 
+				</when>
+				<otherwise>
+					CANCEL = #{value}
 				</otherwise>
 			</choose>
 		WHERE ADC_NO = #{adcNo}

@@ -23,10 +23,16 @@ public interface ApprovalService {
 	List<ApprovalVo> getListAuthorMy(String empNo);
 
 	//결재권자가 결재 눌렀을때 업데이트
-	int updateAprvStatus(ApprovalVo avo, String loginEmpNo);
+	int updateAprvStatus(ApprovalVo avo, String loginEmpNo, String statusInfo);
 
 	//합의자가 합의 눌렀을때 업데이트
-	int updateAgreeStatus(ApprovalVo avo, String loginEmpNo);
+	int updateAgreeStatus(ApprovalVo avo, String loginEmpNo, String statusInfo);
+
+	//기안취소
+	int updateCancel(String adcNo);
+
+	//안읽은거 조회
+	int countNonRead(String loginEmpNo);
 	
 	//임시저장한 기안서
 	

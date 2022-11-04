@@ -38,12 +38,17 @@
                          <td>${ l.categoryNo }</td>
                          <td>${ l.empNo }</th>
                          <td>${ l.adcName }</td>
-                         <c:if test="${ l.progress eq '100' }">
-	                    	<td class="complete-progress">결재완료</td>
-	                    </c:if>
-	                    <c:if test="${ l.progress ne '100' }">
-	                    	<td>${ avo.progress }%</td>
-	                    </c:if>
+                         <c:if test="${ l.progress ne '반려' }">
+                            <c:if test="${ l.progress eq '100' }">
+		                    	<td style="color: blue; font-weight: 900;">결재 완료</td>
+		                    </c:if>
+		                    <c:if test="${ l.progress ne '100' }">
+		                    	<td>${ l.progress }%</td>
+		                    </c:if>
+                         </c:if>
+                         <c:if test="${ l.progress eq '반려' }">
+                            	 <td style="color: red; font-weight: 900;">반려</td>
+                         </c:if>
                          <td>${ l.enrollDate }</td>
                          <td>${ l.myAutho }</th>
                      </tr>

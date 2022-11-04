@@ -11,7 +11,7 @@
 
    <!-- Page Heading -->
    <h1 class="h3 mb-2 text-gray-800">나의 기안서</h1>
-   <p class="mb-4">000님이 작성한 기안서 입니다.</p>
+   <p class="mb-4">${ loginVo.nick }님이 작성한 기안서 입니다.</p>
 
    <!-- DataTales Example -->
    <div class="card shadow mb-4">
@@ -27,7 +27,6 @@
                            <th>제목</th>
                            <th>진행상태</th>
                            <th>기안일</th>
-                           <th>현 결재자</th>
                        </tr>
                    </thead>
                    <tbody>
@@ -36,14 +35,18 @@
                         	<input type="hidden" value="${ l.adcNo }"/>
                             <td>${ l.categoryNo }</td>
                             <td>${ l.adcName }</td>
-                            <c:if test="${ l.progress eq '100' }">
-		                    	<td>결재 완료</td>
-		                    </c:if>
-		                    <c:if test="${ l.progress ne '100' }">
-		                    	<td>${ avo.progress }%</td>
-		                    </c:if>
+                            <c:if test="${ l.progress ne '반려' }">
+	                            <c:if test="${ l.progress eq '100' }">
+			                    	<td style="color: blue; font-weight: 900;">결재 완료</td>
+			                    </c:if>
+			                    <c:if test="${ l.progress ne '100' }">
+			                    	<td>${ l.progress }%</td>
+			                    </c:if>
+                            </c:if>
+                            <c:if test="${ l.progress eq '반려' }">
+                            	 <td style="color: red; font-weight: 900;">반려</td>
+                            </c:if>
                             <td>${ l.enrollDate }</td>
-                            <td>${ l.empNo }</td> 
                         </tr>
                    	</c:forEach>
                    </tbody>
