@@ -38,11 +38,11 @@
 		color: gray;
 	}
 	
-	#test1{
+	#detailBar{
 		display: none;
 	}
 	
-	.addrList{
+	.information{
 		display: none;
 	}
 	
@@ -237,47 +237,6 @@
 									</li> <!-- tree -->
 								</ul> <!-- tree -->
 								
-								
-								<!-- 부서도 받아오도록 수정중 -->
-								<%-- <ul class="tree">
-									<li>
-										<input type="checkbox" id="root">
-										<label for="root">비즈쉐어</label>
-										<ul>
-											<li>
-												<input type="checkbox" id="node0">
-												<label id="n0" for="node0">임원</label>
-												<ul>
-													<li>
-														<c:forEach var="addr" items="${voList}" varStatus="st">
-															<input type="checkbox" id="node0">
-															<c:if test="${addr.rankName eq '대표이사'}">
-																<div id="boss">
-																	<label for="node00" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
-																</div>
-															</c:if>
-														</c:forEach>
-													</li>
-												</ul>
-										
-											<li>
-												<c:forEach var="addr" items="${voList}" varStatus="st">
-														<c:if test="${addr.rankName ne '대표이사' || addr.deptName ne '임원'}" >
-														<input type="checkbox" id="node1">
-														<label id="n1" for="node1">${addr.deptName}</label>
-															<input type="checkbox" id="node11">
-															<div id="label">
-																<label for="node11" class="lastTree"><img id="img2" src="${root}/resources/img/guest.png"><a href="javascript:doDisplay(${st.index});"> ${addr.nick} ${addr.rankName}</a></label>
-															</div>
-														</c:if>
-												</c:forEach>
-											</li> <!-- node 1 -->
-
-											</li> <!-- node 0 -->
-										</ul> <!-- node 0 -->
-									</li> <!-- tree -->
-								</ul> <!-- tree --> --%>
-								
 							</tbody>
                         </table>
                         
@@ -294,31 +253,31 @@
 	        		<h6 class="m-0 font-weight-bold text-primary" >직원 상세정보</h6>
 	    		</div>
 	    		
-	    		<div class="card-body" id="test1">
+	    		<div class="card-body" id="detailBar">
 		            <div class="table-responsive">
 		            	
 		            		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 		                	<img id="img" src="${root}/resources/img/guest.png">
 		                		<c:forEach var="addr2" items="${dvoList}" varStatus="st">
-				                		<tr class="temp-${st.index} addrList">
+				                		<tr class="temp-${st.index} information zzz">
 					                		<td id="t1">이름:&nbsp ${addr2.nick}</td>
 					                	</tr>
-					                	<tr class="temp-${st.index} addrList">
+					                	<tr class="temp-${st.index} information zzz">
 					                		<td id="t1">직급:&nbsp ${addr2.rankName}</td>
 					                	</tr>
-										<tr class="temp-${st.index} addrList">
+										<tr class="temp-${st.index} information zzz">
 											<td id="t1">부서:&nbsp ${addr2.deptName}</td>
 					                	</tr>
-										<tr class="temp-${st.index} addrList">
+										<tr class="temp-${st.index} information zzz">
 											<td id="t1">연락처:&nbsp ${addr2.phone}</td>
 					                	</tr>
-										<tr class="temp-${st.index} addrList">
+										<tr class="temp-${st.index} information zzz">
 											<td id="t1">이메일:&nbsp ${addr2.email}</td>
 					                	</tr>
-					                	<tr class="temp-${st.index} addrList">
+					                	<tr class="temp-${st.index} information zzz">
 											<td id="t1">주소:&nbsp ${addr2.address}</td>
 					                	</tr>
-					                	<tr class="temp-${st.index} addrList">
+					                	<tr class="temp-${st.index} information zzz">
 											<td id="t1">입사일:&nbsp ${addr2.hireDate}</td>
 					                	</tr>
 			                	
@@ -343,19 +302,36 @@
 	var bDisplay = true; 
 	function doDisplay(idx){ 	
 		
+		const con = document.getElementById("detailBar"); 
 		const arr = document.querySelectorAll(".temp-" + idx);
-		console.log(arr);
-		for(let i = 0; i < arr.length; i++)  {
-			arr[i].classList.toggle('addrList');
+		
+		let isClicked = false;
+		if(!arr[0].classList.contains("information")){
+			//클릭된거 또 클릭
+			isClicked = true;
+			//클릭한거 만 안보이게
+			for(let i = 0; i < arr.length; i++)  {
+				arr[i].classList.add('information');
+			}
+			con.style.display = 'none';
+			return;
 		}
 		
-	    var con = document.getElementById("test1"); 
+		console.log(arr);
+		
+		//전부다 안보이게
+		const zzzArr = document.querySelectorAll(".zzz");
+		for(let i = 0; i < zzzArr.length; i++)  {
+			zzzArr[i].classList.add('information');
+		}
+		
+		//클릭한거 만 보이게
+		for(let i = 0; i < arr.length; i++)  {
+			arr[i].classList.remove('information');
+		}
+		
+	    con.style.display = 'block';
 	    
-	    if(con.style.display=='block'){ 		
-	        con.style.display = 'none'; 	
-	    }else{ 		
-	        con.style.display = 'block'; 	
-	    } 
 	} 
 	
 </script> 
