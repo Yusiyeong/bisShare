@@ -100,6 +100,14 @@
         width: 100px;
     }
 
+    #center-bot{
+        display: flex;
+        justify-content: center;
+    }
+    #btns{
+        width: 300px;
+    }
+
 
 </style>
 
@@ -130,9 +138,6 @@
                                         <div id="create">
 							                작성자 <a id="now_date">${cvo.writer}</a>
 							            </div>
-							            <div id="cate">
-							                카테고리  <ia id="select">${cvo.cateNo}</ia>
-							            </div>
 							            <div id="start">
 							                시작일 <a class="datepicker-start"  name="startDate">${cvo.startDate}</a>
 							            </div>
@@ -144,10 +149,14 @@
 							                <div id="con">${cvo.content}</div>
 							            </div>
 							            <c:if test="${ cvo.writer eq loginVo.nick }">
-											<div class="row" id="center-bot">
-												<a class="btn btn-primary btn-user btn-block" id="edit" href="${root}/calendar/edit/${cvo.calNo}">수정하기</a>
-												<a class="btn btn-danger btn-user btn-block" id="delete" href="${root}/calendar/delete/${cvo.calNo}">삭제하기</a>
-											</div>
+                                            <div id="center-bot">
+                                                <div class="row" id="btns">
+                                                    <a class="btn btn-primary btn-user btn-block" id="edit" href="${root}/calendar/edit/${cvo.calNo}">수정하기</a>
+                                                    <a class="btn btn-danger btn-user btn-block" id="delete" href="${root}/calendar/delete/${cvo.calNo}">삭제하기</a>
+                                                </div>
+
+                                            </div>
+                                           
 										</c:if>
 							        </div>
 							    </form>

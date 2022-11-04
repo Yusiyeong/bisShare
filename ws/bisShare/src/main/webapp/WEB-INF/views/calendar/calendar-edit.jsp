@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 
+
 <style>
 
     #page{
@@ -32,10 +33,12 @@
     }
 
     #select{
+		margin-left: 45px;
         width: 100px;
         height: 23px;
         font-size: 13px;
         border: none;
+		display: inline;
     }
 
     #file-name{
@@ -94,16 +97,16 @@
 								    <form action="" method="post">
 								        <div id="page">
 								            <div>
-								                <textarea id="title" name="title" placeholder="${vo.title}"></textarea>
+								                <textarea id="title" name="title" placeholder="" value="">${cvo.title}</textarea>
 								            </div>
 								            <div id="create">
 								                작성일 <input id="now_date" type="date" value="">
 												<script>document.getElementById('now_date').valueAsDate = new Date();</script>
 								            </div>
 								            <div id="cate">
-												<div>
+											
 													카테고리  
-												</div>
+											
 												<select name="cateNo" id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
 														  <option value="1" selected>기타</option>
 														  <option value="2">회의</option>
@@ -112,12 +115,19 @@
 														  <option value="5">외근</option>
 														</select>
 								            </div>
+											<script>
+												const x = '${cvo.cateNo}'
+												document.querySelector('#select').value=x;
+											</script>
 								            <div id="start">
 								                시작일 <input class="datepicker-start" name="startDate">
 								                <script>
 								                  $(function(){
-								                    $( ".datepicker-start" ).datepicker({ minDate: 0});
-								                    $('.datepicker-start').datepicker('setDate', 'today');
+								                    $( ".datepicker-start" ).datepicker({ minDate: 0
+													, dateFormat : "yy-mm-dd"
+													});
+								                    $('.datepicker-start').datepicker('setDate', "${cvo.startDate}");
+									
 								                  })
 								                </script>
 								            </div>
@@ -125,15 +135,16 @@
 								                종료일 <input class="datepicker-end" name="endDate">
 								                <script>
 								                  $(function(){
-								                    $('.datepicker-end').datepicker({ minDate: 0});
-								                    $('.datepicker-end').datepicker('setDate', 'today');
+								                    $('.datepicker-end').datepicker({ minDate: 0
+														, dateFormat : "yy-mm-dd"});
+								                    $('.datepicker-end').datepicker('setDate', "${cvo.endDate}");
 								                  })
 								                </script>
 								            </div>
 
 								            <hr id="line">
 								            <div>
-								                <textarea id="con" placeholder="내용을 입력하세요" name="content"></textarea>
+								                <textarea id="con" placeholder="내용을 입력하세요" name="content" value="">${cvo.content}</textarea>
 								            </div>
 								            <div id="center-bot" ><input class="btn btn-primary btn-user btn-block" type="submit" value="작성하기"></div>
 								        </div>

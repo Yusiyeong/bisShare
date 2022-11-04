@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bs.calendar.vo.CalendarVo;
 import com.bs.common.PageVo;
+import com.bs.employee.vo.EmployeeVo;
 
 public interface CalendarService {
 
@@ -20,7 +21,7 @@ public interface CalendarService {
 	int edit(CalendarVo vo);
 
 	//일정 목록 조회
-	List<CalendarVo> selectList(PageVo pv, String no);
+	List<CalendarVo> selectList(PageVo pv, EmployeeVo loginvo);
 	
 	//전체 일정 갯수 조회
 	int selectToatalCnt();
@@ -29,7 +30,7 @@ public interface CalendarService {
 	CalendarVo selectOne(String no);
 
 	//캘린더에서 일정 보기
-	List<CalendarVo> getCalendar();
+	List<CalendarVo> getCalendar(EmployeeVo loginvo);
 
 	//중요 일정 등록
 	String star(CalendarVo cv);

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.bs.calendar.dao.CalendarDao;
 import com.bs.calendar.vo.CalendarVo;
 import com.bs.common.PageVo;
+import com.bs.employee.vo.EmployeeVo;
 
 @Service
 public class CalendarServiceImpl implements CalendarService{
@@ -106,8 +107,8 @@ public class CalendarServiceImpl implements CalendarService{
 
 	//일정 목록 조회
 	@Override
-	public List<CalendarVo> selectList(PageVo pv, String no) {
-		return dao.selectList(sst, pv, no);
+	public List<CalendarVo> selectList(PageVo pv, EmployeeVo evo) {
+		return dao.selectList(sst, pv, evo);
 	}
 
 	//일정 갯수 조회
@@ -124,8 +125,8 @@ public class CalendarServiceImpl implements CalendarService{
 
 	//캘린더에서 일정보기
 	@Override
-	public List<CalendarVo> getCalendar() {
-		return dao.getCalendar(sst);
+	public List<CalendarVo> getCalendar(EmployeeVo evo) {
+		return dao.getCalendar(sst, evo);
 	}
 
 	//중요 일정 등록

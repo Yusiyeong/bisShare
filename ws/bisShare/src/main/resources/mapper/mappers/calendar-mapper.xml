@@ -82,10 +82,10 @@
 		        ,C.CATE_NO
 		        ,C.TITLE
 		        ,C.CONTENT
-		        ,C.ENROLL_DATE
-		        ,C.MODIFY_DATE
-		        ,C.START_DATE
-		        ,C.END_DATE
+		        ,TO_CHAR(C.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE
+		        ,TO_CHAR(C.MODIFY_DATE, 'YYYY-MM-DD') AS MODIFY_DATE
+		        ,TO_CHAR(C.START_DATE, 'YYYY-MM-DD') AS START_DATE
+		        ,TO_CHAR(C.END_DATE, 'YYYY-MM-DD') AS END_DATE
 		        ,C.STATUS
 		        ,E.NICK AS WRITER
 		        ,C.STAR
@@ -93,7 +93,7 @@
 		    JOIN EMPLOYEE E
 		    ON C.WRITER = E.EMP_NO
 		    WHERE C.STATUS = 'Y'
-		    AND C.WRITER = #{writer}
+		    AND E.DEPT_NO = #{deptNo}
 		    ORDER BY C.START_DATE ASC
 	</select>
 	
@@ -113,10 +113,10 @@
 			,C.CATE_NO
 			,C.TITLE
 			,C.CONTENT
-			,C.ENROLL_DATE
-			,C.MODIFY_DATE
-			,C.START_DATE
-			,C.END_DATE
+			,TO_CHAR(C.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE
+	        ,TO_CHAR(C.MODIFY_DATE, 'YYYY-MM-DD') AS MODIFY_DATE
+	        ,TO_CHAR(C.START_DATE, 'YYYY-MM-DD') AS START_DATE
+	        ,TO_CHAR(C.END_DATE, 'YYYY-MM-DD') AS END_DATE
 			,C.STATUS
 			,E.NICK AS WRITER
 		FROM CALENDAR C
@@ -135,15 +135,16 @@
 			,C.TITLE
 			,C.CONTENT
 			,C.ENROLL_DATE
-			,C.MODIFY_DATE
-			,C.START_DATE
-			,C.END_DATE
+	        ,C.MODIFY_DATE
+	        ,C.START_DATE
+	        ,C.END_DATE
 			,C.STATUS
 			,E.NICK AS WRITER
 		FROM CALENDAR C
 		JOIN EMPLOYEE E
 		ON C.WRITER = E.EMP_NO
 		WHERE C.STATUS = 'Y'
+		AND E.DEPT_NO = #{deptNo}
 	</select>
 	
 	
@@ -170,10 +171,10 @@
 		        ,C.CATE_NO
 		        ,C.TITLE
 		        ,C.CONTENT
-		        ,C.ENROLL_DATE
+				,TO_CHAR(C.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE
 		        ,C.MODIFY_DATE
-		        ,C.START_DATE
-		        ,C.END_DATE
+		        ,TO_CHAR(C.START_DATE, 'YYYY-MM-DD') AS START_DATE
+		        ,TO_CHAR(C.END_DATE, 'YYYY-MM-DD') AS END_DATE
 		        ,C.STAR
 		        ,C.STATUS
 		        ,E.NICK AS WRITER

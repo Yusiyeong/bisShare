@@ -41,23 +41,24 @@ public class CalendarController {
 	
 	//일정 메인 (캘린더에서 데이터 조회)
 	@GetMapping("main")
-	public String main(ModelAndView mv, HttpServletRequest request, Model model) {
+	public String main(ModelAndView mv, HttpServletRequest request, Model model, HttpSession session) {
 		model.addAttribute("page", "calendar/calendar-main");
+		
+		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginVo");
+		String no = loginvo.getEmpNo();
 
-		List<CalendarVo> calendar = cs.getCalendar();
+		List<CalendarVo> calendar = cs.getCalendar(loginvo);
 		request.setAttribute("calendarList", calendar);
-		System.out.println(calendar);
 		
 		
 		return "layout/template";
 	}
 	
 
-	//일정 메인에서 상세정보 조회
+	//일정 메인에서 모달로 상세정보 조회
 	
 	
-	
-	//일정 캘린더에서 모달로 작성
+	//일정 캘린더에서 모달로 일정 작성
 //	@GetMapping("modalWrite")
 //	public String createAction(@RequestBody String filterJSON, HttpServletRequest request, HttpServletResponse res, HttpSession session, ModelMap model) throws IOException {
 //		
@@ -73,6 +74,12 @@ public class CalendarController {
 //		
 //		return "layout/template";
 //	}
+	
+	
+	//메인에서 모달로 일정 수정
+	
+	
+	//메인에서 모달로 일정 삭제
 
 	
 	
@@ -109,8 +116,10 @@ public class CalendarController {
 	
 	//일정 수정 (화면)
 	@GetMapping("edit/{no}")
-	public String edit(Model model) {
+	public String edit(Model model, @PathVariable String no) {
+		CalendarVo cvo = cs.selectOne(no);
 		model.addAttribute("page", "calendar/calendar-edit");
+		model.addAttribute("cvo", cvo);
 		return "layout/template";
 	}
 	
@@ -121,8 +130,6 @@ public class CalendarController {
 		vo.setCalNo(no);
 		
 		int result = cs.edit(vo);
-		
-		System.out.println(result);
 		
 		if(result == 1) {
 			session.setAttribute("alertMsg", "일정 수정 완료");
@@ -146,7 +153,7 @@ public class CalendarController {
 			session.setAttribute("alertMsg", "일정이 삭제되었습니다.");
 			return "redirect:/calendar/view/1";
 		}else {
-			model.addAttribute("msg", "일정 삭제 실패");
+			session.setAttribute("alertMsg", "일정 삭제 실패");
 			return "redirect:/calendar/view/1";
 		}
 	}
@@ -166,7 +173,7 @@ public class CalendarController {
 		String no = loginvo.getEmpNo();
 		
 		//데이터 조회
-		List<CalendarVo> cvoList = cs.selectList(pv, no);
+		List<CalendarVo> cvoList = cs.selectList(pv, loginvo);
 		
 		
 		model.addAttribute("cvoList", cvoList);
@@ -184,7 +191,6 @@ public class CalendarController {
 		CalendarVo cvo = cs.selectOne(no);
 		
 		model.addAttribute("cvo", cvo);
-		System.out.println(cvo);
 		
 		return "layout/template";
 	}
