@@ -86,4 +86,10 @@
 		detailView();
 	</script>
 </c:if>
+<c:if test="${!empty mailNick}">
+	<script>
+		let mailNick = '${mailNick}';
+		writeFromAddr();
+	</script>
+</c:if>
 

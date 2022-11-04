@@ -71,8 +71,8 @@ function fileUpload(input) {
                         </path>
                     </svg>
                     ${name[i].originName}
+                    <input type="hidden" value="${name[i].name}-${name[i].originName}" name="fileNames">
                 </button>
-                <input type="hidden" value="${name[i].name}-${name[i].originName}" name="fileNames">
                 `
     
                 uploadDiv.innerHTML += htmlTag;
