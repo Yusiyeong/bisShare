@@ -123,5 +123,15 @@ public class EmployeeController {
 				
 	}//nickDup
 	
+	// 퇴직처리
+	@PostMapping("quit")
+	@ResponseBody
+	public String quit(String memberId) {		
+		
+		// 서비스 호출
+		int result = ms.quit(memberId);
+		return "" + result;		
+		
+	}//quit
 	
 }//class

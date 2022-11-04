@@ -19,7 +19,8 @@ public class EmployeeVo {
 	private String email;
 	private String address;
 	private String ssNo;
-	private String hireDate;
+	private String hireDate;	// 입사일
+	private String quitDate;    // 퇴사일
 	private String salary;
 	private String status;
 	private String profilePath;			// == fileName

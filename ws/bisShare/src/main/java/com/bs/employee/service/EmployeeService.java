@@ -22,6 +22,9 @@ public interface EmployeeService {
 	
 	// 회원이 속해있는 회사의 모든 부서 조회
 	List<EmployeeVo> deptList(String compNo);
+
+	// 퇴직처리
+	int quit(String memberId);
 	
 
 	

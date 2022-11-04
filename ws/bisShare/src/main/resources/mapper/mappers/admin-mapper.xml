@@ -13,6 +13,7 @@
           ,E.PROFILE_PATH AS profilePath
           ,E.EMAIL
           ,E.PHONE
+          ,E.STATUS
       FROM EMPLOYEE E 
       INNER JOIN DEPT D
           ON E.DEPT_NO = D.DEPT_NO
@@ -111,8 +112,9 @@
         ,E.PHONE
         ,E.EMAIL
         ,E.ADDRESS
-        , RPAD(SUBSTR(E.SS_NO,1,7),13,'*') AS ssNo
+        ,RPAD(SUBSTR(E.SS_NO,1,7),13,'*') AS ssNo
         ,TO_CHAR(E.HIRE_DATE, 'YYYY"년" MM"월" DD"일"') AS hireDate
+        ,TO_CHAR(E.QUIT_DATE, 'YYYY"년" MM"월" DD"일"') AS quitDate
         ,E.SALARY
         ,E.STATUS
         ,E.PROFILE_PATH AS profilePath
@@ -139,6 +141,6 @@
 		WHERE EMP_NO = #{empNo}
 	</update>
 
-
+	
 	
 </mapper>

@@ -45,5 +45,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return sst.selectList("employeeMapper.getDeptList", compNo);
 	}
 
+	// 퇴직처리
+	@Override
+	public int quit(SqlSessionTemplate sst, String memberId) {
+		return sst.update("employeeMapper.quit", memberId);
+	}//quit
+
 
 }//class

@@ -25,4 +25,7 @@ public interface EmployeeDao {
 	//속해있는 회사의 모든 부서 조회
 	List<EmployeeVo> getDeptList(SqlSessionTemplate sst, String compNo);
 
+	// 퇴직처리
+	int quit(SqlSessionTemplate sst, String memberId);
+
 }//interface

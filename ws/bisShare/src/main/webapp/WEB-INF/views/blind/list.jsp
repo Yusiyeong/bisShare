@@ -75,7 +75,7 @@ a:hover { text-decoration:none !important }
                                    <tr>
                                        <th width="5%"></th>
                                        <th width="60%">제목</th>
-                                       <th width="10%" class="text-center">익명</th>
+                                       <th width="10%" class="text-center">작성자</th>
                                        <th width="15%" class="text-center">작성일</th>
                                        <th width="10%" class="text-center">조회수</th>
                                    </tr>
@@ -86,7 +86,7 @@ a:hover { text-decoration:none !important }
                                    <tr>
                                        <td class="text-center">${x.num}</td>
                                        <td><a href="${root}/blind/detail/${x.boardNo}">${x.title}</a></td>
-                                       <td class="text-center">${x.writer}</td>
+                                       <td class="text-center">익명</td>
                                        <td class="text-center">${x.enrollDate}</td>
                                        <td class="text-center">${x.cnt}</td>
                                    </tr> 

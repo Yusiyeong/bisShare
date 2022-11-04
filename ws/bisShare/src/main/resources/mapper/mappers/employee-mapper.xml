@@ -115,7 +115,13 @@
 		WHERE COMPANY_NO = #{compNo}
 	</select>
 	
-	
+	<!-- 퇴직처리 -->
+	<update id="quit">
+	UPDATE EMPLOYEE 
+		SET STATUS = 'N',
+		QUIT_DATE = SYSDATE
+	WHERE ID = #{memberId} 
+	</update>
 	
 	
 	

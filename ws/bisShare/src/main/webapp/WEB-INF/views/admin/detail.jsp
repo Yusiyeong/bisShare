@@ -10,7 +10,7 @@
 
 <c:if test="${not empty alertMsg}">
  <script>
- 	alert('${alertMsg}');
+    alert('${alertMsg}');
  </script>
 </c:if>
 
@@ -27,14 +27,19 @@
        <!--form start-->
          <form action="" method="post" enctype="multipart/form-data">
          
-         <!--취소, 수정 버튼start-->
+         <!--취소, 수정 퇴직 버튼start-->
          <div style="margin-bottom: 15px;">
             <!-- 목록 -->
             <a href="${root}/admin/list" class="btn btn-outline-secondary btn-sm">목록으로</a> 
-            <!-- 수정 -->
-            <input type="submit" class="btn btn-outline-primary btn-sm" value="수정하기">
+            
+            <c:if test="${! not empty vo.quitDate}">  <!-- 퇴사한 사람이면 수정, 퇴직처리 버튼 안보이도록 -->
+	            <!-- 수정 -->
+	            <input type="submit" class="btn btn-outline-primary btn-sm" value="수정하기">
+	            <!-- 퇴직처리 -->
+	            <input type="button" class="btn btn-outline-danger btn-sm" onclick="quit();" value="퇴직처리">
+            </c:if>
          </div>
-         <!--취소, 수정 버튼end-->
+         <!--취소, 수정 퇴직 버튼end-->
                      
          <!--start-->
          <div class="">
@@ -47,7 +52,7 @@
                         <hr>
 
                         <!--프로필사진 내부start-->
-						<div style="font-size: 13px; margin-bottom: 5px;">사진은 가로 100px, 세로 100px이상을 권장 합니다.</div>
+                        <div style="font-size: 13px; margin-bottom: 5px;">사진은 가로 100px, 세로 100px이상을 권장 합니다.</div>
 
                         <div>
                            <input hidden type="file" name="profile">
@@ -79,18 +84,18 @@
                            </div>
                         </div>
 
-						<div class="row" style="margin-top: 15px;">
-							<div class="col">
-							   <label class="visually" for="autoSizingSelect">회사 주소</label>
-							   <input type="text" class="form-control" value="${vo.companyAdr}" readonly>
-							</div>
-						</div>
+                  <div class="row" style="margin-top: 15px;">
+                     <div class="col">
+                        <label class="visually" for="autoSizingSelect">회사 주소</label>
+                        <input type="text" class="form-control" value="${vo.companyAdr}" readonly>
+                     </div>
+                  </div>
 
                         <div class="row" style="margin-top: 15px;">
                            <div class="col">
                               <label class="visually" for="autoSizingSelect">직급</label>
                               <select class="form-select form-control" id="rank" name="rankNo">
-                              	 <option value="${vo.rankNo}">${vo.rankNo}</option>
+                                  <option value="${vo.rankNo}">${vo.rankNo}</option>
                                  <option value="1">사원</option>
                                  <option value="2">주임</option>
                                  <option value="3">대리</option>
@@ -105,8 +110,8 @@
                            <div class="col">
                               <label class="visually" for="autoSizingSelect">부서</label>
                               <select class="form-select form-control" id="dept" name="deptNo">
-                              	 <option value="${vo.deptNo}">${vo.deptNo}</option>
-                              	 <option value="0">임원</option>
+                                  <option value="${vo.deptNo}">${vo.deptNo}</option>
+                                  <option value="0">임원</option>
                                  <option value="1">인사</option>
                                  <option value="2">개발</option>
                                  <option value="3">영업</option>
@@ -138,7 +143,7 @@
                                  
                               <div class="col">
                                  <label class="visually" for="autoSizingSelect">아이디</label>
-                                 <input type="text" class="form-control" value="${vo.id}" placeholder="아이디를 입력하세요." readonly>
+                                 <input type="text" class="form-control" name="id" value="${vo.id}" placeholder="아이디를 입력하세요." readonly>
                               </div>
 
                               <div class="col">
@@ -146,7 +151,7 @@
                                  <input type="text" class="form-control" value="${vo.nick}" placeholder="닉네임 입력하세요." readonly>
                               </div>
 
-							  <div class="col">
+                       <div class="col">
                                  <label class="visually" for="autoSizingSelect">비밀번호</label>
                                  <input type="text" class="form-control" placeholder="본인만 확인 가능합니다." readonly>
                               </div>
@@ -189,7 +194,14 @@
                                  <label class="visually" for="autoSizingSelect">입사일</label>
                                  <input type="text" class="form-control" value="${vo.hireDate}" readonly>
                               </div>
-
+                              
+                              <c:if test="${! empty vo.quitDate}">  
+	                               <div class="col">
+	                                 <label class="visually" for="autoSizingSelect">퇴사일</label>
+	                                 <input type="text" class="form-control" value="${vo.quitDate}" readonly>
+	                               </div>
+							   </c:if>
+							   
                            </div>
                         <!--사원정보 내부end-->
                         
@@ -244,3 +256,34 @@
    }
 </script>
 
+<script>
+// 퇴직처리 
+function quit(){
+   
+     const userId  = document.querySelector('input[name=id]').value;
+
+     $.ajax({
+         url : "${root}/employee/quit",
+         method : 'POST',
+         data : {memberId : userId} ,   
+         success : function(data){      
+             
+             if(data == 1){
+                 // 퇴직처리 0 
+                 alert(userId + '님 퇴직처리 되었습니다.');
+                 location.reload();
+             }else{
+                // 퇴직처리 X 
+                 alert('퇴직처리 불가');
+             }
+             
+
+         },
+         error : function(){
+             alert('ajax 통신 실패');
+         },
+     });
+     
+   
+}
+</script>
