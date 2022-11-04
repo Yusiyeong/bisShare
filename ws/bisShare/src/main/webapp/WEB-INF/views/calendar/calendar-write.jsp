@@ -36,6 +36,8 @@
         height: 23px;
         font-size: 13px;
         border: none;
+		display: inline;
+		margin-left: 45px;
     }
 
     #file-name{
@@ -101,16 +103,16 @@
 												<script>document.getElementById('now_date').valueAsDate = new Date();</script>
 								            </div>
 								            <div id="cate">
-												<div>
+												
 													카테고리  
-												</div>
-												<select name="cateNo" id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
-														  <option value="1" selected>기타</option>
-														  <option value="2">회의</option>
-														  <option value="3">휴가</option>
-														  <option value="4">반차</option>
-														  <option value="5">외근</option>
-														</select>
+													<select name="cateNo" id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
+															  <option value="1" selected>기타</option>
+															  <option value="2">회의</option>
+															  <option value="3">휴가</option>
+															  <option value="4">반차</option>
+															  <option value="5">외근</option>
+															</select>
+												
 								            </div>
 								            <div id="start">
 								                시작일 <input class="datepicker-start" name="startDate">

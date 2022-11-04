@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bs.calendar.vo.CalendarVo;
 import com.bs.common.PageVo;
+import com.bs.employee.vo.EmployeeVo;
 
 @Repository
 public class CalendarDaoImpl implements CalendarDao{
@@ -40,12 +41,12 @@ public class CalendarDaoImpl implements CalendarDao{
 
 	//일정 목록 조회
 	@Override
-	public List<CalendarVo> selectList(SqlSessionTemplate sst, PageVo pv, String no) {
+	public List<CalendarVo> selectList(SqlSessionTemplate sst, PageVo pv, EmployeeVo evo) {
 		
 		int offset = (pv.getCurrentPage()-1 * pv.getBoardLimit());
 		RowBounds rb = new RowBounds(offset, pv.getBoardLimit());
 		
-		return sst.selectList("calendarMapper.selectList", no, rb);
+		return sst.selectList("calendarMapper.selectList", evo, rb);
 	}
 
 	//일정 갯수 조회
@@ -62,7 +63,7 @@ public class CalendarDaoImpl implements CalendarDao{
 
 	//캘린더 일정조회
 	@Override
-	public List<CalendarVo> getCalendar(SqlSessionTemplate sst) {
+	public List<CalendarVo> getCalendar(SqlSessionTemplate sst, EmployeeVo evo) {
 		return sst.selectList("calendarMapper.calendarList");
 	}
 

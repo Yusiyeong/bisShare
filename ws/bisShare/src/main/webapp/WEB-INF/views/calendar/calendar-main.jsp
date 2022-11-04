@@ -111,7 +111,7 @@
 						}) */
 					</script>
 					
-				    <script>
+<!-- 				    <script>
 			        window.onload = function () {
 			            var calendarEl = document.getElementById('calendar');
 			            var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -133,7 +133,7 @@
 			            calendar.render();
 			        }
 			
-			    </script>
+			    </script> -->
 
 				<!--end-->
 				</div>

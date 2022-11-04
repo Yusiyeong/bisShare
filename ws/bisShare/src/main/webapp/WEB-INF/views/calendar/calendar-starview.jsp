@@ -80,7 +80,7 @@
 																			});
 																		});
 																</script>
-														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'">${x.title}</h5>
+														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${x.title}</h5>
 														  <h5 class="card-title">${x.startDate}</h5>
 														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
 														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
@@ -132,7 +132,7 @@
 																			});
 																		});
 																</script>
-														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'">${x.title}</h5>
+														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${x.title}</h5>
 														  <h5 class="card-title">${x.startDate} ~ ${x.endDate}</h5>
 														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
 														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
@@ -184,7 +184,7 @@
 																			});
 																		});
 																</script>
-														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'">${x.title}</h5>
+														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${x.title}</h5>
 														  <h5 class="card-title">${x.startDate}</h5>
 														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
 														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
@@ -236,7 +236,7 @@
 																			});
 																		});
 																</script>
-														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'">${x.title}</h5>
+														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${x.title}</h5>
 														  <h5 class="card-title">${x.startDate}</h5>
 														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
 														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
@@ -288,7 +288,7 @@
 																			});
 																		});
 																</script>
-														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'">${x.title}</h5>
+														  <h5 class="card-title"  onclick="location.href='${root}/calendar/detail/${x.calNo}'" style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">${x.title}</h5>
 														  <h5 class="card-title">${x.startDate}</h5>
 														  <h6 class="card-subtitle mb-2 text-muted">${x.writer}</h6>
 														  <p class="card-text" style='overflow:hidden; white-space:nowrap; text-overflow:ellipsis;'>${x.content}</p>
