@@ -1,5 +1,6 @@
 package com.bs.approval.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,6 @@ public class ApprovalController {
 		//로그인한 멤버의 정보 (empNo 필요)
 		EmployeeVo vo = (EmployeeVo) session.getAttribute("loginVo");
 		List<ApprovalVo> aprvList = aprvService.getListByEmpNo(vo.getEmpNo());
-		
 		if(aprvList != null) {
 			model.addAttribute("aprvList", aprvList);
 			model.addAttribute("title", "나의 기안서");
@@ -50,7 +50,7 @@ public class ApprovalController {
 			return "layout/template";
 		} else {
 			//실패
-			return "";
+			return "layout/template";
 		}
 	}
 	
@@ -104,13 +104,18 @@ public class ApprovalController {
 	public String document(Model model, HttpSession session) {
 		
 		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
+		List<ApprovalVo> myAuthoAprvList = new ArrayList<>();
+		if(empVo != null) {
+			myAuthoAprvList = aprvService.getListAuthorMy(empVo.getEmpNo());
+			model.addAttribute("aprvList", myAuthoAprvList);
+			model.addAttribute("title", "나의 결재함");
+			model.addAttribute("page", "approval/document");
+			return "layout/template";
+		}
+		else {
+			return "main";
+		}
 		
-		List<ApprovalVo> myAuthoAprvList = aprvService.getListAuthorMy(empVo.getEmpNo());
-		
-		model.addAttribute("aprvList", myAuthoAprvList);
-		model.addAttribute("title", "나의 결재함");
-		model.addAttribute("page", "approval/document");
-		return "layout/template";
 	}
 	
 	//결재 디테일 화면
@@ -133,7 +138,8 @@ public class ApprovalController {
 		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
 		
 		String loginEmpNo = empVo.getEmpNo();
-		int result = aprvService.updateAprvStatus(avo, loginEmpNo);
+		String statusInfo = "Y";
+		int result = aprvService.updateAprvStatus(avo, loginEmpNo, statusInfo);
 		
 		if(result==1) {
 			return "ok";
@@ -149,7 +155,67 @@ public class ApprovalController {
 		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
 		
 		String loginEmpNo = empVo.getEmpNo();
-		int result = aprvService.updateAgreeStatus(avo, loginEmpNo);
+		String statusInfo = "Y";
+		int result = aprvService.updateAgreeStatus(avo, loginEmpNo, statusInfo);
+		
+		if(result==1) {
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+	
+	//기안 취소
+	@PostMapping("cancel")
+	@ResponseBody
+	public String cancel(String adcNo) {
+		int result = aprvService.updateCancel(adcNo);
+		if(result==1) return"ok";
+		else return"false";
+	}
+	
+	//결재 반려 버튼 눌렀을때 ajax
+	@PostMapping("approveReject")
+	@ResponseBody
+	public String approveReject(ApprovalVo avo, HttpSession session) {
+		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
+		
+		String loginEmpNo = empVo.getEmpNo();
+		String statusInfo = "R";
+		int result = aprvService.updateAprvStatus(avo, loginEmpNo, statusInfo);
+		
+		if(result==1) {
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+	
+	//합의 반려 버튼 눌렀을때 ajax
+	@PostMapping("agreeReject")
+	@ResponseBody
+	public String agreeReject(ApprovalVo avo, HttpSession session) {
+		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
+		
+		String loginEmpNo = empVo.getEmpNo();
+		String statusInfo = "R";
+		int result = aprvService.updateAgreeStatus(avo, loginEmpNo, statusInfo);
+		
+		if(result==1) {
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+	
+	// 사이드바에 표시해줄 안읽은 결재문서 ajax
+	@PostMapping("nonReadCount")
+	@ResponseBody
+	public String nonReadCount(HttpSession session) {
+		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
+		
+		String loginEmpNo = empVo.getEmpNo();
+		int result = aprvService.countNonRead(loginEmpNo);
 		
 		if(result==1) {
 			return "ok";
@@ -160,4 +226,29 @@ public class ApprovalController {
 	
 	
 	
+	
 }//class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

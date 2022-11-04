@@ -43,7 +43,16 @@ public class ApprovalServiceImpl implements ApprovalService{
 		List<ApprovalVo> list = dao.getListByNo(sst, empNo);
 		if(list != null) {
 			for(int i = 0; i < list.size(); ++i) {
-				list.set(i, checkProgress(list.get(i)));
+				boolean isReject = false;
+				if(list.get(i).getAgreeStatus() == null) {
+					isReject = false;
+				} else {
+					isReject = list.get(i).getAgreeStatus().contains("R");
+				}
+				if(!list.get(i).getAprverStatus().contains("R")&&!isReject) {
+					list.set(i, checkProgress(list.get(i)));
+				}
+				else list.get(i).setProgress("반려");
 			}
 			return list;
 		} else {
@@ -121,8 +130,18 @@ public class ApprovalServiceImpl implements ApprovalService{
 			
 			dao.updateStatus(sst, updateInfo);
 		}
-		
-		return checkProgress(vo);
+		boolean isReject = false;
+		if(vo.getAgreeStatus() == null) {
+			isReject = false;
+		} else {
+			isReject = vo.getAgreeStatus().contains("R");
+		}
+		if(!vo.getAprverStatus().contains("R")&&!isReject) {
+			return checkProgress(vo);
+		} else {
+			vo.setProgress("반려");
+			return vo;
+		}
 	}//기안서 1개 조회 - END
 
 	//나에게 권한있는 기안서 조회
@@ -153,7 +172,16 @@ public class ApprovalServiceImpl implements ApprovalService{
 			}
 		}
 		for(int i = 0; i < myAuthoList.size(); ++i) {
-			myAuthoList.set(i, checkProgress(myAuthoList.get(i)));
+			boolean isReject = false;
+			if(myAuthoList.get(i).getAgreeStatus() == null) {
+				isReject = false;
+			} else {
+				isReject = myAuthoList.get(i).getAgreeStatus().contains("R");
+			}
+			if(!myAuthoList.get(i).getAprverStatus().contains("R")&&!isReject) {
+				myAuthoList.set(i, checkProgress(myAuthoList.get(i)));
+			}
+			else myAuthoList.get(i).setProgress("반려");
 		}
 		return myAuthoList;
 	}
@@ -186,7 +214,6 @@ public class ApprovalServiceImpl implements ApprovalService{
 					++approveYesCnt;
 				}
 			}
-			
 			// 총 Y로 나와야 하는 수 = 결재권자 + 합의자
 			int entireNum = aprverCnt + agreeCnt;
 			// 백분율로 계산 -> 버림
@@ -199,7 +226,7 @@ public class ApprovalServiceImpl implements ApprovalService{
 
 	//결재권자가 결재 눌렀을때
 	@Override
-	public int updateAprvStatus(ApprovalVo avo, String loginEmpNo) {
+	public int updateAprvStatus(ApprovalVo avo, String loginEmpNo, String statusInfo) {
 
 		Map updateInfo = new HashMap<String, String>();
 		
@@ -210,8 +237,11 @@ public class ApprovalServiceImpl implements ApprovalService{
 		
 		for(int i = 0; i < avo.getAprverStatuses().length; ++i) {
 			if(i>0) updateAprverStatus += ",";
-			if(loginEmpNo.equals(avo.getAprverEmpNos()[i])) updateAprverStatus += "Y";
-			else updateAprverStatus += avo.getAprverStatuses()[i];
+			if(loginEmpNo.equals(avo.getAprverEmpNos()[i])) {
+				//결재인지 반려인지 체크
+				if(statusInfo.equals("Y"))updateAprverStatus += "Y";
+				else updateAprverStatus += "R";
+			} else updateAprverStatus += avo.getAprverStatuses()[i];
 		}
 		updateInfo.put("key", "aprv");
 		updateInfo.put("value", updateAprverStatus);
@@ -222,7 +252,7 @@ public class ApprovalServiceImpl implements ApprovalService{
 	
 	//합의자가 결재 눌렀을때
 	@Override
-	public int updateAgreeStatus(ApprovalVo avo, String loginEmpNo) {
+	public int updateAgreeStatus(ApprovalVo avo, String loginEmpNo, String statusInfo) {
 
 		Map updateInfo = new HashMap<String, String>();
 		
@@ -233,7 +263,11 @@ public class ApprovalServiceImpl implements ApprovalService{
 		
 		for(int i = 0; i < avo.getAgreeStatuses().length; ++i) {
 			if(i>0) updateAgreeStatus += ",";
-			if(loginEmpNo.equals(avo.getAgreeEmpNos()[i])) updateAgreeStatus += "Y";
+			if(loginEmpNo.equals(avo.getAgreeEmpNos()[i])) {
+				//결재인지 반려인지 체크
+				if(statusInfo.equals("Y")) updateAgreeStatus += "Y";
+				else updateAgreeStatus += "R";
+			}
 			else updateAgreeStatus += avo.getAgreeStatuses()[i];
 		}
 		updateInfo.put("key", "agree");
@@ -241,6 +275,55 @@ public class ApprovalServiceImpl implements ApprovalService{
 		updateInfo.put("adcNo", avo.getAdcNo());
 		
 		return dao.updateStatus(sst, updateInfo);
+	}
+
+	@Override
+	public int updateCancel(String adcNo) {
+		Map updateInfo = new HashMap<String, String>();
+		updateInfo.put("key", "cancel");
+		updateInfo.put("value", "Y");
+		updateInfo.put("adcNo", adcNo);
+		return dao.updateStatus(sst, updateInfo);
+	}
+
+	@Override
+	public int countNonRead(String empNo) {
+		List<ApprovalVo> allAprvList = dao.getListAll(sst);
+		
+		List<ApprovalVo> myAuthoList = new ArrayList<ApprovalVo>();
+		
+		for(ApprovalVo vo : allAprvList) {
+			// DB에서 꺼내온 데이터 배열로 변환
+			vo.setAprverEmpNos(vo.getAprverEmpNo().split(","));;
+			//변수 생성 (로그인한 emp의 권한이 들어가있는지 확인)
+			boolean isAprver = Arrays.asList(vo.getAprverEmpNos()).contains(empNo);
+			//결과에 따라 list에 담아줌
+			if(isAprver) { myAuthoList.add(vo); vo.setMyAutho("결재권자");}
+			if(vo.getAgreeEmpNo()!=null) {
+				vo.setAgreeEmpNos(vo.getAgreeEmpNo().split(","));
+				boolean isAgree = Arrays.asList(vo.getAgreeEmpNos()).contains(empNo);
+				if(isAgree) { myAuthoList.add(vo); vo.setMyAutho("합의");}
+			}
+			if(vo.getRefEmpNo()!=null) {
+				vo.setRefEmpNos(vo.getRefEmpNo().split(","));
+				boolean isRef = Arrays.asList(vo.getRefEmpNos()).contains(empNo);
+				if(isRef) { myAuthoList.add(vo); vo.setMyAutho("참조");}
+			}
+		}
+		for(int i = 0; i < myAuthoList.size(); ++i) {
+			boolean isReject = false;
+			if(myAuthoList.get(i).getAgreeStatus() == null) {
+				isReject = false;
+			} else {
+				isReject = myAuthoList.get(i).getAgreeStatus().contains("R");
+			}
+			if(!myAuthoList.get(i).getAprverStatus().contains("R")&&!isReject) {
+				myAuthoList.set(i, checkProgress(myAuthoList.get(i)));
+			}
+			else myAuthoList.get(i).setProgress("반려");
+		}
+		
+		return 0;
 	}
 	
 	
