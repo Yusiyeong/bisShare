@@ -80,7 +80,11 @@
 								<td>${addr.rankName}</td>
 								<td>${addr.deptName}</td>
 								<td>${addr.phone}</td>
-								<td>${addr.email}</td>
+								<td>
+									<a href="${root}/mail/receive?mailNick=${addr.nick}">
+										${addr.email}
+									</a>
+								</td>
 							</tr>
 		    			</c:forEach>
 						

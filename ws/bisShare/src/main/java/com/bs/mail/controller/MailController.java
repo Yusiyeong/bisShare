@@ -143,10 +143,14 @@ public class MailController {
 	 * 받은 메일함 이동
 	 */
 	@GetMapping(value={"/receive","/receive/{mailNo}"})
-	public String received(Model model, HttpSession session, @PathVariable(required = false) String mailNo) {
+	public String received(Model model, HttpSession session, @PathVariable(required = false) String mailNo, HttpServletRequest req) {
 		
 		if(mailNo != null) {
 			model.addAttribute("dropDetail", mailNo);
+		}
+		
+		if(req.getParameter("mailNick") != null) {
+			model.addAttribute("mailNick",req.getParameter("mailNick"));
 		}
 		
 		model.addAttribute("title", "RECEIVED MAIL");
@@ -162,7 +166,7 @@ public class MailController {
 		model.addAttribute("receiveMail", list);
 		return "layout/template";
 	}
-
+	
 	/**
 	 * 중요 표시
 	 */
@@ -431,16 +435,18 @@ public class MailController {
 
 		int result = ms.draftWrite(mv, recList, refList);
 		
-		
-		for(String x : fileNames) {
-			MailAttVo mav = new MailAttVo();
-			String[] arr = x.split("-");
-			
-			mav.setName(arr[0]);
-			mav.setOriginName(arr[1]);
-			
-			ms.insertDraftAtt(mav);
+		if (fileNames != null) {
+			for(String x : fileNames) {
+				MailAttVo mav = new MailAttVo();
+				String[] arr = x.split("-");
+				
+				mav.setName(arr[0]);
+				mav.setOriginName(arr[1]);
+				
+				ms.insertDraftAtt(mav);
+			}
 		}
+		
 		
 		if (result == 1) {
 			return "redirect:/mail/draft";

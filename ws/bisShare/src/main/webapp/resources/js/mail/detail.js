@@ -65,6 +65,7 @@
               </path>
             </svg>
             ${x.originName}
+            <input type="hidden" value="${x.name}-${x.originName}" name="fileNames">
           </button>
             `
 
@@ -96,6 +97,11 @@
       success: function (response) {
         document.querySelector('#notReadCnt').innerHTML = response;
         document.querySelector('#mail-dropdown-cnt').innerHTML = response;
+        if(response == 0) {
+          document.querySelector('#mail-dropdown-cnt').style.display = 'none';
+        }else {
+          document.querySelector('#mail-dropdown-cnt').style.display = 'block';
+        }
       }
     });
   }

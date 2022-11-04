@@ -1,16 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<style>
-	.content-border {
-		border: 1px solid red;
-	}
-	#detail-content {
-		display: block;
-	}
-</style>
-
-
 <div class="user" id="mail-detail">
 	<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 		<button class="btn btn-danger ml-2 mr-5" onclick="removeOneBtn()" id="navTrash">삭제하기</button>

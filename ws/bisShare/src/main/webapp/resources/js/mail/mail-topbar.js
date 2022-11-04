@@ -28,5 +28,10 @@ $.ajax({
     url: `${root}/mail/updateCnt`,
     success: function (response) {
     document.querySelector('#mail-dropdown-cnt').innerHTML = response;
+    if(response == 0) {
+        document.querySelector('#mail-dropdown-cnt').style.display = 'none';
+      }else {
+        document.querySelector('#mail-dropdown-cnt').style.display = 'block';
+      }
     }
 });
