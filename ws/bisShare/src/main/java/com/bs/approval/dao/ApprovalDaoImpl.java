@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bs.approval.vo.ApprovalVo;
+import com.bs.approval.vo.AprvAttVo;
 
 @Repository
 public class ApprovalDaoImpl implements ApprovalDao{
@@ -38,8 +39,21 @@ public class ApprovalDaoImpl implements ApprovalDao{
 	//결재테이블 결재/합의/참조 업데이트
 	@Override
 	public int updateStatus(SqlSessionTemplate sst, Map updateInfo) {
-		return sst.update("updateStatus", updateInfo);
+		return sst.update("approvalMapper.updateStatus", updateInfo);
 	}
+
+	//첨부파일 insert
+	@Override
+	public int insertAprvAtt(SqlSessionTemplate sst, AprvAttVo vo) {
+		return sst.insert("approvalMapper.insertAtt", vo);
+	}
+
+	//첨부파일 가져오기
+	@Override
+	public List<AprvAttVo> getAttList(SqlSessionTemplate sst, String adcNo) {
+		return sst.selectList("approvalMapper.selectAttList", adcNo);
+	}
+
 
 	
 	

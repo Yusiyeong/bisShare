@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.bs.approval.vo.ApprovalVo;
+import com.bs.approval.vo.AprvAttVo;
 
 public interface ApprovalService {
 
@@ -33,6 +34,12 @@ public interface ApprovalService {
 
 	//안읽은거 조회
 	int countNonRead(String loginEmpNo);
+
+
+	int insertAprvAtt(String[] fileNames, String adcNo);
+
+	//첨부파일 가져오기
+	List<AprvAttVo> getAttList(String adcNo);
 	
 	//임시저장한 기안서
 	

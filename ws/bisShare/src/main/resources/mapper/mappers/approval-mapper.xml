@@ -127,6 +127,32 @@
 			</choose>
 		WHERE ADC_NO = #{adcNo}
 	</update>
+	
+	<!-- 첨부파일 -->
+	<insert id="insertAtt">
+		INSERT INTO APRV_ATTATCHMENT(
+		ATT_NO
+		, ADC_NO
+		, ATT_NAME
+		, ORIGIN_NAME
+		) VALUES(
+		APRV_ATT_NO.NEXTVAL
+		, #{adcNo}
+		, #{attName}
+		, #{originName}
+		)
+	</insert>
+	
+	<!-- 첨부파일 가져오기 -->
+	<select id="selectAttList" resultType="aprvAttVo">
+		SELECT
+			ATT_NO
+			, ADC_NO
+			, ATT_NAME
+			, ORIGIN_NAME 
+		FROM APRV_ATTATCHMENT
+		WHERE ADC_NO = #{adcNo}
+	</select>
 
 </mapper>
 

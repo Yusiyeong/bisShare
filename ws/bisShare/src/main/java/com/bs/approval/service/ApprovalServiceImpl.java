@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bs.admin.dao.AdminDao;
 import com.bs.approval.dao.ApprovalDao;
 import com.bs.approval.vo.ApprovalVo;
+import com.bs.approval.vo.AprvAttVo;
 import com.bs.employee.vo.EmployeeVo;
+import com.bs.mail.vo.MailAttVo;
 
 @Service
 public class ApprovalServiceImpl implements ApprovalService{
@@ -332,6 +334,29 @@ public class ApprovalServiceImpl implements ApprovalService{
 		}
 		
 		return 0;
+	}
+
+	@Override
+	public int insertAprvAtt(String[] fileNames, String adcNo) {
+		int result = 0;
+		
+		for(String x : fileNames) {
+			AprvAttVo vo = new AprvAttVo();
+			String[] arr = x.split("-");
+			
+			vo.setAttName(arr[0]);
+			vo.setOriginName(arr[1]);
+			vo.setAdcNo(adcNo);
+			
+			result += dao.insertAprvAtt(sst, vo);
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<AprvAttVo> getAttList(String adcNo) {
+		return dao.getAttList(sst, adcNo);
 	}
 	
 	

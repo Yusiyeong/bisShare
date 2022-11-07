@@ -1,14 +1,26 @@
 package com.bs.approval.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +30,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bs.approval.service.ApprovalService;
 import com.bs.approval.vo.ApprovalVo;
+import com.bs.approval.vo.AprvAttVo;
+import com.bs.common.FileUploader;
 import com.bs.employee.service.EmployeeService;
 import com.bs.employee.vo.EmployeeVo;
+import com.bs.mail.vo.MailAttVo;
+import com.google.gson.Gson;
 
 @Controller
 @RequestMapping("approval")
@@ -91,6 +108,59 @@ public class ApprovalController {
 		}
 	}
 	
+	//파일 업로드 화면 ajax
+	@PostMapping(value = "fileUpload", produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String fileUpload(@RequestParam(value = "files", required = false) MultipartFile[] files, HttpServletRequest req) {
+		Gson gson = new Gson();
+		String savePath = req.getServletContext().getRealPath("/resources/upload/approve/");
+		List<Map<String, String>> nameList = new ArrayList<Map<String,String>>();
+		
+		if(files != null) {	
+			for(MultipartFile f : files) {
+				String originName = f.getOriginalFilename();
+				String name = FileUploader.fileUploadWithChangName(f, savePath);
+				Map<String, String> fileNames = new HashMap<String, String>();
+				fileNames.put("originName", originName);
+				fileNames.put("name", name);
+				nameList.add(fileNames);
+			}
+		}
+		
+		return gson.toJson(nameList);
+	}
+	
+	//업로드할 파일 클릭시 삭제 하는 ajax
+	@PostMapping(value = "delFile", produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String fileDelete(String fileName, HttpServletRequest req) {
+		String savePath = req.getServletContext().getRealPath("/resources/upload/mail/");
+		File file = new File(savePath+fileName);
+		
+		boolean result = file.delete();
+		if(result) {			
+			return "성공";
+		}else {
+			return "실패";
+		}
+		
+	}
+	
+	//결재 작성 파일첨부 -> DB에 저장하는 (ajax)
+	@PostMapping("attach")
+	@ResponseBody
+	public String attach(Model model,@RequestParam(value="fileNames[]") String[] fileNames, String adcNo) {
+		//첨부된 파일 있을 경우에만 진행
+		if(fileNames != null) {
+			int result = aprvService.insertAprvAtt(fileNames, adcNo);
+			if(result == fileNames.length) return adcNo;
+			else return null;
+		} else {
+			return "첨부된 파일이 없음";
+		}
+		
+	}
+	
 	//임시저장 화면
 	@GetMapping("temp")
 	public String temp(Model model) {
@@ -125,6 +195,11 @@ public class ApprovalController {
 		EmployeeVo empVo = (EmployeeVo) session.getAttribute("loginVo");
 		
 		ApprovalVo vo = aprvService.getOneByNo(adcNo, empVo.getEmpNo());
+		List<AprvAttVo> attVoList = aprvService.getAttList(adcNo);
+		
+		if(attVoList != null) model.addAttribute("attList", attVoList); //첨부파일 있을때만
+		else model.addAttribute("attList", null);
+		
 		model.addAttribute("avo", vo);
 		model.addAttribute("title", "결재 서류");
 		model.addAttribute("page", "approval/detail");
@@ -224,7 +299,29 @@ public class ApprovalController {
 		}
 	}
 	
-	
+	//첨부파일 다운로드
+	@GetMapping("download/{name}/{origin}")
+	public ResponseEntity<ByteArrayResource> download(@PathVariable String name,@PathVariable String origin, HttpServletRequest req) throws IOException {
+		String fileName = URLEncoder.encode(origin, "UTF-8");
+		fileName = "\'" + fileName + "\'";
+		
+		String path = req.getServletContext().getRealPath("/resources/upload/approve/");
+		
+		File file = new File(path + name);
+		
+		Path filePath = Paths.get(path+name);
+		
+		byte[] data = FileUtils.readFileToByteArray(file);
+		ByteArrayResource res = new ByteArrayResource(data);
+		
+		return ResponseEntity
+				.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(Files.size(filePath))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + URLEncoder.encode(origin, "UTF-8"))
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.body(res);
+	}
 	
 	
 }//class
