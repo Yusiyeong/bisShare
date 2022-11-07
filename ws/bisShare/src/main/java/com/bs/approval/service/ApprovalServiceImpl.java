@@ -288,6 +288,10 @@ public class ApprovalServiceImpl implements ApprovalService{
 
 	@Override
 	public int countNonRead(String empNo) {
+		
+		int cnt = 0;
+		
+		//기안서 전체 조회
 		List<ApprovalVo> allAprvList = dao.getListAll(sst);
 		
 		List<ApprovalVo> myAuthoList = new ArrayList<ApprovalVo>();
@@ -321,6 +325,10 @@ public class ApprovalServiceImpl implements ApprovalService{
 				myAuthoList.set(i, checkProgress(myAuthoList.get(i)));
 			}
 			else myAuthoList.get(i).setProgress("반려");
+		}
+		
+		for(int i = 0; i < myAuthoList.size(); ++i) {
+			
 		}
 		
 		return 0;

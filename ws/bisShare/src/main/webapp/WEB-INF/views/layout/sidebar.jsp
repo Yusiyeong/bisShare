@@ -72,7 +72,7 @@
                 </a>
                 <a class="collapse-item" href="${root}/approval/document">
                     나의결재함
-                    <span class="badge badge-danger">3</span>
+                    <span class="badge badge-danger" id="non-read-count-num">0</span>
                 </a>
             </div>
         </div>
@@ -139,7 +139,7 @@
             url : "${root}/approval/nonReadCount"
             , type : "post"
             , success : (result) => {
-                if(result == 'ok'){
+                if(result > 0){
                 } else{
                 }
             }
