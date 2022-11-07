@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.bs.approval.vo.ApprovalVo;
+import com.bs.approval.vo.AprvAttVo;
 
 public interface ApprovalDao {
 
@@ -26,6 +27,12 @@ public interface ApprovalDao {
 
 	//결재/합의/참조 상태 업데이트 하기
 	int updateStatus(SqlSessionTemplate sst, Map updateInfo);
+
+	//첨부파일
+	int insertAprvAtt(SqlSessionTemplate sst, AprvAttVo vo);
+
+	//첨부파일 가져오기
+	List<AprvAttVo> getAttList(SqlSessionTemplate sst, String adcNo);
 
 	//임시저장한 기안서
 	
