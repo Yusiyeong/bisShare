@@ -1,7 +1,7 @@
 let oneNo;
 const numFilter = /[^0-9]/g;
 
-let order = 4;
+let order = 5;
 let t1 = 40;
 let t2 = 300;
 if(refCheck == 4) {

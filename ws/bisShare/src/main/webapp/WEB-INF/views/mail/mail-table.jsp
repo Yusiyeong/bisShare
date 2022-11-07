@@ -9,6 +9,7 @@
 				<th></th>
 				<th id="import">중요</th>
 				<th>메일명</th>
+				<th class="d-none"></th>
 				<th id="nick">발신</th>
 				<th>시간</th>
 			</tr>
@@ -34,6 +35,7 @@
 					<c:if test="${empty r.readYn}">
 						<td>${r.title}</td>
 					</c:if>
+					<td class="d-none">${r.content}</td>
 					<c:if test="${!empty r.send }">
 						<td>${r.send}</td>
 					</c:if>
