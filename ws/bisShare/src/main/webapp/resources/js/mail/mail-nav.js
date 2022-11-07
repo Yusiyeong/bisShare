@@ -98,19 +98,22 @@ function passBtn() {
   if(refInfo != '') {
     refText = `Reference : ${refInfo}`
   }
-
-  $('#mail-content').summernote('code', `
-      ---------- Forwarded message ---------
-      <br>
-      Send : ${sendInfo}
-      <br>
-      ${refText}
-      <br>
-      <br>
-      ${contentInfo}
-
-    `
-    );
+  if(refCheck!=4) {
+    $('#mail-content').summernote('code', `
+        ---------- Forwarded message ---------
+        <br>
+        Send : ${sendInfo}
+        <br>
+        ${refText}
+        <br>
+        <br>
+        ${contentInfo}
+  
+      `
+      );
+  } else {
+    $('#mail-content').summernote('code',`${contentInfo}`);
+  }
 }
 
 function writeFromAddr() {
