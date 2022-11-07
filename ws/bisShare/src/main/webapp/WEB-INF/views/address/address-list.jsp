@@ -40,9 +40,9 @@
 	
 	#detailBar{
 		display: none;
-	}
+	} 
 	
-	.information{
+	.dp-none{
 		display: none;
 	}
 	
@@ -137,7 +137,7 @@
 	    		<div class="card-body">
 	    		<form action="${root}/address/list" method="get">
                     <div class="table-responsive">
-                        <table id="addrList" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 							<tbody>
 				    			
 								<ul class="tree">
@@ -259,25 +259,25 @@
 		            		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 		                	<img id="img" src="${root}/resources/img/guest.png">
 		                		<c:forEach var="addr2" items="${dvoList}" varStatus="st">
-				                		<tr class="index-${st.index} information otherInfo">
+				                		<tr class="addrVo${st.index} dp-none otherInfo">
 					                		<td id="t1">이름:&nbsp ${addr2.nick}</td>
 					                	</tr>
-					                	<tr class="index-${st.index} information otherInfo">
+					                	<tr class="addrVo${st.index} dp-none otherInfo">
 					                		<td id="t1">직급:&nbsp ${addr2.rankName}</td>
 					                	</tr>
-										<tr class="index-${st.index} information otherInfo">
+										<tr class="addrVo${st.index} dp-none otherInfo">
 											<td id="t1">부서:&nbsp ${addr2.deptName}</td>
 					                	</tr>
-										<tr class="index-${st.index} information otherInfo">
+										<tr class="addrVo${st.index} dp-none otherInfo">
 											<td id="t1">연락처:&nbsp ${addr2.phone}</td>
 					                	</tr>
-										<tr class="index-${st.index} information otherInfo">
+										<tr class="addrVo${st.index} dp-none otherInfo">
 											<td id="t1">이메일:&nbsp ${addr2.email}</td>
 					                	</tr>
-					                	<tr class="index-${st.index} information otherInfo">
+					                	<tr class="addrVo${st.index} dp-none otherInfo">
 											<td id="t1">주소:&nbsp ${addr2.address}</td>
 					                	</tr>
-					                	<tr class="index-${st.index} information otherInfo">
+					                	<tr class="addrVo${st.index} dp-none otherInfo">
 											<td id="t1">입사일:&nbsp ${addr2.hireDate}</td>
 					                	</tr>
 			                	
@@ -302,35 +302,29 @@
 	var bDisplay = true; 
 	function doDisplay(idx){ 	
 		
-		const con = document.getElementById("detailBar"); 
-		const arr = document.querySelectorAll(".index-" + idx);
+		const detailBar = document.getElementById("detailBar"); 
+		const addrVoArr = document.querySelectorAll(".addrVo" + idx);
 		
-		let isClicked = false;
-		if(!arr[0].classList.contains("information")){
-			//클릭된거 또 클릭
-			isClicked = true;
-			//클릭한거 만 안보이게
-			for(let i = 0; i < arr.length; i++)  {
-				arr[i].classList.add('information');
+		if(!addrVoArr[0].classList.contains("dp-none")){	
+			for(let i = 0; i < addrVoArr.length; i++)  {
+				addrVoArr[i].classList.add('dp-none');
 			}
-			con.style.display = 'none';
+			detailBar.style.display = 'none';
 			return;
 		}
 		
-		console.log(arr);
-		
-		//전부다 안보이게
+		//전부 다 안보이게
 		const infoArr = document.querySelectorAll(".otherInfo");
 		for(let i = 0; i < infoArr.length; i++)  {
-			infoArr[i].classList.add('information');
+			infoArr[i].classList.add('dp-none');
 		}
 		
 		//클릭한거 만 보이게
-		for(let i = 0; i < arr.length; i++)  {
-			arr[i].classList.remove('information');
+		for(let i = 0; i < addrVoArr.length; i++)  {
+			addrVoArr[i].classList.remove('dp-none');
 		}
 		
-	    con.style.display = 'block';
+		detailBar.style.display = 'block';
 	    
 	} 
 	

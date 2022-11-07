@@ -20,7 +20,16 @@
 	#page>a{
 		margin: 0px 10px 0px 10px;
 	}
+	
+	#color{
+		color: gray;
+	}
 
+	#excel{
+		background-color: white;
+		color: gray;
+		border: 1px solid gray;
+	}
 </style>
 
 <!-- Begin Page Content -->
@@ -81,7 +90,7 @@
 								<td>${addr.deptName}</td>
 								<td>${addr.phone}</td>
 								<td>
-									<a href="${root}/mail/receive?mailNick=${addr.nick}">
+									<a id="color" href="${root}/mail/receive?mailNick=${addr.nick}">
 										${addr.email}
 									</a>
 								</td>
@@ -91,7 +100,7 @@
 						
 					</tbody>
     			</table>
-    			
+    			<button type="button" id="excel" class="download">엑셀파일 다운로드</button>
     			
     			<!-- page -->
     				<div id="page">
@@ -99,10 +108,6 @@
 							<a href="${root}/address/search/${pvo.startPage -1}" class="btn btn-outline-primary">이전</a>	
 						</c:if>
 					
-						<%-- <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
-							<a href="${root}/address/search/${i}" class="btn btn-primary">${i}</a>
-						</c:forEach> --%>
-						
 						<c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i">
 							<a href="${root}/address/search/${i}?&field=${field}&keyword=${keyword}" class="btn btn-primary">${i}</a>
 						</c:forEach>
