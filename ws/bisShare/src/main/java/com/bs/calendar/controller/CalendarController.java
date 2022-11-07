@@ -57,27 +57,9 @@ public class CalendarController {
 
 	//일정 메인에서 모달로 상세정보 조회
 	
-	
 	//일정 캘린더에서 모달로 일정 작성
-//	@GetMapping("modalWrite")
-//	public String createAction(@RequestBody String filterJSON, HttpServletRequest request, HttpServletResponse res, HttpSession session, ModelMap model) throws IOException {
-//		
-//		EmployeeVo loginvo = (EmployeeVo)session.getAttribute("loginVo");
-//		String no = loginvo.getEmpNo();
-//		
-//		//JSONObject obj = new JSONObject(); <<정체가 뭐임 왜있는거임
-//		
-//		res.setContentType("text/html; charset = UTF-8");
-//		PrintWriter out = res.getWriter();
-//		
-//		ObjectMapper mapper = new ObjectMapper();
-//		
-//		return "layout/template";
-//	}
-	
-	
+
 	//메인에서 모달로 일정 수정
-	
 	
 	//메인에서 모달로 일정 삭제
 
