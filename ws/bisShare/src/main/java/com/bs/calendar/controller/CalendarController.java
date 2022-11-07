@@ -49,7 +49,7 @@ public class CalendarController {
 
 		List<CalendarVo> calendar = cs.getCalendar(loginvo);
 		request.setAttribute("calendarList", calendar);
-		
+		System.out.println(calendar);
 		
 		return "layout/template";
 	}
