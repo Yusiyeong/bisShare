@@ -259,25 +259,25 @@
 		            		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 		                	<img id="img" src="${root}/resources/img/guest.png">
 		                		<c:forEach var="addr2" items="${dvoList}" varStatus="st">
-				                		<tr class="temp-${st.index} information zzz">
+				                		<tr class="index-${st.index} information otherInfo">
 					                		<td id="t1">이름:&nbsp ${addr2.nick}</td>
 					                	</tr>
-					                	<tr class="temp-${st.index} information zzz">
+					                	<tr class="index-${st.index} information otherInfo">
 					                		<td id="t1">직급:&nbsp ${addr2.rankName}</td>
 					                	</tr>
-										<tr class="temp-${st.index} information zzz">
+										<tr class="index-${st.index} information otherInfo">
 											<td id="t1">부서:&nbsp ${addr2.deptName}</td>
 					                	</tr>
-										<tr class="temp-${st.index} information zzz">
+										<tr class="index-${st.index} information otherInfo">
 											<td id="t1">연락처:&nbsp ${addr2.phone}</td>
 					                	</tr>
-										<tr class="temp-${st.index} information zzz">
+										<tr class="index-${st.index} information otherInfo">
 											<td id="t1">이메일:&nbsp ${addr2.email}</td>
 					                	</tr>
-					                	<tr class="temp-${st.index} information zzz">
+					                	<tr class="index-${st.index} information otherInfo">
 											<td id="t1">주소:&nbsp ${addr2.address}</td>
 					                	</tr>
-					                	<tr class="temp-${st.index} information zzz">
+					                	<tr class="index-${st.index} information otherInfo">
 											<td id="t1">입사일:&nbsp ${addr2.hireDate}</td>
 					                	</tr>
 			                	
@@ -303,7 +303,7 @@
 	function doDisplay(idx){ 	
 		
 		const con = document.getElementById("detailBar"); 
-		const arr = document.querySelectorAll(".temp-" + idx);
+		const arr = document.querySelectorAll(".index-" + idx);
 		
 		let isClicked = false;
 		if(!arr[0].classList.contains("information")){
@@ -320,9 +320,9 @@
 		console.log(arr);
 		
 		//전부다 안보이게
-		const zzzArr = document.querySelectorAll(".zzz");
-		for(let i = 0; i < zzzArr.length; i++)  {
-			zzzArr[i].classList.add('information');
+		const infoArr = document.querySelectorAll(".otherInfo");
+		for(let i = 0; i < infoArr.length; i++)  {
+			infoArr[i].classList.add('information');
 		}
 		
 		//클릭한거 만 보이게
