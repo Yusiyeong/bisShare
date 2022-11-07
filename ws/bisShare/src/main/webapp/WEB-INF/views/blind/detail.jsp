@@ -53,7 +53,7 @@
                      <a href="${root}/blind/delete/${vo.boardNo}" class="btn btn-outline-danger btn-sm">삭제</a>
                </c:if>
                      <!-- 목록으로 -->
-                     <a onclick="history.go(-1)" style="float: right; margin-left: 3px;" class="btn btn-outline-primary btn-sm">목록으로</a>
+                     <a href="${root}/blind/list/1" style="float: right; margin-left: 3px;" class="btn btn-outline-primary btn-sm">목록으로</a>
                   </div>
                <!--글 수정, 삭제 버튼end-->
                     

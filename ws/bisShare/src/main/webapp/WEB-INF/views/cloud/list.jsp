@@ -14,9 +14,10 @@
 </c:if>
    
 <style>
-    tr{
-        cursor: pointer;
-    }
+a { text-decoration:none !important ;
+color: gray;}
+
+a:hover { text-decoration:none !important }
 </style>
 
     <!-- 검색 이모티콘 -->
