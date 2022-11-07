@@ -64,7 +64,7 @@ public class CalendarDaoImpl implements CalendarDao{
 	//캘린더 일정조회
 	@Override
 	public List<CalendarVo> getCalendar(SqlSessionTemplate sst, EmployeeVo evo) {
-		return sst.selectList("calendarMapper.calendarList");
+		return sst.selectList("calendarMapper.calendarList", evo);
 	}
 
 	//중요 일정 등록

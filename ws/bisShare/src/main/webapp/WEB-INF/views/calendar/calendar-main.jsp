@@ -105,6 +105,7 @@
 							});
 							calendar.render();
 						});
+						
 
 /* 						$('.fc-event-title-container').on('click', function(){
 							$('#calendarModal').modal('toggle');
