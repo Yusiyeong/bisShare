@@ -161,14 +161,6 @@ public class ApprovalController {
 		
 	}
 	
-	//임시저장 화면
-	@GetMapping("temp")
-	public String temp(Model model) {
-		model.addAttribute("title", "임시저장한 기안서");
-		model.addAttribute("page", "approval/temp");
-		return "layout/template";
-	}
-	
 	//결재함 화면 (내가 결재권자 || 합의 || 참조)
 	@GetMapping("document")
 	public String document(Model model, HttpSession session) {
