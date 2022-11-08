@@ -58,7 +58,6 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
-            <span class="badge badge-danger badge-counter">7</span>
             <i class="fas fa-clipboard fa-fw"></i>
             <!-- Counter - Messages -->
             <span>전자결재(수정중)</span>
@@ -69,7 +68,6 @@
                 <a class="collapse-item" href="${root}/approval/write">기안서 작성</a>
                 <a class="collapse-item" href="${root}/approval/document">
                     나의결재함
-                    <span class="badge badge-danger" id="non-read-count-num">0</span>
                 </a>
             </div>
         </div>
@@ -101,7 +99,7 @@
         </a>
         <div id="collapsefour" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="${root}/address/list/1">조직도</a> <!-- 수정 -->
+                <a class="collapse-item" href="${root}/address/list/1">조직도</a> 
                 <a class="collapse-item" href="${root}/address/search/1">주소록 검색</a>
             </div>
         </div>

@@ -21,6 +21,17 @@ public class MainController {
 	
 	@RequestMapping("/main")
 	public String mainPage(Model model) {
+		
+		//공지사항 불러오기
+		
+		
+		//메일 불러오기
+		
+		//일정 불러오기
+		
+		//결재 불러오기
+		
+		
 		model.addAttribute("title", "BISSHARE");
 		model.addAttribute("page", "layout/main");
 		return "layout/template";

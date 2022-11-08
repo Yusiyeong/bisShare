@@ -329,11 +329,11 @@ public class ApprovalServiceImpl implements ApprovalService{
 			else myAuthoList.get(i).setProgress("반려");
 		}
 		
-		for(int i = 0; i < myAuthoList.size(); ++i) {
+		for(ApprovalVo vo : myAuthoList) {
 			
 		}
 		
-		return 0;
+		return cnt;
 	}
 
 	@Override

@@ -13,10 +13,11 @@
 		    , E.PHONE
 		    , E.ADDRESS
 		    , E.SS_NO
-		    , E.HIRE_DATE
+		    , TO_CHAR(E.HIRE_DATE, 'YYYY-MM-DD') AS HIRE_DATE 
 		    , E.SALARY
 		    , E.STATUS
 		    , E.PROFILE_PATH
+		    , E.EMAIL
 		    , C.COMP_NAME COMPANY_NAME
 		    , D.DEPT_NAME DEPT_NAME
 		    , R.RANK_NAME RANK_NAME
