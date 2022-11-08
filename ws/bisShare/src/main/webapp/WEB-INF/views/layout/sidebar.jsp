@@ -67,9 +67,6 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="${root}/approval/my">나의 기안서</a>
                 <a class="collapse-item" href="${root}/approval/write">기안서 작성</a>
-                <a class="collapse-item" href="${root}/approval/temp">
-                    임시저장한 기안서
-                </a>
                 <a class="collapse-item" href="${root}/approval/document">
                     나의결재함
                     <span class="badge badge-danger" id="non-read-count-num">0</span>
