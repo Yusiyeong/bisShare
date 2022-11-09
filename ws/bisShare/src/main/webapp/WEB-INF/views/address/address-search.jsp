@@ -8,7 +8,6 @@
 <!-- FileSaver saveAs CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
 
-
 <style>
 	#address-page{
 		margin-left: 630px;
@@ -36,6 +35,7 @@
 		color: gray;
 		border: 1px solid gray;
 	}
+	
 </style>
 
 <!-- Begin Page Content -->
@@ -89,12 +89,12 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="addr" items="${voList}">
+						<c:forEach var="addr" items="${voList}" varStatus="st">
 							<tr>
 								<td>${addr.nick}</td>
 								<td>${addr.rankName}</td>
 								<td>${addr.deptName}</td>
-								<td  style="mso-number-format:'\@'">${addr.phone}</td>
+								<td>${addr.phone}</td>
 								<td>
 									<a id="color" href="${root}/mail/receive?mailNick=${addr.nick}">
 										${addr.email}
@@ -106,7 +106,8 @@
 						
 					</tbody>
     			</table>
-    			<input type="button" id="excel" value="엑셀 파일 다운로드"/>
+    			
+    			<input type="button" id="excel" value="연락처 백업"/>
     			
     			<!-- page -->
     				<div id="page">
@@ -126,6 +127,7 @@
     			</div>
  	   			</form>
     		</div>
+    		
     </div>               
 </div>
 
@@ -174,3 +176,4 @@ var excelHandler = {
         }
 }
 </script>
+
