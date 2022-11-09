@@ -42,7 +42,6 @@ public class EmployeeController {
 		}
 		
 		EmployeeVo loginVo = ms.login(ev);
-		System.out.println(loginVo);
 		if (loginVo != null) {
 			session.setAttribute("loginVo", loginVo);
 			return "redirect:/main";

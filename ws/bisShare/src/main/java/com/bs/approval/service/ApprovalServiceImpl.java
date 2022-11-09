@@ -187,10 +187,9 @@ public class ApprovalServiceImpl implements ApprovalService{
 		}
 		return myAuthoList;
 	}
-
 	
 	//기안서 진행도 체크
-	public static ApprovalVo checkProgress(ApprovalVo vo) {
+	private static ApprovalVo checkProgress(ApprovalVo vo) {
 		
 			//합의자 수
 			int agreeCnt = 0;

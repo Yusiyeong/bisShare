@@ -41,6 +41,4 @@ public interface ApprovalService {
 	//첨부파일 가져오기
 	List<AprvAttVo> getAttList(String adcNo);
 	
-	//임시저장한 기안서
-	
 }

@@ -37,18 +37,17 @@
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="${root}/mail/receive">
             <i class="fas fa-fw fa-mail-bulk"></i>
             <span>메일</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+        <%-- <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="${root}/mail/receive">받은 메일</a>
+                <a class="collapse-item" href="${root}/mail/receive">메일</a>
                 <a class="collapse-item" href="${root}/mail/draft">임시 보관함</a>
             </div>
-        </div>
+        </div> --%>
     </li>
 
     <!-- Divider -->
@@ -60,7 +59,7 @@
             aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-clipboard fa-fw"></i>
             <!-- Counter - Messages -->
-            <span>전자결재(수정중)</span>
+            <span>전자결재</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">

@@ -22,13 +22,14 @@
         grid-template-columns: repeat(8, 1fr);
     }
     #approve-line-area div{
-        box-sizing: border-box;
+        /* box-sizing: border-box; */
     }
     #approve-line-area>div{
         border: 1px solid grey;
         text-align: center;
         display: grid;
-        grid-template-rows: 1fr 3fr 1fr;
+        height: 170px !important;
+        grid-template-rows: 1fr 3fr 1fr !important;
     }
     #approve-line-name-area{
         padding-top: 40px;
@@ -66,13 +67,15 @@
     #approve-btn, #approve-reject-btn{
     	margin-top: 30px;
     }
-    #approve-btn-area{
+    
+    #approve-btn-area, #approve-stamp-area{
     	width : 100%;
-    	height : 100%;
+    	height : 101px;
     }
     #approve-stamp{
     	width: 100%;
-    	height: 100%;'
+    	height: 101px !important;
+        object-fit: contain;
     }
 </style>
 
@@ -148,7 +151,7 @@
 		                    		<img id="approve-stamp" alt="승인도장" src="${root}/resources/img/approve-stamp.png"> 
 		                    	</c:if>
 		                    	<c:if test="${ avo.aprverStatuses[i] eq 'R' }">
-		                    		<img id="approve-stamp" alt="승인도장" src="${root}/resources/img/reject-stamp.png"> 
+		                    		<img id="approve-stamp" alt="반려도장" src="${root}/resources/img/reject-stamp.png"> 
 		                    	</c:if>
 		                    </div>
 	                    <div class="approve-name-area">${ avo.aprverNicks[i] }</div>
