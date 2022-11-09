@@ -82,10 +82,14 @@ public class CalendarDaoImpl implements CalendarDao{
 	//중요 일정 목록 조회
 	@Override
 	public List<CalendarVo> selectStarList(SqlSessionTemplate sst, PageVo pv, String no) {
-		int offset = (pv.getCurrentPage()-1 * pv.getBoardLimit());
-		RowBounds rb = new RowBounds(offset, pv.getBoardLimit());
-		
-		return sst.selectList("calendarMapper.selectStarList", no, rb);
+		if(pv != null) {
+			int offset = (pv.getCurrentPage()-1 * pv.getBoardLimit());
+			RowBounds rb = new RowBounds(offset, pv.getBoardLimit());
+			
+			return sst.selectList("calendarMapper.selectStarList", no, rb);
+		} else {
+			return sst.selectList("calendarMapper.selectStarList", no);
+		}
 	}
 
 

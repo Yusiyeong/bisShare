@@ -24,10 +24,14 @@ public class NoticeDaoImpl implements NoticeDao{
 	// 게시글 목록 조회
 	@Override
 	public List<NoticeVo> selectList(SqlSessionTemplate sst, PageVo pv, Map<String, String> map) {
-		int offset = (pv.getCurrentPage()-1) * pv.getBoardLimit();
-		RowBounds rb = new RowBounds(offset, pv.getBoardLimit());
-		
-		return sst.selectList("noticeMapper.selectList", map, rb);
+		if(pv != null && map != null) {
+			int offset = (pv.getCurrentPage()-1) * pv.getBoardLimit();
+			RowBounds rb = new RowBounds(offset, pv.getBoardLimit());
+			
+			return sst.selectList("noticeMapper.selectList", map, rb);
+		} else {
+			return sst.selectList("noticeMapper.selectList");
+		}
 	}//selectList
 
 	// 조회수 증가
