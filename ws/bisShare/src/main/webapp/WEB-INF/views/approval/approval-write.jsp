@@ -71,7 +71,6 @@
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary" id="approve-submit-area">
             <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#submitModal">기안하기</a>
-            <button class="btn btn-sm btn-primary" id="submit-temp">임시저장</a>
         </h6>
     </div>
     <div class="card-body">
