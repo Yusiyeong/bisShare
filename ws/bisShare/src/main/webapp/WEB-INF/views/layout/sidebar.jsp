@@ -106,12 +106,15 @@
 
     <!-- 나중에 관리자일때만 뜨게 해야함 -->
     <!-- 관리자 (인사과 일 때) -->
-    <hr class="sidebar-divider d-none d-md-block">
-    <li class="nav-item">
-        <a class="nav-link" href="${root}/admin/list">
-            <i class="fas fa-fw fa-address-book"></i>
-            <span>사원관리</span></a>
-    </li>
+    <c:if test="${ loginVo.deptNo eq '1' }">
+	    <hr class="sidebar-divider d-none d-md-block">
+	    <li class="nav-item">
+	        <a class="nav-link" href="${root}/admin/list">
+	            <i class="fas fa-fw fa-address-book"></i>
+	            <span>사원관리</span></a>
+	    </li>
+    </c:if>
+    
     
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

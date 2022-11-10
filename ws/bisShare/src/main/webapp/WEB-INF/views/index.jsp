@@ -70,15 +70,11 @@
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
-                                        <hr>
-                                        <a href="${root}/main" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> 메인페이지로 이동하기
-                                        </a>
                                     </form>
                                     <hr>
-                                    <div class="text-center">
+                                    <!-- <div class="text-center">
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
