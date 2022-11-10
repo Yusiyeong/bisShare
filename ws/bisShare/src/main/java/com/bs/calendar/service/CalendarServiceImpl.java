@@ -88,7 +88,7 @@ public class CalendarServiceImpl implements CalendarService{
 		int result = 0;
 		
 		try {
-		    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy"); 
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
 		    Date parsedSDate = dateFormat.parse(vo.getStartDate());
 		    Date parsedEDate = dateFormat.parse(vo.getEndDate());
 		    Timestamp timestamp = new java.sql.Timestamp(parsedSDate.getTime());
