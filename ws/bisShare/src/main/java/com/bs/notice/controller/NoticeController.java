@@ -205,7 +205,7 @@ public class NoticeController {
       bos.flush();
       bos.close();
       
-      savePath = "/test/resources/upload/board/" + changeName;
+      savePath = "/bisShare/resources/upload/board/" + changeName;
       return savePath;
 
    }//imgUpload
