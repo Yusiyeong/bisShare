@@ -298,7 +298,7 @@ public class MailController {
 			e.printStackTrace();
 		}
 
-		savePath = "/test/resources/upload/mail/" + fileName;
+		savePath = "/bisShare/resources/upload/mail/" + fileName;
 
 		return savePath;
 	}

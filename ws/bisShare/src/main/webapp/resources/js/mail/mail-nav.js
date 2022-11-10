@@ -112,6 +112,7 @@ function passBtn() {
       `
       );
   } else {
+    document.querySelector('input[name=receive]').value = sendInfo;
     $('#mail-content').summernote('code',`${contentInfo}`);
   }
 }
