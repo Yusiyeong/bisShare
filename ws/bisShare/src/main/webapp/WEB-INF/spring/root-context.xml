@@ -27,8 +27,8 @@
 	<!-- 데이터소스 -->
 	<bean id="bds" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@129.154.52.135:1521:xe"/>
-		<property name="username" value="C##BS"/>
+		<property name="url" value="jdbc:oracle:thin:@146.56.185.216:40000:xe"/>
+		<property name="username" value="C##BISSHARE"/>
 		<property name="password" value="1234"/>
 	</bean>
 
