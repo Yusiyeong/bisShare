@@ -25,10 +25,10 @@
 	</button>
 	<button class="btn btn-success mx-2" id="mail-send-btn">작성</button>
 	<button class="btn btn-primary mx-2" onclick="location.href=root+'/mail/receive';">
-		받은 메일
+		받은메일
 		<span class="badge badge-danger badge-counter" id="notReadCnt">${notReadCnt}</span>
 	</button>
-	<button class="btn btn-primary mx-2" onclick="location.href=root+'/mail/send'">보낸 메일</button>
+	<button class="btn btn-primary mx-2" onclick="location.href=root+'/mail/send'">보낸메일</button>
 	<button class="btn btn-warning mx-2" onclick="location.href=root+'/mail/important';">중요</button>
 	<button class="btn btn-primary mx-2" onclick="location.href=root+'/mail/reference'">참조</button>
 	<button class="btn btn-primary mx-2" onclick="location.href=root+'/mail/draft'">임시보관</button>
