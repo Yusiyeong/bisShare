@@ -96,7 +96,7 @@
 							            	title : '<%=cvo.getTitle()%>',
 							                start : '<%=cvo.getStartDate()%>',
 							                end : '<%=cvo.getEndDate()%>',
-							                backgroundColor : '#' + Math.round(Math.random() * 0xffffff).toString(16),
+							                backgroundColor : '#03a' + Math.round(Math.random() * 0xfff).toString(16),
 											borderColor : '#FFFFFF'
 							             },
 								<%}
